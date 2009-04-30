@@ -1,0 +1,16 @@
+<h1>New headword</h1>
+
+<%= error_messages_for :headword %>
+
+<% form_for(@headword) do |f| %>
+  <p>
+    <b>Form</b><br />
+    <%= f.text_field :form %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', headwords_path %>

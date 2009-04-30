@@ -1,0 +1,17 @@
+<h1>Editing parse</h1>
+
+<%= error_messages_for :parse %>
+
+<% form_for(@parse) do |f| %>
+  <p>
+    <b>Attestation</b><br />
+    <%= f.text_field :attestation_id %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @parse %> |
+<%= link_to 'Back', parses_path %>

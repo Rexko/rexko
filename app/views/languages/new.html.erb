@@ -1,0 +1,16 @@
+<h1>New language</h1>
+
+<%= error_messages_for :language %>
+
+<% form_for(@language) do |f| %>
+	<p>
+		<b>Code:</b>
+		<%= f.text_field :iso_639_code %>
+	</p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', languages_path %>

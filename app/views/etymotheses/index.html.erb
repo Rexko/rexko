@@ -1,0 +1,22 @@
+<h1>Listing etymotheses</h1>
+
+<table>
+  <tr>
+    <th>Etymology</th>
+    <th>Subentry</th>
+  </tr>
+
+<% for etymothesis in @etymotheses %>
+  <tr>
+    <td><%=h etymothesis.etymology_id %></td>
+    <td><%=h etymothesis.subentry_id %></td>
+    <td><%= link_to 'Show', etymothesis %></td>
+    <td><%= link_to 'Edit', edit_etymothesis_path(etymothesis) %></td>
+    <td><%= link_to 'Destroy', etymothesis, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New etymothesis', new_etymothesis_path %>

@@ -1,0 +1,24 @@
+<h1>Listing subentries</h1>
+
+<table>
+  <tr>
+    <th>Lexeme</th>
+    <th>Paradigm</th>
+    <th>Part of speech</th>
+  </tr>
+
+<% for subentry in @subentries %>
+  <tr>
+    <td><%=h subentry.lexeme_id %></td>
+    <td><%=h subentry.paradigm %></td>
+    <td><%=h subentry.part_of_speech %></td>
+    <td><%= link_to 'Show', subentry %></td>
+    <td><%= link_to 'Edit', edit_subentry_path(subentry) %></td>
+    <td><%= link_to 'Destroy', subentry, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New subentry', new_subentry_path %>

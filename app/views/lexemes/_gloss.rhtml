@@ -1,0 +1,11 @@
+<div class="editform-gloss">
+<%  @gloss = gloss
+		fields_for "subentry[#{@subentry.id}][sense][#{@sense.id}][gloss][]", @gloss do |f|
+#		fields_for attr_trail(:gloss, :sense, :subentry), @gloss do |f| 
+%>
+	<tr>
+		<td>Gloss:</td>
+		<td><%= f.text_field :gloss %></td>
+	</tr>
+<% end %>
+</div>

@@ -1,0 +1,27 @@
+<h1>Editing subentry</h1>
+
+<%= error_messages_for :subentry %>
+
+<% form_for(@subentry) do |f| %>
+  <p>
+    <b>Lexeme</b><br />
+    <%= f.text_field :lexeme_id %>
+  </p>
+
+  <p>
+    <b>Paradigm</b><br />
+    <%= f.text_field :paradigm %>
+  </p>
+
+  <p>
+    <b>Part of speech</b><br />
+    <%= f.text_field :part_of_speech %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @subentry %> |
+<%= link_to 'Back', subentries_path %>

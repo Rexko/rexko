@@ -1,0 +1,81 @@
+<% form_tag form[:for_url], {:method => form[:method], :action => form[:action], :id => params[:id]}  do %>
+	<p>
+		<!-- Dictionary -->
+		<table>
+			<tr>
+				<td valign="top">Dictionary:</td>
+				<td>
+		<%= collection_select(:lexeme, :dictionary_ids, Dictionary.find(:all), :id, :title, {}, {:multiple => :true}) %>
+				</td>
+			</tr>
+		</table>
+				
+		<!-- Headword -->
+		<table>
+		<%= render :partial => 'headword', :collection => @lexeme.headwords %>
+		</table>
+		
+	<div class="editform-newheadword">
+	  <table>
+			<tr>
+				<td><b>New headword:</b></td>
+				<td><%= text_field :new_headword, :form %></td>
+			</tr>
+			<tr>
+				<td>Phonetic form:</td>
+				<td><%= text_field :new_headword_phonetic_form, :form %></td>
+			</tr>
+		</table>
+	</div>
+	
+		<%= render :partial => 'subentry', :collection => @lexeme.subentries %>
+
+	<div class="editform-newsubentry">
+		<h1>New subentry</h1>
+		<table>
+			<tr>
+				<td><b>Principal parts:</b></td>
+				<td><%= text_field :new_subentry, :paradigm %></td>
+			</tr>
+			<tr>
+				<td>Part of speech:</td>
+				<td><%= text_field :new_subentry, :part_of_speech %></td>
+			</tr>
+		</table>
+		
+			<h2>Sense</h2>
+				<table>
+					<tr>
+						<td valign="top">Definition:</td>
+						<td><%= text_area :new_subentry_sense, :definition, :rows => 4 %></td>
+					</tr>
+					<tr>
+						<td>Gloss:</td>
+						<td><%= text_field :new_subentry_sense_gloss, :gloss %></td>
+					</tr>
+				</table>
+				
+			<h2>Etymology</h2>
+		<table>
+			<tr>
+				<th>Source Language</th>
+				<th>Etymon</th>
+				<th>Gloss</th>
+			</tr>
+				<tr>
+					<td>
+						<%= text_field :new_subentry_etymology, :source_language %>
+					</td>
+					<td>
+						<%= text_field :new_subentry_etymology, :etymon %>
+					</td>
+					<td>
+						<%= text_field :new_subentry_etymology, :gloss %>
+					</td>
+				</tr>
+		</table>
+	</div>
+
+    <%= submit_tag form[:label] %> | <%= submit_tag "#{form[:label]} and continue editing" %>
+	</p>
+<% end %>

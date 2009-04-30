@@ -1,0 +1,12 @@
+<h1>Editing orthograph</h1>
+
+<%= error_messages_for :orthograph %>
+
+<% form_for(@orthograph) do |f| %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @orthograph %> |
+<%= link_to 'Back', orthographs_path %>

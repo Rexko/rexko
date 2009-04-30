@@ -1,0 +1,20 @@
+<h1>Listing phonetic_forms</h1>
+
+<table>
+  <tr>
+    <th>Form</th>
+  </tr>
+
+<% for phonetic_form in @phonetic_forms %>
+  <tr>
+    <td><%=h phonetic_form.form %></td>
+    <td><%= link_to 'Show', phonetic_form %></td>
+    <td><%= link_to 'Edit', edit_phonetic_form_path(phonetic_form) %></td>
+    <td><%= link_to 'Destroy', phonetic_form, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New phonetic_form', new_phonetic_form_path %>

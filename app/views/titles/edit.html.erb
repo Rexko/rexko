@@ -1,0 +1,12 @@
+<h1>Editing title</h1>
+
+<%= error_messages_for :title %>
+
+<% form_for(@title) do |f| %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @title %> |
+<%= link_to 'Back', titles_path %>

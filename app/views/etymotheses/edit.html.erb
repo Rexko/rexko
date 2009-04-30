@@ -1,0 +1,22 @@
+<h1>Editing etymothesis</h1>
+
+<%= error_messages_for :etymothesis %>
+
+<% form_for(@etymothesis) do |f| %>
+  <p>
+    <b>Etymology</b><br />
+    <%= f.text_field :etymology_id %>
+  </p>
+
+  <p>
+    <b>Subentry</b><br />
+    <%= f.text_field :subentry_id %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @etymothesis %> |
+<%= link_to 'Back', etymotheses_path %>

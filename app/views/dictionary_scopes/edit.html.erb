@@ -1,0 +1,22 @@
+<h1>Editing dictionary_scope</h1>
+
+<%= error_messages_for :dictionary_scope %>
+
+<% form_for(@dictionary_scope) do |f| %>
+  <p>
+    <b>Dictionary</b><br />
+    <%= f.text_field :dictionary_id %>
+  </p>
+
+  <p>
+    <b>Lexeme</b><br />
+    <%= f.text_field :lexeme_id %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @dictionary_scope %> |
+<%= link_to 'Back', dictionary_scopes_path %>

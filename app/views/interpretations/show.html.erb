@@ -1,0 +1,13 @@
+<p>
+  <b>Parse:</b>
+  <%=h @interpretation.parse_id %>
+</p>
+
+<p>
+  <b>Sense:</b>
+  <%=h @interpretation.sense_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_interpretation_path(@interpretation) %> |
+<%= link_to 'Back', interpretations_path %>

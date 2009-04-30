@@ -1,0 +1,20 @@
+<h1>Listing loci</h1>
+
+<table width="100%">
+<% @loci.each_with_index do |locus, i| %>
+	<tr>
+		<td colspan="3">
+			<%= render(:partial => "shared/locus", :object => locus, :locals => { :count => i + 1 })%>
+		</td>
+	</tr>
+	<tr>
+	  <td><%= link_to 'Show', locus %></td>
+	  <td><%= link_to 'Edit', edit_locus_path(locus) %></td>
+	  <td><%= link_to 'Destroy', locus, :confirm => 'Are you sure?', :method => :delete %></td>
+	</tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New locus', new_locus_path %>

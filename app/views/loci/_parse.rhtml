@@ -1,0 +1,7 @@
+<% @parse = parse 
+	 fields_for attr_trail(:parse, :attestation, :locus), @parse do |f| %>
+<br>Parsed form: <%= f.text_field :parsed_form %> <%=  Headword.lookup_by_parse(@parse).nil? ? link_to("[No entry for <i>#{@parse.parsed_form}</i>]", :controller => 'lexemes', :action => 'new') : link_to(@parse.parsed_form, Headword.lookup_by_parse(@parse).lexeme) %> <%= "&times;#{Parse.find_all_by_parsed_form(@parse.parsed_form).size}" %>
+<%= render :partial => "interpretation", :collection => parse.interpretations %> 
+<br>New sense: <%= collection_select "new_interpretation_for_parse[#{@parse.id}]", :sense_id,  Headword.lookup_all_by_parse(@parse).collect{ |hw| Sense.find(hw.lexeme.sense_ids) }.flatten, :id, :definition, {:include_blank => "[Unassigned]"} 
+%>
+<% end %>

@@ -1,0 +1,16 @@
+<h1>New gloss</h1>
+
+<%= error_messages_for :gloss %>
+
+<% form_for(@gloss) do |f| %>
+  <p>
+    <b>Gloss</b><br />
+    <%= f.text_field :gloss %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', glosses_path %>

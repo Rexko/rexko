@@ -1,0 +1,22 @@
+<h1>Listing senses</h1>
+
+<table>
+  <tr>
+    <th>Subentry</th>
+    <th>Definition</th>
+  </tr>
+
+<% for sense in @senses %>
+  <tr>
+    <td><%=h sense.subentry_id %></td>
+    <td><%=h sense.definition %></td>
+    <td><%= link_to 'Show', sense %></td>
+    <td><%= link_to 'Edit', edit_sense_path(sense) %></td>
+    <td><%= link_to 'Destroy', sense, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New sense', new_sense_path %>

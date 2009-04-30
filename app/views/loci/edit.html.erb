@@ -1,0 +1,8 @@
+<h1>Editing locus</h1>
+
+<%= error_messages_for :locus %>
+
+<%=	render(:partial => "form", :object => { :label => 'Update', :action => 'update', :method => :put, :for_url => "/loci/#{@locus.id}" }) %>
+
+<%= link_to 'Show', @locus %> |
+<%= link_to 'Back', loci_path %>

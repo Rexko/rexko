@@ -1,0 +1,15 @@
+<div class="lexform-subentry"  <%= h lang_for(subentry) %>>
+	<span class="lexform-paradigm">
+	  <%=h subentry.paradigm || "<No principal parts>" %>.
+	</span>
+	<!-- phonetic form was here, now in shared/headword -->
+	<span class="lexform-part-of-speech">
+		<%=h subentry.part_of_speech || "<No part of speech>"%>
+	</span>
+	<% unless subentry.senses.empty? %>
+		<ol class="lexform-senses">
+			<%= render :partial => "shared/sense", :collection => subentry.senses %>
+		</ol>
+	<% end %>
+	<%= render :partial => "shared/etymology", :collection => subentry.etymologies %>
+</div>

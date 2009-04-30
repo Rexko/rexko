@@ -1,0 +1,4 @@
+<%= render(:partial => "shared/locus", :object => @locus, :locals => { :count => @locus.id })%>
+
+<%= link_to 'Edit', edit_locus_path(@locus) %> |
+<%= link_to 'Back', loci_path %>

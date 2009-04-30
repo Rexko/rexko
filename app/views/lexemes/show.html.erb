@@ -1,0 +1,34 @@
+<%= render(:partial => "shared/lexeme", :object => @lexeme)%>
+
+<% unless @lexeme.constructions.empty? %>
+<h3>Constructions</h3>
+<ul>
+<%= render(:partial => "shared/construction", :collection => @lexeme.constructions)%>
+</ul>
+<% end %>
+
+<% unless @lexeme.loci.empty? %>
+<h3>Loci</h3>
+<%= render(:partial => "shared/locus", :collection => @lexeme.loci) %>
+<% end %>
+
+<% for headword in @lexeme.headwords do %>
+<h3><a href="http://ttt.frath.net/html/<%=h headword.form %>"><%=h headword.form %></a> - This entry</h3>
+<div class="wikified-lexeme">
+<textarea cols="72" rows="10">
+<%= render(:partial => "shared/wiki/lexeme", :object => @lexeme)%>
+</textarea>
+</div>
+<h3><a href="http://ttt.frath.net/html/<%=h headword.form %>"><%=h headword.form %></a> - All entries</h3>
+<div class="wikified-headword">
+<textarea cols="72" rows="10">
+<%= render(:partial => "shared/wiki/headword", :object => headword)%>
+</textarea>
+</div>
+<% end %>
+
+<%= link_to 'Edit', edit_lexeme_path(@lexeme) %> |
+<%= link_to 'Back to lexemes', lexemes_path %> 
+<% for dictionary in @lexeme.dictionaries %> |
+<%= link_to "Back to #{dictionary.title}", dictionary %>
+<% end %>

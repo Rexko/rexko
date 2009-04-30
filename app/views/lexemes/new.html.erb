@@ -1,0 +1,9 @@
+<h1>New lexeme</h1>
+
+<%= error_messages_for :lexeme %>
+
+<%= @action = "Create"
+		render(:partial => "form", :object => { :label => 'Create', :action => 'create', :method => :post, :for_url => '/lexemes' }) 
+		%>
+
+<%= link_to 'Back', lexemes_path %>

@@ -1,0 +1,20 @@
+<h1>Listing headwords</h1>
+
+<table>
+  <tr>
+    <th>Form</th>
+  </tr>
+
+<% for headword in @headwords %>
+  <tr>
+    <td><%=h headword.form %></td>
+    <td><%= link_to 'Show', headword %></td>
+    <td><%= link_to 'Edit', edit_headword_path(headword) %></td>
+    <td><%= link_to 'Destroy', headword, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New headword', new_headword_path %>

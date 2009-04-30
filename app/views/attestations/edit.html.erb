@@ -1,0 +1,12 @@
+<h1>Editing attestation</h1>
+
+<%= error_messages_for :attestation %>
+
+<% form_for(@attestation) do |f| %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @attestation %> |
+<%= link_to 'Back', attestations_path %>

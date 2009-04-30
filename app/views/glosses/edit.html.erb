@@ -1,0 +1,17 @@
+<h1>Editing gloss</h1>
+
+<%= error_messages_for :gloss %>
+
+<% form_for(@gloss) do |f| %>
+  <p>
+    <b>Gloss</b><br />
+    <%= f.text_field :gloss %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @gloss %> |
+<%= link_to 'Back', glosses_path %>

@@ -1,0 +1,27 @@
+<h1>Editing etymology</h1>
+
+<%= error_messages_for :etymology %>
+
+<% form_for(@etymology) do |f| %>
+  <p>
+    <b>Etymon</b><br />
+    <%= f.text_field :etymon %>
+  </p>
+
+  <p>
+    <b>Source language</b><br />
+    <%= f.text_field :source_language %>
+  </p>
+
+  <p>
+    <b>Gloss</b><br />
+    <%= f.text_field :gloss %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @etymology %> |
+<%= link_to 'Back', etymologies_path %>

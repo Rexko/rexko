@@ -1,0 +1,25 @@
+<p>
+  <b>Title:</b>
+  <%=h @dictionary.title %>
+</p>
+
+<h1>Listing lexemes in <%=h @dictionary.title %></h1>
+
+<% for lexeme in @lexemes %>
+	<%= render(:partial => "shared/lexeme", :object => lexeme ) 
+	%>
+<table>
+  <tr>
+    <td><%= link_to 'Show', lexeme %></td>
+    <td><%= link_to 'Edit', edit_lexeme_path(lexeme) %></td>
+    <td><%= link_to 'Destroy', lexeme, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+</table>
+<% end %>
+
+
+<br />
+
+
+<%= link_to 'Edit', edit_dictionary_path(@dictionary) %> |
+<%= link_to 'Back', dictionaries_path %>

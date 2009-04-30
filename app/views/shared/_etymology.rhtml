@@ -1,0 +1,10 @@
+<div class="lexform-etymology" <%= h lang_for(etymology) %>>
+	<span class="lexform-source-language"> 
+		[<%= h (etymology.source_language || '<Unknown source>') %>
+	</span>
+	<span class="lexform-etymon">
+		<%= h (etymology.etymon || '<Unknown etymon>') %>
+	</span>
+	<span class="lexform-etymon-gloss">
+		<%=h (etymology.gloss || '<Unknown gloss>') %></span>.]
+</div>

@@ -1,0 +1,2 @@
+module HeadwordsHelper
+end

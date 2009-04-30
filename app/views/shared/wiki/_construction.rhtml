@@ -1,0 +1,1 @@
+* [[<%= construction.headwords.first.form %>]] &mdash; <%= render :partial => "shared/wiki/author", :collection => construction.loci.collect(&:source).collect(&:author).uniq, :locals => { :construction => construction }, :spacer_template => "shared/semicolon" %>

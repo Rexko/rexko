@@ -1,0 +1,12 @@
+<h1>Editing author</h1>
+
+<%= error_messages_for :author %>
+
+<% form_for(@author) do |f| %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @author %> |
+<%= link_to 'Back', authors_path %>

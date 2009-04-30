@@ -1,0 +1,22 @@
+<h1>Listing dictionary_scopes</h1>
+
+<table>
+  <tr>
+    <th>Dictionary</th>
+    <th>Lexeme</th>
+  </tr>
+
+<% for dictionary_scope in @dictionary_scopes %>
+  <tr>
+    <td><%=h dictionary_scope.dictionary_id %></td>
+    <td><%=h dictionary_scope.lexeme_id %></td>
+    <td><%= link_to 'Show', dictionary_scope %></td>
+    <td><%= link_to 'Edit', edit_dictionary_scope_path(dictionary_scope) %></td>
+    <td><%= link_to 'Destroy', dictionary_scope, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New dictionary_scope', new_dictionary_scope_path %>

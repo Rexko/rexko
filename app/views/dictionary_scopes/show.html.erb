@@ -1,0 +1,13 @@
+<p>
+  <b>Dictionary:</b>
+  <%=h @dictionary_scope.dictionary_id %>
+</p>
+
+<p>
+  <b>Lexeme:</b>
+  <%=h @dictionary_scope.lexeme_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_dictionary_scope_path(@dictionary_scope) %> |
+<%= link_to 'Back', dictionary_scopes_path %>

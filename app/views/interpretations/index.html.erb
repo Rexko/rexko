@@ -1,0 +1,22 @@
+<h1>Listing interpretations</h1>
+
+<table>
+  <tr>
+    <th>Parse</th>
+    <th>Sense</th>
+  </tr>
+
+<% for interpretation in @interpretations %>
+  <tr>
+    <td><%=h interpretation.parse_id %></td>
+    <td><%=h interpretation.sense_id %></td>
+    <td><%= link_to 'Show', interpretation %></td>
+    <td><%= link_to 'Edit', edit_interpretation_path(interpretation) %></td>
+    <td><%= link_to 'Destroy', interpretation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New interpretation', new_interpretation_path %>

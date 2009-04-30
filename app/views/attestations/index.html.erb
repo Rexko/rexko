@@ -1,0 +1,18 @@
+<h1>Listing attestations</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% for attestation in @attestations %>
+  <tr>
+    <td><%= link_to 'Show', attestation %></td>
+    <td><%= link_to 'Edit', edit_attestation_path(attestation) %></td>
+    <td><%= link_to 'Destroy', attestation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New attestation', new_attestation_path %>

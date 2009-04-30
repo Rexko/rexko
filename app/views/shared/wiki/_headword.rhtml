@@ -1,0 +1,2 @@
+<%= render :partial => "shared/wiki/lexeme", :collection => Headword.find_all_by_form(headword.form).collect(&:lexeme).uniq # once primary headwords are implemented, we can replace all but the primary with redirects 
+%>

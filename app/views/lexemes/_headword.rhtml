@@ -1,0 +1,15 @@
+<div class="editform-headword">
+<% @headword = headword
+	 fields_for "headword[]" do |f| %>
+	<tr>
+			<td><b>Headword <%= headword_counter + 1 %>:</b></td> 
+			<td><%= f.text_field :form %></td>
+	</tr>
+			<!-- Phonetic form -->
+			<%= render :partial => 'phonetic_form', :collection => headword.phonetic_forms, :locals => { :headword => headword } %>
+			<tr>
+				<td>New phonetic form:</td>
+				<td><%= text_field "new_phonetic_form_for_headword_#{headword.id}", :form %></td>
+			</tr>
+<% end %>
+</div>

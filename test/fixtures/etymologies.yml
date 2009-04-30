@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  etymon: MyString
+  source_language: MyString
+  gloss: MyString
+
+two:
+  etymon: MyString
+  source_language: MyString
+  gloss: MyString

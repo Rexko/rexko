@@ -1,0 +1,18 @@
+<p>
+  <b>Etymon:</b>
+  <%=h @etymology.etymon %>
+</p>
+
+<p>
+  <b>Source language:</b>
+  <%=h @etymology.source_language %>
+</p>
+
+<p>
+  <b>Gloss:</b>
+  <%=h @etymology.gloss %>
+</p>
+
+
+<%= link_to 'Edit', edit_etymology_path(@etymology) %> |
+<%= link_to 'Back', etymologies_path %>

@@ -1,0 +1,4 @@
+.lexform-headword { font-weight: bold; font-size: larger; color: blue; }
+.lexform-paradigm { font-weight: bold; }
+.lexform-part-of-speech { font-style: italic; }
+.lexform-phonetic-form { font-family: monospace; }

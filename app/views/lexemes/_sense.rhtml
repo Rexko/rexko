@@ -1,0 +1,20 @@
+<div class="editform-sense">
+<h2>Sense <%= sense_counter + 1 %></h2>
+	<% @sense = sense
+		 fields_for "subentry[#{@subentry.id}][sense][]", @sense do |f| 
+#		 fields_for attr_trail(:sense, :subentry), @sense do |f| 
+%>
+		<table>
+			<tr>
+				<td valign="top">Definition:</td>
+				<td><%= f.text_area :definition, :rows => 4 %></td>
+			</tr>
+	<% end %>
+	<!-- Gloss -->
+	<%= render :partial => 'gloss', :collection => @sense.glosses %>
+			<tr>
+				<td>New Gloss:</td>
+				<td><%= text_field "new_gloss_for_sense_#{@sense.id}", :gloss %></td>
+			</tr>
+		</table>
+</div>

@@ -1,0 +1,4 @@
+<% @interpretation = interpretation 
+	 fields_for attr_trail(:interpretation, :parse, :attestation, :locus), @interpretation do |f| %>
+<br><b>Sense:</b> <%= f.collection_select :sense_id, Headword.lookup_all_by_parse(@parse).collect{ |hw| Sense.find(hw.lexeme.sense_ids) }.flatten, :id, :definition, {:include_blank => true} %>
+<% end %>

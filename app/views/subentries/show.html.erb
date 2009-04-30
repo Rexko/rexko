@@ -1,0 +1,18 @@
+<p>
+  <b>Lexeme:</b>
+  <%=h @subentry.lexeme_id %>
+</p>
+
+<p>
+  <b>Paradigm:</b>
+  <%=h @subentry.paradigm %>
+</p>
+
+<p>
+  <b>Part of speech:</b>
+  <%=h @subentry.part_of_speech %>
+</p>
+
+
+<%= link_to 'Edit', edit_subentry_path(@subentry) %> |
+<%= link_to 'Back', subentries_path %>

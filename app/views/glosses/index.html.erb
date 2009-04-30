@@ -1,0 +1,20 @@
+<h1>Listing glosses</h1>
+
+<table>
+  <tr>
+    <th>Gloss</th>
+  </tr>
+
+<% for gloss in @glosses %>
+  <tr>
+    <td><%=h gloss.gloss %></td>
+    <td><%= link_to 'Show', gloss %></td>
+    <td><%= link_to 'Edit', edit_gloss_path(gloss) %></td>
+    <td><%= link_to 'Destroy', gloss, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New gloss', new_gloss_path %>

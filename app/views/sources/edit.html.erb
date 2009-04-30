@@ -1,0 +1,28 @@
+<h1>Editing source</h1>
+
+<%= error_messages_for :source %>
+
+<% form_for(@source) do |f| %>
+	<%= "No title" unless @source.title  %>
+  <p>
+    <b>Author</b><br />
+    <%= #f.text_field @author, :name 
+		%>
+  </p>
+  <p>
+    <b>Title</b><br />
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <b>Pointer</b><br />
+    <%= f.text_field :pointer %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @source %> |
+<%= link_to 'Back', sources_path %>

@@ -1,0 +1,8 @@
+<h1>Editing authorship</h1>
+
+<%= error_messages_for :authorship %>
+
+<%=	render(:partial => "form", :object => { :label => 'Update', :action => 'update', :method => :put, :for_url => "/authorships/#{@authorship.id}" }) %>
+
+<%= link_to 'Show', @authorship %> |
+<%= link_to 'Back', authorships_path %>

@@ -1,0 +1,2 @@
+# <%=h sense.definition %>
+<% unless sense.glosses.empty? %><%= render :partial => "shared/wiki/gloss", :collection => sense.glosses %><% end %>
