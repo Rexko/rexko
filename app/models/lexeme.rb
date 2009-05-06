@@ -24,6 +24,13 @@ class Lexeme < ActiveRecord::Base
     # => why teh flattens?  the methods that return arrays... maybe we could simplify that.
     fellows = loci.collect(&:parses).flatten.collect(&:interpretations).flatten.collect(&:sense).collect(&:lexeme).uniq - [self]
     
+    # for bug 7 [28] - constructions are multi-word; delete what isn't
+    fellows.delete_if do |fellow| 
+      fellow.headwords.any? do |headword|
+        ! headword.form.include? " "
+      end
+    end
+    
     # Then, if from_dictionary is given, limit it to that dictionary; otherwise
     # return all.
     from_dictionary.nil? ? fellows : from_dictionary.lexemes.find(fellows)

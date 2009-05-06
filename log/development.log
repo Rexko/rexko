@@ -12558,3 +12558,370 @@ Completed in 5.81174 (0 reqs/sec) | Rendering: 4.54322 (78%) | DB: 1.15390 (19%)
   [4;35;1mLexeme Load (0.215609)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
   [4;36;1mSubentry Load (0.152610)[0m   [0;1mSELECT * FROM subentries WHERE (subentries."id" = 2) [0m
   [4;35;1mLexeme Load (0.210217)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+
+
+Processing LexemesController#new (for 192.168.1.111 at 2009-04-30 20:14:38) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZWY5Y2RkNzViMjc5YzY0NjA3MWI4Njg2OGRiOGEy%0AMGEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh%0Ac2h7AAY6CkB1c2VkewA%3D--5c02a0bdd698089b11f43987d2808e9f0152091d
+  Parameters: {"action"=>"new", "controller"=>"lexemes"}
+Rendering template within layouts/lexemes
+Rendering lexemes/new
+  [4;36;1mDictionary Load (0.005433)[0m   [0;1mSELECT * FROM dictionaries [0m
+Rendered lexemes/_form (5.79236)
+Completed in 6.67519 (0 reqs/sec) | Rendering: 5.90094 (88%) | DB: 0.00543 (0%) | 200 OK [http://laputa/lexemes/new]
+
+
+Processing LexemesController#index (for 192.168.1.111 at 2009-04-30 20:14:56) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZWY5Y2RkNzViMjc5YzY0NjA3MWI4Njg2OGRiOGEy%0AMGEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh%0Ac2h7AAY6CkB1c2VkewA%3D--5c02a0bdd698089b11f43987d2808e9f0152091d
+  Parameters: {"action"=>"index", "controller"=>"lexemes"}
+  [4;35;1mLexeme Load (2.044948)[0m   [0mSELECT * FROM lexemes [0m
+Rendering template within layouts/lexemes
+Rendering lexemes/index
+  [4;36;1mHeadword Load (0.005102)[0m   [0;1mSELECT * FROM headwords WHERE (headwords.lexeme_id = 1) [0m
+  [4;35;1mPhoneticForm Load (0.004317)[0m   [0mSELECT phonetic_forms.* FROM phonetic_forms INNER JOIN orthographs ON phonetic_forms.id = orthographs.phonetic_form_id WHERE ((orthographs.headword_id = 1)) [0m
+Rendered shared/_headword (0.64185)
+  [4;36;1mSubentry Load (0.023229)[0m   [0;1mSELECT * FROM subentries WHERE (subentries.lexeme_id = 1) [0m
+  [4;35;1mSQL (0.005600)[0m   [0mSELECT count(*) AS count_all FROM senses WHERE (senses.subentry_id = 1) [0m
+  [4;36;1mSense Load (0.003837)[0m   [0;1mSELECT * FROM senses WHERE (senses.subentry_id = 1) [0m
+  [4;35;1mSQL (0.012339)[0m   [0mSELECT count(*) AS count_all FROM glosses WHERE (glosses.sense_id = 1) [0m
+  [4;36;1mGloss Load (0.003599)[0m   [0;1mSELECT * FROM glosses WHERE (glosses.sense_id = 1) [0m
+Rendered shared/_gloss (0.03285)
+Rendered shared/_sense (0.37466)
+  [4;35;1mEtymology Load (0.004973)[0m   [0mSELECT etymologies.* FROM etymologies INNER JOIN etymotheses ON etymologies.id = etymotheses.etymology_id WHERE ((etymotheses.subentry_id = 1)) [0m
+Rendered shared/_etymology (0.16716)
+Rendered shared/_subentry (8.60651)
+Rendered shared/_lexeme (17.40461)
+  [4;36;1mHeadword Load (0.004394)[0m   [0;1mSELECT * FROM headwords WHERE (headwords.lexeme_id = 2) [0m
+  [4;35;1mPhoneticForm Load (0.003967)[0m   [0mSELECT phonetic_forms.* FROM phonetic_forms INNER JOIN orthographs ON phonetic_forms.id = orthographs.phonetic_form_id WHERE ((orthographs.headword_id = 2)) [0m
+Rendered shared/_phonetic_form (0.14348)
+Rendered shared/_headword (0.17543)
+  [4;36;1mSubentry Load (0.003940)[0m   [0;1mSELECT * FROM subentries WHERE (subentries.lexeme_id = 2) [0m
+  [4;35;1mSQL (0.003335)[0m   [0mSELECT count(*) AS count_all FROM senses WHERE (senses.subentry_id = 2) [0m
+  [4;36;1mSense Load (0.003357)[0m   [0;1mSELECT * FROM senses WHERE (senses.subentry_id = 2) [0m
+  [4;35;1mSQL (0.002755)[0m   [0mSELECT count(*) AS count_all FROM glosses WHERE (glosses.sense_id = 2) [0m
+  [4;36;1mGloss Load (0.004282)[0m   [0;1mSELECT * FROM glosses WHERE (glosses.sense_id = 2) [0m
+Rendered shared/_gloss (0.01044)
+Rendered shared/_sense (0.16477)
+  [4;35;1mEtymology Load (0.006574)[0m   [0mSELECT etymologies.* FROM etymologies INNER JOIN etymotheses ON etymologies.id = etymotheses.etymology_id WHERE ((etymotheses.subentry_id = 2)) [0m
+Rendered shared/_etymology (0.00770)
+Rendered shared/_subentry (3.43188)
+Rendered shared/_lexeme (3.65151)
+  [4;36;1mHeadword Load (0.116615)[0m   [0;1mSELECT * FROM headwords WHERE (headwords.lexeme_id = 3) [0m
+  [4;35;1mPhoneticForm Load (0.002238)[0m   [0mSELECT phonetic_forms.* FROM phonetic_forms INNER JOIN orthographs ON phonetic_forms.id = orthographs.phonetic_form_id WHERE ((orthographs.headword_id = 4)) [0m
+Rendered shared/_headword (0.02074)
+  [4;36;1mSubentry Load (0.003749)[0m   [0;1mSELECT * FROM subentries WHERE (subentries.lexeme_id = 3) [0m
+  [4;35;1mSQL (0.005381)[0m   [0mSELECT count(*) AS count_all FROM senses WHERE (senses.subentry_id = 3) [0m
+  [4;36;1mSense Load (0.004590)[0m   [0;1mSELECT * FROM senses WHERE (senses.subentry_id = 3) [0m
+  [4;35;1mSQL (0.003251)[0m   [0mSELECT count(*) AS count_all FROM glosses WHERE (glosses.sense_id = 3) [0m
+Rendered shared/_sense (0.02090)
+  [4;36;1mEtymology Load (0.011205)[0m   [0;1mSELECT etymologies.* FROM etymologies INNER JOIN etymotheses ON etymologies.id = etymotheses.etymology_id WHERE ((etymotheses.subentry_id = 3)) [0m
+Rendered shared/_subentry (0.55810)
+Rendered shared/_lexeme (0.73402)
+Completed in 24.22050 (0 reqs/sec) | Rendering: 21.68902 (89%) | DB: 2.28758 (9%) | 200 OK [http://laputa/lexemes]
+
+
+Processing LexemesController#show (for 192.168.1.111 at 2009-04-30 20:15:43) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZWY5Y2RkNzViMjc5YzY0NjA3MWI4Njg2OGRiOGEy%0AMGEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh%0Ac2h7AAY6CkB1c2VkewA%3D--5c02a0bdd698089b11f43987d2808e9f0152091d
+  Parameters: {"action"=>"show", "id"=>"2", "controller"=>"lexemes"}
+  [4;35;1mLexeme Load (0.003175)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+Rendering template within layouts/lexemes
+Rendering lexemes/show
+  [4;36;1mHeadword Load (0.005751)[0m   [0;1mSELECT * FROM headwords WHERE (headwords.lexeme_id = 2) [0m
+  [4;35;1mPhoneticForm Load (0.007608)[0m   [0mSELECT phonetic_forms.* FROM phonetic_forms INNER JOIN orthographs ON phonetic_forms.id = orthographs.phonetic_form_id WHERE ((orthographs.headword_id = 2)) [0m
+Rendered shared/_phonetic_form (0.02776)
+Rendered shared/_headword (0.60528)
+  [4;36;1mSubentry Load (0.005149)[0m   [0;1mSELECT * FROM subentries WHERE (subentries.lexeme_id = 2) [0m
+  [4;35;1mSQL (0.004096)[0m   [0mSELECT count(*) AS count_all FROM senses WHERE (senses.subentry_id = 2) [0m
+  [4;36;1mSense Load (0.004100)[0m   [0;1mSELECT * FROM senses WHERE (senses.subentry_id = 2) [0m
+  [4;35;1mSQL (0.003300)[0m   [0mSELECT count(*) AS count_all FROM glosses WHERE (glosses.sense_id = 2) [0m
+  [4;36;1mGloss Load (2.767753)[0m   [0;1mSELECT * FROM glosses WHERE (glosses.sense_id = 2) [0m
+Rendered shared/_gloss (0.08807)
+Rendered shared/_sense (3.64186)
+  [4;35;1mEtymology Load (0.020661)[0m   [0mSELECT etymologies.* FROM etymologies INNER JOIN etymotheses ON etymologies.id = etymotheses.etymology_id WHERE ((etymotheses.subentry_id = 2)) [0m
+Rendered shared/_etymology (0.16874)
+Rendered shared/_subentry (12.84527)
+Rendered shared/_lexeme (15.80111)
+  [4;36;1mSQL (0.025919)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSense Load (0.004305)[0m   [0mSELECT senses.* FROM senses INNER JOIN subentries ON senses.subentry_id = subentries.id WHERE ((subentries.lexeme_id = 2)) [0m
+  [4;36;1mParse Load (4.042751)[0m   [0;1mSELECT parses.* FROM parses INNER JOIN interpretations ON parses.id = interpretations.parse_id WHERE ((interpretations.sense_id = 2)) [0m
+  [4;35;1mParse Load (0.004228)[0m   [0mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;36;1mAttestation Load Including Associations (0.005253)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;35;1mParse Load (0.005282)[0m   [0mSELECT parses.* FROM parses INNER JOIN attestations ON parses.attestation_id = attestations.id WHERE ((attestations.locus_id = 7)) [0m
+  [4;36;1mInterpretation Load (0.016101)[0m   [0;1mSELECT * FROM interpretations WHERE (interpretations.parse_id = 3) [0m
+  [4;35;1mInterpretation Load (0.004514)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 4) [0m
+  [4;36;1mInterpretation Load (0.003772)[0m   [0;1mSELECT * FROM interpretations WHERE (interpretations.parse_id = 5) [0m
+  [4;35;1mSense Load (0.004380)[0m   [0mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;35;1mSense Load (0.003691)[0m   [0mSELECT * FROM senses WHERE (senses."id" = 2) [0m
+  [4;36;1mSubentry Load (0.030815)[0m   [0;1mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;35;1mLexeme Load (0.004549)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;36;1mSubentry Load (0.075852)[0m   [0;1mSELECT * FROM subentries WHERE (subentries."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT parses.* FROM parses INNER JOIN attestations ON parses.attestation_id = attestations.id WHERE ((attestations.locus_id = 7)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 3) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM interpretations WHERE (interpretations.parse_id = 4) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+  [4;35;1mHeadword Load (0.004630)[0m   [0mSELECT * FROM headwords WHERE (headwords.lexeme_id = 1) [0m
+  [4;36;1mSense Load (0.071910)[0m   [0;1mSELECT senses.* FROM senses INNER JOIN subentries ON senses.subentry_id = subentries.id WHERE ((subentries.lexeme_id = 1)) [0m
+  [4;35;1mParse Load (0.004653)[0m   [0mSELECT parses.* FROM parses INNER JOIN interpretations ON parses.id = interpretations.parse_id WHERE ((interpretations.sense_id = 1)) [0m
+  [4;36;1mParse Load (4.861806)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" IN (3,4)) [0m
+  [4;35;1mAttestation Load Including Associations (0.053983)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 3) [0m
+  [4;36;1mAttestation Load Including Associations (0.007159)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 4) [0m
+  [4;35;1mSource Load (0.003476)[0m   [0mSELECT * FROM sources WHERE (sources."id" = 7) [0m
+  [4;36;1mAuthorship Load (0.051982)[0m   [0;1mSELECT * FROM authorships WHERE (authorships."id" = 7) [0m
+  [4;35;1mAuthor Load (0.004266)[0m   [0mSELECT * FROM authors WHERE (authors."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" IN (3,4)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 3) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 4) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM sources WHERE (sources."id" = 7) [0m
+Rendered shared/_ref (4.50570)
+Rendered shared/_author (9.15972)
+Rendered shared/_construction (15.11383)
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT parses.* FROM parses INNER JOIN attestations ON parses.attestation_id = attestations.id WHERE ((attestations.locus_id = 7)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 3) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM interpretations WHERE (interpretations.parse_id = 4) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT senses.* FROM senses INNER JOIN subentries ON senses.subentry_id = subentries.id WHERE ((subentries.lexeme_id = 1)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT parses.* FROM parses INNER JOIN interpretations ON parses.id = interpretations.parse_id WHERE ((interpretations.sense_id = 1)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM parses WHERE (parses."id" IN (3,4)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 3) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 4) [0m
+Rendered shared/_note (0.04940)
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM sources WHERE (sources."id" = 7) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM authorships WHERE (authorships."id" = 7) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM authors WHERE (authors."id" = 1) [0m
+  [4;35;1mTitle Load (0.003994)[0m   [0mSELECT * FROM titles WHERE (titles."id" = 4) [0m
+Rendered shared/_locus (5.77299)
+  [4;36;1mDictionary Load (0.003268)[0m   [0;1mSELECT dictionaries.* FROM dictionaries INNER JOIN dictionary_scopes ON dictionaries.id = dictionary_scopes.dictionary_id WHERE ((dictionary_scopes.lexeme_id = 2)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM headwords WHERE (headwords.lexeme_id = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT phonetic_forms.* FROM phonetic_forms INNER JOIN orthographs ON phonetic_forms.id = orthographs.phonetic_form_id WHERE ((orthographs.headword_id = 2)) [0m
+Rendered shared/wiki/_phonetic_form (0.03236)
+Rendered shared/wiki/_gloss (2.95859)
+Rendered shared/wiki/_sense (5.09800)
+Rendered shared/wiki/_etymology (0.02893)
+Rendered shared/wiki/_subentry (5.32191)
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT parses.* FROM parses INNER JOIN attestations ON parses.attestation_id = attestations.id WHERE ((attestations.locus_id = 7)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 3) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM interpretations WHERE (interpretations.parse_id = 4) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT parses.* FROM parses INNER JOIN attestations ON parses.attestation_id = attestations.id WHERE ((attestations.locus_id = 7)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM interpretations WHERE (interpretations.parse_id = 3) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 4) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM interpretations WHERE (interpretations.parse_id = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM senses WHERE (senses."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM subentries WHERE (subentries."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM headwords WHERE (headwords.lexeme_id = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT senses.* FROM senses INNER JOIN subentries ON senses.subentry_id = subentries.id WHERE ((subentries.lexeme_id = 1)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT parses.* FROM parses INNER JOIN interpretations ON parses.id = interpretations.parse_id WHERE ((interpretations.sense_id = 1)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM parses WHERE (parses."id" IN (3,4)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 3) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 4) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM sources WHERE (sources."id" = 7) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM authorships WHERE (authorships."id" = 7) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM authors WHERE (authors."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM parses WHERE (parses."id" IN (3,4)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 3) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 4) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+Rendered shared/wiki/_ref (4.56994)
+Rendered shared/wiki/_author (9.94114)
+Rendered shared/wiki/_construction (15.99178)
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM sources WHERE (sources."id" = 7) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM authorships WHERE (authorships."id" = 7) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM authors WHERE (authors."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM titles WHERE (titles."id" = 4) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT parses.* FROM parses INNER JOIN attestations ON parses.attestation_id = attestations.id WHERE ((attestations.locus_id = 7)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 3) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM interpretations WHERE (interpretations.parse_id = 4) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT senses.* FROM senses INNER JOIN subentries ON senses.subentry_id = subentries.id WHERE ((subentries.lexeme_id = 1)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT parses.* FROM parses INNER JOIN interpretations ON parses.id = interpretations.parse_id WHERE ((interpretations.sense_id = 1)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM parses WHERE (parses."id" IN (3,4)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 3) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 4) [0m
+Rendered shared/wiki/_note (4.76806)
+Rendered shared/wiki/_locus (5.06810)
+Rendered shared/wiki/_lexeme (31.62081)
+  [4;36;1mHeadword Load (0.003700)[0m   [0;1mSELECT * FROM headwords WHERE (headwords."form" = 'Aaron') [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT dictionaries.* FROM dictionaries INNER JOIN dictionary_scopes ON dictionaries.id = dictionary_scopes.dictionary_id WHERE ((dictionary_scopes.lexeme_id = 2)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries.lexeme_id = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM headwords WHERE (headwords.lexeme_id = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT phonetic_forms.* FROM phonetic_forms INNER JOIN orthographs ON phonetic_forms.id = orthographs.phonetic_form_id WHERE ((orthographs.headword_id = 2)) [0m
+Rendered shared/wiki/_phonetic_form (0.00540)
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT count(*) AS count_all FROM senses WHERE (senses.subentry_id = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses.subentry_id = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT count(*) AS count_all FROM glosses WHERE (glosses.sense_id = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM glosses WHERE (glosses.sense_id = 2) [0m
+Rendered shared/wiki/_gloss (0.00591)
+Rendered shared/wiki/_sense (0.03218)
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT etymologies.* FROM etymologies INNER JOIN etymotheses ON etymologies.id = etymotheses.etymology_id WHERE ((etymotheses.subentry_id = 2)) [0m
+Rendered shared/wiki/_etymology (0.00520)
+Rendered shared/wiki/_subentry (0.18223)
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT senses.* FROM senses INNER JOIN subentries ON senses.subentry_id = subentries.id WHERE ((subentries.lexeme_id = 2)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT parses.* FROM parses INNER JOIN interpretations ON parses.id = interpretations.parse_id WHERE ((interpretations.sense_id = 2)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT parses.* FROM parses INNER JOIN attestations ON parses.attestation_id = attestations.id WHERE ((attestations.locus_id = 7)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 3) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM interpretations WHERE (interpretations.parse_id = 4) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT parses.* FROM parses INNER JOIN attestations ON parses.attestation_id = attestations.id WHERE ((attestations.locus_id = 7)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM interpretations WHERE (interpretations.parse_id = 3) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 4) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM interpretations WHERE (interpretations.parse_id = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM senses WHERE (senses."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM subentries WHERE (subentries."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM headwords WHERE (headwords.lexeme_id = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT senses.* FROM senses INNER JOIN subentries ON senses.subentry_id = subentries.id WHERE ((subentries.lexeme_id = 1)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT parses.* FROM parses INNER JOIN interpretations ON parses.id = interpretations.parse_id WHERE ((interpretations.sense_id = 1)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM parses WHERE (parses."id" IN (3,4)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 3) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 4) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM sources WHERE (sources."id" = 7) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM authorships WHERE (authorships."id" = 7) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM authors WHERE (authors."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM parses WHERE (parses."id" IN (3,4)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 3) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 4) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+Rendered shared/wiki/_ref (0.04339)
+Rendered shared/wiki/_author (0.31376)
+Rendered shared/wiki/_construction (0.39045)
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM sources WHERE (sources."id" = 7) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM authorships WHERE (authorships."id" = 7) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM authors WHERE (authors."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM titles WHERE (titles."id" = 4) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM parses WHERE (parses."id" = 5) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT parses.* FROM parses INNER JOIN attestations ON parses.attestation_id = attestations.id WHERE ((attestations.locus_id = 7)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 3) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM interpretations WHERE (interpretations.parse_id = 4) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM interpretations WHERE (interpretations.parse_id = 5) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM senses WHERE (senses."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM senses WHERE (senses."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 1) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 1) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM subentries WHERE (subentries."id" = 2) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM lexemes WHERE (lexemes."id" = 2) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT senses.* FROM senses INNER JOIN subentries ON senses.subentry_id = subentries.id WHERE ((subentries.lexeme_id = 1)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT parses.* FROM parses INNER JOIN interpretations ON parses.id = interpretations.parse_id WHERE ((interpretations.sense_id = 1)) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM parses WHERE (parses."id" IN (3,4)) [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 3) [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT attestations."id" AS t0_r0, attestations."locus_id" AS t0_r1, attestations."created_at" AS t0_r2, attestations."updated_at" AS t0_r3, attestations."attested_form" AS t0_r4, loci."id" AS t1_r0, loci."source_id" AS t1_r1, loci."example" AS t1_r2, loci."example_translation" AS t1_r3, loci."created_at" AS t1_r4, loci."updated_at" AS t1_r5 FROM attestations LEFT OUTER JOIN loci ON loci.id = attestations.locus_id WHERE (attestations."id" = 4) [0m
+Rendered shared/wiki/_note (0.09741)
+Rendered shared/wiki/_locus (5.34351)
+Rendered shared/wiki/_lexeme (10.40839)
+Rendered shared/wiki/_headword (10.43989)
+Completed in 91.61232 (0 reqs/sec) | Rendering: 79.00764 (86%) | DB: 12.12783 (13%) | 200 OK [http://laputa/lexemes/2]
+
+
+Processing LanguagesController#index (for 192.168.1.111 at 2009-04-30 20:26:12) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZWY5Y2RkNzViMjc5YzY0NjA3MWI4Njg2OGRiOGEy%0AMGEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh%0Ac2h7AAY6CkB1c2VkewA%3D--5c02a0bdd698089b11f43987d2808e9f0152091d
+  Parameters: {"action"=>"index", "controller"=>"languages"}
+  [4;36;1mLanguage Load (0.369549)[0m   [0;1mSELECT * FROM languages [0m
+Rendering template within layouts/languages
+Rendering languages/index
+Completed in 3.45248 (0 reqs/sec) | Rendering: 2.63847 (76%) | DB: 0.36955 (10%) | 200 OK [http://laputa/languages/]
