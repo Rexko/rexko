@@ -1,7 +1,6 @@
 <h1>Editing lexeme</h1>
 
 <%= error_messages_for :lexeme %>
-<%= error_messages_for :headword %>
 
 <%=	render(:partial => "form", :object => { :label => 'Update', :action => 'update', :method => :put, :for_url => "/lexemes/#{@lexeme.id}" }) %>
 
