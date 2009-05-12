@@ -56,11 +56,13 @@ class LexemesController < ApplicationController
 
     respond_to do |format|
       if @lexeme.save # Is this right?
-        flash[:notice] = 'Lexeme was successfully created.'
+        flash[:notice] = "Lexeme was successfully created." 
         format.html do
           case params[:commit]
           when "Create and continue editing" then render :action => 'edit'
-          else redirect_to(@lexeme) 
+          else 
+            flash[:notice] += " <a href=\"#{ url_for :controller => 'lexemes', :action => 'new' }\">Create another?</a>"
+            redirect_to(@lexeme)
           end
         end
         format.xml  { render :xml => @lexeme, :status => :created, :location => @lexeme }
@@ -154,11 +156,13 @@ class LexemesController < ApplicationController
 
     respond_to do |format|
       if records_to_update.compact.flatten.all?(&:save!)
-        flash[:notice] = 'Lexeme was successfully updated.'
+        flash[:notice] = "Lexeme was successfully updated." 
         format.html do
           case params[:commit]
           when "Update and continue editing" then render :action => "edit"
-          else redirect_to(@lexeme) 
+          else 
+            flash[:notice] += " <a href=\"#{ url_for :controller => 'lexemes', :action => 'new' }\">Create a new lexeme?</a>"
+            redirect_to(@lexeme) 
           end
         end
         format.xml  { head :ok }
