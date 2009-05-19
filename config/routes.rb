@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect "html/:headword",
+    :controller => "lexemes",
+    :action => "show_by_headword" 
+  
   map.resources :interpretations
 
   map.resources :parses

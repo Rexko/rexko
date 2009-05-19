@@ -21,6 +21,24 @@ class LexemesController < ApplicationController
     end
   end
 
+  def show_by_headword
+    @headword = Headword.find_by_form(params[:headword])
+    
+    if @headword
+      respond_to do |format|
+        format.html { redirect_to @headword.lexeme }
+        format.xml { render :xml => @headword.lexeme }
+        # lexeme display in XML is currently useless, btw
+      end
+    else
+      flash[:notice] = "There is no lexeme with <i>#{params[:headword]}</i> as headword.  You can create one below."
+      respond_to do |format|
+        format.html { redirect_to :action => 'new' }
+        format.xml { render :nothing => true, :status => '404 Not Found' }
+      end
+    end
+  end
+
   # GET /lexemes/new
   # GET /lexemes/new.xml
   def new
