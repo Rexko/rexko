@@ -1,0 +1,8 @@
+==0.1 to 0.1.1==
+* [#8 (30)] Fixed deletion of items in lexeme edit view
+* [#30] Implemented a URL format to look up lexemes by headword
+* [#15 (40)] Added 'create another lexeme' message to lexeme show page.
+* Removed misplaced error_messages_for line that was throwing errors 
+  when editing some lexemes.
+* [#7 (28)] Corrected a bug where single-word terms were showing up as
+  constructions.
