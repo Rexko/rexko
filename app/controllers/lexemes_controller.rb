@@ -110,11 +110,19 @@ class LexemesController < ApplicationController
       phonetic_forms = headword.phonetic_forms
       phonetic_forms.each do |phonetic_form|
         phonetic_form.attributes = headword_param[:phonetic_forms][phonetic_form.id.to_s]
-        phonetic_forms.delete(phonetic_form) if phonetic_form.form.blank?
+        if phonetic_form.form.blank?
+          phonetic_form.destroy
+          phonetic_forms.delete(phonetic_form) 
+        end
       end
       records_to_update << build_if_valid(PhoneticForm, phonetic_forms, params["new_phonetic_form_for_headword_#{headword.id.to_s}"])
-      @headwords.delete(headword) if headword.form.blank? 
-      # => add a confirmation? Check if last headword?  Fail noisily if subdata.
+      if headword.form.blank? && headword.phonetic_forms.empty?
+        headword.destroy
+        @headwords.delete(headword) 
+      elsif headword.form.blank?
+        headword.form = headword.phonetic_forms.find(:first).form # Right?
+      end
+      # => Check if last headword?
     end
 
     # Add a new headword and its phonetic form, if valid
@@ -133,12 +141,20 @@ class LexemesController < ApplicationController
       # Update etymologies.  Delete blank ones.  Add a new one if valid.
       etymologies.each do |etymology|
         etymology.attributes = subentry_param[:etymology][etymology.id.to_s]
-        etymologies.delete(etymology) if [etymology.source_language, etymology.gloss, etymology.etymon].all?(&:blank?)
+        if [etymology.source_language, etymology.gloss, etymology.etymon].all?(&:blank?)
+          etymology.destroy
+          etymologies.delete(etymology) 
+        end
       end
       records_to_update << build_if_valid(Etymology, etymologies, params["new_etymology_for_subentry_#{subentry.id.to_s}"])      
       
-      @subentries.delete(subentry) if subentry.paradigm.blank?
-      # => add conf? check if last subentry? Fail noisily if subdata.
+      if subentry.paradigm.blank? && subentry.etymologies.empty? && subentry.senses.empty?
+        subentry.destroy
+        @subentries.delete(subentry) 
+      elsif subentry.paradigm.blank?
+        subentry.paradigm = @headwords.collect(&:form).to_sentence(:connector => "'''''or'''''") # I think there is a reason this might be a bad idea
+      end
+      # => check if last subentry?
       
       senses = subentry.senses
       # Update senses.  Delete blank ones.  Add a new one if valid.
@@ -149,10 +165,16 @@ class LexemesController < ApplicationController
         # Update glosses.  Delete blank ones.  Add a new one if valid.
         glosses.each do |gloss|
           gloss.attributes = sense_param[:gloss][gloss.id.to_s]
-          glosses.delete(gloss) if gloss.gloss.blank?
+          if gloss.gloss.blank? 
+            gloss.destroy
+            glosses.delete(gloss)
+          end
         end
         records_to_update << build_if_valid(Gloss, glosses, params["new_gloss_for_sense_#{sense.id.to_s}"])
-        senses.delete(sense) if sense.definition.blank? && sense.glosses.empty?
+        if sense.definition.blank? && sense.glosses.empty?
+          sense.destroy
+          senses.delete(sense) 
+        end
       end
       records_to_update << build_if_valid(Sense, senses, subentry_param[:new_sense])
     end
