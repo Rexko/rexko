@@ -1,11 +1,9 @@
-<div class="editform-phonform">
-<%  @phonetic_form = phonetic_form
-		fields_for "headword[#{headword.id}][phonetic_forms][]", @phonetic_form do |f| 
-#		fields_for attr_trail(:phonetic_forms, :headword), @phonetic_form do |f| 
-%>
-	<tr>
-		<td>Phonetic form:</td>
-		<td><%= f.text_field :form %></td>
-	</tr>
+<% unless (f.object._delete) %>
+  <tr class="phonetic_form">
+    <td>Phonetic form:</td>
+    <td><%= f.text_field :form %></td>
+    <td>
+	    <%= remove_link_unless_new_record(f) %>
+    </td>
+  </tr>
 <% end %>
-</div>

@@ -5,3 +5,12 @@
 #
 # two:
 #   column: value
+
+valid_attestation:
+    id:             1
+    locus:          1
+    attested_form:  foo
+
+invalid_attestation:
+    id:     2
+    locus:  1

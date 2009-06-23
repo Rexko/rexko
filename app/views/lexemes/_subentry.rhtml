@@ -1,50 +1,47 @@
-<div class="editform-subentry">
-<h1>Subentry <%= subentry_counter + 1 %></h1>
-<% @subentry = subentry
-	 fields_for "subentry[]" do |f| %>
-	<table>
-		<tr>
-			<td><b>Principal parts:</b></td>
-			<td><%= f.text_field :paradigm %></td>
-		</tr>
-		<tr>
-			<td>Part of speech:</td>
-			<td><%= f.text_field :part_of_speech %></td>
-		</tr>
-	</table>
-	<!-- Sense -->
-	<%= render :partial => 'sense', :collection => @subentry.senses %>
-	<h2>New sense</h2>
-	<table>
-		<tr>
-			<td valign="top">Definition:</td>
-			<td><%= text_area "subentry[#{@subentry.id}][new_sense]", :definition, :rows => 4 %></td>
-		</tr>
-		<tr>
-			<td>Gloss:</td>
-			<td><%= text_field "subentry[#{@subentry.id}][new_gloss]", :gloss %></td>
-		</tr>
-	</table>
-	<!-- Etymology -->
-	<h2>Etymology</h2>
-	<table>
-		<tr>
-			<th>Source Language</th>
-			<th>Etymon</th>
-			<th>Gloss</th>
-		</tr>
-		<%= render :partial => 'etymology', :collection => @subentry.etymologies %>
-		<tr>
-			<td>
-				<%= text_field "new_etymology_for_subentry_#{@subentry.id}", :source_language %>
-			</td>
-			<td>
-				<%= text_field "new_etymology_for_subentry_#{@subentry.id}", :etymon %>
-			</td>
-			<td>
-				<%= text_field "new_etymology_for_subentry_#{@subentry.id}", :gloss %>
-			</td>
-		</tr>
-	</table>
+<% unless (f.object._delete) %>
+	<% nested_attributes_for f, :senses, :etymologies %>
+	<div class="subentry">
+	  <h1>Subentry <%= subentry_counter + 1  if defined? subentry_counter  %></h1>
+	  <table>
+	    <tr>
+	      <td><b>Principal parts:</b></td>
+	      <td><%= f.text_field :paradigm %></td>
+	    </tr>
+	    <tr>
+	      <td>Part of speech:</b></td>
+	      <td><%= f.text_field :part_of_speech %></td>
+	    </tr>
+	  </table>
+    <%= remove_link_unless_new_record(f) %>
+
+	  <!-- Sense -->
+	  <% @sense = f.object.senses.empty? ? f.object.senses.build : f.object.senses %>
+	  <% f.fields_for :senses do |s_form| %>
+	    <%= render :partial => 'sense', :locals => { :f => s_form } %>
+	  <% end %>
+		<span class="par">
+			<%= link_to 'Add sense', '#senses', :class => 'add' %>
+		</span>
+
+	  <!-- Etymology -->
+	  <h2>Etymology</h2>
+	  <table>
+	    <tr>
+	      <th>Source Language</th>
+	      <th>Etymon</th>
+	      <th>Gloss</th>
+	    </tr>
+    
+	    <% @etymology = f.object.etymologies.empty? ? f.object.etymologies.build : f.object.etymologies 
+	%>
+	    <% f.fields_for :etymologies do |e_form| %>
+	      <%= render :partial => 'etymology', :locals => { :f => e_form } %>
+	    <% end %>
+			<tr class="par">
+				<td>
+					<%= link_to 'Add etymology', '#etymologies', :class => 'add' %>
+				</td>
+			</tr>
+	  </table>
+	</div>
 <% end %>
-</div>

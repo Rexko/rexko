@@ -1,4 +1,7 @@
-<% @interpretation = interpretation 
-	 fields_for attr_trail(:interpretation, :parse, :attestation, :locus), @interpretation do |f| %>
-<br><b>Sense:</b> <%= f.collection_select :sense_id, Headword.lookup_all_by_parse(@parse).collect{ |hw| Sense.find(hw.lexeme.sense_ids) }.flatten, :id, :definition, {:include_blank => true} %>
+<% unless (f.object._delete) %>
+	<span class="interpretation">
+		<br><b>Sense:</b> <%= f.collection_select :sense_id, f.object.parse.potential_interpretations, :id, :definition, {:include_blank => true} if f.object.parse %> 
+
+	  <%= remove_link_unless_new_record(f) %>
+	</span>
 <% end %>

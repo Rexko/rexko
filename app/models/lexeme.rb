@@ -6,10 +6,10 @@ class Lexeme < ActiveRecord::Base
   has_many :headwords
   has_many :phonetic_forms
   
-  attr_accessible :dictionary_scopes, :dictionaries, :subentries, :headwords
+  accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
   def loci
-    Parse.find(senses.collect(&:parse_ids).flatten).collect(&:attestation).collect(&:locus).uniq
+    Parse.find(senses.collect(&:parse_ids).flatten).collect(&:attestation).compact.collect(&:locus).uniq
   end
   
   def constructions (from_dictionary = nil)

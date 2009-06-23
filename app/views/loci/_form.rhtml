@@ -1,37 +1,42 @@
-<% form_tag form[:for_url], {:method => form[:method], :action => form[:action], :id => params[:id]}  do %>
+<% form_for @locus, {:method => form[:method], :action => form[:action]} do |l_form| %>
+<% nested_attributes_for l_form, :attestations %>
   <p>
+    <!-- these need a better interface -->
     <b>Author</b><br />
-		<%= collection_select(:authorship, :author_id, Author.find(:all), :id, :name, {:include_blank => "[Other:]"})%> <%= text_field :new_author, :name %>  </p>
-	<p>
-   <b>Title</b><br />
-		<%= collection_select(:authorship, :title_id, Title.find(:all), :id, :name, {:include_blank => "[Other:]" })%> <%= text_field :new_title, :name %>
+    <%= collection_select(:authorship, :author_id, Author.find(:all), :id, :name, {:include_blank => "[Other:]"}) %> <%= text_field :new_author, :name %>
   </p>
-
+  <p>
+    <b>Title</b><br />
+    <%= collection_select(:authorship, :title_id, Title.find(:all), :id, :name, {:include_blank => "[Other:]"}) %> <%= text_field :new_title, :name %>
+  </p>
   <p>
     <b>Pointer</b><br />
     <%= text_field :source, :pointer %>
   </p>
-<table>
-	<tr>
-		<td>
-		  <p>
-		    <b>Example</b><br />
-		    <%= text_area :locus, :example %>
-		  </p>
-		</td>
-		<td>
-		  <p>
-		    <b>Example translation</b><br />
-		    <%= text_area :locus, :example_translation %>
-		  </p>
-		</td>
-	</tr>
-</table>
-	<%= render :partial => "attestation", :collection => @locus.attestations %>
+  <table>
+    <tr>
+      <td>
+        <p>
+          <b>Example</b><br />
+          <%= l_form.text_area :example %>
+        </p>
+      </td>
+      <td>
+        <p>
+          <b>Example translation</b><br />
+          <%= l_form.text_area :example_translation %>
+        </p>
+      </td>
+    </tr>
+  </table>
 
-	<p><b>New attested form:</b> <%= text_field :new_attestation, :attested_form %>
-	<br>Parsed form: <%= text_field :new_parse, :parsed_form %>
-	<p>
-  <%= submit_tag form[:label] %> | <%= submit_tag "#{form[:label]} and continue editing" %>
-  </p>
+  <% @attestation = l_form.object.attestations.empty? ? l_form.object.attestations.build : l_form.object.attestations %>
+  <% l_form.fields_for :attestations do |a_form| %>
+    <%= render :partial => 'attestation', :locals => { :f => a_form } %>
+  <% end %>
+	<span class="par">
+		<br/><%= link_to 'Add attestation', '#attestations', :class => 'add' %>
+	</span>
+
+  <p><%= submit_tag form[:label] %> | <%= submit_tag "#{form[:label]} and continue editing" %></p>
 <% end %>

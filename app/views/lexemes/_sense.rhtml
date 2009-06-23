@@ -1,20 +1,27 @@
-<div class="editform-sense">
-<h2>Sense <%= sense_counter + 1 %></h2>
-	<% @sense = sense
-		 fields_for "subentry[#{@subentry.id}][sense][]", @sense do |f| 
-#		 fields_for attr_trail(:sense, :subentry), @sense do |f| 
-%>
-		<table>
-			<tr>
-				<td valign="top">Definition:</td>
-				<td><%= f.text_area :definition, :rows => 4 %></td>
-			</tr>
-	<% end %>
-	<!-- Gloss -->
-	<%= render :partial => 'gloss', :collection => @sense.glosses %>
-			<tr>
-				<td>New Gloss:</td>
-				<td><%= text_field "new_gloss_for_sense_#{@sense.id}", :gloss %></td>
-			</tr>
-		</table>
-</div>
+<% unless (f.object._delete) %>
+	<% nested_attributes_for f, :glosses %>
+	<div class="sense">
+	  <h2>Sense <%= sense_counter + 1 if defined? sense_counter %></h2>
+    <%= remove_link_unless_new_record(f) %>
+
+	  <table>
+	    <tr>
+	      <td valign="top">Definition:</td>
+	      <td><%= f.text_area :definition, :rows => 4 %></td>
+	    </tr>
+
+	    <!-- Gloss -->
+	    <% @gloss = f.object.glosses.empty? ? f.object.glosses.build : f.object.glosses %>
+	    <% f.fields_for :glosses do |g_form| %>
+	      <%= render :partial => 'gloss', :locals => { :f => g_form } %>
+	    <% end %>
+			<tfoot class="par">
+				<tr>
+					<td>
+						<%= link_to 'Add gloss', '#glosses', :class => 'add' %>
+					</td>
+				</tr>
+			</tfoot>
+	  </table>
+	</div>
+<% end %>

@@ -1,15 +1,23 @@
-<div class="editform-headword">
-<% @headword = headword
-	 fields_for "headword[]" do |f| %>
-	<tr>
-			<td><b>Headword <%= headword_counter + 1 %>:</b></td> 
-			<td><%= f.text_field :form %></td>
-	</tr>
-			<!-- Phonetic form -->
-			<%= render :partial => 'phonetic_form', :collection => headword.phonetic_forms, :locals => { :headword => headword } %>
-			<tr>
-				<td>New phonetic form:</td>
-				<td><%= text_field "new_phonetic_form_for_headword_#{headword.id}", :form %></td>
-			</tr>
+<% unless (f.object._delete) %>
+  <% nested_attributes_for f, :phonetic_forms %>
+	<tbody class="headword">
+	  <tr>
+	    <td><b>Headword <%= headword_counter + 1 if defined? headword_counter %>:</b></td>
+	    <td><%= f.text_field :form %></td>
+	    <td>
+		    <%= remove_link_unless_new_record(f) %>
+	    </td>
+	  </tr>
+
+	  <!-- Phonetic form -->
+	  <% @phonetic_form = f.object.phonetic_forms.empty? ? f.object.phonetic_forms.build : f.object.phonetic_forms %>
+	  <% f.fields_for :phonetic_forms do |pf_form| %>
+	    <%= render :partial => 'phonetic_form', :locals => { :f => pf_form } %>
+	  <% end %>
+		<tr class="par">
+			<td colspan="3">
+				<%= link_to 'Add phonetic form', '#phonetic_forms', :class => 'add' %>
+			</td>
+		</tr>
+	</tbody>
 <% end %>
-</div>

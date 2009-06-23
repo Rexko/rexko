@@ -1,3 +1,1 @@
-<div class="lexform-headword" <%=h lang_for(headword) %>><%= h headword.form.capitalize %></div>
-	
-	<%= render :partial => "shared/phonetic_form", :collection => headword.phonetic_forms, :spacer_template => "shared/or", :locals => { :headword => headword } %>
+<span class="lexform-phonetic-form" <%=h lang_for(headword, :variant => 'fonipa') %>><%= h sentence_case headword.phonetic_forms.collect{|x| "(#{x.form})"}.to_sentence(:two_words_connector  => ' or ', :last_word_connector => ", or ") %></span>

@@ -1,3 +1,10 @@
+==0.1.1 to 0.1.2==
+* Several changes thanks to Rails upgrade
+* [#2 (11)], [#32 (55)], [#34 (57)]  Rewrote forms to use the new nested attributes features.
+* [#25 (50)] Implemented JavaScript to allow entry of multiple items in both lexeme and locus edit form
+* Removed the globalize plugin
+* Miscellaneous changes
+
 ==0.1 to 0.1.1==
 * [#8 (30)] Fixed deletion of items in lexeme edit view
 * [#30] Implemented a URL format to look up lexemes by headword

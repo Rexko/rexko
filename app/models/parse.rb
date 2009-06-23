@@ -4,6 +4,8 @@ class Parse < ActiveRecord::Base
   has_many :interpretations
   validates_presence_of :parsed_form
   
+  accepts_nested_attributes_for :interpretations, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+    
   def interpretation=(terp_params)
     terp_params.each do |id, attributes|
       this_terp = Interpretation.find(id)
@@ -13,5 +15,17 @@ class Parse < ActiveRecord::Base
         interpretations.delete(this_terp)
       end
     end
+  end
+  
+  def lookup_headword
+    Headword.find_by_form(parsed_form)
+  end
+
+  def lookup_all_headwords
+    Headword.find_all_by_form(parsed_form)
+  end
+
+  def potential_interpretations
+    lookup_all_headwords.collect {|hw| Sense.find(hw.lexeme.sense_ids) }.flatten
   end
 end

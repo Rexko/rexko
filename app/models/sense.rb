@@ -6,6 +6,8 @@ class Sense < ActiveRecord::Base
   has_many :interpretations
   has_many :parses, :through => :interpretations
   
+  accepts_nested_attributes_for :glosses, :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+  
 protected
   def validate
     if definition.blank? && glosses.empty?

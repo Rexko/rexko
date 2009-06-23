@@ -1,1 +1,2 @@
-<%= author.name %> <%= render :partial => "shared/ref", :collection => construction.loci & @lexeme.loci, :spacer_template => "shared/comma" %>
+<%= author.name %> 
+<%= (construction.loci & @lexeme.loci).collect {|ref| link_to "[#{greek_numeral(@lexeme.loci.index(ref).next)}]", :anchor => "locus-#{ref.source.id}"}.to_sentence(:two_words_connector  => ', ', :last_word_connector => ", ")%>

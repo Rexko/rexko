@@ -5,4 +5,6 @@ class Subentry < ActiveRecord::Base
   belongs_to :language
   has_many :senses
   validates_presence_of :paradigm
+  
+  accepts_nested_attributes_for :etymologies, :senses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
 end

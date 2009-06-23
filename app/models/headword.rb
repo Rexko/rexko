@@ -2,6 +2,8 @@ class Headword < ActiveRecord::Base
   has_many :orthographs
   has_many :phonetic_forms, :through => :orthographs
   
+  accepts_nested_attributes_for :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+  
   belongs_to :lexeme
   delegate :senses, :to => '(lexeme or return nil)'
   belongs_to :language

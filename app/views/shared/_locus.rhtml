@@ -1,4 +1,4 @@
-<a name="locus-<%= locus.id %>"><%= count ||= locus_counter + 1 if locus_counter
+<a name="locus-<%= locus.id %>"><%= count ||= locus_counter + 1 if defined? locus_counter
 		"<b>#{h greek_numeral(count)}</b>" if count %></a>
 <%= render(:partial => "shared/note", :collection => @lexeme.constructions.collect {|constr| constr if constr.loci.include?(locus)}.compact) if @lexeme %>
 <%=	h "#{locus.source.author.name}," unless locus.source.author.nil?  %>

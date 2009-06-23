@@ -1,6 +1,14 @@
-<% @attestation = attestation 
-	 fields_for attr_trail(:attestation, :locus), @attestation do |f| %>
-<p><b>Attested form:</b> <%= f.text_field :attested_form %>
-<%= render :partial => "parse", :collection => @attestation.parses %>
-<!-- (New parse) -->
+<% unless (f.object._delete) %>
+	<% nested_attributes_for f, :parses %>
+	<p class="attestation"><b>Attested form:</b> <%= f.text_field :attested_form %>
+
+  <%= remove_link_unless_new_record(f) %>
+
+	<% @parse = f.object.parses.empty? ? f.object.parses.build : f.object.parses %>
+	<% f.fields_for :parses do |p_form| %>
+	  <%= render :partial => 'parse', :locals => { :f => p_form } %>
+	<% end %>
+	<span class="par">
+		<br/ ><%= link_to 'Add parse', '#parses', :class => 'add' %>
+	</span>
 <% end %>

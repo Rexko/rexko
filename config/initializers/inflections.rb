@@ -9,7 +9,7 @@
 #   inflect.uncountable %w( fish sheep )
 # end
 
-Inflector.inflections do |inflect|
+ActiveSupport::Inflector.inflections do |inflect|
   inflect.plural /^(loc)us/i, '\1i'
   inflect.singular /^(loc)i/i, '\1us'
   inflect.plural /^(etym)on/i, '\1a'

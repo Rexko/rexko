@@ -1,7 +1,19 @@
-<% @parse = parse 
-	 fields_for attr_trail(:parse, :attestation, :locus), @parse do |f| %>
-<br>Parsed form: <%= f.text_field :parsed_form %> <%=  Headword.lookup_by_parse(@parse).nil? ? link_to("[No entry for <i>#{@parse.parsed_form}</i>]", :controller => 'lexemes', :action => 'new') : link_to(@parse.parsed_form, Headword.lookup_by_parse(@parse).lexeme) %> <%= "&times;#{Parse.find_all_by_parsed_form(@parse.parsed_form).size}" %>
-<%= render :partial => "interpretation", :collection => parse.interpretations %> 
-<br>New sense: <%= collection_select "new_interpretation_for_parse[#{@parse.id}]", :sense_id,  Headword.lookup_all_by_parse(@parse).collect{ |hw| Sense.find(hw.lexeme.sense_ids) }.flatten, :id, :definition, {:include_blank => "[Unassigned]"} 
-%>
+<% unless (f.object._delete) %>
+	<% nested_attributes_for f, :interpretations %>
+	<span class="parse">
+		<br>Parsed form: <%= f.text_field :parsed_form %>
+		<%= headword_link(f.object) unless f.object.parsed_form.blank? %> 
+
+	  <%= remove_link_unless_new_record(f) %>
+
+		<% unless f.object.potential_interpretations.empty? %>
+			<% @interpretation = f.object.interpretations.empty? ? f.object.interpretations.build : f.object.interpretations %>
+			<% f.fields_for :interpretations do |i_form| %>
+			  <%= render :partial => 'interpretation', :locals => { :f => i_form } %>
+			<% end %>
+			<span class="par">
+				<%= link_to 'Add interpretation', '#interpretations', :class => 'add' %>
+			</span>
+		<% end %>
+	</span>
 <% end %>

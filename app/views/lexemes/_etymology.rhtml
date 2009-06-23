@@ -1,16 +1,10 @@
-<% @etymology = etymology
- 		fields_for "subentry[#{@subentry.id}][etymology][]", @etymology do |f|
-	#	fields_for attr_trail(:etymology, :subentry), @etymology do |f| 
-	%>
-<tr>
-	<td>
-		<%= f.text_field :source_language %>
-	</td>
-	<td>
-		<%= f.text_field :etymon %>
-	</td>
-	<td>
-		<%= f.text_field :gloss %>
-	</td>
-</tr>
+<% unless (f.object._delete) %>
+	<tr class="etymology">
+	  <td><%= f.text_field :source_language %></td>
+	  <td><%= f.text_field :etymon %></td>
+	  <td><%= f.text_field :gloss %></td>
+	  <td>
+	    <%= remove_link_unless_new_record(f) %>
+	  </td>
+	</tr>
 <% end %>

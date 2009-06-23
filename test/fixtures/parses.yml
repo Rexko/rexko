@@ -1,7 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  attestation_id: 1
+    id: 1
+    attestation_id: 1
+    parsed_form:  foo
 
 two:
-  attestation_id: 1
+    id: 2
+    attestation_id: 1
+    parsed_form:  bar
