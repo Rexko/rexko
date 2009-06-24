@@ -1,5 +1,5 @@
 <div class="lexform-entry">
-	<div class="lexform-headword" <%=h lang_for(lexeme.headwords) %>><%= h sentence_case lexeme.headwords.collect(&:form).to_sentence(:two_words_connector  => ' or ', :last_word_connector => ", or ") %></div>
+	<div class="lexform-headword" <%=h lang_for(lexeme.headwords) %>><%= h sentence_case (lexeme.headwords.collect(&:form).to_sentence(:two_words_connector  => ' or ', :last_word_connector => ", or ")) %></div>
 	<%= render :partial => "shared/headword", :collection => lexeme.headwords %>
 	<%= render :partial => "shared/subentry", :collection => lexeme.subentries %>
 </div>

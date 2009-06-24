@@ -30,10 +30,11 @@
     </tr>
   </table>
 
-  <% @attestation = l_form.object.attestations.empty? ? l_form.object.attestations.build : l_form.object.attestations %>
-  <% l_form.fields_for :attestations do |a_form| %>
-    <%= render :partial => 'attestation', :locals => { :f => a_form } %>
-  <% end %>
+	<% unless l_form.object.attestations.empty? %>
+		<% l_form.fields_for :attestations do |a_form| %>
+	    <%= render :partial => 'attestation', :locals => { :f => a_form } %>
+	  <% end %>
+	<% end %>
 	<span class="par">
 		<br/><%= link_to 'Add attestation', '#attestations', :class => 'add' %>
 	</span>
