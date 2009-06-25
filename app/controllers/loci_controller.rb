@@ -2,7 +2,7 @@ class LociController < ApplicationController
   # GET /loci
   # GET /loci.xml
   def index
-    @loci = Locus.find(:all)
+    @loci = Locus.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

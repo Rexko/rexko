@@ -14,7 +14,8 @@ class DictionariesController < ApplicationController
   # GET /dictionaries/1.xml
   def show
     @dictionary = Dictionary.find(params[:id])
-    @lexemes = @dictionary.source_language.iso_639_code == 'la' ? sort_latin(@dictionary.lexemes) : @dictionary.lexemes
+    # 'sort_latin(@dictionary.lexemes).paginate' is pretty bad, I think 
+    @lexemes = (@dictionary.source_language.iso_639_code == 'la' ? sort_latin(@dictionary.lexemes) : @dictionary.lexemes).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # show.html.erb

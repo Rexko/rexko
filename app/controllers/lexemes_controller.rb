@@ -2,7 +2,7 @@ class LexemesController < ApplicationController
   # GET /lexemes
   # GET /lexemes.xml
   def index
-    @lexemes = Lexeme.find(:all)
+    @lexemes = Lexeme.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
