@@ -51,26 +51,11 @@ class LociController < ApplicationController
     @authorship.title = params[:authorship][:title_id].empty? ? @authorship.build_title(params[:new_title]) : Title.find(params[:authorship][:title_id])
     @authorship.author = params[:authorship][:author_id].empty? ? @authorship.build_author(params[:new_author]) : Author.find(params[:authorship][:author_id])
 
-    to_break = params[:locus][:example]
-    broken = to_break.scan(/\[\[.+?\]\]/)
-    broken.each do |entry|
-      entry.delete!("[]")
-
-      attested = entry.include?("|") ? entry.gsub(/.+\|/, '') : entry
-      att = Attestation.new(:attested_form => attested)
-      att.save
-      @locus.attestations << att
-
-      parsed = entry.include?("|") ? entry.gsub(/\|.+/, '') : entry
-      parse = Parse.new(:parsed_form => parsed)
-      parse.save
-      att.parses << parse
-
-      # And we'll make an Interpretation later (or once we ajaxify)
-
-      # => left off here: modify the form to list and edit attestations.
-      # => also, modify 'update' to do likewise.
+    each_wikilink(params[:locus][:example]) do |linked, shown|
+      att = @locus.attestations.build(:attested_form => shown)
+      att.parses.build(:parsed_form => linked)
     end
+
 
     respond_to do |format|
       if [@source, @locus, @authorship].all?(&:save) #FIX
@@ -130,6 +115,19 @@ class LociController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(loci_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+protected
+  def each_wikilink to_break
+    broken = to_break.scan(/\[\[.+?\]\]\w*/)
+    broken.each do |entry|
+      entry.sub!(/\[\[/, '').sub!(/\]\]/, '')
+
+      shown = entry.include?("|") ? entry.gsub(/.+\|/, '') : entry
+      linked = entry.include?("|") ? entry.gsub(/\|.+/, '') : entry
+
+      yield(linked, shown)
     end
   end
 end
