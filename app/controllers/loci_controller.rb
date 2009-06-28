@@ -56,7 +56,6 @@ class LociController < ApplicationController
       att.parses.build(:parsed_form => linked)
     end
 
-
     respond_to do |format|
       if [@source, @locus, @authorship].all?(&:save) #FIX
         flash[:notice] = 'Locus was successfully created.'
