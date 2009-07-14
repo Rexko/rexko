@@ -21,7 +21,7 @@ module ApplicationHelper
   
   def headword_link (parse)
     parse.lookup_headword.nil? ? 
-      link_to("[No entry for <i>#{parse.parsed_form}</i> &times;#{Parse.count(:conditions => {:parsed_form => parse.parsed_form})}]", :controller => 'lexemes', :action => 'new') :
+      link_to("<span #{'style=color:red' if parse == @wantedparse }>[No entry for <i>#{parse.parsed_form}</i> &times;#{Parse.count(:conditions => {:parsed_form => parse.parsed_form})}]</span>", :controller => 'lexemes', :action => 'new') :
       link_to(parse.parsed_form, parse.lookup_headword.lexeme)
   end
   

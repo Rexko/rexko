@@ -39,6 +39,8 @@ class LociController < ApplicationController
     @locus = Locus.find(params[:id])
     @source = @locus.source
     @authorship = @source.authorship
+    
+    @wantedparse = @locus.most_wanted_parse
   end
 
   # POST /loci

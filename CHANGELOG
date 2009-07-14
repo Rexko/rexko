@@ -1,3 +1,11 @@
+==Since 0.1.2==
+* Views were calling delegate.js which was never actually in use
+* Modified locus form so it doesn't autobuild a form for an attestation
+* [#1 (2)] Implemented paging with will_paginate
+* [#39] Improved link parsing (links with [[trail]]ing text now work)
+* Fixed a bug in #sentence_case helper that prevented 'all entries with headword' working correctly.
+* [#23 (48)] Highlighted the most-wanted parse needing an entry. Also fixed a regression where the indicator of how often a lexeme was linked to had been pulled from the view.
+
 ==0.1.1 to 0.1.2==
 * Several changes thanks to Rails upgrade
 * [#2 (11)], [#32 (55)], [#34 (57)]  Rewrote forms to use the new nested attributes features.
