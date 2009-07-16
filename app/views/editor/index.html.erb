@@ -1,0 +1,17 @@
+<h1>Lexicon</h1>
+
+<h2>Tools</h2>
+<% form_tag :controller => :lexemes, :action => :show_by_headword do %>
+<ul>
+	<li>Find or create a lexeme: <%= text_field_tag :headword %></li>
+	<li><%=	link_to "Create a locus", :controller => :loci, :action => :new %></li>
+</ul>
+<% end %>
+
+<h2>Navigation</h2>
+<ul>
+	<li><%= link_to "Browse languages", :controller => :languages %></li>
+	<li><%= link_to "Browse dictionaries", :controller => :dictionaries %></li>
+	<li><%= link_to "Browse all lexemes", :controller => :lexemes %></li>
+	<li><%= link_to "Browse all loci", :controller => :loci %></li>
+</ul>
