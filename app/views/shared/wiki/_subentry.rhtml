@@ -1,3 +1,3 @@
-'''<%=h subentry.paradigm.split('|').join("'''|'''") || "<No principal parts>" %>.''' <%= h subentry.lexeme.headwords.first.phonetic_forms.collect{|phonetic_form| "(#{phonetic_form.form})"}.to_sentence(:two_words_connector  => ', ', :last_word_connector => ", ''or'' ") %> ''<%=h subentry.part_of_speech || "<No part of speech>"%>''
+'''<%=h unbold_pipes(subentry.paradigm) || "<No principal parts>" %>.''' <%= h subentry.lexeme.headwords.first.phonetic_forms.collect{|phonetic_form| "(#{phonetic_form.form})"}.to_sentence(:two_words_connector  => ', ', :last_word_connector => ", ''or'' ") %> ''<%=h subentry.part_of_speech || "<No part of speech>"%>''
 <% unless subentry.senses.empty? %><%= render :partial => "shared/wiki/sense", :collection => subentry.senses %><% end %>
 <%= render :partial => "shared/wiki/etymology", :collection => subentry.etymologies %>
