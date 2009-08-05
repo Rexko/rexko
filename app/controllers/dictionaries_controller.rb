@@ -15,7 +15,11 @@ class DictionariesController < ApplicationController
   def show
     @dictionary = Dictionary.find(params[:id])
     # 'sort_latin(@dictionary.lexemes).paginate' is pretty bad, I think 
-    @lexemes = (@dictionary.source_language.iso_639_code == 'la' ? sort_latin(@dictionary.lexemes) : @dictionary.lexemes).paginate(:page => params[:page])
+    @lexemes = (
+      @dictionary.source_language.iso_639_code == 'la' ?
+        sort_latin(@dictionary.lexemes) : 
+        @dictionary.lexemes
+      ).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -85,23 +89,19 @@ class DictionariesController < ApplicationController
     end
   end
   
- # =>  this isn't returning collection as an array, but an array containing the array. o-O
   def sort_latin collection
-    collection.sort do |x, y|
-      sub_latin(x.headwords[0].form).casecmp(sub_latin(y.headwords[0].form)) #ugh
+    collection.sort_by do |x|
+      sub_latin(x.headwords[0].form).downcase
     end
   end
 
 protected
   def sub_latin str
-    str.gsub(/[JjVvWw]/) do |unkosher|
+    str.gsub(/[jvw]/i) do |unkosher|
       case unkosher
-      when "J" then "I"
-      when "j" then "i"
-      when "V" then "U"
-      when "v" then "u"
-      when "W" then "UU"
-      when "w" then "uu"
+      when /j/i then "i"
+      when /v/i then "u"
+      when /w/i then "uu"
       end
     end
   end
