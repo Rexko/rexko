@@ -9,7 +9,7 @@
   <tr>
     <td>
 			<span class="dictform-title" <%= lang_for (dictionary) %>><%=h dictionary.title %></span> 
-	 		(<%=h "#{dictionary.source_language.iso_639_code}/#{dictionary.target_language.iso_639_code} " unless dictionary.source_language.nil? || dictionary.target_language.nil? %><%=h "in  #{dictionary.language.iso_639_code}" unless dictionary.language.nil? || dictionary.language.iso_639_code.nil? %>)
+	 		(<%=h "#{dictionary.source_language.iso_639_code}/#{dictionary.target_language.iso_639_code} " unless dictionary.source_language.nil? || dictionary.target_language.nil? %><%=h "in #{dictionary.language.iso_639_code}" if dictionary.try(:language).try(:iso_639_code) %>)
 		</td>
     <td><%= link_to 'Show', dictionary %></td>
     <td><%= link_to 'Edit', edit_dictionary_path(dictionary) %></td>

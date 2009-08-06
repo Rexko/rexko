@@ -9,11 +9,7 @@ module ApplicationHelper
       else langtag = "mul"
       end
     else
-      if languable.language.nil?
-        langtag = "und"
-      else
-        langtag = languable.language
-      end
+      langtag = languable.try(:language) || "und"
     end
     langtag += "-" + subtags[:variant] unless subtags[:variant].nil?
     "lang=\"#{langtag}\""
