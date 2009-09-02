@@ -3,6 +3,7 @@
 * [#24 (49)] Rudimentary portal/dashboard in place with a couple of links to common tasks.
 * Cleaned up the sort_latin nonsense some
 * Rewrote ApplicationHelper#lang_for for efficiency and better behaviour
+* [#47] Better parsing of wikilinks ([[abc]]def and [[abc|def|ghi]] should work correctly now)
 
 ==0.1.2 to 0.1.3==
 * Views were calling delegate.js which was never actually in use

@@ -121,12 +121,9 @@ class LociController < ApplicationController
   
 protected
   def each_wikilink to_break
-    broken = to_break.scan(/\[\[.+?\]\]\w*/)
-    broken.each do |entry|
-      entry.sub!(/\[\[/, '').sub!(/\]\]/, '')
-
-      shown = entry.include?("|") ? entry.gsub(/.+\|/, '') : entry
-      linked = entry.include?("|") ? entry.gsub(/\|.+/, '') : entry
+    to_break.scan(/\[\[.+?\]\]\w*/).each do |entry|
+      shown = entry.sub(/.+?\|/, '').sub(/\[\[/, '').sub(/\]\]/, '')
+      linked = entry.gsub(/\|.+/, '').sub(/\[\[/, '').sub(/\]\].*/, '')
 
       yield(linked, shown)
     end
