@@ -10,7 +10,7 @@ module ApplicationHelper
   #   language is found in the array's content
   # * the language value of the content, if they are all of one language
   # 
-  # May also takes a hash of subtags. At the moment the only one specifically
+  # May also take a hash of subtags. At the moment the only one specifically
   # handled is 'variant'.
   def lang_for content, subtags = {}
     langtag = [*content].inject(nil) do |memo, elem| 
