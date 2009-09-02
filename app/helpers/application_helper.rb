@@ -14,7 +14,7 @@ module ApplicationHelper
   # handled is 'variant'.
   def lang_for content, subtags = {}
     langtag = [*content].inject(nil) do |memo, elem| 
-      lang = elem.try(:language).try(:iso_639_code) || 'und'
+      lang = elem.language.try(:iso_639_code) || 'und'
       memo ? if lang == memo then memo else break 'mul' end : lang
     end
     langtag += '-' + subtags[:variant] unless subtags[:variant].blank?
