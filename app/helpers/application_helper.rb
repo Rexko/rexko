@@ -1,20 +1,26 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  def lang_for languable, subtags = {}
-    if (languable.is_a? Array)
-      langset = languable.each {|lb| lb.language if lb.language}.compact.uniq
-      case langset.size
-      when 0: langtag = "und"
-      when 1: langtag = langset[0]
-      else langtag = "mul"
-      end
-    else
-      langtag = languable.try(:language) || "und"
+  # lang_for: Builds a string with lang= and xml:lang= attributes usable in an 
+  # XHTML element.  Takes as argument an element or an array.
+  #
+  # Will return: 
+  # * 'und' (ISO 639: 'undetermined') if no languages are found for
+  #   any of the content
+  # * 'mul' (ISO 639: 'multiple languages') if more than one 
+  #   language is found in the array's content
+  # * the language value of the content, if they are all of one language
+  # 
+  # May also takes a hash of subtags. At the moment the only one specifically
+  # handled is 'variant'.
+  def lang_for content, subtags = {}
+    langtag = [*content].inject(nil) do |memo, elem| 
+      lang = elem.try(:language).try(:iso_639_code) || 'und'
+      memo ? if lang == memo then memo else break 'mul' end : lang
     end
-    langtag += "-" + subtags[:variant] unless subtags[:variant].nil?
-    "lang=\"#{langtag}\""
+    langtag += '-' + subtags[:variant] unless subtags[:variant].blank?
+    "xml:lang=\"#{langtag}\" lang=\"#{langtag}\""
   end
-  
+    
   def headword_link (parse)
     parse.lookup_headword.nil? ? 
       link_to("<span #{'style=color:red' if parse == @wantedparse }>[No entry for <i>#{parse.parsed_form}</i> &times;#{Parse.count(:conditions => {:parsed_form => parse.parsed_form})}]</span>", :controller => 'lexemes', :action => 'new') :
