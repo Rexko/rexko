@@ -1,3 +1,6 @@
+==Since 0.1.4==
+* For [#31] 'All entries' under Lexeme/show is case-insensitive on the first letter
+
 ==Since 0.1.3==
 * [#29 (54)] Improved automatic unbolding around pipes in wiki markup for citation forms
 * [#24 (49)] Rudimentary portal/dashboard in place with a couple of links to common tasks.

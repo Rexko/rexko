@@ -35,4 +35,13 @@ class Lexeme < ActiveRecord::Base
     # return all.
     from_dictionary.nil? ? fellows : from_dictionary.lexemes.find(fellows)
   end
+  
+  # Return all lexemes with a headword matching a string or the string with
+  # its first letter's case inverted (MediaWiki-style case insensitivity)
+  def self.lookup_all_by_headword(form)
+    swapform = form.dup
+    swapform[0,1] = swapform[0,1].swapcase
+    
+    Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform])
+  end
 end
