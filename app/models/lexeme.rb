@@ -9,7 +9,7 @@ class Lexeme < ActiveRecord::Base
   accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
   def loci
-    Parse.find(senses.collect(&:parse_ids).flatten).collect(&:attestation).compact.collect(&:locus).uniq
+    Locus.find(:all, :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}}, :conditions => { :subentries => { :lexeme_id => id }})
   end
   
   def constructions (from_dictionary = nil)
