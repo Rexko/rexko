@@ -28,6 +28,6 @@ class Parse < ActiveRecord::Base
   end
 
   def potential_interpretations
-    lookup_all_headwords.collect {|hw| Sense.find(hw.lexeme.sense_ids) }.flatten
+    parsed_form && Sense.lookup_all_by_headword(parsed_form)
   end
 end

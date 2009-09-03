@@ -8,6 +8,13 @@ class Sense < ActiveRecord::Base
   
   accepts_nested_attributes_for :glosses, :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
+  def self.lookup_all_by_headword(form)
+    swapform = form.dup
+    swapform[0,1] = swapform[0,1].swapcase
+    
+    Sense.find(:all, :joins => [{ :subentry => { :lexeme => :headwords} } ], :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform])
+  end
+  
 protected
   def validate
     if definition.blank? && glosses.empty?

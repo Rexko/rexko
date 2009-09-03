@@ -6,7 +6,7 @@
 
 	  <%= remove_link_unless_new_record(f) %>
 
-		<% unless f.object.potential_interpretations.empty? %>
+		<% unless f.object.potential_interpretations.blank? %>
 			<% @interpretation = f.object.interpretations.empty? ? f.object.interpretations.build : f.object.interpretations %>
 			<% f.fields_for :interpretations do |i_form| %>
 			  <%= render :partial => 'interpretation', :locals => { :f => i_form } %>
