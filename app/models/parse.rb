@@ -30,4 +30,8 @@ class Parse < ActiveRecord::Base
   def potential_interpretations
     parsed_form && Sense.lookup_all_by_headword(parsed_form)
   end
+  
+  def count
+    Parse.count(:conditions => {:parsed_form => parsed_form})
+  end
 end

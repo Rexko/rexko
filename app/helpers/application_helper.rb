@@ -22,9 +22,15 @@ module ApplicationHelper
   end
     
   def headword_link (parse)
-    parse.lookup_headword.nil? ? 
-      link_to("<span #{'style=color:red' if parse == @wantedparse }>[No entry for <i>#{parse.parsed_form}</i> &times;#{Parse.count(:conditions => {:parsed_form => parse.parsed_form})}]</span>", :controller => 'lexemes', :action => 'new') :
-      link_to(parse.parsed_form, parse.lookup_headword.lexeme)
+    is_wanted = parse == @wantedparse
+    headword = parse.lookup_headword
+
+    link_to("%s%s#{parse.parsed_form}%s%s" % [
+      ("<span 'style=color:red'>" if is_wanted),
+      ("[No entry for <i>" unless headword),
+      ("</i> &times;#{parse.count}]" unless headword),
+      ("</span>" if is_wanted) 
+    ], headword.try(:lexeme) || {:controller => 'lexemes', :action => 'new'})
   end
   
   def attr_trail *args
