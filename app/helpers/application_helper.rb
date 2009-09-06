@@ -33,45 +33,6 @@ module ApplicationHelper
     ], headword.try(:lexeme) || {:controller => 'lexemes', :action => 'new'})
   end
   
-  def attr_trail *args
-    # if 3
-    # top level arg is "#{arg.to_s}[\#{@#{arg.to_s}.id}]"
-    # mid level arg is "[#{arg.to_s}][\#{@#{arg.to_s}.id}]"
-    # last arg is "[#{arg.to_s}][]"
-    
-    # if 2
-    # top level arg is "#{arg.to_s}[\#{@#{arg.to_s}.id}]"
-    # last arg is "[#{arg.to_s}][]"
-
-    # if 1 (shouldn't be, but...)
-    # last arg is "#{arg.to_s}[]"
-
-    case args.size
-    when 1 then return "#{args.first}[]"
-    when 2 then return "#{args.last}[#{args.first}][]"
-    else 
-      outputtail = "[#{args.first}][]"
-      args.delete args.first
-      output = "#{args.last}"
-      args.delete args.last
-      for arg in args
-        outputtail = "[#{arg}][#{instance_variable_get("@#{arg}").id}]" + outputtail
-      end
-      return "#{output + outputtail}"
-    end unless true
-    
-    case args.size
-    when 1 then return "#{args.first}"
-    else 
-      output = "#{args.last}"
-      args.delete args.last
-      for arg in args
-        outputtail = "[#{arg}_attributes][#{instance_variable_get("@#{arg}").id}]" + outputtail
-      end
-      return "#{output + outputtail}"
-    end
-  end
-  
   def sentence_case str
     returning str.dup do |x|
       x[0,1] = x[0,1].upcase
