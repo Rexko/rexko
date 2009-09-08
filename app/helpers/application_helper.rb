@@ -18,14 +18,14 @@ module ApplicationHelper
       memo ? if lang == memo then memo else break 'mul' end : lang
     end
     langtag += '-' + subtags[:variant] unless subtags[:variant].blank?
-    "xml:lang=\"#{langtag}\" lang=\"#{langtag}\""
+    "xml:lang=\"#{html_escape langtag}\" lang=\"#{html_escape langtag}\""
   end
     
   def headword_link (parse)
     is_wanted = parse == @wantedparse
     headword = parse.lookup_headword
 
-    link_to("%s%s#{parse.parsed_form}%s%s" % [
+    link_to("%s%s#{html_escape parse.parsed_form}%s%s" % [
       ("<span 'style=color:red'>" if is_wanted),
       ("[No entry for <i>" unless headword),
       ("</i> &times;#{parse.count}]" unless headword),
@@ -60,7 +60,7 @@ module ApplicationHelper
   end  
 
   def generate_template(form_builder, method, options = {})  
-    escape_javascript generate_html(form_builder, method, options = {})  
+    escape_javascript generate_html(form_builder, method, options)  
   end
   
   def remove_link_unless_new_record(form_builder)  
