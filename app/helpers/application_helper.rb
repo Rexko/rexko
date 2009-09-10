@@ -70,4 +70,16 @@ module ApplicationHelper
       link_to("remove", "##{form_builder.object.class.name.underscore}", :class => 'remove')
     end  
   end
+  
+  def spaced_render(options = {})
+    coll = options[:collection].collect do |item|
+      render :partial => options[:partial], :object => item, :locals => options[:locals]
+    end
+    
+    coll.to_sentence({
+      :words_connector => options[:spacer] || ", ",
+      :last_word_connector => options[:last_spacer] || options[:spacer] || ", ",
+      :two_words_connector => options[:dual_spacer] || options[:spacer] || ", "
+    })
+  end
 end

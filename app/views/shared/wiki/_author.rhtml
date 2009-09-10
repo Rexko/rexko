@@ -1,1 +1,1 @@
-<%= author.name %> <%= render :partial => "shared/wiki/ref", :collection => construction.loci & @lexeme.loci, :spacer_template => "shared/comma" %>
+<%= author.name %> <%= spaced_render(:collection => construction.loci & @lexeme.loci, :partial => "shared/wiki/ref") %>
