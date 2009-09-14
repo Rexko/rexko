@@ -2,6 +2,7 @@
 * For [#31] 'All entries' under Lexeme/show is case-insensitive on the first letter
 * For [#31] Potential interpretations are first-letter insensitive to parsed forms
 * [#57] Corrected HTML escaping in uses of ApplicationHelper#lang_for 
+* [#38 (62)] The locus partial now contains a link to the individual locus
 
 ==Since 0.1.3==
 * [#29 (54)] Improved automatic unbolding around pipes in wiki markup for citation forms

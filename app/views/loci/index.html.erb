@@ -4,7 +4,7 @@
 <% @loci.each_with_index do |locus, i| %>
 	<tr>
 		<td colspan="3">
-			<%= render(:partial => "shared/locus", :object => locus, :locals => { :count => i + 1 })%>
+			<%= render(:partial => "shared/locus", :object => locus, :locals => { :locus_counter => locus.id - 1 })%>
 		</td>
 	</tr>
 	<tr>
