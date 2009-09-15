@@ -3,11 +3,11 @@
   <p>
     <!-- these need a better interface -->
     <b>Author</b><br />
-    <%= collection_select(:authorship, :author_id, Author.find(:all), :id, :name, {:include_blank => "[Other:]"}) %> <%= text_field :new_author, :name %>
+    <%= collection_select(:authorship, :author_id, Author.find(:all, :order => "name"), :id, :name, {:include_blank => "[Other:]"}) %> <%= text_field :new_author, :name %>
   </p>
   <p>
     <b>Title</b><br />
-    <%= collection_select(:authorship, :title_id, Title.find(:all), :id, :name, {:include_blank => "[Other:]"}) %> <%= text_field :new_title, :name %>
+    <%= collection_select(:authorship, :title_id, Title.find(:all, :order => "name"), :id, :name, {:include_blank => "[Other:]"}) %> <%= text_field :new_title, :name %>
   </p>
   <p>
     <b>Pointer</b><br />
