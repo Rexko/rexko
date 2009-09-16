@@ -13,7 +13,8 @@ class LexemesController < ApplicationController
   # GET /lexemes/1
   # GET /lexemes/1.xml
   def show
-    @lexeme = Lexeme.find(params[:id])
+    @lexeme = Lexeme.find(params[:id], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => :glosses}, :etymologies]}, :dictionaries])
+    @loci = @lexeme.loci
 
     respond_to do |format|
       format.html # show.html.erb
@@ -22,12 +23,12 @@ class LexemesController < ApplicationController
   end
 
   def show_by_headword
-    @headword = Headword.find_by_form(params[:headword])
+    @lexeme = Lexeme.lookup_by_headword(params[:headword])
     
-    if @headword
+    if @lexeme
       respond_to do |format|
-        format.html { redirect_to @headword.lexeme }
-        format.xml { render :xml => @headword.lexeme }
+        format.html { redirect_to @lexeme }
+        format.xml { render :xml => @lexeme }
         # lexeme display in XML is currently useless, btw
       end
     else

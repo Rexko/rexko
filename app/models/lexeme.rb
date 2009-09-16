@@ -9,7 +9,9 @@ class Lexeme < ActiveRecord::Base
   accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
   def loci
-    Locus.find(:all, :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}}, :conditions => { :subentries => { :lexeme_id => id }})
+    Locus.find(:all, 
+      :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}}, :conditions => { :subentries => { :lexeme_id => id }}, 
+      :include => { :parses => { :interpretations => { :sense => { :subentry => { :lexeme => :headwords }}}}})
   end
   
   def constructions (from_dictionary = nil)
@@ -42,6 +44,15 @@ class Lexeme < ActiveRecord::Base
     swapform = form.dup
     swapform[0,1] = swapform[0,1].swapcase
     
-    Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform])
+    Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform], :include => [:dictionaries, {:subentries => [{:senses => :glosses}, :etymologies]}])
+  end
+  
+  # Return first lexeme with a headword matching a string or the string with
+  # its first letter's case inverted (MediaWiki-style case insensitivity)
+  def self.lookup_by_headword(form)
+    swapform = form.dup
+    swapform[0,1] = swapform[0,1].swapcase
+    
+    Lexeme.find(:first, :joins => :headwords, :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform])
   end
 end

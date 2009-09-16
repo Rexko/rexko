@@ -1,5 +1,6 @@
 ==Since 0.1.5==
 * Corrected link to locus in locus partial 
+* [#55] Wiki formats should play with multiple headwords a little better
 
 ==Since 0.1.4==
 * For [#31] 'All entries' under Lexeme/show is case-insensitive on the first letter

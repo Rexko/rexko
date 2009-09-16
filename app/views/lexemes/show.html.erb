@@ -7,16 +7,16 @@
 </ul>
 <% end %>
 
-<% unless @lexeme.loci.empty? %>
+<% unless @loci.empty? %>
 <h3>Loci</h3>
-<%= render(:partial => "shared/locus", :collection => @lexeme.loci) %>
+<%= render(:partial => "shared/locus", :collection => @loci) %>
 <% end %>
 
 <% for headword in @lexeme.headwords do %>
 <h3><a href="http://ttt.frath.net/html/<%=h headword.form %>"><%=h headword.form %></a> - This entry</h3>
 <div class="wikified-lexeme">
 <textarea cols="72" rows="10">
-<%= render(:partial => "shared/wiki/lexeme", :object => @lexeme)%>
+<%= render(:partial => "shared/wiki/lexeme", :object => @lexeme, :locals => {:headword => headword })%>
 </textarea>
 </div>
 <h3><a href="http://ttt.frath.net/html/<%=h headword.form %>"><%=h headword.form %></a> - All entries</h3>
