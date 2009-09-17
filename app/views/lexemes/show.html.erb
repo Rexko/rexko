@@ -1,9 +1,9 @@
 <%= render(:partial => "shared/lexeme", :object => @lexeme)%>
 
-<% unless @lexeme.constructions.empty? %>
+<% unless @constructions.empty? %>
 <h3>Constructions</h3>
 <ul>
-<%= render(:partial => "shared/construction", :collection => @lexeme.constructions)%>
+<%= render(:partial => "shared/construction", :collection => @constructions)%>
 </ul>
 <% end %>
 

@@ -1,7 +1,7 @@
 =={{<%= lexeme.dictionaries.first.title unless lexeme.dictionaries.empty? %>}}==
-<%= render :partial => "shared/wiki/subentry", :collection => lexeme.subentries, :locals => { :headword => headword } %><% unless lexeme.constructions.empty? %>
+<%= render :partial => "shared/wiki/subentry", :collection => lexeme.subentries, :locals => { :headword => headword } %><% unless @constructions.empty? %>
 ===Constructions===
-<%= render(:partial => "shared/wiki/construction", :collection => lexeme.constructions)%>
+<%= render(:partial => "shared/wiki/construction", :collection => @constructions)%>
 <% end %><% unless @loci.empty? %>
 ===Loci===
 <%= render(:partial => "shared/wiki/locus", :collection => @loci) %>

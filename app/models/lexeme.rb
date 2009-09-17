@@ -5,7 +5,7 @@ class Lexeme < ActiveRecord::Base
   has_many :senses, :through => :subentries
   has_many :headwords
   has_many :phonetic_forms
-  
+ 
   accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
   def loci

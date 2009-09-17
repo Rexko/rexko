@@ -3,7 +3,7 @@
 |titl=<%=h locus.source.title.name unless locus.source.title.nil?  %>
 |sect=<%=h locus.source.pointer %>
 |note=
-|refs=<%= render :partial => "shared/wiki/note", :collection => @lexeme.constructions.collect {|constr| constr if constr.loci.include?(locus)}.compact, :locals => { :locus => count } %>
+|refs=<%= render :partial => "shared/wiki/note", :collection => @constructions.collect {|constr| constr if constr.loci.include?(locus)}.compact, :locals => { :locus => count } %>
 |text=<%=h locus.example %>
 |trans=<%=h locus.example_translation %>
 }}

@@ -15,6 +15,7 @@ class LexemesController < ApplicationController
   def show
     @lexeme = Lexeme.find(params[:id], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => :glosses}, :etymologies]}, :dictionaries])
     @loci = @lexeme.loci
+    @constructions = @lexeme.constructions
 
     respond_to do |format|
       format.html # show.html.erb
