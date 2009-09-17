@@ -4,7 +4,7 @@ class Parse < ActiveRecord::Base
   has_many :interpretations
   validates_presence_of :parsed_form
   
-  named_scope :without_entries, :conditions => ['parsed_form NOT IN (SELECT form FROM "headwords" WHERE parses.parsed_form = headwords.form)']
+  named_scope :without_entries, :conditions => ['(SELECT COUNT (form) FROM "headwords" WHERE headwords.form = parsed_form) = 0']
   named_scope :uninterpreted, :include => :interpretations, :conditions => { "interpretations.parse_id" => nil }
   
   accepts_nested_attributes_for :interpretations, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
