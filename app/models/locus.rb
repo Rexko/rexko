@@ -3,6 +3,11 @@ class Locus < ActiveRecord::Base
   has_many :attestations
   has_many :parses, :through => :attestations
 
+  named_scope :attesting, lambda { |lexeme|
+    { :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}},
+    :conditions => { :subentries => { :lexeme_id => lexeme.id }} }
+  }
+
     accepts_nested_attributes_for :attestations, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
 
   def most_wanted_parse

@@ -5,38 +5,18 @@ class Lexeme < ActiveRecord::Base
   has_many :senses, :through => :subentries
   has_many :headwords
   has_many :phonetic_forms
- 
+  
   accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
   def loci
-    Locus.find(:all, 
-      :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}}, :conditions => { :subentries => { :lexeme_id => id }}, 
-      :include => { :parses => { :interpretations => { :sense => { :subentry => { :lexeme => :headwords }}}}})
+    Locus.attesting(self).find(:all, :include => { :parses => { :interpretations => { :sense => { :subentry => { :lexeme => :headwords }}}}})
   end
   
+  # Fetch all other lexemes sharing the same loci. If a dictionary is given, give all results in that 
+  # dictionary.  Otherwise, fetch all results containing a space.
   def constructions (from_dictionary = nil)
-    # Goal in brief.
-    # Get a list of every lexeme in a dictionary of our choice (!) 
-    # ...which appears in loci with this word.
-    
-    # First then, a list of all the loci of this word
-    # (loci was moved to its own method)
-    
-    # Then, a list of all the other words appearing in these loci
-    # => why teh flattens?  the methods that return arrays... maybe we could simplify that.
-    fellows = loci.collect(&:parses).flatten.collect(&:interpretations).flatten.collect(&:sense).collect(&:lexeme).uniq - [self]
-    
-    # for bug 7 [28] - constructions are multi-word; delete what isn't
-    fellows.delete_if do |fellow| 
-      fellow.headwords.any? do |headword|
-        ! headword.form.include? " "
-      end
-    end
-    
-    # Then, if from_dictionary is given, limit it to that dictionary; otherwise
-    # return all.
-    from_dictionary.nil? ? fellows : from_dictionary.lexemes.find(fellows)
-  end
+    Lexeme.find(:all, :select => 'DISTINCT "lexemes".*', :joins => [{ :senses => { :parses => { :attestation => { :locus => { :attestations => { :parses => { :interpretations => { :sense => { :subentry => :lexeme }}}}}}}}}, :headwords, :dictionaries], :conditions => from_dictionary ? ['lexemes.id != ? AND dictionaries.id = ?', id, from_dictionary.id] : ['lexemes.id != ? AND headwords.form LIKE "% %"', id])
+  end  
   
   # Return all lexemes with a headword matching a string or the string with
   # its first letter's case inverted (MediaWiki-style case insensitivity)
