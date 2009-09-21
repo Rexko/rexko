@@ -5,7 +5,7 @@ class Locus < ActiveRecord::Base
 
   named_scope :attesting, lambda { |lexeme|
     { :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}},
-    :conditions => { :subentries => { :lexeme_id => lexeme.id }} }
+    :conditions => { :subentries => { :lexeme_id => [*lexeme].collect(&:id) }} }
   }
 
     accepts_nested_attributes_for :attestations, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
