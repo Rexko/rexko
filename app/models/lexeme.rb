@@ -15,7 +15,7 @@ class Lexeme < ActiveRecord::Base
   # Fetch all other lexemes sharing the same loci. If a dictionary is given, give all results in that 
   # dictionary.  Otherwise, fetch all results containing a space.
   def constructions (from_dictionary = nil)
-    Lexeme.find(:all, :select => 'DISTINCT "lexemes".*', :joins => [{ :senses => { :parses => { :attestation => { :locus => { :attestations => { :parses => { :interpretations => { :sense => { :subentry => :lexeme }}}}}}}}}, :headwords, :dictionaries], :conditions => from_dictionary ? ['lexemes.id != ? AND dictionaries.id = ?', id, from_dictionary.id] : ['lexemes.id != ? AND headwords.form LIKE "% %"', id])
+    Lexeme.find(:all, :select => 'DISTINCT "lexemes".*', :joins => { :senses => { :parses => { :attestation => { :locus => { :attestations => { :parses => { :interpretations => { :sense => { :subentry => :lexeme }}}}}}}}}, :include => [:headwords, :dictionaries], :conditions => from_dictionary ? ['lexemes.id != ? AND dictionaries.id = ? AND "lexemes_subentries".id = ?', id, from_dictionary.id, id] : ['lexemes.id != ? AND headwords.form LIKE "% %" AND "lexemes_subentries".id = ?', id, id])
   end  
   
   # Return all lexemes with a headword matching a string or the string with
