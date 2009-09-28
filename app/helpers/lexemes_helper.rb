@@ -13,4 +13,21 @@ module LexemesHelper
       memo + char
     end
   end
+  
+  def wiki_title_for(lexeme, headword)
+    dict = lexeme.dictionaries.first
+    homographs = dict.try(:homographs_of, headword.form)
+    count = homographs.try(:size) || 1
+    index = homographs.try(:index, lexeme) || 0
+    
+    "{{%s}}%s" % [
+      dict.try(:title),
+      (" #{roman_numeral(index.next)}." unless count == 1)
+    ]
+  end
+  
+  # TODO
+  def roman_numeral(int)
+    int
+  end
 end

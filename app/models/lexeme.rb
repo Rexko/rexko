@@ -20,6 +20,7 @@ class Lexeme < ActiveRecord::Base
   
   # Return all lexemes with a headword matching a string or the string with
   # its first letter's case inverted (MediaWiki-style case insensitivity)
+  # TODO: make what's included an option
   def self.lookup_all_by_headword(form)
     swapform = form.dup
     swapform[0,1] = swapform[0,1].swapcase

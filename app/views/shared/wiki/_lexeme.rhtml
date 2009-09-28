@@ -1,4 +1,4 @@
-=={{<%= lexeme.dictionaries.first.title unless lexeme.dictionaries.empty? %>}}==
+==<%= wiki_title_for(lexeme, headword) %>==
 <%= render :partial => "shared/wiki/subentry", :collection => lexeme.subentries, :locals => { :headword => headword } %><% unless @constructions.empty? %>
 ===Constructions===
 <%= render(:partial => "shared/wiki/construction", :collection => @constructions)%>
