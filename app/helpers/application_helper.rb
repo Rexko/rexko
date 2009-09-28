@@ -26,7 +26,7 @@ module ApplicationHelper
     headword = parse.lookup_headword
 
     link_to("%s%s#{html_escape parse.parsed_form}%s%s" % [
-      ("<span 'style=color:red'>" if is_wanted),
+      ("<span style='color:red'>" if is_wanted),
       ("[No entry for <i>" unless headword),
       ("</i> &times;#{parse.count}]" unless headword),
       ("</span>" if is_wanted) 
