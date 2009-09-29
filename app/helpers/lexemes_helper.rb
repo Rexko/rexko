@@ -26,8 +26,12 @@ module LexemesHelper
     ]
   end
   
-  # TODO
   def roman_numeral(int)
-    int
+    "%s%s%s%s" % [
+      ['', 'M', 'MM', 'MMM', 'Mↁ', 'ↁ', 'ↁM', 'ↁMM', 'ↁMMM', 'Mↂ'][int / 1000 % 10],
+      ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'][int / 100 % 10],
+      ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'][int / 10 % 10],
+      ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'][int % 10]
+    ]
   end
 end
