@@ -2,7 +2,7 @@ class LociController < ApplicationController
   # GET /loci
   # GET /loci.xml
   def index
-    @loci = Locus.paginate(:page => params[:page])
+    @loci = Locus.paginate(:page => params[:page], :include => {:source => {:authorship => [:author, :title]}})
 
     respond_to do |format|
       format.html # index.html.erb

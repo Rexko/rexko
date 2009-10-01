@@ -20,12 +20,13 @@ class Lexeme < ActiveRecord::Base
   
   # Return all lexemes with a headword matching a string or the string with
   # its first letter's case inverted (MediaWiki-style case insensitivity)
-  # TODO: make what's included an option
-  def self.lookup_all_by_headword(form)
+  def self.lookup_all_by_headword(form, options = {})
     swapform = form.dup
     swapform[0,1] = swapform[0,1].swapcase
     
-    Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform], :include => [:dictionaries, {:subentries => [{:senses => :glosses}, :etymologies]}])
+    Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform], :include => options[:include])
+    # old include:
+    # :include => [:dictionaries, {:subentries => [{:senses => :glosses}, :etymologies]}]
   end
   
   # Return first lexeme with a headword matching a string or the string with

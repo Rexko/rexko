@@ -44,7 +44,7 @@ class LexemesController < ApplicationController
   # GET /lexemes/new
   # GET /lexemes/new.xml
   def new
-    @lexeme = Lexeme.new
+    @lexeme = Lexeme.new(:dictionaries => [])
     @lexeme.headwords.build
     @lexeme.subentries.build
 
