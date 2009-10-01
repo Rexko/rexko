@@ -30,7 +30,7 @@ module ApplicationHelper
       ("[No entry for <i>" unless headword),
       ("</i> &times;#{parse.count}]" unless headword),
       ("</span>" if is_wanted) 
-    ], headword.try(:lexeme) || {:controller => 'lexemes', :action => 'new'})
+    ], headword.try(:lexeme) || {:controller => 'lexemes', :action => 'show_by_headword', :headword => parse.parsed_form})
   end
   
   def sentence_case str

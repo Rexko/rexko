@@ -34,6 +34,7 @@ class LexemesController < ApplicationController
       end
     else
       flash[:notice] = "There is no lexeme with <i>#{params[:headword]}</i> as headword.  You can create one below."
+      flash[:headword] = params[:headword]
       respond_to do |format|
         format.html { redirect_to :action => 'new' }
         format.xml { render :nothing => true, :status => '404 Not Found' }
@@ -45,7 +46,7 @@ class LexemesController < ApplicationController
   # GET /lexemes/new.xml
   def new
     @lexeme = Lexeme.new(:dictionaries => [])
-    @lexeme.headwords.build
+    @lexeme.headwords.build(:form => flash[:headword])
     @lexeme.subentries.build
 
     respond_to do |format|

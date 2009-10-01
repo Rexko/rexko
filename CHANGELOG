@@ -3,6 +3,7 @@
 * [#55] Wiki formats should play with multiple headwords a little better
 * Assorted improvements on db performance including [#41] the lexeme list
 * [#27 (52)] Wiki form now enumerates homographs with Roman numerals
+* Links to non-existent headwords now have that headword filled in
 
 ==Since 0.1.4==
 * For [#31] 'All entries' under Lexeme/show is case-insensitive on the first letter

@@ -10,4 +10,16 @@ class Dictionary < ActiveRecord::Base
   def homographs_of (form)
     lexemes & Lexeme.lookup_all_by_headword(form)
   end
+  
+  def headword_language
+    source_language.try(:iso_639_code) || "und"
+  end
+  
+  def gloss_language
+    target_language.try(:iso_639_code) || "und"
+  end
+  
+  def definition_language
+    language.try(:iso_639_code) || "und"
+  end
 end

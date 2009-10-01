@@ -16,7 +16,7 @@ class DictionariesController < ApplicationController
     @dictionary = Dictionary.find(params[:id])
     # 'sort_latin(@dictionary.lexemes).paginate' is pretty bad, I think 
     @lexemes = (
-      @dictionary.source_language.iso_639_code == 'la' ?
+      @dictionary.headword_language == 'la' ?
         sort_latin(@dictionary.lexemes) : 
         @dictionary.lexemes
       ).paginate(:page => params[:page])
