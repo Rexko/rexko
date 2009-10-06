@@ -14,7 +14,7 @@ class LexemesController < ApplicationController
   # GET /lexemes/1.xml
   def show
     @lexeme = Lexeme.find(params[:id], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => :glosses}, :etymologies]}, :dictionaries])
-    @loci = @lexeme.loci
+    @loci = @lexeme.loci(:include => {:source => {:authorship => [:author, :title]}})
     @constructions = @lexeme.constructions
 
     respond_to do |format|

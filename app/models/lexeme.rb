@@ -8,8 +8,10 @@ class Lexeme < ActiveRecord::Base
   
   accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
-  def loci
-    Locus.attesting(self).find(:all, :include => { :parses => { :interpretations => { :sense => { :subentry => { :lexeme => :headwords }}}}})
+  def loci(options = {})
+    Locus.attesting(self).find(:all, :include => options[:include])
+    # old include:
+    # :include => { :parses => { :interpretations => { :sense => { :subentry => { :lexeme => :headwords }}}}}
   end
   
   # Fetch all other lexemes sharing the same loci. If a dictionary is given, give all results in that 

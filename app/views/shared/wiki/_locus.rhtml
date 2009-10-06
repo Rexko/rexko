@@ -1,6 +1,6 @@
 {{loc|<%= count ||= locus_counter + 1 if locus_counter; h greek_numeral(count) if count %>|
-|auth=<%=h locus.source.author.name unless locus.source.author.nil?  %>
-|titl=<%=h locus.source.title.name unless locus.source.title.nil?  %>
+|auth=<%=h locus.source.author.try(:name)  %>
+|titl=<%=h locus.source.title.try(:name)  %>
 |sect=<%=h locus.source.pointer %>
 |note=
 |refs=<%= render :partial => "shared/wiki/note", :collection => @constructions.collect {|constr| constr if constr.loci.include?(locus)}.compact, :locals => { :locus => count } %>
