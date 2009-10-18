@@ -23,7 +23,7 @@ module ApplicationHelper
     
   def headword_link (parse)
     is_wanted = parse == @wantedparse
-    headword = parse.lookup_headword
+    headword = @headwords ? @headwords[parse.parsed_form] : parse.lookup_headword
 
     link_to("%s%s#{html_escape parse.parsed_form}%s%s" % [
       ("<span style='color:red'>" if is_wanted),

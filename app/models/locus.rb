@@ -3,6 +3,7 @@ class Locus < ActiveRecord::Base
   has_many :attestations
   has_many :parses, :through => :attestations
 
+  # Takes a lexeme and returns 
   named_scope :attesting, lambda { |lexeme|
     { :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}},
     :conditions => { :subentries => { :lexeme_id => [*lexeme].collect(&:id) }} }

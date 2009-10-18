@@ -28,6 +28,7 @@ class Parse < ActiveRecord::Base
     Headword.find_all_by_form(parsed_form)
   end
 
+  # Return all senses belonging to words with parsed_form as headword if parsed_form exists
   def potential_interpretations
     parsed_form && Sense.lookup_all_by_headword(parsed_form)
   end
