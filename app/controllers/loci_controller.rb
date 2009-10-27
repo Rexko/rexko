@@ -52,21 +52,6 @@ class LociController < ApplicationController
     @locus.parses.each do |parse|
         @interpretations[parse.parsed_form] = all_interpretations.select{|ip| ip.hw_form == parse.parsed_form}
       end
-=begin
-  Sense Load (5002.3ms)   SELECT "senses".* FROM "senses" INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON headwords.lexeme_id = lexemes.id WHERE (headwords.form = 'dico' OR headwords.form = 'Dico') 
-  
-  CACHE (0.0ms)   SELECT "senses".* FROM "senses" INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON headwords.lexeme_id = lexemes.id WHERE (headwords.form = 'hic' OR headwords.form = 'Hic') 
-  
-  SELECT * 
-    FROM "senses"
-    INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id
-    INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id
-    INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id
-    INNER JOIN "parses" ON "parses"."parsed_form" LIKE "headwords"."form"
-    INNER JOIN "attestations" ON "parses"."attestation_id" = "attestations"."id"
-    WHERE "attestation"."locus_id" = ?
-    locus.id
-=end 
     
     @wantedparse = @locus.most_wanted_parse
   end
