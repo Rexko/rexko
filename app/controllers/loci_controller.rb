@@ -76,7 +76,7 @@ class LociController < ApplicationController
         flash[:notice] = 'Locus was successfully created.'
         format.html do
           case params[:commit]
-          when "Create and continue editing" then render :action => 'edit'
+          when "Create and continue editing" then redirect_to :action => 'edit', :id => @locus.id, :status => 303
           else redirect_to(@locus)
           end
         end
@@ -107,7 +107,7 @@ class LociController < ApplicationController
         flash[:notice] = 'Locus was successfully updated.'
         format.html do
           case params[:commit]
-          when "Update and continue editing" then render :action => "edit"
+          when "Update and continue editing" then redirect_to :action => "edit", :status => 303
           else redirect_to(@locus)
           end
         end
