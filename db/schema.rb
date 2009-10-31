@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 23) do
+ActiveRecord::Schema.define(:version => 20091031184526) do
 
   create_table "attestations", :force => true do |t|
     t.integer  "locus_id"
@@ -104,6 +104,15 @@ ActiveRecord::Schema.define(:version => 23) do
     t.integer  "source_id"
     t.text     "example"
     t.text     "example_translation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notes", :force => true do |t|
+    t.text     "content"
+    t.integer  "language_id"
+    t.integer  "annotatable_id"
+    t.string   "annotatable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

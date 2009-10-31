@@ -6,5 +6,5 @@
 		<%= h (etymology.etymon || '<Unknown etymon>') %>
 	</span>
 	<span class="lexform-etymon-gloss">
-		<%=h (etymology.gloss || '<Unknown gloss>') %></span>.]
+		<%=h (etymology.gloss || '<Unknown gloss>') %></span>.<%= render :partial => "shared/comment", :collection => etymology.notes %>]
 </div>

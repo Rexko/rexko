@@ -64,7 +64,7 @@ module ApplicationHelper
   end
   
   def remove_link_unless_new_record(form_builder)  
-    unless form_builder.object.new_record?  
+    unless form_builder.object.try(:new_record?)
       form_builder.check_box(:_delete) + form_builder.label(:_delete, 'Delete')  
     else  
       link_to("remove", "##{form_builder.object.class.name.underscore}", :class => 'remove')

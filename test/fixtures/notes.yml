@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  content: MyText
+  language_id: 1
+  annotatable_id: 1
+  annotatable_type: MyString
+
+two:
+  content: MyText
+  language_id: 1
+  annotatable_id: 1
+  annotatable_type: MyString
