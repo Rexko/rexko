@@ -1,3 +1,6 @@
+==Since 0.2==
+* Fixed a bug where the lexeme edit form wasn't appropriately ignoring blank etymologies
+
 ==Since 0.1.6==
 * For [#13] Added notes column to DB and implemented notes for etymologies.
 * [#54] Fix for most-wanted headword not being highlighted on "and continue editing".
