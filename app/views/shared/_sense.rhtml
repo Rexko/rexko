@@ -4,5 +4,10 @@
 		<ul class="lexform-glosses">
 			<%= render :partial => "shared/gloss", :collection => sense.glosses %>	
 		</ul>
+		<% unless sense.notes.empty? %>
+		<dl>
+			<dd><b>¶</b> <%= render :partial => "shared/comment", :collection => sense.notes %>
+		</dl>
+		<% end %>
 	<% end %>
 </li>

@@ -5,8 +5,9 @@ class Sense < ActiveRecord::Base
   has_many :glosses
   has_many :interpretations
   has_many :parses, :through => :interpretations
+  has_many :notes, :as => :annotatable
   
-  accepts_nested_attributes_for :glosses, :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+  accepts_nested_attributes_for :glosses, :parses, :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
   def self.lookup_all_by_headword(form)
     swapform = form.dup

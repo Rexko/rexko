@@ -1,5 +1,5 @@
 <% unless (f.object._delete) %>
-	<% nested_attributes_for f, :glosses %>
+	<% nested_attributes_for f, :glosses, :notes %>
 	<div class="sense">
 	  <h2>Sense <%= sense_counter + 1 if defined? sense_counter %></h2>
     <%= remove_link_unless_new_record(f) %>
@@ -22,6 +22,15 @@
 					</td>
 				</tr>
 			</tfoot>
+			<% f.object.notes.build if f.object.notes.empty? %>
+			<% f.fields_for :notes do |e_form| %>
+		    <%= render :partial => 'note', :locals => { :f => e_form } %>
+		  <% end %>
+			<tr class="par">
+				<td colspan="4">
+					<%= link_to 'Add note', '#notes', :class => 'add' %>
+				</td>
+			</tr>
 	  </table>
 	</div>
 <% end %>
