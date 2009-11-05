@@ -8,7 +8,7 @@ class Etymology < ActiveRecord::Base
   
 protected 
   def validate
-    if [etymon, source_language, gloss].all?(&:blank?)
+    if [etymon, source_language, gloss, notes].all?(&:blank?)
       errors.add_to_base("At least one attribute of the etymology must be specified")
     end
   end
