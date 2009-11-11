@@ -2,7 +2,7 @@ class LexemesController < ApplicationController
   # GET /lexemes
   # GET /lexemes.xml
   def index
-    @lexemes = Lexeme.paginate(:page => params[:page], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}]}])
+    @lexemes = Lexeme.paginate(:page => params[:page], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class LexemesController < ApplicationController
   # GET /lexemes/1
   # GET /lexemes/1.xml
   def show
-    @lexeme = Lexeme.find(params[:id], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}]}, :dictionaries])
+    @lexeme = Lexeme.find(params[:id], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}, :dictionaries])
     @loci = @lexeme.loci(:include => {:source => {:authorship => [:author, :title]}})
     @constructions = @lexeme.constructions
 

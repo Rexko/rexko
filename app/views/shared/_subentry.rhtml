@@ -6,6 +6,9 @@
 	<span class="lexform-part-of-speech">
 		<%=h subentry.part_of_speech || "<No part of speech>"%>
 	</span>
+	<span class="lexform-notes">
+		<%= render :partial => "shared/comment", :collection => subentry.notes %>
+	</span>
 	<% unless subentry.senses.empty? %>
 		<ol class="lexform-senses">
 			<%= render :partial => "shared/sense", :collection => subentry.senses %>

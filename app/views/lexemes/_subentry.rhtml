@@ -1,5 +1,5 @@
 <% unless (f.object._delete) %>
-	<% nested_attributes_for f, :senses, :etymologies %>
+	<% nested_attributes_for f, :senses, :etymologies, :notes %>
 	<div class="subentry">
 	  <h1>Subentry <%= subentry_counter + 1  if defined? subentry_counter  %></h1>
 	  <table>
@@ -11,6 +11,15 @@
 	      <td>Part of speech:</b></td>
 	      <td><%= f.text_field :part_of_speech %></td>
 	    </tr>
+			<% f.object.notes.build if f.object.notes.empty? %>
+			<% f.fields_for :notes do |e_form| %>
+		    <%= render :partial => 'note', :locals => { :f => e_form } %>
+		  <% end %>
+			<tr class="par">
+				<td colspan="4">
+					<%= link_to 'Add note', '#notes', :class => 'add' %>
+				</td>
+			</tr>
 	  </table>
     <%= remove_link_unless_new_record(f) %>
 

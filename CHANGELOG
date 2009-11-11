@@ -1,5 +1,5 @@
 ==Since 0.2==
-* For [#13] implemented notes for senses
+* For [#13] implemented notes for senses and subentries
 * Fixed a bug where the lexeme edit form wasn't appropriately ignoring blank etymologies
 
 ==Since 0.1.6==
