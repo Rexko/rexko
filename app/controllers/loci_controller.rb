@@ -47,7 +47,7 @@ class LociController < ApplicationController
       end.flatten]
     
     # Find all potential interpretations of this locus' parses
-    all_interpretations = Sense.find(:all, :select => ['"senses".*, "headwords"."form" AS hw_form'], :joins => ['INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id INNER JOIN "parses" ON "parses"."parsed_form" LIKE "headwords"."form" INNER JOIN "attestations" ON "parses"."attestation_id" = "attestations"."id"'], :conditions => ['"attestations"."locus_id" = ?', @locus.id])
+    all_interpretations = Sense.find(:all, :select => ['DISTINCT "senses".*, "headwords"."form" AS hw_form'], :joins => ['INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id INNER JOIN "parses" ON "parses"."parsed_form" LIKE "headwords"."form" INNER JOIN "attestations" ON "parses"."attestation_id" = "attestations"."id"'], :conditions => ['"attestations"."locus_id" = ?', @locus.id])
     @interpretations = {}
     @locus.parses.each do |parse|
         @interpretations[parse.parsed_form] = all_interpretations.select{|ip| ip.hw_form == parse.parsed_form}
