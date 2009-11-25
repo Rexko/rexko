@@ -1,11 +1,6 @@
 <% unless (f.object._delete) %>
-	<tbody class="gloss">
-	  <tr>
-	    <td>Gloss:</td>
-	    <td><%= f.text_field :gloss %></td>
-	    <td>
-		    <%= remove_link_unless_new_record(f) %>
-	    </td>
-	  </tr>
-	</tbody>
+	<li class="gloss">
+		<%= f.label :gloss, "Gloss<br>#{remove_link_unless_new_record(f)}" %>
+	  <%= f.text_field :gloss %>
+	</li>
 <% end %>

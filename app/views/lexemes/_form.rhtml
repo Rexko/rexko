@@ -11,25 +11,19 @@
   </table>
 
   <!-- Headword -->
-  <table>
-    <% l_form.fields_for :headwords do |hw_form| %>
-      <%= render :partial => 'headword', :locals => { :f => hw_form } %>
-    <% end %>  
-		<tfoot class="par">
-			<tr>
-				<td colspan="3">
-				<%= link_to 'Add headword', '#headwords', :class => 'add' %>
-				</td>
-			</tr>
-		</tfoot>
-  </table>
+	<% l_form.fields_for :headwords do |hw_form| %>
+  	<%= render :partial => 'headword', :locals => { :f => hw_form } %>
+  <% end %>  
+	<div class="par">
+		<%= link_to 'Add headword', '#headwords', :class => 'add' %>
+  </div>
 
   <% l_form.fields_for :subentries do |se_form| %>
     <%= render :partial => 'subentry', :locals => { :f => se_form } %>
   <% end %>
-	<span class="par">
+	<div class="par">
 	<%= link_to 'Add subentry', '#subentries', :class => 'add' %>
-	</span>
+	</div>
 
 	<p><%= submit_tag form[:label] %> | <%= submit_tag "#{form[:label]} and continue editing" %>
 <% end %>

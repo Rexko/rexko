@@ -1,23 +1,23 @@
 <% unless (f.object._delete) %>
-  <% nested_attributes_for f, :phonetic_forms %>
-	<tbody class="headword">
-	  <tr>
-	    <td><b>Headword <%= headword_counter + 1 if defined? headword_counter %>:</b></td>
-	    <td><%= f.text_field :form %></td>
-	    <td>
-		    <%= remove_link_unless_new_record(f) %>
-	    </td>
-	  </tr>
-
+	<% nested_attributes_for f, :phonetic_forms %>
+	<fieldset class="headword">
+		<legend>
+			Headword <%= headword_counter + 1 if defined? headword_counter %>
+			<%= remove_link_unless_new_record(f) %>
+		</legend>
+	  <ul>
+			<li>
+	    	<%= f.label :form, "Orthographic form" %>
+	    	<%= f.text_field :form %>
+	    </li>
+	
 	  <!-- Phonetic form -->
-	  <% @phonetic_form = f.object.phonetic_forms.empty? ? f.object.phonetic_forms.build : f.object.phonetic_forms %>
-	  <% f.fields_for :phonetic_forms do |pf_form| %>
-	    <%= render :partial => 'phonetic_form', :locals => { :f => pf_form } %>
-	  <% end %>
-		<tr class="par">
-			<td colspan="3">
+	  	<% f.fields_for :phonetic_forms do |pf_form| %>
+		    <%= render :partial => 'phonetic_form', :locals => { :f => pf_form } %>
+		  <% end %>
+			<li class="par">
 				<%= link_to 'Add phonetic form', '#phonetic_forms', :class => 'add' %>
-			</td>
-		</tr>
-	</tbody>
+			</li>
+		</ul>
+	</fieldset>
 <% end %>

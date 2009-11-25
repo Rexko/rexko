@@ -1,56 +1,44 @@
 <% unless (f.object._delete) %>
 	<% nested_attributes_for f, :senses, :etymologies, :notes %>
-	<div class="subentry">
-	  <h1>Subentry <%= subentry_counter + 1  if defined? subentry_counter  %></h1>
-	  <table>
-	    <tr>
-	      <td><b>Principal parts:</b></td>
-	      <td><%= f.text_field :paradigm %></td>
-	    </tr>
-	    <tr>
-	      <td>Part of speech:</b></td>
-	      <td><%= f.text_field :part_of_speech %></td>
-	    </tr>
-			<% f.object.notes.build if f.object.notes.empty? %>
+	<fieldset class="subentry">
+	  <legend>
+			Subentry <%= subentry_counter + 1  if defined? subentry_counter  %> 
+			<%= remove_link_unless_new_record(f) %>
+		</legend>
+	  <ul>
+	    <li>
+	      <%= f.label :paradigm, "Principal parts" %>
+	      <%= f.text_field :paradigm %>
+	    </li>
+	    <li>
+	      <%= f.label :part_of_speech %>
+	      <%= f.text_field :part_of_speech %>
+	    </li>
 			<% f.fields_for :notes do |e_form| %>
 		    <%= render :partial => 'note', :locals => { :f => e_form } %>
 		  <% end %>
-			<tr class="par">
-				<td colspan="4">
-					<%= link_to 'Add note', '#notes', :class => 'add' %>
-				</td>
-			</tr>
-	  </table>
-    <%= remove_link_unless_new_record(f) %>
-
+			<li class="par">
+				<%= link_to 'Add note', '#notes', :class => 'add' %>
+			</li>
+	  </ul>
+    
 	  <!-- Sense -->
 	  <% @sense = f.object.senses.empty? ? f.object.senses.build : f.object.senses %>
 	  <% f.fields_for :senses do |s_form| %>
 	    <%= render :partial => 'sense', :locals => { :f => s_form } %>
 	  <% end %>
-		<span class="par">
+		<div class="par">
 			<%= link_to 'Add sense', '#senses', :class => 'add' %>
-		</span>
+		</div>
 
 	  <!-- Etymology -->
-	  <h2>Etymology</h2>
-	  <table>
-	    <tr>
-	      <th>Source Language</th>
-	      <th>Etymon</th>
-	      <th>Gloss</th>
-	    </tr>
-    
-	    <% @etymology = f.object.etymologies.empty? ? f.object.etymologies.build : f.object.etymologies 
+	    <% # @etymology = f.object.etymologies.empty? ? f.object.etymologies.build : f.object.etymologies 
 	%>
 	    <% f.fields_for :etymologies do |e_form| %>
 	      <%= render :partial => 'etymology', :locals => { :f => e_form } %>
 	    <% end %>
-			<tr class="par">
-				<td>
+			<div class="par">
 					<%= link_to 'Add etymology', '#etymologies', :class => 'add' %>
-				</td>
-			</tr>
-	  </table>
-	</div>
+			</div>
+	</fieldset>
 <% end %>

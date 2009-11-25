@@ -10,7 +10,6 @@ var NestedAttributesJs = {
 		el = Event.findElement(e);
 		target = el.href.replace(/.*#/, '.');
 		el.up(target).hide();
-		// this does not appear to be functioning as it should:
 		if(hidden_input = el.previous("input[type=hidden]")) hidden_input.value = '1';
 	},
 	add : function(e) {  

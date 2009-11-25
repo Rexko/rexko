@@ -2,3 +2,13 @@
 .lexform-paradigm { font-weight: bold; }
 .lexform-part-of-speech { font-style: italic; }
 .lexform-phonetic-form { font-family: monospace; }
+
+fieldset {	float: left; clear: left; width: 100%; 
+						margin: 1.5em 0 0 0; padding: 0; }
+fieldset ul { padding: 1em 1em 0 1em; list-style: none; }
+fieldset li { float: left; clear: left; width: 100%; padding-bottom: 1em; }
+fieldset label { float: left; width: 10em; margin-right: 1em; text-align: right; }
+fieldset label a, fieldset label .delete_label { font-size: smaller; float: none; }
+
+legend { margin-left: 1em; color: #000; font-weight: bold; }
+legend .delete_label {	font-weight: normal; float: none; margin-right: 0; }

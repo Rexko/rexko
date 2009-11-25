@@ -1,36 +1,31 @@
 <% unless (f.object._delete) %>
 	<% nested_attributes_for f, :glosses, :notes %>
-	<div class="sense">
-	  <h2>Sense <%= sense_counter + 1 if defined? sense_counter %></h2>
-    <%= remove_link_unless_new_record(f) %>
-
-	  <table>
-	    <tr>
-	      <td valign="top">Definition:</td>
-	      <td><%= f.text_area :definition, :rows => 4 %></td>
-	    </tr>
+	<fieldset class="sense">
+	  <legend>
+			Sense <%= sense_counter + 1 if defined? sense_counter %>
+			<%= remove_link_unless_new_record(f) %>
+		</legend>
+	  <ul>
+	    <li>
+	      <%= f.label :definition %>
+	      <%= f.text_area :definition, :rows => 4 %>
+	    </li>
 
 	    <!-- Gloss -->
-	    <% @gloss = f.object.glosses.empty? ? f.object.glosses.build : f.object.glosses %>
+	    <% # @gloss = f.object.glosses.empty? ? f.object.glosses.build : f.object.glosses %>
 	    <% f.fields_for :glosses do |g_form| %>
 	      <%= render :partial => 'gloss', :locals => { :f => g_form } %>
 	    <% end %>
-			<tfoot class="par">
-				<tr>
-					<td>
-						<%= link_to 'Add gloss', '#glosses', :class => 'add' %>
-					</td>
-				</tr>
-			</tfoot>
-			<% f.object.notes.build if f.object.notes.empty? %>
+			<li class="par">
+				<%= link_to 'Add gloss', '#glosses', :class => 'add' %>
+			</li>
+			
 			<% f.fields_for :notes do |e_form| %>
 		    <%= render :partial => 'note', :locals => { :f => e_form } %>
 		  <% end %>
-			<tr class="par">
-				<td colspan="4">
-					<%= link_to 'Add note', '#notes', :class => 'add' %>
-				</td>
-			</tr>
-	  </table>
-	</div>
+			<li class="par">
+				<%= link_to 'Add note', '#notes', :class => 'add' %>
+			</li>
+	  </ul>
+	</fieldset>
 <% end %>

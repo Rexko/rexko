@@ -1,20 +1,28 @@
 <% unless (f.object._delete) %>
 	<% nested_attributes_for f, :notes %>
-	<tr class="etymology">
-	  <td><%= f.text_field :source_language %></td>
-	  <td><%= f.text_field :etymon %></td>
-	  <td><%= f.text_field :gloss %></td>
-	  <td>
-	    <%= remove_link_unless_new_record(f) %>
-	  </td>
-	</tr>
-	<% f.object.notes.build if f.object.notes.empty? %>
-	<% f.fields_for :notes do |e_form| %>
-    <%= render :partial => 'note', :locals => { :f => e_form } %>
-  <% end %>
-	<tr class="par">
-		<td colspan="4">
-			<%= link_to 'Add note', '#notes', :class => 'add' %>
-		</td>
-	</tr>
+	<fieldset class="etymology">
+		<legend>Etymology <%= remove_link_unless_new_record(f) %></legend>
+			<ul>
+		  <li>
+				<%= f.label :source_language %>
+				<%= f.text_field :source_language %>
+			</li>
+			<li>
+				<%= f.label :etymon %> 
+				<%= f.text_field :etymon %>
+			</li>
+		  <li>
+				<%= f.label :gloss %>
+				<%= f.text_field :gloss %>
+			</li>
+	
+			<% f.fields_for :notes do |e_form| %>
+	    	<%= render :partial => 'note', :locals => { :f => e_form } %>
+	  	<% end %>
+
+			<li class="par">
+				<%= link_to 'Add note', '#notes', :class => 'add' %>
+			</li>
+			</ul>
+	</fieldset>
 <% end %>

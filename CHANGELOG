@@ -1,4 +1,6 @@
 ==Since 0.2==
+* [#50] Remove links should now be functional
+* Rewrote lexeme edit form
 * [#62] Fixed a bug where senses were appearing multiple times in the locus edit form
 * For [#13] implemented notes for senses and subentries
 * Fixed a bug where the lexeme edit form wasn't appropriately ignoring blank etymologies
