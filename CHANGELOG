@@ -1,3 +1,6 @@
+==Since 0.2.1==
+* Fixed Yet Another bug where etymologies were causing saves to fail.
+
 ==Since 0.2==
 * [#50] Remove links should now be functional
 * Rewrote lexeme edit form

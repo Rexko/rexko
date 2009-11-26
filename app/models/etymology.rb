@@ -6,6 +6,10 @@ class Etymology < ActiveRecord::Base
   
   accepts_nested_attributes_for :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
+  def self.rejectable?(attrs)
+    !new(attrs.delete_if{|key, value| key == "_delete"}).valid?
+  end 
+
 protected 
   def validate
     if [etymon, source_language, gloss, notes].all?(&:blank?)

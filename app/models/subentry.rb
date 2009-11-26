@@ -8,5 +8,5 @@ class Subentry < ActiveRecord::Base
   validates_presence_of :paradigm
   
   accepts_nested_attributes_for :senses, :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
-  accepts_nested_attributes_for :etymologies, :allow_destroy => true, :reject_if => proc {|attrs| Etymology.new(attrs).invalid? }
+  accepts_nested_attributes_for :etymologies, :allow_destroy => true, :reject_if => proc {|attrs| Etymology.rejectable?(attrs) }
 end
