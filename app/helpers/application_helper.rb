@@ -40,10 +40,13 @@ module ApplicationHelper
   end
   
   def nested_attributes_for(form_builder, *args)  
+    @nests ||= {}
+    
     content_for :javascript do  
       content = ""  
       args.each do |association|  
-        content << "\nvar #{association}_template='#{generate_template(form_builder, association.to_sym)}';"  
+        content << "\nvar #{association}_template='#{generate_template(form_builder, association.to_sym)}';" unless @nests[association]
+        @nests[association] = true
       end  
       content  
     end  

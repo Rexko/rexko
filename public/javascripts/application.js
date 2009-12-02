@@ -15,7 +15,6 @@ var NestedAttributesJs = {
 	add : function(e) {  
 		element = Event.findElement(e);
 		template = replace_ids(eval(element.href.replace(/.*#/, '') + '_template'));  
-//		element.insert( { before: template } );
 		element.up('.par').insert({before: template});
 		element.up('.par').previous().getElementsBySelector('.remove').each(function(link){  
 			link.observe('click', NestedAttributesJs.remove);  

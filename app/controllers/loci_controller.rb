@@ -39,6 +39,7 @@ class LociController < ApplicationController
     @locus = Locus.find(params[:id], :include => {:attestations => {:parses => :interpretations}})
     @source = @locus.source
     @authorship = @source.authorship
+    @nests = {}
 
     # Find all headwords corresponding to this locus' parses
     all_headwords = Headword.find(:all, :joins => ['INNER JOIN "parses" ON "parses"."parsed_form" LIKE "headwords"."form" INNER JOIN "attestations" ON "attestations"."id" = "parses"."attestation_id"'], :include => :lexeme, :conditions => ['"attestations"."locus_id" = ?', @locus.id])

@@ -60,6 +60,7 @@ class LexemesController < ApplicationController
     @lexeme = Lexeme.find(params[:id])
     @lexeme.headwords.build if @lexeme.headwords.empty?
     @lexeme.subentries.build if @lexeme.subentries.empty?
+    @nests = {}
   end
 
   # POST /lexemes
