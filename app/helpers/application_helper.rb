@@ -44,9 +44,11 @@ module ApplicationHelper
     
     content_for :javascript do  
       content = ""  
-      args.each do |association|  
-        content << "\nvar #{association}_template='#{generate_template(form_builder, association.to_sym)}';" unless @nests[association]
-        @nests[association] = true
+      args.each do |association| 
+        association = Array(association) 
+        assoc_key = association.join('$')
+        content << "\nvar #{assoc_key}_template='#{generate_template(form_builder, association[0].to_sym)}';" unless @nests[assoc_key] 
+        @nests[assoc_key] = true
       end  
       content  
     end  

@@ -5,6 +5,18 @@ replace_ids = function(template){
 	return template.replace(/NEW_RECORD/g, new_id);  
 }
 
+activate_links = function(element){
+	element.getElementsBySelector('.remove').each(function(link){  
+		link.observe('click', NestedAttributesJs.remove);  
+	});
+	element.getElementsBySelector('.add').each(function(link){  
+			link.observe('click', NestedAttributesJs.add);  
+	});
+	element.getElementsBySelector('.add_nested').each(function(link){  
+			link.observe('click', NestedAttributesJs.add_nested);  
+	});
+}
+
 var NestedAttributesJs = {  
 	remove : function(e) {
 		el = Event.findElement(e);
@@ -16,12 +28,48 @@ var NestedAttributesJs = {
 		element = Event.findElement(e);
 		template = replace_ids(eval(element.href.replace(/.*#/, '') + '_template'));  
 		element.up('.par').insert({before: template});
-		element.up('.par').previous().getElementsBySelector('.remove').each(function(link){  
-			link.observe('click', NestedAttributesJs.remove);  
-		});
-		element.up('.par').previous().getElementsBySelector('.add').each(function(link){  
-				link.observe('click', NestedAttributesJs.add);  
-		});
+		activate_links(element.up('.par').previous());
+	},
+	add_nested : function(e) {
+		el = Event.findElement(e);
+		elements = el.rel.match(/(\w+)/g)
+		// refactor this later, after it works
+		switch (elements.length) {
+		case 2:
+			par = '.'+elements[0]
+			child = '.'+elements[1]
+		
+			child_container = el.up('.par')
+			parent_object_id = el.up(par).down('input').name.match(/.*\[(\d+)\]/)[1]
+		
+			tempname = el.href.replace(/.*#/, '');
+			template = eval('window.' + tempname + '_template') || eval(tempname + '$' + elements[0] + '_template')
+		
+			template = replace_ids(template).replace(/(attributes[_\]\[]+)\d+/g, "$1"+parent_object_id);
+			re = new RegExp("(" + elements[1] + "_attributes[_\\]\\[]+)\\d+", "g");
+			template = template.replace(re, "$1NEW_RECORD");
+			break;
+		case 3:
+			par = '.'+elements[0]
+			child = '.'+elements[2]
+			
+			child_container = el.up('.par')
+			parent_object_id = el.up(par).down('input').name.match(/.*\[(\d+)\]/)[1]
+			middle_object_id = el.up('fieldset').down('input').name.match(/\d+/g)[1]
+			
+			template = eval(el.href.replace(/.*#/, '') + '$' + elements[1] + '$' + elements[0] + '_template')
+			
+			template = replace_ids(template).replace(/(attributes[_\]\[]+)\d+/g, "$1"+parent_object_id);
+			re = new RegExp("(" + elements[1] + "_attributes[_\\]\\[]+)\\d+", "g");
+			template = template.replace(re, "$1"+middle_object_id);
+			re = new RegExp("(" + elements[2] + "_attributes[_\\]\\[]+)\\d+", "g");
+			template = template.replace(re, "$1NEW_RECORD");
+			break;
+		}
+		child_container.insert({
+			before: replace_ids(template)
+		})		
+		activate_links(child_container.previous());
 	}
 }; 
   
@@ -32,4 +80,7 @@ Event.observe(window, 'load', function(){
 	$$('.remove').each(function(link){
 		link.observe('click', NestedAttributesJs.remove);
 	}); 
+	$$('.add_nested').each(function(link){
+		link.observe('click', NestedAttributesJs.add_nested);
+	});
 });

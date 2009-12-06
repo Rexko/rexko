@@ -1,5 +1,5 @@
 <% unless (f.object._delete) %>
-	<% nested_attributes_for f, :notes %>
+	<% nested_attributes_for f, [:notes, :etymologies, :subentry] %>
 	<fieldset class="etymology">
 		<legend>Etymology <%= remove_link_unless_new_record(f) %></legend>
 			<ul>
@@ -21,7 +21,7 @@
 	  	<% end %>
 
 			<li class="par">
-				<%= link_to 'Add note', '#notes', :class => 'add' %>
+				<%= link_to 'Add note', '#notes', :class => 'add_nested', :rel => "[subentry][etymologies][notes]" %>
 			</li>
 			</ul>
 	</fieldset>

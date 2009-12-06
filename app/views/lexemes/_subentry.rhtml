@@ -1,5 +1,5 @@
 <% unless (f.object._delete) %>
-	<% nested_attributes_for f, :senses, :etymologies, :notes %>
+	<% nested_attributes_for f, :senses, :etymologies, [:notes, :subentry] %>
 	<fieldset class="subentry">
 	  <legend>
 			Subentry <%= subentry_counter + 1  if defined? subentry_counter  %> 
@@ -18,7 +18,7 @@
 		    <%= render :partial => 'note', :locals => { :f => e_form } %>
 		  <% end %>
 			<li class="par">
-				<%= link_to 'Add note', '#notes', :class => 'add' %>
+				<%= link_to 'Add note', '#notes', :class => 'add_nested', :rel => "[subentry][notes]" %>
 			</li>
 	  </ul>
     
@@ -28,7 +28,7 @@
 	    <%= render :partial => 'sense', :locals => { :f => s_form } %>
 	  <% end %>
 		<div class="par">
-			<%= link_to 'Add sense', '#senses', :class => 'add' %>
+			<%= link_to 'Add sense', '#senses', :class => 'add_nested', :rel => "[subentry][senses]" %>
 		</div>
 
 	  <!-- Etymology -->
@@ -38,7 +38,7 @@
 	      <%= render :partial => 'etymology', :locals => { :f => e_form } %>
 	    <% end %>
 			<div class="par">
-					<%= link_to 'Add etymology', '#etymologies', :class => 'add' %>
+					<%= link_to 'Add etymology', '#etymologies', :class => 'add_nested', :rel => "[subentry][etymologies]" %>
 			</div>
 	</fieldset>
 <% end %>

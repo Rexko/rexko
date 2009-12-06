@@ -16,7 +16,7 @@
 		    <%= render :partial => 'phonetic_form', :locals => { :f => pf_form } %>
 		  <% end %>
 			<li class="par">
-				<%= link_to 'Add phonetic form', '#phonetic_forms', :class => 'add' %>
+				<%= link_to 'Add phonetic form', '#phonetic_forms', :class => 'add_nested', :rel => "[headword][phonetic_forms]" %>
 			</li>
 		</ul>
 	</fieldset>
