@@ -1,6 +1,7 @@
 ==Since 0.2.1==
 * Fixed Yet Another bug where etymologies were causing saves to fail.
 * [#45] Process for adding a new subitem should be fully functional now.
+* Rewrote locus edit form for previous issue (visual change for the worse; needs better styling)
 
 ==Since 0.2==
 * [#50] Remove links should now be functional

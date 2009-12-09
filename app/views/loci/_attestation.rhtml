@@ -1,14 +1,22 @@
 <% unless (f.object._delete) %>
-	<% nested_attributes_for f, :parses %>
-	<p class="attestation"><b>Attested form:</b> <%= f.text_field :attested_form %>
-
-  <%= remove_link_unless_new_record(f) %>
-
-	<% @parse = f.object.parses.empty? ? f.object.parses.build : f.object.parses %>
-	<% f.fields_for :parses do |p_form| %>
-	  <%= render :partial => 'parse', :locals => { :f => p_form } %>
-	<% end %>
-	<span class="par">
-		<br/ ><%= link_to 'Add parse', '#parses', :class => 'add' %>
-	</span>
+	<% nested_attributes_for f, [:parses, :attestation] %>
+	<fieldset class="attestation">
+		<legend>
+			Attestation 
+			<%= remove_link_unless_new_record(f) %>
+		</legend>
+		<ul>
+			<li>
+				<%= f.label :attested_form %>
+				<%= f.text_field :attested_form %>
+			</li>
+		</ul>  
+		<% @parse = f.object.parses.empty? ? f.object.parses.build : f.object.parses %>
+		<% f.fields_for :parses do |p_form| %>
+		  <%= render :partial => 'parse', :locals => { :f => p_form } %>
+		<% end %>
+		<div class="par">
+			<%= link_to 'Add parse', '#parses', :class => 'add_nested', :rel => "[attestation][parses]" %>
+		</div>
+	</fieldset>
 <% end %>
