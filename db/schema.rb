@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091031184526) do
+ActiveRecord::Schema.define(:version => 20100407035355) do
 
   create_table "attestations", :force => true do |t|
     t.integer  "locus_id"
@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(:version => 20091031184526) do
     t.datetime "updated_at"
     t.string   "attested_form"
   end
+
+  add_index "attestations", ["locus_id"], :name => "index_attestations_on_locus_id"
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -50,6 +52,9 @@ ActiveRecord::Schema.define(:version => 20091031184526) do
     t.datetime "updated_at"
   end
 
+  add_index "dictionary_scopes", ["dictionary_id"], :name => "index_dictionary_scopes_on_dictionary_id"
+  add_index "dictionary_scopes", ["lexeme_id"], :name => "index_dictionary_scopes_on_lexeme_id"
+
   create_table "etymologies", :force => true do |t|
     t.string   "etymon"
     t.string   "source_language"
@@ -82,12 +87,18 @@ ActiveRecord::Schema.define(:version => 20091031184526) do
     t.integer  "lexeme_id"
   end
 
+  add_index "headwords", ["form"], :name => "index_headwords_on_form"
+  add_index "headwords", ["lexeme_id"], :name => "index_headwords_on_lexeme_id"
+
   create_table "interpretations", :force => true do |t|
     t.integer  "parse_id"
     t.integer  "sense_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "interpretations", ["parse_id"], :name => "index_interpretations_on_parse_id"
+  add_index "interpretations", ["sense_id"], :name => "index_interpretations_on_sense_id"
 
   create_table "languages", :force => true do |t|
     t.string   "iso_639_code"
@@ -131,6 +142,8 @@ ActiveRecord::Schema.define(:version => 20091031184526) do
     t.datetime "updated_at"
   end
 
+  add_index "parses", ["attestation_id"], :name => "index_parses_on_attestation_id"
+
   create_table "phonetic_forms", :force => true do |t|
     t.string   "form"
     t.datetime "created_at"
@@ -144,6 +157,8 @@ ActiveRecord::Schema.define(:version => 20091031184526) do
     t.datetime "updated_at"
     t.integer  "language_id"
   end
+
+  add_index "senses", ["subentry_id"], :name => "index_senses_on_subentry_id"
 
   create_table "sources", :force => true do |t|
     t.string   "pointer"
@@ -160,6 +175,8 @@ ActiveRecord::Schema.define(:version => 20091031184526) do
     t.datetime "updated_at"
     t.integer  "language_id"
   end
+
+  add_index "subentries", ["lexeme_id"], :name => "index_subentries_on_lexeme_id"
 
   create_table "titles", :force => true do |t|
     t.string   "name"
