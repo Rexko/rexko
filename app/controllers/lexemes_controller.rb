@@ -16,6 +16,7 @@ class LexemesController < ApplicationController
     @lexeme = Lexeme.find(params[:id], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}, :dictionaries])
     @loci = @lexeme.loci(:include => {:source => {:authorship => [:author, :title]}})
     @constructions = @lexeme.constructions
+    @unattached = Parse.uninterpreted.count(:id, :conditions => ["parsed_form IN (?)", @lexeme.headwords.collect(&:form)])
 
     respond_to do |format|
       format.html # show.html.erb

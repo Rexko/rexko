@@ -7,6 +7,9 @@
 </ul>
 <% end %>
 
+<% if @unattached > 0 %>
+	<i>Found <%=h pluralize(@unattached, "unattached locus") %> pointing to a lexeme with this spelling.</i>
+<% end %>
 <% unless @loci.empty? %>
 <h3>Loci</h3>
 <%= render(:partial => "shared/locus", :collection => @loci) %>
