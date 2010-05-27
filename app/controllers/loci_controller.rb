@@ -133,6 +133,15 @@ class LociController < ApplicationController
     end
   end
   
+  def unattached
+    lexeme = Lexeme.find(params[:id], :include => :headwords)
+    unattached = Parse.uninterpreted.find(:all, :conditions => ["parsed_form IN (?)", lexeme.headwords.collect(&:form)]).collect(&:attestation).collect(&:locus) #ugh
+    
+    @loci = unattached.paginate(:page => params[:page], :include => {:source => {:authorship => [:author, :title]}})
+    
+    render "index"
+  end
+  
 protected
   def each_wikilink to_break
     to_break.scan(/\[\[.+?\]\]\w*/).each do |entry|

@@ -2,7 +2,7 @@
 * Fixed Yet Another bug where etymologies were causing saves to fail.
 * [#45] Process for adding a new subitem should be fully functional now.
 * Rewrote locus edit form for previous issue (visual change for the worse; needs better styling)
-* Added count of uninterpreted loci to lexeme view.
+* [#33] Added count of uninterpreted loci to lexeme view, and a way to view them
 
 ==Since 0.2==
 * [#50] Remove links should now be functional
