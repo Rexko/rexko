@@ -3,6 +3,7 @@
 * [#45] Process for adding a new subitem should be fully functional now.
 * Rewrote locus edit form for previous issue (visual change for the worse; needs better styling)
 * [#33] Added count of uninterpreted loci to lexeme view, and a way to view them
+* [#66] Fixed blank pipe link so [[foo|]] and [[bar (baz)|]] work as expected
 
 ==Since 0.2==
 * [#50] Remove links should now be functional

@@ -148,6 +148,8 @@ protected
       shown = entry.sub(/.+?\|/, '').sub(/\[\[/, '').sub(/\]\]/, '')
       linked = entry.gsub(/\|.+/, '').sub(/\[\[/, '').sub(/\]\].*/, '')
 
+      shown = shown.empty? ? linked.gsub(/ \(.+\)\z/, '') : shown
+
       yield(linked, shown)
     end
   end
