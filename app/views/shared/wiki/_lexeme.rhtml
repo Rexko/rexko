@@ -1,8 +1,8 @@
 ==<%= wiki_title_for(lexeme, headword) %>==
-<%= render :partial => "shared/wiki/subentry", :collection => lexeme.subentries, :locals => { :headword => headword } %><% unless @constructions.empty? %>
+<%= render :partial => "shared/wiki/subentry", :collection => lexeme.subentries, :locals => { :headword => headword } %><% unless lexeme.constructions.empty? %>
 ===Constructions===
-<%= render(:partial => "shared/wiki/construction", :collection => @constructions)%>
-<% end %><% unless @loci.empty? %>
+<%= render(:partial => "shared/wiki/construction", :collection => lexeme.constructions)%>
+<% end %><% unless lexeme.loci.empty? %>
 ===Loci===
-<%= render(:partial => "shared/wiki/locus", :collection => @loci) %>
+<%= render(:partial => "shared/wiki/locus", :collection => lexeme.loci) %>
 <% end %>
