@@ -4,6 +4,12 @@
 <% form_tag :controller => :lexemes, :action => :show_by_headword do %>
 <ul>
 	<li>Find or create a lexeme: <%= text_field_tag :headword %></li>
+</ul>
+<% end %>
+
+<% form_tag :controller => :loci, :action => :show_by_author do %>
+<ul>
+	<li>Browse loci by author (substring search): <%= text_field_tag :author %> </li> 
 	<li><%=	link_to "Create a locus", :controller => :loci, :action => :new %></li>
 </ul>
 <% end %>

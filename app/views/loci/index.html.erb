@@ -1,5 +1,6 @@
 <h1>Listing loci</h1>
 
+<% if @loci %>
 <table width="100%">
 <% @loci.each_with_index do |locus, i| %>
 	<tr>
@@ -20,3 +21,6 @@
 <%= link_to 'New locus', new_locus_path %>
 
 <%= will_paginate @loci %>
+<% else %>
+<p><i>No loci to list</i></p>
+<% end %>

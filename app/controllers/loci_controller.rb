@@ -142,6 +142,17 @@ class LociController < ApplicationController
     render "index"
   end
   
+  def show_by_author
+    author = Author.find(:first, :conditions => ["name LIKE ?", "%" + params[:author] + "%"])
+    if author 
+      author_loci = author.sources.collect(&:loci).flatten #ugh
+    
+      @loci = author_loci.paginate(:page => params[:page], :include => {:source => {:authorship => [:author, :title]}})
+    end
+    
+    render "index"
+  end
+  
 protected
   def each_wikilink to_break
     to_break.scan(/\[\[.+?\]\]\w*/).each do |entry|

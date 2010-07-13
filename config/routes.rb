@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect "author/:author",
+    :controller => "loci",
+    :action => "show_by_author"
+  
   map.connect "unattached/:id",
     :controller => "loci",
     :action => "unattached"
