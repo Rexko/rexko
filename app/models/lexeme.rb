@@ -7,7 +7,7 @@ class Lexeme < ActiveRecord::Base
   has_many :phonetic_forms
   
   accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
-  
+ 
   def loci(options = {})
     Locus.attesting(self).find(:all, :include => options[:include])
     # old include:

@@ -4,6 +4,8 @@ class Headword < ActiveRecord::Base
   
   accepts_nested_attributes_for :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
+  named_scope :unattested, :joins => ['LEFT OUTER JOIN "parses" ON "parses"."parsed_form" = "form"'], :conditions => {:parses => {:parsed_form => nil}}
+
   belongs_to :lexeme
   delegate :senses, :to => '(lexeme or return nil)'
   belongs_to :language

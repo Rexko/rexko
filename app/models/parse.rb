@@ -40,4 +40,8 @@ class Parse < ActiveRecord::Base
   def self.most_wanted count  
     Parse.find(:all, :select => '"parses"."parsed_form", COUNT("parsed_form") AS count_all', :joins => ['LEFT OUTER JOIN "headwords" ON "headwords"."form" = "parsed_form"'], :conditions => {:headwords => {:form => nil}}, :group => '"parses"."parsed_form"', :order => 'count_all DESC', :limit => count)
   end
+  
+  def self.less_popular_than times, count 
+    Parse.find(:all, :select => '"parses"."parsed_form", COUNT("parsed_form") AS count_all', :group => '"parses"."parsed_form"', :order => 'count_all DESC', :limit => count, :having => ['"count_all" < ?', times])
+  end
 end
