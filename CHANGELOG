@@ -2,6 +2,7 @@
 * [#64] Fixed where loci in "all entries" under lexeme view didn't match the lexeme
 * For [#36 (60)] added locus search by author to front page.
 * [#18 (36)] added automated to-do lists (addlist and expandlist).
+* Fixed a bug that made lexemes inaccessible if etymology items were deleted.
 
 ==Since 0.2.1==
 * Fixed Yet Another bug where etymologies were causing saves to fail.

@@ -14,5 +14,7 @@
 			<%= render :partial => "shared/sense", :collection => subentry.senses %>
 		</ol>
 	<% end %>
-	<%= render :partial => "shared/etymology", :collection => subentry.etymologies %>
+	<% unless subentry.etymologies.empty? %>
+		<%= render :partial => "shared/etymology", :collection => subentry.etymologies.compact %>
+	<% end %>
 </div>
