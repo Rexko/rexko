@@ -135,9 +135,8 @@ class LociController < ApplicationController
   
   def unattached
     lexeme = Lexeme.find(params[:id], :include => :headwords)
-    unattached = Parse.uninterpreted.find(:all, :conditions => ["parsed_form IN (?)", lexeme.headwords.collect(&:form)]).collect(&:attestation).collect(&:locus) #ugh
     
-    @loci = unattached.paginate(:page => params[:page], :include => {:source => {:authorship => [:author, :title]}})
+    @loci = Locus.unattached(lexeme).paginate(:page => params[:page], :include => {:source => {:authorship => [:author, :title]}})
     
     render "index"
   end

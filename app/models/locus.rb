@@ -8,7 +8,13 @@ class Locus < ActiveRecord::Base
     { :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}},
     :conditions => { :subentries => { :lexeme_id => [*lexeme].collect(&:id) }} }
   }
-
+  
+  named_scope :unattached, lambda {|lexeme|
+    { :joins => "INNER JOIN attestations ON attestations.locus_id = loci.id INNER JOIN parses ON parses.attestation_id = attestations.id LEFT OUTER JOIN interpretations ON interpretations.parse_id = parses.id",
+     :conditions => { "interpretations.parse_id" => nil, "parses.parsed_form" => lexeme.headword_forms }          
+    }
+  }
+  
   accepts_nested_attributes_for :attestations, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
 
   # Returns the parse with the most attestations that doesn't have an entry yet. 
