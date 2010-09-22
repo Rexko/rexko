@@ -42,13 +42,13 @@ class LociController < ApplicationController
     @nests = {}
 
     # Find all headwords corresponding to this locus' parses
-    all_headwords = Headword.find(:all, :joins => ['INNER JOIN "parses" ON "parses"."parsed_form" LIKE "headwords"."form" INNER JOIN "attestations" ON "attestations"."id" = "parses"."attestation_id"'], :include => :lexeme, :conditions => ['"attestations"."locus_id" = ?', @locus.id])
+    all_headwords = Headword.find(:all, :joins => ['INNER JOIN "parses" ON "parses"."parsed_form" = "headwords"."form" INNER JOIN "attestations" ON "attestations"."id" = "parses"."attestation_id"'], :include => :lexeme, :conditions => ['"attestations"."locus_id" = ?', @locus.id])
     @headwords = Hash[*@locus.parses.collect do |parse| 
         [parse.parsed_form, all_headwords.find{|hw| hw.form == parse.parsed_form}]
       end.flatten]
     
     # Find all potential interpretations of this locus' parses
-    all_interpretations = Sense.find(:all, :select => ['DISTINCT "senses".*, "headwords"."form" AS hw_form'], :joins => ['INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id INNER JOIN "parses" ON "parses"."parsed_form" LIKE "headwords"."form" INNER JOIN "attestations" ON "parses"."attestation_id" = "attestations"."id"'], :conditions => ['"attestations"."locus_id" = ?', @locus.id])
+    all_interpretations = Sense.find(:all, :select => ['DISTINCT "senses".*, "headwords"."form" AS hw_form'], :joins => ['INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id INNER JOIN "parses" ON "parses"."parsed_form" = "headwords"."form" INNER JOIN "attestations" ON "parses"."attestation_id" = "attestations"."id"'], :conditions => ['"attestations"."locus_id" = ?', @locus.id])
     @interpretations = {}
     @locus.parses.each do |parse|
         @interpretations[parse.parsed_form] = all_interpretations.select{|ip| ip.hw_form == parse.parsed_form}

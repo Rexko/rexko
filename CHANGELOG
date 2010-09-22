@@ -1,3 +1,6 @@
+==Since 0.2.3==
+* DB query cleanup to make the locus edit page go faster.
+
 ==Since 0.2.2==
 * [#64] Fixed where loci in "all entries" under lexeme view didn't match the lexeme
 * For [#36 (60)] added locus search by author to front page.
