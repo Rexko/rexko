@@ -1,5 +1,6 @@
 ==Since 0.2.3==
 * DB query cleanup to make the locus edit page go faster.
+* For [#63] fixed a bug where lexemes would associate with constructions not containing them.
 
 ==Since 0.2.2==
 * [#64] Fixed where loci in "all entries" under lexeme view didn't match the lexeme

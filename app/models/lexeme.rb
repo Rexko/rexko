@@ -19,9 +19,13 @@ class Lexeme < ActiveRecord::Base
   end
   
   # Fetch all other lexemes sharing the same loci. If a dictionary is given, give all results in that 
-  # dictionary.  Otherwise, fetch all results containing a space.
+  # dictionary.  Otherwise, fetch all results with any of the lexeme's headwords in its paradigm
+  # that are linked wiki-style (e.g. [[foo]] or [[foo|bar]]).
   def constructions (from_dictionary = nil)
-    Lexeme.find(:all, :select => 'DISTINCT "lexemes".*', :joins => { :senses => { :parses => { :attestation => { :locus => { :attestations => { :parses => { :interpretations => { :sense => { :subentry => :lexeme }}}}}}}}}, :include => [:headwords, :dictionaries], :conditions => from_dictionary ? ['lexemes.id != ? AND dictionaries.id = ? AND "lexemes_subentries".id = ?', id, from_dictionary.id, id] : ['lexemes.id != ? AND headwords.form LIKE "% %" AND "lexemes_subentries".id = ?', id, id])
+    heads = headword_forms.collect{|form| ["%[[" + form + "|%", "%[[" + form + "]]%"]}.flatten
+    headlike = "(subentries.paradigm LIKE ?" + " OR subentries.paradigm LIKE ?" * (heads.length - 1) + ")"
+    
+    Lexeme.find(:all, :select => 'DISTINCT "lexemes".*', :joins => { :senses => { :parses => { :attestation => { :locus => { :attestations => { :parses => { :interpretations => { :sense => { :subentry => :lexeme }}}}}}}}}, :include => [:headwords, :dictionaries, :subentries], :conditions => from_dictionary ? ['lexemes.id != ? AND dictionaries.id = ? AND "lexemes_subentries".id = ? AND ' + headlike, id, from_dictionary.id, id, *heads] : ['lexemes.id != ? AND "lexemes_subentries".id = ? AND ' + headlike, id, id, *heads])
   end  
   
   # Return all lexemes with a headword matching a string or the string with
