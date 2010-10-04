@@ -21,8 +21,17 @@ var NestedAttributesJs = {
 	remove : function(e) {
 		el = Event.findElement(e);
 		target = el.href.replace(/.*#/, '.');
-		el.up(target).hide();
-		if(hidden_input = el.previous("input[type=hidden]")) hidden_input.value = '1';
+		var oldStyle = el.up(target).style.border;
+		el.up(target).style.border = "3px solid red";
+		
+		var conf = confirm("Delete this " + el.href.replace(/.*#/, '') + "?");
+		if (conf) {
+			el.up(target).hide();
+			if(hidden_input = el.previous("input[type=hidden]")) hidden_input.value = '1';
+		}
+		else {
+			el.up(target).style.border = oldStyle;
+		}
 	},
 	add : function(e) {  
 		element = Event.findElement(e);
