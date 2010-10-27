@@ -6,12 +6,12 @@ module EditorHelper
   end
   
   def expandlist
-    unattested = Headword.unattested.first
+    unattested = Headword.unattested.rand
     
     '<ul><li>%s</li><li>%s</li></ul>' % [
       "0 " << link_to(unattested.form, unattested.lexeme),
-      [5, 10, 50, 100].collect {|num|
-        Parse.less_popular_than num, 1
+      [[1, 4], [5, 9], [10, 49], [50, 100]].collect {|num|
+        Parse.popularity_between(num[0], num[1]).rand
       }.flatten.collect{|parse|
         parse.count_all << " " << headword_link(parse)
       }.join("</li><li>")
