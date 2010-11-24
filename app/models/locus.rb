@@ -18,7 +18,8 @@ class Locus < ActiveRecord::Base
   accepts_nested_attributes_for :attestations, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
 
   # Returns the parse with the most attestations that doesn't have an entry yet. 
+  # I guess this should be part of Parse now
   def most_wanted_parse
-    parses.find(:first, :select => '"parses".id, "parses"."parsed_form",  COUNT("parsed_form") AS count_all', :joins => ['LEFT OUTER JOIN "headwords" ON "headwords"."form" = "parsed_form"'], :group => '"parses"."parsed_form"', :conditions => {:headwords => {:form => nil}}, :order => 'count_all DESC')
+    Parse.find(:first, :select => '"parses".id, "parses"."parsed_form",  COUNT("parsed_form") AS count_all', :joins => ['INNER JOIN "attestations" ON "parses"."attestation_id" = "attestations".id LEFT OUTER JOIN "headwords" ON ("headwords"."form" = "parses"."parsed_form")'], :group => '"parses"."parsed_form"', :conditions => {:headwords => {:form => nil}}, :order => 'count_all DESC', :having => {:attestations => {:locus_id => id}})
   end
 end

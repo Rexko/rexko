@@ -3,6 +3,7 @@
 * For [#63] fixed a bug where lexemes would associate with constructions not containing them.
 * [#65] Ask for confirmation before removing fields from edit forms
 * Randomize the expandlist on the front page (this is ugly)
+* [#72] Fixed a bug where the 'most wanted parse' highlight was highlighting the wrong item.
 
 ==Since 0.2.2==
 * [#64] Fixed where loci in "all entries" under lexeme view didn't match the lexeme
