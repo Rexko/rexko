@@ -1,6 +1,8 @@
 <% unless (f.object._delete) %>
-  <li class="phonetic_form">
-    <%= f.label :form, "Phonetic form<br>#{remove_link_unless_new_record(f)}" %>
-    <%= f.text_field :form %>
-  </li>
+  <div class="phonetic_form">
+		<div class="type-text">		
+	    <%= f.label :form, "Phonetic form &nbsp; #{remove_link_unless_new_record(f)}" %>
+	    <%= f.text_field :form %>
+		</div>
+  </div>
 <% end %>

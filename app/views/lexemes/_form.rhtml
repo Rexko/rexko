@@ -1,14 +1,10 @@
-<% form_for @lexeme, {:method => form[:method], :action => form[:action]} do |l_form| %>
+<% form_for @lexeme, {:method => form[:method], :action => form[:action], :html => {:class => "yform"}} do |l_form| %>
   <% nested_attributes_for l_form, :headwords, :subentries %>
   <!-- Dictionary -->
-  <table>
-    <tr>
-      <td valign="top">Dictionary:</td>
-      <td>
-        <%= collection_select(:lexeme, :dictionary_ids, Dictionary.find(:all), :id, :title, {}, { :multiple => :true }) %> 
-      </td>
-    </tr>
-  </table>
+  <div class="type-select">
+      <label for="lexeme_dictionary_ids">Dictionary</label>
+      <%= collection_select(:lexeme, :dictionary_ids, Dictionary.find(:all), :id, :title, {}, { :multiple => :true }) %> 
+  </div>
 
   <!-- Headword -->
 	<% l_form.fields_for :headwords do |hw_form| %>
@@ -25,5 +21,8 @@
 	<%= link_to 'Add subentry', '#subentries', :class => 'add' %>
 	</div>
 
-	<p><%= submit_tag form[:label] %> | <%= submit_tag "#{form[:label]} and continue editing" %>
+	<div class="type-button">
+		<%= submit_tag form[:label] %> 
+		<%= submit_tag "#{form[:label]} and continue editing" %>
+	</div>
 <% end %>

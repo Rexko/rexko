@@ -1,4 +1,5 @@
 class LanguagesController < ApplicationController
+  layout '1col_layout'
   # GET /languages
   # GET /languages.xml
   def index

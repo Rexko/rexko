@@ -1,4 +1,5 @@
 class LociController < ApplicationController
+  layout '1col_layout'
   # GET /loci
   # GET /loci.xml
   def index

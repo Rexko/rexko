@@ -1,6 +1,12 @@
 <% unless (f.object._delete) %>
-	<li class="interpretation">
-		<%= f.label :sense, "Sense<br>#{remove_link_unless_new_record(f)}" %>
-		<%= f.collection_select :sense_id, @interpretations ? @interpretations[f.object.parse.parsed_form] : f.object.parse.potential_interpretations, :id, :definition, {:include_blank => true} if f.object.parse %> 
-	</li>
+	<div class="interpretation type-select">
+		<%= f.label :sense, "Sense #{remove_link_unless_new_record(f)}" %>
+		<%= f.collection_select :sense_id, 
+														@interpretations ? 
+															@interpretations[f.object.parse.parsed_form] :
+															f.object.parse.potential_interpretations, 
+														:id,
+														:definition, 
+														{:include_blank => true} if f.object.parse %> 
+	</div>
 <% end %>

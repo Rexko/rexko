@@ -1,28 +1,24 @@
 <% unless (f.object._delete) %>
 	<% nested_attributes_for f, [:notes, :etymologies, :subentry] %>
 	<fieldset class="etymology">
-		<legend>Etymology <%= remove_link_unless_new_record(f) %></legend>
-			<ul>
-		  <li>
+		<legend>Etymology &nbsp; <%= remove_link_unless_new_record(f) %></legend>
+			<div class="type-text">
 				<%= f.label :source_language %>
 				<%= f.text_field :source_language %>
-			</li>
-			<li>
+
 				<%= f.label :etymon %> 
 				<%= f.text_field :etymon %>
-			</li>
-		  <li>
+
 				<%= f.label :gloss %>
 				<%= f.text_field :gloss %>
-			</li>
+			</div>
 	
 			<% f.fields_for :notes do |e_form| %>
 	    	<%= render :partial => 'note', :locals => { :f => e_form } %>
 	  	<% end %>
 
-			<li class="par">
+			<div class="par">
 				<%= link_to 'Add note', '#notes', :class => 'add_nested', :rel => "[subentry][etymologies][notes]" %>
-			</li>
-			</ul>
+			</div>
 	</fieldset>
 <% end %>

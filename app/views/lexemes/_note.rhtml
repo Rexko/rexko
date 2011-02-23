@@ -1,6 +1,8 @@
 <% unless (f.object.try(:_delete)) %>
-		<li class="note">
-			<%= f.label :content, "Note<br>#{remove_link_unless_new_record(f)}" %>
-			<%= f.text_area :content, :size => "80x3" %>
-		</li>
+		<div class="note">
+			<div class="type-text">
+				<%= f.label :content, "Note &nbsp; #{remove_link_unless_new_record(f)}" %>
+				<%= f.text_area :content, :size => "80x3" %>
+			</div>
+		</div>
 <% end %>

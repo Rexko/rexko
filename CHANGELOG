@@ -1,3 +1,6 @@
+==Since 0.2.4==
+* Revamped layout based on YAML.  
+
 ==Since 0.2.3==
 * For [#70] DB query cleanup to make the locus edit page go faster.
 * For [#63] fixed a bug where lexemes would associate with constructions not containing them.

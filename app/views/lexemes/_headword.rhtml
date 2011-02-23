@@ -2,22 +2,22 @@
 	<% nested_attributes_for f, :phonetic_forms %>
 	<fieldset class="headword">
 		<legend>
-			Headword <%= headword_counter + 1 if defined? headword_counter %>
+			Headword <%= headword_counter + 1 if defined? headword_counter %> &nbsp; 
 			<%= remove_link_unless_new_record(f) %>
 		</legend>
-	  <ul>
-			<li>
+		
+		<div class="type-text">
 	    	<%= f.label :form, "Orthographic form" %>
 	    	<%= f.text_field :form %>
-	    </li>
+	  </div>
 	
 	  <!-- Phonetic form -->
 	  	<% f.fields_for :phonetic_forms do |pf_form| %>
 		    <%= render :partial => 'phonetic_form', :locals => { :f => pf_form } %>
 		  <% end %>
-			<li class="par">
+			<div class="par">
 				<%= link_to 'Add phonetic form', '#phonetic_forms', :class => 'add_nested', :rel => "[headword][phonetic_forms]" %>
-			</li>
+			</div>
 		</ul>
 	</fieldset>
 <% end %>

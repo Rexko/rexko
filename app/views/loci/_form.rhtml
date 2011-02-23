@@ -1,34 +1,70 @@
-<% form_for @locus, {:method => form[:method], :action => form[:action]} do |l_form| %>
+<% form_for @locus, {:method => form[:method], :action => form[:action], :html => {:class => "yform"}} do |l_form| %>
 <% nested_attributes_for l_form, :attestations %>
-  <p>
-    <!-- these need a better interface -->
-    <b>Author</b><br />
-    <%= collection_select(:authorship, :author_id, Author.find(:all, :order => "name"), :id, :name, {:include_blank => "[Other:]"}) %> <%= text_field :new_author, :name %>
-  </p>
-  <p>
-    <b>Title</b><br />
-    <%= collection_select(:authorship, :title_id, Title.find(:all, :order => "name"), :id, :name, {:include_blank => "[Other:]"}) %> <%= text_field :new_title, :name %>
-  </p>
-  <p>
-    <b>Pointer</b><br />
-    <%= text_field :source, :pointer %>
-  </p>
-  <table>
-    <tr>
-      <td>
-        <p>
-          <b>Example</b><br />
-          <%= l_form.text_area :example %>
-        </p>
-      </td>
-      <td>
-        <p>
-          <b>Example translation</b><br />
-          <%= l_form.text_area :example_translation %>
-        </p>
-      </td>
-    </tr>
-  </table>
+<fieldset>
+	<legend>Author</legend>
+	<div class="subcolumns full">
+		<div class="c50l">
+		  <div class="subcl type-select">
+		    <!-- these need a better interface -->
+		    <%= collection_select(:authorship, 
+															:author_id, 
+															Author.find(:all, :order => "name"), 
+															:id, 
+															:name, 
+															{:include_blank => "[Other:]"}) %> 
+			</div>
+		</div>
+		<div class="c50r">
+			<div class="subcr type-text">
+				<%= text_field :new_author, :name %>
+			</div>
+		</div>
+	</div>
+</fieldset>
+
+<fieldset>
+	<legend>Text</legend>
+	<div class="subcolumns full">
+		<div class="c50l">
+		  <div class="subcl type-select">
+		    <%= collection_select(:authorship, 
+															:title_id, 
+															Title.find(:all, :order => "name"), 
+															:id, 
+															:name, 
+															{:include_blank => "[Other:]"}) %> 
+			</div>
+		</div>
+		<div class="c50r">
+			<div class="subcr type-text">
+				<%= text_field :new_title, :name %>
+			</div>
+		</div>
+	</div>
+
+	<div class="type-text">
+	  <label for="source">Pointer</label>
+	  <%= text_field :source, :pointer %>
+	</div>
+</fieldset>
+
+<fieldset>
+	<legend>Example</legend>
+	<div class="subcolumns full">
+		<div class="c50l">
+		  <div class="subcl type-text">
+		    <label for="example">Original language</label>
+	      <%= l_form.text_area :example %>
+			</div>
+		</div>
+		<div class="c50r">
+			<div class="subcr type-text">
+	    	<label for="example_translation">Translation</label>
+	      <%= l_form.text_area :example_translation %>
+	    </div>
+	  </div>
+	</div>
+</fieldset>
 
 	<% unless l_form.object.attestations.empty? %>
 		<% l_form.fields_for :attestations do |a_form| %>
@@ -39,5 +75,7 @@
 		<br/><%= link_to 'Add attestation', '#attestations', :class => 'add' %>
 	</span>
 
-  <p><%= submit_tag form[:label] %> | <%= submit_tag "#{form[:label]} and continue editing" %></p>
+  <div class="type-button">
+		<%= submit_tag form[:label] %> | <%= submit_tag "#{form[:label]} and continue editing" %>
+	</div>
 <% end %>

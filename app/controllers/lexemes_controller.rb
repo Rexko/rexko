@@ -1,4 +1,5 @@
 class LexemesController < ApplicationController
+  layout '1col_layout'
   # GET /lexemes
   # GET /lexemes.xml
   def index

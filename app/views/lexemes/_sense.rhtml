@@ -2,30 +2,27 @@
 	<% nested_attributes_for f, [:glosses, :senses, :subentry], [:notes, :senses, :subentry] %>
 	<fieldset class="sense">
 	  <legend>
-			Sense <%= sense_counter + 1 if defined? sense_counter %>
+			Sense <%= sense_counter + 1 if defined? sense_counter %> &nbsp; 
 			<%= remove_link_unless_new_record(f) %>
 		</legend>
-	  <ul>
-	    <li>
+		<div class="type-text">
 	      <%= f.label :definition %>
 	      <%= f.text_area :definition, :rows => 4 %>
-	    </li>
+    </div>
 
-	    <!-- Gloss -->
-	    <% # @gloss = f.object.glosses.empty? ? f.object.glosses.build : f.object.glosses %>
-	    <% f.fields_for :glosses do |g_form| %>
-	      <%= render :partial => 'gloss', :locals => { :f => g_form } %>
-	    <% end %>
-			<li class="par">
-				<%= link_to 'Add gloss', '#glosses', :class => 'add_nested', :rel => "[subentry][senses][glosses]" %>
-			</li>
+    <!-- Gloss -->
+    <% f.fields_for :glosses do |g_form| %>
+      <%= render :partial => 'gloss', :locals => { :f => g_form } %>
+    <% end %>
+		<div class="par">
+			<%= link_to 'Add gloss', '#glosses', :class => 'add_nested', :rel => "[subentry][senses][glosses]" %>
+		</div>
 			
-			<% f.fields_for :notes do |e_form| %>
-		    <%= render :partial => 'note', :locals => { :f => e_form } %>
-		  <% end %>
-			<li class="par">
-				<%= link_to 'Add note', '#notes', :class => 'add_nested', :rel => "[subentry][senses][notes]" %>
-			</li>
-	  </ul>
+		<% f.fields_for :notes do |e_form| %>
+	    <%= render :partial => 'note', :locals => { :f => e_form } %>
+	  <% end %>
+		<div class="par">
+			<%= link_to 'Add note', '#notes', :class => 'add_nested', :rel => "[subentry][senses][notes]" %>
+		</div>
 	</fieldset>
 <% end %>

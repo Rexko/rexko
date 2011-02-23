@@ -1,4 +1,5 @@
 class DictionariesController < ApplicationController
+  layout '1col_layout'
   # GET /dictionaries
   # GET /dictionaries.xml
   def index

@@ -2,11 +2,12 @@
 	<% nested_attributes_for f, [:interpretations, :parses, :attestation] %>
 	<fieldset class="parse">
 		<legend>Parse <%= remove_link_unless_new_record(f) %></legend>
-		<ul>
-			<li>
-			<%= f.label :parsed_form %>
-			<%= f.text_field :parsed_form %>
-			<%= headword_link(f.object) unless f.object.parsed_form.blank? %> 
+			<div class="type-text">
+				<%= f.label :parsed_form, nil, :style => "float:left" %>
+				<%= headword_link(f.object) unless f.object.parsed_form.blank? %>
+				<div style="clear:both"/>
+				<%= f.text_field :parsed_form %>
+			</div>
 
 			<% unless @interpretations ? @interpretations[f.object.parsed_form].blank? : f.object.potential_interpretations.blank? %>
 				<% @interpretation = f.object.interpretations.empty? ? f.object.interpretations.build : f.object.interpretations %>
@@ -19,7 +20,5 @@
 					<%= link_to 'Add interpretation', '#interpretations', :class => 'add_nested', :rel => '[attestation][parses][interpretations]'%>
 				</div>
 			<% end %>
-			</li>
-		</ul>
 	</fieldset>
 <% end %>

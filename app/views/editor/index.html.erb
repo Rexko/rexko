@@ -1,39 +1,44 @@
-<h1>Lexicon</h1>
+<div class="subcolumns">
+	<div class="c50l">
+		<div class="subcl">
+			<h2>Tools</h2>
+			<% form_tag({:controller => :lexemes, :action => :show_by_headword}, {:class => "yform"}) do %>
+			<div class="type-text">
+				<label>Find or create a lexeme:</label> 
+				<%= text_field_tag :headword, '', :size => 20 %>
+			</div>
+			<% end %>
 
-<h2>Tools</h2>
-<% form_tag :controller => :lexemes, :action => :show_by_headword do %>
-<ul>
-	<li>Find or create a lexeme: <%= text_field_tag :headword %></li>
-</ul>
-<% end %>
+			<% form_tag({:controller => :loci, :action => :show_by_author}, {:class => "yform"}) do %>
+			<div class="type-text">
+				<label>Browse loci by author (substring search)</label>
+				<%= text_field_tag :author, '', :size => 20 %>
+			</div>
+			<% end %>
 
-<% form_tag :controller => :loci, :action => :show_by_author do %>
-<ul>
-	<li>Browse loci by author (substring search): <%= text_field_tag :author %> </li> 
-	<li><%=	link_to "Create a locus", :controller => :loci, :action => :new %></li>
-</ul>
-<% end %>
+			<ul>
+				<li><%=	link_to "Create a locus", :controller => :loci, :action => :new %></li>
+			</ul>
+		</div>
+	</div>
 
-<h2>Navigation</h2>
-<ul>
-	<li><%= link_to "Browse languages", :controller => :languages %></li>
-	<li><%= link_to "Browse dictionaries", :controller => :dictionaries %></li>
-	<li><%= link_to "Browse all lexemes", :controller => :lexemes %></li>
-	<li><%= link_to "Browse all loci", :controller => :loci %></li>
-</ul>
-
-<h2>Things to do</h2>
-<table width="75%">
-	<tr>
-		<td valign="top" width="50%">
-			<h3>Addlist</h3>
+	<div class="c50r">
+		<div class="subcr">
+			<h2>Things to do</h2>
+			<table width="75%">
+				<tr>
+					<td valign="top" width="50%">
+						<h3>Addlist</h3>
 			
-			<%= ten_most_wanted %>
-		</td>
-		<td valign="top">
-			<h3>Expandlist</h3>	
+						<%= ten_most_wanted %>
+					</td>
+					<td valign="top">
+						<h3>Expandlist</h3>	
 			
-			<%= expandlist %>
-		</td>
-	</tr>
-</table>
+						<%= expandlist %>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

@@ -25,11 +25,10 @@ module ApplicationHelper
     is_wanted = parse == @wantedparse
     headword = @headwords ? @headwords[parse.parsed_form] : parse.lookup_headword
 
-    link_to("%s%s#{html_escape parse.parsed_form}%s%s" % [
-      ("<span style='color:red'>" if is_wanted),
+    link_to("<span class='hw-link%s'>%s#{html_escape parse.parsed_form}%s</span>" % [
+      (" wanted" if is_wanted),
       ("[No entry for <i>" unless headword),
-      ("</i> &times;#{parse.count}]" unless headword),
-      ("</span>" if is_wanted) 
+      ("</i> &times;#{parse.count}]" unless headword)
     ], headword.try(:lexeme) || {:controller => 'lexemes', :action => 'show_by_headword', :headword => parse.parsed_form})
   end
   
@@ -70,9 +69,9 @@ module ApplicationHelper
   
   def remove_link_unless_new_record(form_builder)  
     unless form_builder.object.try(:new_record?)
-      form_builder.check_box(:_delete) + form_builder.label(:_delete, 'Delete', :class => 'delete_label')
+      "<span class=\"type-check\">%s</span>" % [form_builder.check_box(:_delete) + " " +  form_builder.label(:_delete, 'Delete', :class => 'delete_label')]
     else  
-      form_builder.hidden_field(:_delete) + link_to("(remove)", "##{form_builder.object.class.name.underscore}", :class => 'remove delete_label')
+      form_builder.hidden_field(:_delete) + " " + link_to("(remove)", "##{form_builder.object.class.name.underscore}", :class => 'remove delete_label')
     end  
   end
   
@@ -86,5 +85,26 @@ module ApplicationHelper
       :last_word_connector => options[:last_spacer] || options[:spacer] || ", ",
       :two_words_connector => options[:dual_spacer] || options[:spacer] || ", "
     })
+  end
+  
+  # Create a <li> link suitable for the navbar, unless we are already on the page.
+  # Modified form of #link_to_unless.
+  def navlink_unless_current name, options = {}, html_options = {}, &block
+    if current_page?(options)
+      "<li class=\"active\"><strong>%s</strong></li>" % [
+        if block_given?
+          block.arity <= 1 ? capture(name, &block) : capture(name, options, html_options_ & block)
+        else
+          name
+        end
+      ]
+    else
+      "<li>%s</li>" % [link_to(name, options, html_options)]
+    end 
+  end
+  
+  # Return @page_title, or a default of "Controller -  action".
+  def page_title
+    html_escape (@page_title || [params[:controller].camelize, params[:action]].join(" - "))
   end
 end
