@@ -1,5 +1,7 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
+
+// Functionality to add new items to a page
 replace_ids = function(template){  
 	var new_id = new Date().getTime();  
 	return template.replace(/NEW_RECORD/g, new_id);  
@@ -93,3 +95,10 @@ Event.observe(window, 'load', function(){
 		link.observe('click', NestedAttributesJs.add_nested);
 	});
 });
+
+
+// For select-all textfields
+function select_all(id){
+	document.getElementById(id).focus();
+	document.getElementById(id).select();
+}
