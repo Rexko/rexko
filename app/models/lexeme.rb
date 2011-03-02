@@ -8,6 +8,7 @@ class Lexeme < ActiveRecord::Base
   
   accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
  
+  # Returns an array containing the forms of each headword.
   def headword_forms
     headwords.collect(&:form)
   end
