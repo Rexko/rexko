@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module LociHelper
   def greek_numeral(int)
     "%s%s%s%sʹ" % [

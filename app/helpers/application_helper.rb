@@ -107,4 +107,12 @@ module ApplicationHelper
   def page_title
     html_escape (@page_title || [params[:controller].camelize, params[:action]].join(" - "))
   end
+  
+  # Translate a string in wiki format into HTML
+  def wh text
+    output = html_escape(text)
+    output.gsub!(/'''(.*?)'''/, '<b>\1</b>')
+    output.gsub!(/''(.*?)''/, '<i>\1</i>')
+    output.gsub(/\[\[(.*?)\]\]/, '<a href="/html/\1">\1</a>')
+  end
 end

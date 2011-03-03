@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module LexemesHelper
   # Do wikibold around a string, except around the | character, unless it's the |
   # that does pipe-linking.  This approach thanks to Ben Marini's suggestion at
