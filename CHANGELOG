@@ -1,6 +1,7 @@
 ==Since 0.2.4==
 * Revamped layout based on YAML.  
 * For [#40] Text areas in the Lexeme view now select all on focus.
+* [#47] Wikilinks, wikibold, and wikiitalic display in lexemes and loci
 
 ==Since 0.2.3==
 * For [#70] DB query cleanup to make the locus edit page go faster.

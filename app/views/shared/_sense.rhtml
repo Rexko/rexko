@@ -1,5 +1,5 @@
 <li class="lexform-sense" <%= lang_for(sense) %>>
-	<%=h sense.definition %>
+	<%=wh sense.definition %>
 	<% unless sense.glosses.empty? %>
 		<ul class="lexform-glosses">
 			<%= render :partial => "shared/gloss", :collection => sense.glosses %>	

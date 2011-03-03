@@ -4,9 +4,15 @@
 <%="<i>#{h locus.source.title.name}</i>" unless locus.source.title.nil?  %>
 <%=h locus.source.pointer %>:
 
-<table width="100%" cellpadding="2" style="margin-left:35px">
-<tr>
-<td style="border-right:3px double gray" width="50%"><%=h locus.example %></td>
-<td><i><%=h locus.example_translation%></i></td>
-</tr>
-</table>
+<div class="subcolumns" style="margin-left:35px">
+	<div class="c50l" style="border-right:3px double gray">
+		<div class="subcl">
+			<%=wh locus.example %>
+		</div>
+	</div>
+	<div class="c50r">
+		<div class="subcr">
+			<i><%=wh locus.example_translation%></i>
+		</div>
+	</div>
+</div>
