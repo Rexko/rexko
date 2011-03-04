@@ -14,7 +14,7 @@ class AttestationsControllerTest < ActionController::TestCase
 
   def test_should_create_attestation
     assert_difference('Attestation.count') do
-      post :create, :attestation => { }
+      post :create, :attestation => { :attested_form => "test" }
     end
 
     assert_redirected_to attestation_path(assigns(:attestation))
