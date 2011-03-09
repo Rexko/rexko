@@ -9,3 +9,11 @@ two:
     id: 2
     attestation_id: 1
     parsed_form:  bar
+
+liters: #
+    attestation: nat_liters
+    parsed_form: liter
+
+litres: #
+    attestation: nem_litres
+    parsed_form: litre

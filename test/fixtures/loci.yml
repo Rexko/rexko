@@ -9,3 +9,14 @@ two:
   source_id: 1
   example: MyText
   example_translation: MyText
+
+natvilcius:
+  source_id: 1
+  example: 99 liters of beer on the wall
+  example_translation: XCIX litrae cerevisiae in muro
+
+nemo:
+  source_id: 1
+  example: 99 litres of beer on the wall
+  example_translation: XCIX litrae cerevisiae in muro
+  
