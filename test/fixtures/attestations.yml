@@ -1,8 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-# one:
-#   column: value
-#
+one: #
+  attested_form: bar
+
 # two:
 #   column: value
 
