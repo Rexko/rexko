@@ -14,7 +14,7 @@ class GlossesControllerTest < ActionController::TestCase
 
   def test_should_create_gloss
     assert_difference('Gloss.count') do
-      post :create, :gloss => { }
+      post :create, :gloss => { :gloss => "test" }
     end
 
     assert_redirected_to gloss_path(assigns(:gloss))

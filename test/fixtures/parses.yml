@@ -13,7 +13,9 @@ two:
 liters: #
     attestation: nat_liters
     parsed_form: liter
+#    interpretations: one
 
 litres: #
     attestation: nem_litres
     parsed_form: litre
+#    interpretations: two

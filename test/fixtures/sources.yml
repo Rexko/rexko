@@ -1,9 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-# one:
-#  author: MyString
-#  title: MyString
-#  pointer: MyString
+one:
+ pointer: MyString
 
 #two:
 #  author: MyString

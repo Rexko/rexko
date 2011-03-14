@@ -14,7 +14,7 @@ class HeadwordsControllerTest < ActionController::TestCase
 
   def test_should_create_headword
     assert_difference('Headword.count') do
-      post :create, :headword => { }
+      post :create, :headword => { :form => "test"}
     end
 
     assert_redirected_to headword_path(assigns(:headword))

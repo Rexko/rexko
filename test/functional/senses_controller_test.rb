@@ -14,7 +14,7 @@ class SensesControllerTest < ActionController::TestCase
 
   def test_should_create_sense
     assert_difference('Sense.count') do
-      post :create, :sense => { }
+      post :create, :sense => { :definition => "text"}
     end
 
     assert_redirected_to sense_path(assigns(:sense))
@@ -31,7 +31,7 @@ class SensesControllerTest < ActionController::TestCase
   end
 
   def test_should_update_sense
-    put :update, :id => senses(:one).id, :sense => { }
+    put :update, :id => senses(:one).id, :sense => { :definition => "test"}
     assert_redirected_to sense_path(assigns(:sense))
   end
 

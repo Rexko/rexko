@@ -14,7 +14,7 @@ class EtymologiesControllerTest < ActionController::TestCase
 
   def test_should_create_etymology
     assert_difference('Etymology.count') do
-      post :create, :etymology => { }
+      post :create, :etymology => { :etymon => "test"}
     end
 
     assert_redirected_to etymology_path(assigns(:etymology))

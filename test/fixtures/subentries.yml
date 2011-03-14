@@ -1,7 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  lexeme_id: 1
+  lexeme: one
   paradigm: MyString
   part_of_speech: MyString
 

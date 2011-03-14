@@ -14,7 +14,7 @@ class LociControllerTest < ActionController::TestCase
 
   def test_should_create_locus
     assert_difference('Locus.count') do
-      post :create, :locus => { }
+      post :create, :locus => { :example => "" }, :authorship => { :title_id => "", :author_id => "" }, :new_title => {:name => "Eggs"}, :new_author => {:name => "Bacon"}
     end
 
     assert_redirected_to locus_path(assigns(:locus))
@@ -31,7 +31,7 @@ class LociControllerTest < ActionController::TestCase
   end
 
   def test_should_update_locus
-    put :update, :id => loci(:one).id, :locus => { }
+    put :update, :id => loci(:one).id, :locus => { :example => "" }, :authorship => { :title_id => "", :author_id => "" }, :new_title => {:name => "Eggs"}, :new_author => {:name => "Bacon"}
     assert_redirected_to locus_path(assigns(:locus))
   end
 

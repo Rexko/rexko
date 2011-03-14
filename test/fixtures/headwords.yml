@@ -5,3 +5,11 @@ one:
 
 two:
   form: MyString
+
+liter: #
+  form: liter
+  lexeme: liter
+  
+litre: #
+  form: litre
+  lexeme: liter

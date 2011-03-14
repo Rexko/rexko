@@ -39,7 +39,7 @@ class LociController < ApplicationController
   def edit
     @locus = Locus.find(params[:id], :include => {:attestations => {:parses => :interpretations}})
     @source = @locus.source
-    @authorship = @source.authorship
+    @authorship = @source.authorship if @source
     @nests = {}
 
     # Find all headwords corresponding to this locus' parses
@@ -49,7 +49,7 @@ class LociController < ApplicationController
       end.flatten]
     
     # Find all potential interpretations of this locus' parses
-    all_interpretations = Sense.find(:all, :select => ['DISTINCT "senses".*, "headwords"."form" AS hw_form'], :joins => ['INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id INNER JOIN "parses" ON "parses"."parsed_form" = "headwords"."form" INNER JOIN "attestations" ON "parses"."attestation_id" = "attestations"."id"'], :conditions => ['"attestations"."locus_id" = ?', @locus.id])
+    all_interpretations = Sense.find(:all, :select => 'DISTINCT "senses".*, "headwords"."form" AS hw_form', :joins => ['INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id INNER JOIN "parses" ON "parses"."parsed_form" = "headwords"."form" INNER JOIN "attestations" ON "parses"."attestation_id" = "attestations"."id"'], :conditions => ['"attestations"."locus_id" = ?', @locus.id])
     @interpretations = {}
     @locus.parses.each do |parse|
         @interpretations[parse.parsed_form] = all_interpretations.select{|ip| ip.hw_form == parse.parsed_form}
@@ -94,8 +94,8 @@ class LociController < ApplicationController
   # PUT /loci/1.xml
   def update
     @locus = Locus.find(params[:id])
-    @source = @locus.source
-    @authorship = @source.authorship
+    @source = @locus.source || @locus.build_source(params[:source])
+    @authorship = @source.authorship || @source.build_authorship(params[:authorship])
 
     @authorship.title = params[:authorship][:title_id].empty? ? @authorship.build_title(params[:new_title]) : Title.find(params[:authorship][:title_id])
     @authorship.author = params[:authorship][:author_id].empty? ? @authorship.build_author(params[:new_author]) : Author.find(params[:authorship][:author_id])

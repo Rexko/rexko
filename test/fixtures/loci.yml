@@ -14,9 +14,10 @@ natvilcius:
   source_id: 1
   example: 99 liters of beer on the wall
   example_translation: XCIX litrae cerevisiae in muro
+#  parses: liters
 
 nemo:
   source_id: 1
   example: 99 litres of beer on the wall
   example_translation: XCIX litrae cerevisiae in muro
-  
+#  parses: litres

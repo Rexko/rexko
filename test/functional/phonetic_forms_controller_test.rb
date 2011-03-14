@@ -14,7 +14,7 @@ class PhoneticFormsControllerTest < ActionController::TestCase
 
   def test_should_create_phonetic_form
     assert_difference('PhoneticForm.count') do
-      post :create, :phonetic_form => { }
+      post :create, :phonetic_form => { :form => "[beIk@n]"}
     end
 
     assert_redirected_to phonetic_form_path(assigns(:phonetic_form))
@@ -31,7 +31,7 @@ class PhoneticFormsControllerTest < ActionController::TestCase
   end
 
   def test_should_update_phonetic_form
-    put :update, :id => phonetic_forms(:one).id, :phonetic_form => { }
+    put :update, :id => phonetic_forms(:one).id, :phonetic_form => { :form => "[Egz]"}
     assert_redirected_to phonetic_form_path(assigns(:phonetic_form))
   end
 

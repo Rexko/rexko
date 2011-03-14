@@ -14,7 +14,7 @@ class SubentriesControllerTest < ActionController::TestCase
 
   def test_should_create_subentry
     assert_difference('Subentry.count') do
-      post :create, :subentry => { }
+      post :create, :subentry => { :paradigm => "test, tests"}
     end
 
     assert_redirected_to subentry_path(assigns(:subentry))

@@ -24,6 +24,7 @@ class Lexeme < ActiveRecord::Base
   # that are linked wiki-style (e.g. [[foo]] or [[foo|bar]]).
   def constructions (from_dictionary = nil)
     heads = headword_forms.collect{|form| ["%[[" + form + "|%", "%[[" + form + "]]%"]}.flatten
+    return {} if heads.empty?
     headlike = "(subentries.paradigm LIKE ?" + " OR subentries.paradigm LIKE ?" * (heads.length - 1) + ")"
     
     Lexeme.find(:all, :select => 'DISTINCT "lexemes".*', :joins => { :senses => { :parses => { :attestation => { :locus => { :attestations => { :parses => { :interpretations => { :sense => { :subentry => :lexeme }}}}}}}}}, :include => [:headwords, :dictionaries, :subentries], :conditions => from_dictionary ? ['lexemes.id != ? AND dictionaries.id = ? AND "lexemes_subentries".id = ? AND ' + headlike, id, from_dictionary.id, id, *heads] : ['lexemes.id != ? AND "lexemes_subentries".id = ? AND ' + headlike, id, id, *heads])

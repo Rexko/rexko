@@ -1,8 +1,8 @@
 <%= link_to "#{greek_numeral(locus_counter + 1)}", locus, :name => "locus-#{locus.id}" %>
 <%= render(:partial => "shared/note", :collection => @constructions.collect {|constr| constr if constr.loci.include?(locus)}.compact) if @lexeme %>
-<%=	h "#{locus.source.author.name}," unless locus.source.author.nil?  %>
-<%="<i>#{h locus.source.title.name}</i>" unless locus.source.title.nil?  %>
-<%=h locus.source.pointer %>:
+<%=	h "#{locus.source.author.name}," unless (locus.source.nil? || locus.source.author.nil?)  %>
+<%="<i>#{h locus.source.title.name}</i>" unless (locus.source.nil? || locus.source.title.nil?)  %>
+<%=h locus.source.pointer unless locus.source.nil? %>:
 
 <div class="subcolumns" style="margin-left:35px">
 	<div class="c50l" style="border-right:3px double gray">

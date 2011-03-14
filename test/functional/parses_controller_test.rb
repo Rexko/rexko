@@ -14,7 +14,7 @@ class ParsesControllerTest < ActionController::TestCase
 
   def test_should_create_parse
     assert_difference('Parse.count') do
-      post :create, :parse => { }
+      post :create, :parse => { :parsed_form => "text"}
     end
 
     assert_redirected_to parse_path(assigns(:parse))
@@ -31,7 +31,7 @@ class ParsesControllerTest < ActionController::TestCase
   end
 
   def test_should_update_parse
-    put :update, :id => parses(:one).id, :parse => { }
+    put :update, :id => parses(:one).id, :parse => { :parsed_form => "test" }
     assert_redirected_to parse_path(assigns(:parse))
   end
 

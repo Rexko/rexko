@@ -18,6 +18,10 @@ class LexemesController < ApplicationController
     @loci = @lexeme.loci(:include => {:source => {:authorship => [:author, :title]}})
     @constructions = @lexeme.constructions
     @unattached = Parse.count_unattached_to @lexeme.headword_forms
+    @loci_for = Hash.new 
+    @lexeme.headword_forms.each { |headword|
+      @loci_for[headword] = @loci.find_all{ |locus| locus.attests?(headword) }
+    }
 
     respond_to do |format|
       format.html # show.html.erb

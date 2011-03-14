@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  parse_id: 1
-  sense_id: 1
+  parse: liters
+  sense: one
 
 two:
-  parse_id: 1
-  sense_id: 1
+  parse: litres
+  sense: one
