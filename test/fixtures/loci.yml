@@ -11,13 +11,13 @@ two:
   example_translation: MyText
 
 natvilcius:
+  id: 1
   source_id: 1
   example: 99 liters of beer on the wall
   example_translation: XCIX litrae cerevisiae in muro
-#  parses: liters
 
 nemo:
+  id: 2
   source_id: 1
   example: 99 litres of beer on the wall
   example_translation: XCIX litrae cerevisiae in muro
-#  parses: litres

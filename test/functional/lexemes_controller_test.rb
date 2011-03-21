@@ -1,46 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class LexemesControllerTest < ActionController::TestCase
-  fixtures :lexemes, :headwords, :parses, :loci, :interpretations, :senses, :subentries
-  def setup
-    associations = {
-      lexemes(:liter) => {  lexemes(:liter).subentries => subentries(:one),
-                            lexemes(:liter).headwords => headwords(:one)},
-      parses(:liters) => {parses(:liters).interpretations => interpretations(:one)},
-      parses(:litres) => {parses(:litres).interpretations => interpretations(:two)},
-      attestations(:nat_liters) => {attestations(:nat_liters).parses => parses(:liters)},
-      attestations(:nem_litres) => {attestations(:nem_litres).parses => parses(:litres)},
-      loci(:natvilcius) => {loci(:natvilcius).attestations => attestations(:nat_liters)},
-      loci(:nemo) => {loci(:nemo).attestations => attestations(:nem_litres)}
-    }
-    
-    associations.each do |record, assoc|
-      assoc.each do |collection, val|
-        collection << val
-      end
-      record.save
-    end
-
-#    lexemes(:liter).subentries << subentries(:one)
-#    lexemes(:liter).headwords << headwords(:one)
-#    lexemes(:liter).save
-    
-#    parses(:liters).interpretations << interpretations(:one)
-#    parses(:liters).save
-#    parses(:litres).interpretations << interpretations(:two)
-#    parses(:litres).save
-    
-#    attestations(:nat_liters).parses << parses(:liters)
-#    attestations(:nat_liters).save
-#    attestations(:nem_litres).parses << parses(:litres)
-#    attestations(:nem_litres).save
-    
-#    loci(:natvilcius).attestations << attestations(:nat_liters)
-#    loci(:natvilcius).save
-#    loci(:nemo).attestations << attestations(:nem_litres)
-#    loci(:nemo).save
-  end
-  
   def test_should_get_index
     get :index
     assert_response :success
@@ -84,23 +44,23 @@ class LexemesControllerTest < ActionController::TestCase
   end
   
   def test_fixture_should_set_up_correctly
-    assert lexemes(:liter).headwords.count > 0, "Test fixture should have more than zero headwords"
+    assert lexemes(:liter_lex).headwords.count > 0, "Test fixture should have more than zero headwords"
     assert loci(:nemo).attests?("litre"), "Fixture loci(:nemo) should attest 'litre'."
-    assert Locus.attesting(lexemes(:liter)).count > 0, "Loci should attest the 'liter' lexeme."
+    assert Locus.attesting(lexemes(:liter_lex)).count > 0, "Loci should attest the 'liter' lexeme."
 
-    assert lexemes(:liter).loci.count > 0, "Test fixture does not have any loci for further tests"    
+    assert lexemes(:liter_lex).loci.count > 0, "Test fixture does not have any loci for further tests"    
   end
   
   # 'show' should create a @loci_for hash that breaks out constructions by 
   # headword form.
-  def test_should_assign_loci_for
-    get :show, :id => lexemes(:liter).id
+  def test_show_should_assign_loci_for
+    get :show, :id => lexemes(:liter_lex).id
     
     loci_for = assigns(:loci_for)
     
     assert_not_nil loci_for
     
-    lexemes(:liter).headword_forms.each do |headword|
+    lexemes(:liter_lex).headword_forms.each do |headword|
       assert loci_for.has_key?(headword), "@loci_for hash should have a key for #{headword}"
       loci_for.each do |hw, loci|
         loci.each do |locus| 
@@ -108,5 +68,39 @@ class LexemesControllerTest < ActionController::TestCase
         end
       end
     end
+  end
+  
+  def test_show_by_headword_can_return_multiple_results
+    get :show_by_headword, :headword => "liter"
+    
+    lexeme = assigns(:lexeme)
+    assert_not_nil lexeme, "Headword 'liter' should return a lexeme; 'liter's lexeme is #{Lexeme.lookup_by_headword('liter')}"
+    assert_equal 1, lexeme.length, "Headword 'liter' should return only one lexeme"
+    
+    get :show_by_headword, :headword => "spring"
+    
+    lexeme = assigns(:lexeme)
+    assert_not_nil lexeme, "Headword 'spring' should return a lexeme"
+    assert lexeme.length > 1, "Headword 'spring' should return more than one lexeme"
+  end
+  
+  def test_show_by_headword_multiple_uses_template
+    get :show_by_headword, :headword => "spring"
+    
+    assert_equal "layouts/1col_layout", @response.layout
+  end
+  
+  def test_show_by_headword_sets_title
+    get :show_by_headword, :headword => "spring"
+    
+    title = assigns(:page_title)
+    assert_not_nil title, "Show_by_headword should set a title"
+    assert_equal "Lexemes - 2 results for \"spring\"", title
+    
+    get :show_by_headword, :headword => "liter"
+    
+    title = assigns(:page_title)
+    assert_not_nil title, "Show_by_headword should set a title"
+    assert_equal "Lexemes - 1 result for \"liter\"", title
   end
 end

@@ -6,10 +6,18 @@ one:
 two:
   form: MyString
 
-liter: #
+liter: 
   form: liter
-  lexeme: liter
-  
-litre: #
+  lexeme_id: 1
+
+litre: 
   form: litre
-  lexeme: liter
+  lexeme_id: 1
+
+spring_a:
+  form: spring
+  lexeme_id: 4
+
+spring_b:
+  form: spring
+  lexeme_id: 5

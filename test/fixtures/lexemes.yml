@@ -6,7 +6,11 @@ one:
 two:
   id: 3
 
-liter: 
+liter_lex: 
   id: 1
-#  headwords: liter, litre
-#  senses: one, two
+
+spring_a:
+  id: 4
+
+spring_b:
+  id: 5

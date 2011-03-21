@@ -15,10 +15,12 @@ invalid_attestation:
     id:     2
     locus:  1
 
-nat_liters: #
+nat_liters:
+  id: 3
   attested_form: liters
-  locus: natvilcius
-  
-nem_litres: #
+  locus_id: 1
+
+nem_litres:
+  id: 4
   attested_form: litres
-  locus: nemo
+  locus_id: 2

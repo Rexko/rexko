@@ -10,12 +10,12 @@ two:
     attestation_id: 1
     parsed_form:  bar
 
-liters: #
-    attestation: nat_liters
-    parsed_form: liter
-#    interpretations: one
+liters: 
+  id: 3
+  attestation_id: 3
+  parsed_form: liter
 
-litres: #
-    attestation: nem_litres
-    parsed_form: litre
-#    interpretations: two
+litres: 
+  id: 4
+  attestation_id: 4
+  parsed_form: litre

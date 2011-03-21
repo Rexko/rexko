@@ -7,6 +7,10 @@ class Lexeme < ActiveRecord::Base
   has_many :phonetic_forms
   
   accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+  
+  SUBSTRING = "contains"
+  EXACT = "exact match"
+  SEARCH_OPTIONS = [SUBSTRING, EXACT]
  
   # Returns an array containing the forms of each headword.
   def headword_forms
@@ -36,7 +40,12 @@ class Lexeme < ActiveRecord::Base
     swapform = form.dup
     swapform[0,1] = swapform[0,1].swapcase
     
-    Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform], :include => options[:include])
+    case options[:matchtype] ||= EXACT
+    when SUBSTRING
+      Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form LIKE ?", "%#{form}%"], :include => options[:include])
+    when EXACT
+      Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform], :include => options[:include])
+    end
     # old include:
     # :include => [:dictionaries, {:subentries => [{:senses => :glosses}, :etymologies]}]
   end
