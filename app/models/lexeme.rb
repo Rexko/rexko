@@ -42,7 +42,7 @@ class Lexeme < ActiveRecord::Base
     
     case options[:matchtype] ||= EXACT
     when SUBSTRING
-      Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form LIKE ?", "%#{form}%"], :include => options[:include])
+      Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form LIKE ?", "%#{form}%"], :include => options[:include], :group => :lexeme_id)
     when EXACT
       Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform], :include => options[:include])
     end
