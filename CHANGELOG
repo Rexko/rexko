@@ -3,6 +3,7 @@
 * For [#40] Text areas in the Lexeme view now select all on focus.
 * [#22 (47)] Wikilinks, wikibold, and wikiitalic display in lexemes and loci
 * [#55] In wiki layout, loci now only appear on pages for the spellings they attest.
+* For [#36 (60)] Headwords can now be searched by substring.
 
 ==Since 0.2.3==
 * For [#70] DB query cleanup to make the locus edit page go faster.
