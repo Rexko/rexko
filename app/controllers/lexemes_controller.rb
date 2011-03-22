@@ -30,18 +30,18 @@ class LexemesController < ApplicationController
   end
 
   def show_by_headword
-    @lexeme = Lexeme.lookup_all_by_headword(params[:headword])
+    @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => params[:matchtype])
     @page_title = "Lexemes - #{@lexeme.length} #{@lexeme.length == 1 ? 'result' : 'results'} for \"#{params[:headword]}\""
     
-    case 
-    when @lexeme.length == 0
+    case @lexeme.length
+    when 0
       flash[:notice] = "There is no lexeme with <i>#{params[:headword]}</i> as headword.  You can create one below."
       flash[:headword] = params[:headword]
       respond_to do |format|
         format.html { redirect_to :action => 'new' }
         format.xml { render :nothing => true, :status => '404 Not Found' }
       end
-    when @lexeme.length == 1
+    when 1
       respond_to do |format|
         format.html { redirect_to @lexeme.first }
         format.xml { render :xml => @lexeme.first }

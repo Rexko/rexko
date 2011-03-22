@@ -3,9 +3,21 @@
 		<div class="subcl">
 			<h2>Tools</h2>
 			<% form_tag({:controller => :lexemes, :action => :show_by_headword}, {:class => "yform"}) do %>
-			<div class="type-text">
-				<label>Find or create a lexeme:</label> 
-				<%= text_field_tag :headword, '', :size => 20 %>
+			<div class="subcolumns full">
+				<div class="c66l">
+					<div class="subcl type-text">
+						<label for="headword">Find or create a lexeme:</label> 
+						<%= text_field_tag :headword, '', :size => 20 %>
+					</div>
+				</div>
+		
+				<div class="c33r">
+					<div class="subcr type-select">
+						<label for="matchtype">Match type</label>
+						<%= select_tag :matchtype, 
+													 options_for_select(Lexeme::SEARCH_OPTIONS, Lexeme::SUBSTRING) %>
+					</div>
+				</div>
 			</div>
 			<% end %>
 

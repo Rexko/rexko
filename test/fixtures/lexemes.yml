@@ -14,3 +14,6 @@ spring_a:
 
 spring_b:
   id: 5
+
+literal:
+  id: 6

@@ -103,4 +103,18 @@ class LexemesControllerTest < ActionController::TestCase
     assert_not_nil title, "Show_by_headword should set a title"
     assert_equal "Lexemes - 1 result for \"liter\"", title
   end
+  
+  def test_show_by_headword_respects_match_type
+    get :show_by_headword, :headword => "liter", :matchtype => Lexeme::SUBSTRING
+    
+    results = assigns(:lexeme)
+    assert results.length > 1, 
+      "Substring search for 'liter' found #{results.length}; there are at least two in the fixtures"
+    
+    get :show_by_headword, :headword => "liter", :matchtype => Lexeme::EXACT
+    
+    results = assigns(:lexeme)
+    assert_equal 1, results.length,
+      "Exact search for 'liter' found #{results.length}; there should only be one in the fixtures"
+  end
 end

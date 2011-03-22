@@ -21,3 +21,7 @@ spring_a:
 spring_b:
   form: spring
   lexeme_id: 5
+
+literal:
+  form: literal
+  lexeme_id: 6
