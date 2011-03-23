@@ -1,6 +1,7 @@
 ==Since 0.2.5==
 * [#51] Locus edit form now better identifies what subentry the interpretation will point to
 * [#75] Lexeme search now uses a fixed URL when there are multiple results.
+* [#63] Fixed bugs with constructions not being listed correctly in lexeme views
 
 ==Since 0.2.4==
 * Revamped layout based on YAML.  
