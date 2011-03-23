@@ -84,24 +84,18 @@ class LexemesControllerTest < ActionController::TestCase
     assert lexeme.length > 1, "Headword 'spring' should return more than one lexeme"
   end
   
-  def test_show_by_headword_multiple_uses_template
-    get :show_by_headword, :headword => "spring"
+  def test_matching_uses_template
+    get :matching, :headword => "spring"
     
     assert_equal "layouts/1col_layout", @response.layout
   end
   
-  def test_show_by_headword_sets_title
-    get :show_by_headword, :headword => "spring"
+  def test_matching_sets_title
+    get :matching, :headword => "spring"
     
     title = assigns(:page_title)
     assert_not_nil title, "Show_by_headword should set a title"
     assert_equal "Lexemes - 2 results for \"spring\"", title
-    
-    get :show_by_headword, :headword => "liter"
-    
-    title = assigns(:page_title)
-    assert_not_nil title, "Show_by_headword should set a title"
-    assert_equal "Lexemes - 1 result for \"liter\"", title
   end
   
   def test_show_by_headword_respects_match_type
@@ -119,7 +113,7 @@ class LexemesControllerTest < ActionController::TestCase
   end
   
   def test_substring_search_friendly_url
-    assert_recognizes({:controller => "lexemes", :action => "show_by_headword", :headword => 'liter', :matchtype => Lexeme::SUBSTRING}, "/lexemes/matching/liter")
+    assert_recognizes({:controller => "lexemes", :action => "matching", :headword => 'liter' }, "/lexemes/matching/liter")
     
     get :show_by_headword, :headword => "liter", :matchtype => Lexeme::SUBSTRING
     

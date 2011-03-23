@@ -11,6 +11,17 @@ class LexemesController < ApplicationController
     end
   end
 
+  def matching
+    @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => Lexeme::SUBSTRING)
+    
+    @page_title = "Lexemes - #{@lexeme.length} results for \"#{params[:headword]}\""
+    @lexemes = @lexeme.paginate(:page => params[:page], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}])
+
+    respond_to do |format|
+      format.html { render @lexemes, :action => 'index', :layout => '1col_layout' }
+    end
+  end
+
   # GET /lexemes/1
   # GET /lexemes/1.xml
   def show
@@ -31,7 +42,6 @@ class LexemesController < ApplicationController
 
   def show_by_headword
     @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => params[:matchtype])
-    @page_title = "Lexemes - #{@lexeme.length} #{@lexeme.length == 1 ? 'result' : 'results'} for \"#{params[:headword]}\""
     
     case @lexeme.length
     when 0
@@ -49,8 +59,7 @@ class LexemesController < ApplicationController
       end
     else
       respond_to do |format|
-        @lexemes = @lexeme.paginate(:page => params[:page], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}])
-        format.html { render @lexemes, :action => 'index', :layout => '1col_layout' }
+        format.html { redirect_to :action => 'matching', :headword => params[:headword] }
       end
     end
   end
