@@ -14,7 +14,7 @@ class DictionariesControllerTest < ActionController::TestCase
 
   def test_should_create_dictionary
     assert_difference('Dictionary.count') do
-      post :create, :dictionary => { :title => "Test dictionary"}
+      post :create, :dictionary => { :title => "A test dictionary"}
     end
 
     assert_redirected_to dictionary_path(assigns(:dictionary))
@@ -31,7 +31,7 @@ class DictionariesControllerTest < ActionController::TestCase
   end
 
   def test_should_update_dictionary
-    put :update, :id => dictionaries(:one).id, :dictionary => { :title => "Test dictionary" }
+    put :update, :id => dictionaries(:one).id, :dictionary => { :title => "A test dictionary" }
     assert_redirected_to dictionary_path(assigns(:dictionary))
   end
 

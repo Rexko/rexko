@@ -24,3 +24,8 @@ nem_litres:
   id: 4
   attested_form: litres
   locus_id: 2
+
+literal:
+  id: 5
+  attested_form: literal
+  locus_id: 1

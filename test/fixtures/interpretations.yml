@@ -1,9 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  parse_id: 3
-  sense_id: 1
+  parse_id: 3 # liters
+  sense_id: 3 # 4.23 cups
 
 two:
-  parse_id: 4
+  parse_id: 4 # litres
+  sense_id: 3 # 4.23 cups
+
+literal:
+  parse_id: 5
   sense_id: 1

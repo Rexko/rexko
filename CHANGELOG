@@ -1,3 +1,6 @@
+==Since 0.2.5==
+* [#51] Locus edit form now better identifies what subentry the interpretation will point to
+
 ==Since 0.2.4==
 * Revamped layout based on YAML.  
 * For [#40] Text areas in the Lexeme view now select all on focus.

@@ -6,3 +6,7 @@ one:
 
 two:
   title: MyString
+
+three:
+  id: 3
+  title: Test dictionary

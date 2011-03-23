@@ -2,11 +2,19 @@
 
 one:
   id: 1
+  lexeme_id: 6
+  paradigm: "literal, -alis"
+  part_of_speech: adj.
+
+two:
+  id: 2
   lexeme_id: 1
+  paradigm: "liter, -eri"
+  part_of_speech: masc.
+
+three:
+  lexeme_id: 6
   paradigm: MyString
   part_of_speech: MyString
 
-two:
-  lexeme_id: 1
-  paradigm: MyString
-  part_of_speech: MyString
+  

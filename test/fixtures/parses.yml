@@ -19,3 +19,8 @@ litres:
   id: 4
   attestation_id: 4
   parsed_form: litre
+
+literal:
+  id: 5
+  attestation_id: 5
+  parsed_form: literal

@@ -7,3 +7,7 @@ one:
 two:
   dictionary_id: 1
   lexeme_id: 1
+
+three:
+  dictionary_id: 3
+  lexeme_id: 6

@@ -3,8 +3,14 @@
 one:
   id: 1
   subentry_id: 1
-  definition: MyText
+  definition: First sense
 
 two:
+  id: 2
   subentry_id: 1
-  definition: MyText
+  definition: Second sense
+
+liter:
+  id: 3
+  subentry_id: 2
+  definition: "4.23 cups"

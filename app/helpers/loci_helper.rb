@@ -9,4 +9,28 @@ module LociHelper
       ['', 'α', 'β', 'γ', 'δ', 'ε', 'στ', 'ζ', 'η', 'θ'][int % 10]
     ]
   end
+  
+  def sense_select(senses)
+    groups = senses.collect do |sense|
+      optgroup = "%s: %s %s" % [
+        sense.lexeme.dictionaries.first.title,
+        sense.subentry.paradigm,
+        ("(" + sense.subentry.part_of_speech + ")" if sense.subentry.part_of_speech)
+        ]
+
+      [optgroup, sense.definition, sense.id]
+    end
+    
+    output = {}
+    
+    groups.each do |group|
+      if output.has_key? group.first
+        output[group.first] << [group.second, group.last]
+      else
+        output[group.first] = [[group.second, group.last]]
+      end
+    end
+    
+    output.to_a
+  end
 end
