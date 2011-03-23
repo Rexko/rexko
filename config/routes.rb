@@ -1,4 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect "lexemes/matching/:headword",
+    :controller => "lexemes",
+    :action => "show_by_headword",
+    :matchtype => Lexeme::SUBSTRING
+    
   map.connect "author/:author",
     :controller => "loci",
     :action => "show_by_author"
@@ -10,7 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "html/:headword",
     :controller => "lexemes",
     :action => "show_by_headword" 
-  
+    
   map.resources :interpretations
 
   map.resources :parses

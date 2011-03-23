@@ -117,4 +117,12 @@ class LexemesControllerTest < ActionController::TestCase
     assert_equal 1, results.length,
       "Exact search for 'liter' found #{results.length}; there should only be one in the fixtures"
   end
+  
+  def test_substring_search_friendly_url
+    assert_recognizes({:controller => "lexemes", :action => "show_by_headword", :headword => 'liter', :matchtype => Lexeme::SUBSTRING}, "/lexemes/matching/liter")
+    
+    get :show_by_headword, :headword => "liter", :matchtype => Lexeme::SUBSTRING
+    
+    assert_redirected_to "/lexemes/matching/liter"
+  end
 end
