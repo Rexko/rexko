@@ -1,2 +1,2 @@
 <%= author.name %> 
-<%= spaced_render :collection => construction.loci & @loci, :partial => "shared/ref" %>
+<%= spaced_render :collection => Locus.attesting(construction, @lexeme).find(:all, :joins => { :source => :authorship }, :conditions => { :id => construction.loci, :authorships => {:author_id => author}}, :group => "loci.id"), :partial => "shared/ref" %>
