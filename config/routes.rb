@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.connect "lexemes/matching/:headword",
+  map.matching "lexemes/matching/:headword",
     :controller => "lexemes",
     :action => "matching" 
   
@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
     :controller => "loci",
     :action => "unattached"
   
-  map.connect "html/:headword",
+  map.exact_lexeme "html/:headword",
     :controller => "lexemes",
     :action => "show_by_headword" 
     

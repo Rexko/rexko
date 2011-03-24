@@ -25,11 +25,19 @@ module ApplicationHelper
     is_wanted = parse == @wantedparse
     headword = @headwords ? @headwords[parse.parsed_form] : parse.lookup_headword
 
-    link_to("<span class='hw-link%s'>%s#{html_escape parse.parsed_form}%s</span>" % [
+    if headword
+      link_to("<span class='hw-link%s'>#{html_escape parse.parsed_form}</span>" % [
+        (" wanted" if is_wanted),
+      ], headword.lexeme)
+    else
+      new_headword_link parse, is_wanted
+    end
+  end
+  
+  def new_headword_link (parse, is_wanted = false)
+    link_to("<span class='hw-link%s'>[No entry for <i>#{html_escape parse.parsed_form}</i> &times;#{parse.respond_to?(:count_all) ? parse.count_all : parse.count}]</span>" % [
       (" wanted" if is_wanted),
-      ("[No entry for <i>" unless headword),
-      ("</i> &times;#{parse.count}]" unless headword)
-    ], headword.try(:lexeme) || {:controller => 'lexemes', :action => 'show_by_headword', :headword => parse.parsed_form})
+    ], exact_lexeme_path(:headword => parse.parsed_form))
   end
   
   def sentence_case str
