@@ -25,3 +25,7 @@ spring_b:
 literal:
   form: literal
   lexeme_id: 6
+
+headword_without_dictionary:
+  form: -----
+  lexeme_id: 10

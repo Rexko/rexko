@@ -17,3 +17,6 @@ spring_b:
 
 literal:
   id: 6
+
+lexeme_without_dictionary:
+  id: 10

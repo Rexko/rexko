@@ -14,3 +14,8 @@ liter:
   id: 3
   subentry_id: 2
   definition: "4.23 cups"
+
+sense_without_dictionary:
+  id: 10
+  subentry_id: 10
+  definition: "A series of dashes."

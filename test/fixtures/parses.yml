@@ -24,3 +24,7 @@ literal:
   id: 5
   attestation_id: 5
   parsed_form: literal
+
+parse_without_dictionary:
+  id: 10
+  parsed_form: -----

@@ -13,7 +13,7 @@ module LociHelper
   def sense_select(senses)
     groups = senses.collect do |sense|
       optgroup = "%s: %s %s" % [
-        sense.lexeme.dictionaries.first.title,
+        (sense.lexeme.dictionaries.first.try(:title) || "(No dictionary)"),
         sense.subentry.paradigm,
         ("(" + sense.subentry.part_of_speech + ")" if sense.subentry.part_of_speech)
         ]

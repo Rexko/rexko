@@ -17,4 +17,9 @@ three:
   paradigm: MyString
   part_of_speech: MyString
 
+subentry_without_dictionary:
+  id: 10
+  lexeme_id: 10
+  paradigm: -----
+  part_of_speech: none
   
