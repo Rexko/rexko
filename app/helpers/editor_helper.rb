@@ -6,7 +6,7 @@ module EditorHelper
   end
   
   def expandlist
-    unattested = Headword.unattested.rand
+    unattested = Headword.unattested.find(:first, :offset => rand(Headword.unattested.count.nonzero? || 1))
 
     '<ul><li>%s</li><li>%s</li></ul>' % [
       ("0 " << link_to(unattested.form, unattested.lexeme) if unattested),

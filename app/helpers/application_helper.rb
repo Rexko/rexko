@@ -21,14 +21,16 @@ module ApplicationHelper
     "xml:lang=\"#{html_escape langtag}\" lang=\"#{html_escape langtag}\""
   end
     
+  # Link to the first lexeme whose headword matches a given parse's parsed form.
+  # Passes to #new_headword_link if no such lexeme.
   def headword_link (parse)
     is_wanted = parse == @wantedparse
-    headword = @headwords ? @headwords[parse.parsed_form] : parse.lookup_headword
+    head = @headwords ? @headwords[parse.parsed_form] : Lexeme.lookup_by_headword(parse.parsed_form)
 
-    if headword
+    if head
       link_to("<span class='hw-link%s'>#{html_escape parse.parsed_form}</span>" % [
         (" wanted" if is_wanted),
-      ], headword.lexeme)
+      ], head.respond_to?(:lexeme) ? head.lexeme : head )
     else
       new_headword_link parse, is_wanted
     end

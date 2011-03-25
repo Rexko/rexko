@@ -51,6 +51,6 @@ class Parse < ActiveRecord::Base
   end
   
   def self.popularity_between low_bound, high_bound
-    Parse.find(:all, :select => '"parses"."parsed_form", COUNT("parsed_form") AS count_all', :group => '"parses"."parsed_form"', :order => 'count_all DESC', :limit => count, :having => ['"count_all" <= ? AND count_all >= ?', high_bound, low_bound])
+    Parse.find(:all, :select => '"parses"."parsed_form", COUNT("parsed_form") AS count_all', :group => '"parses"."parsed_form"', :order => 'count_all DESC', :having => ['"count_all" <= ? AND count_all >= ?', high_bound, low_bound])
   end
 end
