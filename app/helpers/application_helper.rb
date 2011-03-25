@@ -36,9 +36,13 @@ module ApplicationHelper
     end
   end
   
+  # Verbose link to create a new lexeme based on a headword, which lists how many
+  # times that headword is attested in the loci
   def new_headword_link (parse, is_wanted = false)
-    link_to("<span class='hw-link%s'>[No entry for <i>#{html_escape parse.parsed_form}</i> &times;#{parse.respond_to?(:count_all) ? parse.count_all : parse.count}]</span>" % [
+    link_to("<span class='hw-link%s'>[No entry for <i>%s</i> &times;%d]</span>" % [
       (" wanted" if is_wanted),
+      html_escape(parse.parsed_form),
+      parse.respond_to?(:count_all) ? parse.count_all : parse.count
     ], exact_lexeme_path(:headword => parse.parsed_form))
   end
   
