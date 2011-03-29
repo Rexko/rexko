@@ -37,17 +37,26 @@ class Lexeme < ActiveRecord::Base
   # Return all lexemes with a headword matching a string or the string with
   # its first letter's case inverted (MediaWiki-style case insensitivity)
   def self.lookup_all_by_headword(form, options = {})
-    swapform = form.dup
-    swapform[0,1] = swapform[0,1].swapcase
+    lookup_all_by_headwords([form], options)
+  end
+  
+  # Return all lexemes with a headword matching any of the given strings, ignoring
+  # the case of the initial character.  
+  def self.lookup_all_by_headwords(forms, options ={})
+    forms = forms.inject([]) do |memo, form|
+      swapform = form.dup
+      swapform[0,1] = swapform[0,1].swapcase
+      memo << form << swapform
+    end
     
     case options[:matchtype] ||= EXACT
     when SUBSTRING
-      Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form LIKE ?", "%#{form}%"], :include => options[:include], :group => :lexeme_id)
+      headwords_like = "(headwords.form LIKE ?" + " OR headwords.form LIKE ?" * (forms.length - 1) + ")"
+      wildcarded_forms = forms.collect {|form| "%#{form}%"}
+      Lexeme.find(:all, :joins => :headwords, :conditions => [headwords_like, *wildcarded_forms], :include => options[:include], :group => :lexeme_id)
     when EXACT
-      Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform], :include => options[:include])
+      Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form IN (?)", forms], :include => options[:include])
     end
-    # old include:
-    # :include => [:dictionaries, {:subentries => [{:senses => :glosses}, :etymologies]}]
   end
   
   # Return first lexeme with a headword matching a string or the string with

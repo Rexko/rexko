@@ -42,4 +42,12 @@ class LociControllerTest < ActionController::TestCase
 
     assert_redirected_to loci_path
   end
+  
+  test "@headwords should be initial case insensitive" do
+    get :edit, :id => loci(:wrong_case_locus)
+
+    heads = assigns(:headwords)
+    
+    assert_not_nil heads["Liter"], "failed to find a lexeme for 'Liter'. @headwords = #{heads}"
+  end
 end

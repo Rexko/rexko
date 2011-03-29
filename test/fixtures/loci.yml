@@ -21,3 +21,6 @@ nemo:
   source_id: 1
   example: 99 litres of beer on the wall
   example_translation: XCIX litrae cerevisiae in muro
+
+wrong_case_locus:
+  id: 20

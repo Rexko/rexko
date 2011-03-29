@@ -28,3 +28,8 @@ literal:
 parse_without_dictionary:
   id: 10
   parsed_form: -----
+
+wrong_case_parse:
+  id: 20
+  attestation_id: 20
+  parsed_form: Liter

@@ -17,4 +17,20 @@ class LexemeTest < ActiveSupport::TestCase
     assert_equal results, results.uniq,
       "lookup_all_by_headword should remove duplicates in substring search"
   end
+  
+  test "lookup_all_by_headwords" do
+    results = Lexeme.lookup_all_by_headwords(["liter", "spring"])
+    
+    assert results.include?(lexemes(:liter_lex)) && 
+           results.include?(lexemes(:spring_a)) && 
+           results.include?(lexemes(:spring_b)), "does not return all expected lexemes; returned #{results}"
+  end
+  
+  test "lookup_all_by_headwords ignores initial case" do
+    results = Lexeme.lookup_all_by_headwords(["Liter", "Spring"])
+
+    assert results.include?(lexemes(:liter_lex)) && 
+           results.include?(lexemes(:spring_a)) && 
+           results.include?(lexemes(:spring_b)), "does not ignore initial case; returned #{results}"    
+  end
 end

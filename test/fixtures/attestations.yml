@@ -29,3 +29,8 @@ literal:
   id: 5
   attested_form: literal
   locus_id: 1
+
+wrong_case_attestation:
+  id: 20
+  attested_form: Liter
+  locus_id: 20
