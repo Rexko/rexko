@@ -37,7 +37,7 @@ module LexemesHelper
     ]
   end
 
-  def titleize_headwords_for lexeme
+  def titleize_headwords_for lexeme    
     html_escape sentence_case(lexeme.headword_forms.to_sentence(:two_words_connector  => ' or ', :last_word_connector => ", or "))
   end
 end
