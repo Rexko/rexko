@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100826004844) do
+ActiveRecord::Schema.define(:version => 20110330155645) do
 
   create_table "attestations", :force => true do |t|
     t.integer  "locus_id"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20100826004844) do
     t.string   "iso_639_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "default_name"
   end
 
   create_table "lexemes", :force => true do |t|
