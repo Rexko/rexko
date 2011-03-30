@@ -11,6 +11,6 @@ class LanguageTest < ActiveSupport::TestCase
   test "name" do
     assert_equal "Testwegian", languages(:testwegian).name
     assert_equal "zxx", languages(:without_default_name).name
-    assert_equal "Unknown language 21", languages(:without_default_name_or_code).name
+    assert_equal Language::UNKNOWN_LANGUAGE % languages(:without_default_name_or_code).id, languages(:without_default_name_or_code).name
   end
 end

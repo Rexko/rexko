@@ -6,6 +6,8 @@ class Language < ActiveRecord::Base
   has_many :senses
   has_many :subentries
   
+  UNKNOWN_LANGUAGE = "Unknown language %d"
+  
   # Return the name of a language plus its ISO code if present.
   def to_s
     "%s%s" % [
@@ -18,6 +20,6 @@ class Language < ActiveRecord::Base
   def name
     (default_name if default_name.present?) || 
     (iso_639_code if iso_639_code.present?) || 
-    "Unknown language #{id}"
+    UNKNOWN_LANGUAGE % id
   end
 end
