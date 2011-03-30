@@ -13,3 +13,13 @@ with_blank_code:
   id: 11
   default_name: Testian
   iso_639_code: ""
+
+without_default_name:
+  id: 20
+  default_name: ""
+  iso_639_code: zxx
+
+without_default_name_or_code:
+  id: 21
+  default_name: ""
+  iso_639_code: ""
