@@ -2,15 +2,8 @@
 
 <%= error_messages_for :language %>
 
-<% form_for(@language) do |f| %>
-	<p>
-		<b>Code:</b>
-		<%= f.text_field :iso_639_code %>
-	</p>
-
-  <p>
-    <%= f.submit "Create" %>
-  </p>
-<% end %>
+<%= # @action = "Create"
+		render(:partial => "form", :object => { :label => 'Create', :action => 'create', :method => :post, :for_url => '/languages' }) 
+		%>
 
 <%= link_to 'Back', languages_path %>

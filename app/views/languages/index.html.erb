@@ -6,7 +6,7 @@
 
 <% for language in @languages %>
   <tr>
-		<td><%= h language.iso_639_code %></td>
+		<td><%= h language %></td>
     <td><%= link_to 'Show', language %></td>
     <td><%= link_to 'Edit', edit_language_path(language) %></td>
     <td><%= link_to 'Destroy', language, :confirm => 'Are you sure?', :method => :delete %></td>

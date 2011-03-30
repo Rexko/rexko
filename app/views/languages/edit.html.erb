@@ -2,16 +2,7 @@
 
 <%= error_messages_for :language %>
 
-<% form_for(@language) do |f| %>
-	<p>
-		<b>Code:</b>
-		<%= f.text_field :iso_639_code %>
-	</p>
-	
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
+<%=	render(:partial => "form", :object => { :label => 'Update', :action => 'update', :method => :put, :for_url => "/languages/#{@language.id}" }) %>
 
 <%= link_to 'Show', @language %> |
 <%= link_to 'Back', languages_path %>
