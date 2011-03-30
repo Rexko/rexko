@@ -4,3 +4,12 @@ testwegian:
   id: 1
   iso_639_code: zxx
   default_name: Testwegian
+
+without_code:
+  id: 10
+  default_name: Testian
+
+with_blank_code:
+  id: 11
+  default_name: Testian
+  iso_639_code: ""

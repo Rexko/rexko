@@ -9,7 +9,7 @@ class Language < ActiveRecord::Base
   def to_s
     "%s%s" % [
       default_name,
-      (" (#{iso_639_code})" if iso_639_code)
+      (" (#{iso_639_code})" if iso_639_code.present?)
     ]
   end
 end
