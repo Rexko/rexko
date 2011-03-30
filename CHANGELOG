@@ -3,6 +3,7 @@
 * [#75] Lexeme search now uses a fixed URL when there are multiple results.
 * [#63] Fixed bugs with constructions not being listed correctly in lexeme views
 * For [#44] Wikilink format now sets title attribute to the headword being linked to
+* [#74] Fixed some issues with casing for headwords differing only by initial letter
 
 ==Since 0.2.4==
 * Revamped layout based on YAML.  

@@ -38,6 +38,13 @@ module LexemesHelper
   end
 
   def titleize_headwords_for lexeme    
-    html_escape sentence_case(lexeme.headword_forms.to_sentence(:two_words_connector  => ' or ', :last_word_connector => ", or "))
+    headwords = lexeme.headword_forms.inject([]) do |memo, form|
+      swapform = form.dup
+      swapform[0,1] = swapform[0,1].swapcase
+      
+      memo.include?(swapform) ? memo : memo << form
+    end
+    
+    html_escape sentence_case(headwords.to_sentence(:two_words_connector  => ' or ', :last_word_connector => ", or "))
   end
 end

@@ -20,3 +20,6 @@ literal:
 
 lexeme_without_dictionary:
   id: 10
+
+with_capitalized_and_uncapitalized_headwords:
+  id: 20

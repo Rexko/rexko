@@ -29,3 +29,11 @@ literal:
 headword_without_dictionary:
   form: -----
   lexeme_id: 10
+
+case_caps:
+  form: Case
+  lexeme_id: 20
+
+case_nocaps:
+  form: case
+  lexeme_id: 20
