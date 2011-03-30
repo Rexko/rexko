@@ -36,4 +36,8 @@ module LexemesHelper
       ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'][int % 10]
     ]
   end
+
+  def titleize_headwords_for lexeme
+    html_escape sentence_case(lexeme.headword_forms.to_sentence(:two_words_connector  => ' or ', :last_word_connector => ", or "))
+  end
 end
