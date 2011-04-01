@@ -33,4 +33,9 @@ class LexemeTest < ActiveSupport::TestCase
            results.include?(lexemes(:spring_a)) && 
            results.include?(lexemes(:spring_b)), "does not ignore initial case; returned #{results}"    
   end
+  
+  test "language" do
+    assert lexemes(:literal).respond_to?(:language), "lexeme should respond to #language"
+    assert_equal lexemes(:literal).language, languages(:testwegian)
+  end
 end
