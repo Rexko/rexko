@@ -68,8 +68,8 @@ class Lexeme < ActiveRecord::Base
     Lexeme.find(:first, :joins => :headwords, :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform])
   end
   
-  # Return the language of the lexeme, based on the first dictionary it's in.  
+  # Return the language of the lexeme, based on the first dictionary it's in.   
   def language
-    dictionaries.first.language
+    dictionaries.first.try(:language) || Language.new(:iso_639_code => "und")
   end
 end

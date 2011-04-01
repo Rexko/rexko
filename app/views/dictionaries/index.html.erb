@@ -9,7 +9,7 @@
   <tr>
     <td>
 			<span class="dictform-title" <%= lang_for (dictionary) %>><%=h dictionary.title %></span> 
-	 		(<%=h "#{dictionary.source_language.name}/#{dictionary.target_language.name} " %><%=h "in #{dictionary.language.name}" %>)
+	 		(<%=h "#{dictionary.source_language.try(:name)}/#{dictionary.target_language.try(:name)} " %><%=h "in #{dictionary.language.try(:name)}" %>)
 		</td>
     <td><%= link_to 'Show', dictionary %></td>
     <td><%= link_to 'Edit', edit_dictionary_path(dictionary) %></td>
