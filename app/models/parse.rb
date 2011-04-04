@@ -1,8 +1,7 @@
 class Parse < ActiveRecord::Base
-  belongs_to :attestation, :include => :locus
-#  delegate :loci, :to => '(attestation or return nil)'
   has_many :interpretations
   validates_presence_of :parsed_form
+  belongs_to :parsable, :polymorphic => true
   
   named_scope :without_entries, :conditions => ['NOT EXISTS (SELECT "form" FROM "headwords" WHERE headwords.form = parsed_form)']
   named_scope :uninterpreted, :include => :interpretations, :conditions => { "interpretations.parse_id" => nil }

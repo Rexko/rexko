@@ -37,3 +37,11 @@ case_caps:
 case_nocaps:
   form: case
   lexeme_id: 20
+
+appearing_in_construction_a:
+  form: blue
+  lexeme_id: 30
+
+appearing_in_construction_b:
+  form: jay
+  lexeme_id: 31

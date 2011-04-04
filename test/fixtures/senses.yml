@@ -19,3 +19,18 @@ sense_without_dictionary:
   id: 10
   subentry_id: 10
   definition: "A series of dashes."
+  
+appearing_in_construction_a:
+  id: 30
+  subentry_id: 30
+  definition: "A primary color."
+
+appearing_in_construction_b:
+  id: 31
+  subentry_id: 31
+  definition: "A sort of bird."
+
+construction:
+  id: 32
+  subentry_id: 32
+  definition: "Cyanocitta cristata."

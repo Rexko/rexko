@@ -9,6 +9,8 @@ class Sense < ActiveRecord::Base
   
   accepts_nested_attributes_for :glosses, :parses, :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
+  HASH_MAP_TO_PARSE = { :interpretations => Interpretation::HASH_MAP_TO_PARSE }
+  
   def self.lookup_all_by_headword(form)
     swapform = form.dup
     swapform[0,1] = swapform[0,1].swapcase

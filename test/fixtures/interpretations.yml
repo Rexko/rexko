@@ -11,3 +11,15 @@ two:
 literal:
   parse_id: 5
   sense_id: 1
+
+appearing_in_construction_a:
+  parse_id: 30
+  sense_id: 30
+  
+appearing_in_construction_b:
+  parse_id: 31
+  sense_id: 31
+
+construction:
+  parse_id: 32
+  sense_id: 32

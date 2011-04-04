@@ -6,11 +6,17 @@ class Lexeme < ActiveRecord::Base
   has_many :headwords
   has_many :phonetic_forms
   
+  named_scope :attested_by, lambda {|parsables, type|
+    { :joins => HASH_MAP_TO_PARSE, :conditions => { :parses => { :parsable_id => parsables, :parsable_type => type }} }
+  }
+  
   accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
   SUBSTRING = "contains"
   EXACT = "exact match"
   SEARCH_OPTIONS = [SUBSTRING, EXACT]
+
+  HASH_MAP_TO_PARSE = { :subentries => Subentry::HASH_MAP_TO_PARSE }
  
   # Returns an array containing the forms of each headword.
   def headword_forms
@@ -31,7 +37,11 @@ class Lexeme < ActiveRecord::Base
     return {} if heads.empty?
     headlike = "(subentries.paradigm LIKE ?" + " OR subentries.paradigm LIKE ?" * (heads.length - 1) + ")"
     
-    Lexeme.find(:all, :select => 'DISTINCT "lexemes".*', :joins => { :senses => { :parses => { :attestation => { :locus => { :attestations => { :parses => { :interpretations => { :sense => { :subentry => :lexeme }}}}}}}}}, :include => [:headwords, :dictionaries, :subentries], :conditions => from_dictionary ? ['lexemes.id != ? AND dictionaries.id = ? AND "lexemes_subentries".id = ? AND ' + headlike, id, from_dictionary.id, id, *heads] : ['lexemes.id != ? AND "lexemes_subentries".id = ? AND ' + headlike, id, id, *heads])
+    conditions = [('lexemes.id != ? %s AND %s' % 
+      [("AND dictionaries.id = ?" if from_dictionary),
+      headlike]), id, from_dictionary.try(:id), *heads].compact
+
+    Lexeme.attested_by(loci.collect(&:attestations).flatten, "Attestation").find(:all, :conditions => conditions, :include => [:headwords, :dictionaries, :subentries]).uniq
   end  
   
   # Return all lexemes with a headword matching a string or the string with
@@ -72,4 +82,9 @@ class Lexeme < ActiveRecord::Base
   def language
     dictionaries.first.try(:language) || Language.new(:iso_639_code => "und")
   end
+  
+  # Return all lexemes the parsables attest.
+#  def Lexeme.attested_by parsables, type
+#    Lexeme.find(:all, :joins => HASH_MAP_TO_PARSE, :conditions => { :parses => { :parsable_id => parsables, :parsable_type => type }})
+#  end
 end

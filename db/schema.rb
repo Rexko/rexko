@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110330155645) do
+ActiveRecord::Schema.define(:version => 20110401192208) do
 
   create_table "attestations", :force => true do |t|
     t.integer  "locus_id"
@@ -137,13 +137,14 @@ ActiveRecord::Schema.define(:version => 20110330155645) do
   end
 
   create_table "parses", :force => true do |t|
-    t.integer  "attestation_id"
+    t.integer  "parsable_id"
     t.string   "parsed_form"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "parsable_type"
   end
 
-  add_index "parses", ["attestation_id"], :name => "index_parses_on_attestation_id"
+  add_index "parses", ["parsable_id"], :name => "index_parses_on_attestation_id"
   add_index "parses", ["parsed_form"], :name => "index_parses_on_parsed_form"
 
   create_table "phonetic_forms", :force => true do |t|

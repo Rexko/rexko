@@ -34,3 +34,19 @@ wrong_case_attestation:
   id: 20
   attested_form: Liter
   locus_id: 20
+
+appearing_in_construction_a:
+  id: 30 
+  attested_form: blue
+  locus_id: 30
+
+appearing_in_construction_b:
+  id: 31
+  attested_form: jays
+  locus_id: 30
+
+with_constructions:
+  id: 32
+  attested_form: blue jays
+  locus_id: 30
+

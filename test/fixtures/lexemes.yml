@@ -23,3 +23,12 @@ lexeme_without_dictionary:
 
 with_capitalized_and_uncapitalized_headwords:
   id: 20
+
+appearing_in_construction_a:
+  id: 30
+
+appearing_in_construction_b:
+  id: 31
+  
+with_construction:
+  id: 32

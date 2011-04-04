@@ -22,4 +22,21 @@ subentry_without_dictionary:
   lexeme_id: 10
   paradigm: -----
   part_of_speech: none
-  
+
+appearing_in_construction_a:
+  id: 30
+  lexeme_id: 30
+  paradigm: blue
+  part_of_speech: adj.
+
+appearing_in_construction_b:
+  id: 31
+  lexeme_id: 31
+  paradigm: "jay, jays"
+  part_of_speech: n.
+
+construction:
+  id: 32
+  lexeme_id: 32
+  paradigm: "[[blue]] [[jay]]s"
+  part_of_speech: n.

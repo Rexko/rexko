@@ -2,27 +2,32 @@
 
 one:
     id: 1
-    attestation_id: 1
+    parsable_id: 1
+    parsable_type: Attestation
     parsed_form:  foo
 
 two:
     id: 2
-    attestation_id: 1
+    parsable_id: 1
+    parsable_type: Attestation
     parsed_form:  bar
 
 liters: 
   id: 3
-  attestation_id: 3
+  parsable_id: 3
+  parsable_type: Attestation
   parsed_form: liter
 
 litres: 
   id: 4
-  attestation_id: 4
+  parsable_id: 4
+  parsable_type: Attestation
   parsed_form: litre
 
 literal:
   id: 5
-  attestation_id: 5
+  parsable_id: 5
+  parsable_type: Attestation
   parsed_form: literal
 
 parse_without_dictionary:
@@ -31,5 +36,24 @@ parse_without_dictionary:
 
 wrong_case_parse:
   id: 20
-  attestation_id: 20
+  parsable_id: 20
+  parsable_type: Attestation
   parsed_form: Liter
+
+appearing_in_construction_a:
+  id: 30
+  parsable_id: 30
+  parsable_type: Attestation
+  parsed_form: blue
+
+appearing_in_construction_b:
+  id: 31
+  parsable_id: 31
+  parsable_type: Attestation
+  parsed_form: jay
+
+construction:
+  id: 32
+  parsable_id: 32
+  parsable_type: Attestation
+  parsed_form: blue jay

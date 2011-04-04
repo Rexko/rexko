@@ -5,7 +5,8 @@
 <% form_for(@parse) do |f| %>
   <p>
     <b>Attestation</b><br />
-    <%= f.text_field :attestation_id %>
+    <%= f.text_field :parsable_id %>
+    <%= f.text_field :parsable_type %>
   </p>
 
   <p>

@@ -20,7 +20,7 @@ class Locus < ActiveRecord::Base
   # Returns the parse with the most attestations that doesn't have an entry yet. 
   # I guess this should be part of Parse now
   def most_wanted_parse
-    Parse.find(:first, :select => '"parses".id, "parses"."parsed_form",  COUNT("parsed_form") AS count_all', :joins => ['INNER JOIN "attestations" ON "parses"."attestation_id" = "attestations".id LEFT OUTER JOIN "headwords" ON ("headwords"."form" = "parses"."parsed_form")'], :group => '"parses"."parsed_form"', :conditions => {:headwords => {:form => nil}}, :order => 'count_all DESC', :having => {:attestations => {:locus_id => id}})
+    Parse.find(:first, :select => '"parses".id, "parses"."parsed_form",  COUNT("parsed_form") AS count_all', :joins => ['INNER JOIN "attestations" ON ("parses"."parsable_id" = "attestations".id AND "parses"."parsable_type" = \'Attestation\') LEFT OUTER JOIN "headwords" ON ("headwords"."form" = "parses"."parsed_form")'], :group => '"parses"."parsed_form"', :conditions => {:headwords => {:form => nil}}, :order => 'count_all DESC', :having => {:attestations => {:locus_id => id}})
   end
   
   # Returns true if form attests either an attested_form or a parsed_form under this locus.

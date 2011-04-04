@@ -39,4 +39,16 @@ class LexemeTest < ActiveSupport::TestCase
     assert_equal languages(:testwegian), lexemes(:literal).language
     assert_equal "und", lexemes(:lexeme_without_dictionary).language.name
   end
+  
+  test "constructions" do
+    constructions = lexemes(:appearing_in_construction_a).constructions
+    assert constructions.include?(lexemes(:with_construction)), "#{constructions} does not include #{lexemes(:with_construction)}"
+  end
+  
+  test "attested_by" do
+    assert Lexeme.respond_to?(:attested_by), "should respond to :attested_by"
+    results = Lexeme.attested_by(attestations(:with_constructions), "Attestation")
+    
+    assert results.include?(lexemes(:with_construction)), "#{results} does not include #{lexemes(:with_construction)}"
+  end
 end

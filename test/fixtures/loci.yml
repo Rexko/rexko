@@ -24,3 +24,7 @@ nemo:
 
 wrong_case_locus:
   id: 20
+
+with_constructions:
+  id: 30
+  

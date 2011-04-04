@@ -7,7 +7,7 @@
 
 <% for parse in @parses %>
   <tr>
-    <td><%=h parse.attestation_id %></td>
+    <td><%=h parse.parsable_id %></td>
     <td><%= link_to 'Show', parse %></td>
     <td><%= link_to 'Edit', edit_parse_path(parse) %></td>
     <td><%= link_to 'Destroy', parse, :confirm => 'Are you sure?', :method => :delete %></td>
