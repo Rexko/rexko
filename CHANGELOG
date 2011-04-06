@@ -1,3 +1,6 @@
+==Since 0.2.6==
+* For [#26 (51)] Upgraded handling of etymologies.
+
 ==Since 0.2.5==
 * [#51] Locus edit form now better identifies what subentry the interpretation will point to
 * [#75] Lexeme search now uses a fixed URL when there are multiple results.
