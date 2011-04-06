@@ -6,6 +6,7 @@ class Etymology < ActiveRecord::Base
   has_many :parses, :as => :parsable
   
   accepts_nested_attributes_for :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+  accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
   def self.rejectable?(attrs)
     !new(attrs.delete_if{|key, value| key == "_delete"}).valid?

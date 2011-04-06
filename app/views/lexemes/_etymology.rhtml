@@ -1,5 +1,5 @@
 <% unless (f.object._delete) %>
-	<% nested_attributes_for f, [:notes, :etymologies, :subentry] %>
+	<% nested_attributes_for f, [:parses, :etymologies, :subentry], [:notes, :etymologies, :subentry] %>
 	<fieldset class="etymology">
 		<legend>Etymology &nbsp; <%= remove_link_unless_new_record(f) %></legend>
 			<div class="type-text">
@@ -10,7 +10,16 @@
 				<%= f.text_field :etymon %>
 
 				<%= f.label :gloss %>
-				<%= f.text_field :gloss %>
+				<%= f.text_field :gloss, :class => "warning" %>
+			</div>
+
+		  <% @parse = f.object.parses.empty? ? f.object.parses.build : f.object.parses %>
+			<% f.fields_for :parses do |p_form| %>
+				<%= render :partial => 'parse', :locals => { :f => p_form } %>
+			<% end %>
+			
+			<div class="par">
+				<%= link_to 'Add parse', '#parses', :class => 'add_nested', :rel => "[subentry][etymologies][parses]" %>
 			</div>
 	
 			<% f.fields_for :notes do |e_form| %>
