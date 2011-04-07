@@ -4,6 +4,7 @@ class Etymology < ActiveRecord::Base
   belongs_to :language # language of gloss and source_language name
   has_many :notes, :as => :annotatable
   has_many :parses, :as => :parsable
+  belongs_to :next_etymon, :class_name => "Etymology"
   
   accepts_nested_attributes_for :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
