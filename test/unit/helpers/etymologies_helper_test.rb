@@ -12,4 +12,10 @@ class EtymologiesHelperTest < ActionView::TestCase
     assert_equal "<span class=\"lexform-source-language\">Latin</span> <span class=\"lexform-etymon\">unus</span> <span class=\"lexform-etymon-gloss\">one</span> + <span class=\"lexform-etymon\">cornu</span> <span class=\"lexform-etymon-gloss\">horn</span>.", 
       html_format(etymologies(:with_same_language_next))
   end
+  
+  test "wiki_format" do
+    assert_equal html_escape("Latin unum \"one\"."), wiki_format(etymologies(:simple))
+    assert_equal html_escape("Latin unus \"one\" + cornu \"horn\"."),
+      wiki_format(etymologies(:with_same_language_next))
+  end
 end

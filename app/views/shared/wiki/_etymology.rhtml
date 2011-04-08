@@ -1,1 +1,1 @@
-[<%= h "#{etymology.source_language} " unless etymology.source_language.blank? %><%= h "#{etymology.etymon}" unless etymology.etymon.blank? %><%=h " \"#{etymology.gloss}\"" unless etymology.gloss.blank? %>.<%= render :partial => "shared/wiki/comment", :collection => etymology.notes %>]
+[<%= wiki_format etymology %>]
