@@ -9,3 +9,22 @@ two:
   etymon: MyString
   source_language: MyString
   gloss: MyString
+
+simple:
+  id: 10
+  etymon: unum
+  source_language: Latin
+  gloss: one
+
+with_same_language_next:
+  id: 20
+  etymon: unus
+  source_language: Latin
+  gloss: one
+  next_etymon_id: 21
+
+with_same_language_next_b:
+  id: 21
+  etymon: cornu
+  source_language: Latin
+  gloss: horn
