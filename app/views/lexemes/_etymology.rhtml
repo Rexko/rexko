@@ -1,4 +1,4 @@
-<% unless (f.object._delete) %>
+<% unless (f.object.try(:_delete)) %>
 	<% nested_attributes_for f, [:parses, :etymologies, :subentry], [:notes, :etymologies, :subentry] %>
 	<fieldset class="etymology">
 		<legend>Etymology &nbsp; <%= remove_link_unless_new_record(f) %></legend>
@@ -13,9 +13,11 @@
 				<%= f.text_field :gloss, :class => "warning" %>
 			</div>
 
-		  <% @parse = f.object.parses.empty? ? f.object.parses.build : f.object.parses %>
-			<% f.fields_for :parses do |p_form| %>
-				<%= render :partial => 'parse', :locals => { :f => p_form } %>
+		  <% if f.object %>
+				<% @parse = f.object.parses.empty? ? f.object.parses.build : f.object.parses %>
+				<% f.fields_for :parses do |p_form| %>
+					<%= render :partial => 'parse', :locals => { :f => p_form } %>
+				<% end %>
 			<% end %>
 			
 			<div class="par">
@@ -29,5 +31,12 @@
 			<div class="par">
 				<%= link_to 'Add note', '#notes', :class => 'add_nested', :rel => "[subentry][etymologies][notes]" %>
 			</div>
+			
+			<% if f.object && !f.object.new_record? %>
+		  	<% @next_etymon = f.object.next_etymon.blank? ? f.object.build_next_etymon : f.object.next_etymon %>
+				<% f.fields_for :next_etymon do |n_form| %>
+					<%= render :partial => 'etymology', :locals => { :f => n_form } %>
+				<% end %>
+			<% end %>
 	</fieldset>
 <% end %>
