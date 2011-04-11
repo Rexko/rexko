@@ -9,7 +9,7 @@ module EtymologiesHelper
     end
     
     gloss = content_tag :span, :class => "lexform-etymon-gloss" do
-      html_escape(etym.gloss || '<Unknown gloss>')
+      html_escape(etym.primary_gloss || '<Unknown gloss>')
     end
   
     next_etym = html_format(etym.next_etymon, etym) if etym.next_etymon
@@ -33,7 +33,7 @@ module EtymologiesHelper
     
     etymon = html_escape(etym.etymon || '<Unknown etymon>')
     
-    gloss = html_escape('"' << etym.gloss << '"' || '<Unknown gloss>')
+    gloss = html_escape('"' << etym.primary_gloss << '"' || '<Unknown gloss>')
   
     next_etym = wiki_format(etym.next_etymon, etym) if etym.next_etymon
     

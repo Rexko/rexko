@@ -57,3 +57,9 @@ construction:
   parsable_id: 32
   parsable_type: Attestation
   parsed_form: blue jay
+
+attesting_etymology:
+  id: 40
+  parsable_id: 30
+  parsable_type: Etymology
+  parsed_form: treinta

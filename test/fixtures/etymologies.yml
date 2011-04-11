@@ -28,3 +28,9 @@ with_same_language_next_b:
   etymon: cornu
   source_language: Latin
   gloss: horn
+
+with_parse:
+  id: 30
+  etymon: treinta
+  source_language: Spanish
+  gloss: ""

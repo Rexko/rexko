@@ -10,6 +10,10 @@ class Etymology < ActiveRecord::Base
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :next_etymon, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
+  def primary_gloss
+    gloss.present? ? gloss : Gloss.attesting(self, "Etymology").first.try(:gloss)
+  end
+  
   def self.rejectable?(attrs)
     !new(attrs.delete_if{|key, value| key == "_delete"}).valid?
   end 

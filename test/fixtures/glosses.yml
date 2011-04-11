@@ -5,3 +5,13 @@ one:
 
 two:
   gloss: MyString
+
+short_gloss:
+  id: 10
+  gloss: "30"
+  sense_id: 40
+
+long_gloss:
+  id: 11
+  gloss: thirty
+  sense_id: 40

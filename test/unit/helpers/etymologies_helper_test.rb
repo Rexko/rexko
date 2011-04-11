@@ -18,4 +18,10 @@ class EtymologiesHelperTest < ActionView::TestCase
     assert_equal html_escape("Latin unus \"one\" + cornu \"horn\"."),
       wiki_format(etymologies(:with_same_language_next))
   end
+  
+  test "html and wiki formats with parses" do
+    assert_equal html_escape("Spanish treinta \"30\"."), wiki_format(etymologies(:with_parse))
+    assert_equal "<span class=\"lexform-source-language\">Spanish</span> <span class=\"lexform-etymon\">treinta</span> <span class=\"lexform-etymon-gloss\">30</span>.",
+      html_format(etymologies(:with_parse))
+  end
 end

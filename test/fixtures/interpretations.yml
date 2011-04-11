@@ -23,3 +23,7 @@ appearing_in_construction_b:
 construction:
   parse_id: 32
   sense_id: 32
+
+appearing_in_etymology:
+  parse_id: 40
+  sense_id: 40
