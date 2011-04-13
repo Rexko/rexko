@@ -4,7 +4,7 @@
 		<legend>Etymology &nbsp; <%= remove_link_unless_new_record(f) %></legend>
 			<div class="type-text">
 				<%= f.label :source_language %>
-				<%= f.text_field :source_language %>
+				<%= f.collection_select :original_language_id, Language.all, :id, :to_s, { :include_blank => true } %>
 
 				<%= f.label :etymon %> 
 				<%= f.text_field :etymon %>

@@ -10,7 +10,7 @@
 <% for etymology in @etymologies %>
   <tr>
     <td><%=h etymology.etymon %></td>
-    <td><%=h etymology.source_language %></td>
+    <td><%=h etymology.original_language %></td>
     <td><%=h etymology.gloss %></td>
     <td><%= link_to 'Show', etymology %></td>
     <td><%= link_to 'Edit', edit_etymology_path(etymology) %></td>

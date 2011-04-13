@@ -1,5 +1,6 @@
 ==Since 0.2.6==
 * For [#26 (51)] Upgraded handling of etymologies.
+* [#4 (25)] Etymologies now refer to Language objects instead of just storing the name 
 
 ==Since 0.2.5==
 * [#51] Locus edit form now better identifies what subentry the interpretation will point to

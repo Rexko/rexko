@@ -2,35 +2,35 @@
 
 one:
   etymon: MyString
-  source_language: MyString
+  original_language_id: 1
   gloss: MyString
 
 two:
   etymon: MyString
-  source_language: MyString
+  original_language_id: 1
   gloss: MyString
 
 simple:
   id: 10
   etymon: unum
-  source_language: Latin
+  original_language_id: 2
   gloss: one
 
 with_same_language_next:
   id: 20
   etymon: unus
-  source_language: Latin
+  original_language_id: 2
   gloss: one
   next_etymon_id: 21
 
 with_same_language_next_b:
   id: 21
   etymon: cornu
-  source_language: Latin
+  original_language_id: 2
   gloss: horn
 
 with_parse:
   id: 30
   etymon: treinta
-  source_language: Spanish
+  original_language_id: 3
   gloss: ""

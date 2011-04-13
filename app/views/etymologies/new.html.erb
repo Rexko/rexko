@@ -10,7 +10,7 @@
 
   <p>
     <b>Source language</b><br />
-    <%= f.text_field :source_language %>
+    <%= f.collection_select :original_language_id, Language.all, :id, :to_s, { :include_blank => true } %>
   </p>
 
   <p>

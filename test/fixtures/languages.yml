@@ -5,6 +5,16 @@ testwegian:
   iso_639_code: zxx
   default_name: Testwegian
 
+latin:
+  id: 2
+  iso_639_code: la
+  default_name: Latin
+
+spanish:
+  id: 3
+  iso_639_code: es
+  default_name: Spanish
+
 without_code:
   id: 10
   default_name: Testian

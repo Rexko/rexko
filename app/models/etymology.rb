@@ -5,6 +5,7 @@ class Etymology < ActiveRecord::Base
   has_many :notes, :as => :annotatable
   has_many :parses, :as => :parsable
   belongs_to :next_etymon, :class_name => "Etymology"
+  belongs_to :original_language, :class_name => "Language" # language of etymon
   
   accepts_nested_attributes_for :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
@@ -20,7 +21,7 @@ class Etymology < ActiveRecord::Base
 
 protected 
   def validate
-    if [etymon, source_language, gloss, notes].all?(&:blank?)
+    if [etymon, original_language, gloss, notes].all?(&:blank?)
       errors.add_to_base("At least one attribute of the etymology must be specified")
     end
   end

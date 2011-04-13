@@ -1,8 +1,8 @@
 module EtymologiesHelper
   def html_format etym, parent = nil
     language = content_tag :span, :class => "lexform-source-language" do
-      html_escape(etym.source_language || '<Unknown source>') 
-    end unless parent && parent.source_language == etym.source_language
+      html_escape(etym.original_language.name || '<Unknown source>') 
+    end unless parent && parent.original_language == etym.original_language
     
     etymon = content_tag :span, :class => "lexform-etymon" do
       wh(etym.etymon || '<Unknown etymon>')
@@ -28,8 +28,8 @@ module EtymologiesHelper
   end
   
   def wiki_format etym, parent = nil
-    language = html_escape(etym.source_language || '<Unknown source>') unless
-      parent && parent.source_language == etym.source_language
+    language = html_escape(etym.original_language.name || '<Unknown source>') unless
+      parent && parent.original_language == etym.original_language
     
     etymon = html_escape(etym.etymon || '<Unknown etymon>')
     

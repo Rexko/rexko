@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110412160722) do
+ActiveRecord::Schema.define(:version => 20110412174710) do
 
   create_table "attestations", :force => true do |t|
     t.integer  "locus_id"
@@ -57,12 +57,12 @@ ActiveRecord::Schema.define(:version => 20110412160722) do
 
   create_table "etymologies", :force => true do |t|
     t.string   "etymon"
-    t.string   "source_language"
     t.string   "gloss"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "language_id"
     t.integer  "next_etymon_id"
+    t.integer  "original_language_id"
   end
 
   create_table "etymotheses", :force => true do |t|
