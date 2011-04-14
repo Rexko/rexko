@@ -10,7 +10,7 @@ class Locus < ActiveRecord::Base
   }
   
   named_scope :unattached, lambda {|lexeme|
-    { :joins => "INNER JOIN attestations ON attestations.locus_id = loci.id INNER JOIN parses ON parses.attestation_id = attestations.id LEFT OUTER JOIN interpretations ON interpretations.parse_id = parses.id",
+    { :joins => "INNER JOIN attestations ON attestations.locus_id = loci.id INNER JOIN parses ON (parses.parsable_id = attestations.id AND parses.parsable_type = 'Attestation') LEFT OUTER JOIN interpretations ON interpretations.parse_id = parses.id",
      :conditions => { "interpretations.parse_id" => nil, "parses.parsed_form" => lexeme.headword_forms }          
     }
   }
