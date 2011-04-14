@@ -1,3 +1,6 @@
+==Since 0.3==
+* Fix several issues with handling missing data
+
 ==Since 0.2.6==
 * For [#26 (51)] Upgraded handling of etymologies.
 * [#4 (25)] Etymologies now refer to Language objects instead of just storing the name 

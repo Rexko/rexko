@@ -34,3 +34,8 @@ with_parse:
   etymon: treinta
   original_language_id: 3
   gloss: ""
+
+without_language:
+  id: 40
+  etymon: ":-)"
+  gloss: smile

@@ -1,15 +1,16 @@
 module EtymologiesHelper
   def html_format etym, parent = nil
     language = content_tag :span, :class => "lexform-source-language" do
-      html_escape(etym.original_language.name || '<Unknown source>') 
-    end unless parent && parent.original_language == etym.original_language
+      html_escape etym.original_language.name
+    end if etym.original_language unless
+      parent && parent.original_language == etym.original_language
     
     etymon = content_tag :span, :class => "lexform-etymon" do
-      wh(etym.etymon || '<Unknown etymon>')
+      wh etym.etymon
     end
     
     gloss = content_tag :span, :class => "lexform-etymon-gloss" do
-      html_escape(etym.primary_gloss || '<Unknown gloss>')
+      html_escape etym.primary_gloss
     end
   
     next_etym = html_format(etym.next_etymon, etym) if etym.next_etymon
@@ -28,12 +29,13 @@ module EtymologiesHelper
   end
   
   def wiki_format etym, parent = nil
-    language = html_escape(etym.original_language.name || '<Unknown source>') unless
+    language = html_escape(etym.original_language.name) if 
+      etym.original_language unless
       parent && parent.original_language == etym.original_language
     
-    etymon = html_escape(etym.etymon || '<Unknown etymon>')
+    etymon = html_escape etym.etymon
     
-    gloss = html_escape('"' << etym.primary_gloss << '"' || '<Unknown gloss>')
+    gloss = html_escape('"' << etym.primary_gloss << '"') if etym.primary_gloss
   
     next_etym = wiki_format(etym.next_etymon, etym) if etym.next_etymon
     

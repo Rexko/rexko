@@ -24,4 +24,10 @@ class EtymologiesHelperTest < ActionView::TestCase
     assert_equal "<span class=\"lexform-source-language\">Spanish</span> <span class=\"lexform-etymon\">treinta</span> <span class=\"lexform-etymon-gloss\">30</span>.",
       html_format(etymologies(:with_parse))
   end
+  
+  test "html and wiki formats where etymon not associated with language" do
+    assert_equal html_escape(":-) \"smile\"."), wiki_format(etymologies(:without_language))
+    assert_equal "<span class=\"lexform-etymon\">:-)</span> <span class=\"lexform-etymon-gloss\">smile</span>.", 
+      html_format(etymologies(:without_language))
+  end
 end
