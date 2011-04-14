@@ -29,3 +29,27 @@
 .delete_label {	font-size: 80%; }
 .type-text .hw-link { text-align: right; float: right; margin-right: 41.5%; }
 .wanted { color: red; }
+
+/* Rails divs */
+.fieldWithErrors { padding: 10px; background: #f44; color:#400; }
+
+#errorExplanation {
+  border:2px #844 solid;
+  padding:0px;
+	margin-bottom:1em;
+  background:#fee;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 125%;
+  margin-bottom:1em;
+  background-color: #f44;
+  color: #fff;
+}
+
+#errorExplanation p { color:#400; margin-bottom: 0; padding-left: 10px; }
+#errorExplanation ul { padding-left: 15px; }
+#errorExplanation ul li { list-style: square; }

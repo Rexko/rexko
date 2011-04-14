@@ -46,7 +46,7 @@
         </div>
       </div>
       <div id="main">
-				<p style="color: green"><%= flash[:notice] %></p>
+				<%= content_tag :div, flash[:notice], :class => "note" if flash[:notice].present? %>
 
 				<%= yield  %>
       </div>
