@@ -5,4 +5,13 @@ class EtymologyTest < ActiveSupport::TestCase
     assert_equal "one", etymologies(:simple).primary_gloss, "Etymology should return its own gloss if present"
     assert_equal "30", etymologies(:with_parse).primary_gloss
   end
+  
+  test "should ignore blank subetymon" do
+    etym = Etymology.new
+    subetym = Etymology.new
+    etym.attributes = { :etymon => "an" }
+    etym.next_etymon_attributes = subetym.attributes
+    
+    assert etym.valid?, "should ignore blank subetymon but reports #{etym.errors.full_messages}"
+  end
 end

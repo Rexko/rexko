@@ -2,6 +2,7 @@
 * Fix several issues with handling missing data
 * [#87] Fixed issue with /unattached crashing due to reference to removed column
 * [#84] Formatting of errors and flash notices in main layout
+* [#83] Fixed issue with saving lexeme with blank etymon subform
 
 ==Since 0.2.6==
 * For [#26 (51)] Upgraded handling of etymologies.
