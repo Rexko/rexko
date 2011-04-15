@@ -40,3 +40,9 @@ construction:
   lexeme_id: 32
   paradigm: "[[blue]] [[jay]]s"
   part_of_speech: n.
+
+for_chainA:
+  id: 40
+  lexeme_id: 40
+  paradigm: "1ary, primary"
+  part_of_speech: ""

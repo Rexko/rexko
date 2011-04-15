@@ -38,11 +38,15 @@ module EtymologiesHelper
     gloss = html_escape('"' << etym.primary_gloss << '"') if etym.primary_gloss
   
     next_etym = wiki_format(etym.next_etymon, etym) if etym.next_etymon
-    
-    pre_note = [language, etymon, gloss, next_etym].compact.join(" ") 
-    pre_note = pre_note << "." unless etym.next_etymon
-    pre_note = "+ " << pre_note if parent
+
+    etym_parent = etym.primary_parent
+    parent_etym = wiki_format(etym_parent) if etym_parent
         
+    pre_note = [language, etymon, gloss, next_etym].compact.join(" ") 
+    pre_note = pre_note << "." unless (etym.next_etymon || etym_parent)
+    pre_note = "+ " << pre_note if parent
+    pre_note = pre_note << (parent ? ";" : ",") << " from " << parent_etym if parent_etym
+
     notes = etym.notes.collect(&:content).join(" ") 
     notes = notes.blank? ? nil : notes
     

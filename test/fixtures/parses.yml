@@ -63,3 +63,9 @@ attesting_etymology:
   parsable_id: 30
   parsable_type: Etymology
   parsed_form: treinta
+
+for_chainA:
+  id: 50
+  parsable_id: 50
+  parsable_type: Etymology
+  parsed_form: primary

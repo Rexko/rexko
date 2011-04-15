@@ -27,3 +27,7 @@ construction:
 appearing_in_etymology:
   parse_id: 40
   sense_id: 40
+
+for_chainA:
+  parse_id: 50
+  sense_id: 50

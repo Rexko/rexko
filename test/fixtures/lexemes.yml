@@ -32,3 +32,6 @@ appearing_in_construction_b:
   
 with_construction:
   id: 32
+
+for_chainA:
+  id: 40

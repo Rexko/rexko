@@ -7,3 +7,7 @@ one:
 two:
   etymology_id: 1
   subentry_id: 1
+
+for_chain_A2:
+  etymology_id: 51
+  subentry_id: 40

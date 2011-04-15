@@ -39,3 +39,11 @@ without_language:
   id: 40
   etymon: ":-)"
   gloss: smile
+
+chained_A:
+  id: 50
+  etymon: 1ary
+
+chained_A2:
+  id: 51
+  etymon: 2ary

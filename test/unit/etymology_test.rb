@@ -14,4 +14,8 @@ class EtymologyTest < ActiveSupport::TestCase
     
     assert etym.valid?, "should ignore blank subetymon but reports #{etym.errors.full_messages}"
   end
+  
+  test "primary_parent" do
+    assert_equal etymologies(:chained_A2), etymologies(:chained_A).primary_parent
+  end
 end

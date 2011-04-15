@@ -15,3 +15,8 @@ long_gloss:
   id: 11
   gloss: thirty
   sense_id: 40
+
+for_chainA:
+  id: 50
+  gloss: primary
+  sense_id: 50
