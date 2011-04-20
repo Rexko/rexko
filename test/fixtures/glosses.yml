@@ -20,3 +20,13 @@ for_chainA:
   id: 50
   gloss: primary
   sense_id: 50
+
+for_chainB:
+  id: 51
+  gloss: test
+  sense_id: 51
+
+for_chainB2:
+  id: 52
+  gloss: test 2
+  sense_id: 52

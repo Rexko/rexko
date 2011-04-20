@@ -31,3 +31,11 @@ appearing_in_etymology:
 for_chainA:
   parse_id: 50
   sense_id: 50
+
+for_chainB:
+  parse_id: 51
+  sense_id: 51
+
+for_chainB2:
+  parse_id: 52
+  sense_id: 52

@@ -46,3 +46,15 @@ for_chainA:
   lexeme_id: 40
   paradigm: "1ary, primary"
   part_of_speech: ""
+
+for_chainB:
+  id: 41
+  lexeme_id: 41
+  paradigm: "1ary A"
+  part_of_speech: ""
+
+for_chainB2:
+  id: 42
+  lexeme_id: 42
+  paradigm: "2ary A"
+  part_of_speech: ""

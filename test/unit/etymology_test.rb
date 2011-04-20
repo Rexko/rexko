@@ -18,4 +18,13 @@ class EtymologyTest < ActiveSupport::TestCase
   test "primary_parent" do
     assert_equal etymologies(:chained_A2), etymologies(:chained_A).primary_parent
   end
+  
+  test "ancestor_map" do 
+    assert_equal Hash[etymologies(:chained_A) => {etymologies(:chained_A2) => {}}],
+      etymologies(:chained_A).ancestor_map
+  end
+  
+  test "ancestor_map with next_etymon" do
+    assert_equal [{etymologies(:with_same_language_next) => {}}, {etymologies(:with_same_language_next_b) => {}}], etymologies(:with_same_language_next).ancestor_map
+  end
 end

@@ -37,10 +37,20 @@ construction:
 
 appearing_in_etymology:
   id: 40
-  subentry_id: 41
+  subentry_id: 39
   definition: "Thirty."
 
 for_chainA:
   id: 50
   subentry_id: 40
   definition: "Primary."
+
+for_chainB:
+  id: 51
+  subentry_id: 41
+  definition: "Test."
+
+for_chainB2:
+  id: 52
+  subentry_id: 42
+  definition: "Test 2."

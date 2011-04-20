@@ -33,8 +33,7 @@ class EtymologiesHelperTest < ActionView::TestCase
   
   test "chained etymologies" do
     assert_equal html_escape("1ary \"primary\", from 2ary."), wiki_format(etymologies(:chained_A))
-#    assert_equal "1ary A + 1ary B; 1ary A, from 2ary A, and 1ary B, from 2ary B."
-    assert_equal "1ary A + 1ary B; where 1ary A is from 2ary A, and where 1ary B is from 2ary B.", wiki_format(etymologies(:chained_B))
+    assert_equal html_escape("1ary A \"test\" + 1ary B \"test 2\"; where 1ary A is from 2ary A, and where 1ary B is from 2ary B."), wiki_format(etymologies(:chained_B))
 #    assert_equal "X + Y; X, from Z, from B, and Y, from A, from C + D; C, from L, and D, also from A."
     assert_equal "X + Y; where X is from Z, from B, and where Y is from A, from C + D; where C is from L, and where D is also from A.", wiki_format(etymologies(:chained_C))
   end

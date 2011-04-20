@@ -11,3 +11,11 @@ two:
 for_chain_A2:
   etymology_id: 51
   subentry_id: 40
+
+for_chain_B2:
+  subentry_id: 41
+  etymology_id: 54
+
+for_chain_B3:
+  subentry_id: 42
+  etymology_id: 55

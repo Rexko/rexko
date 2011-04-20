@@ -47,3 +47,20 @@ chained_A:
 chained_A2:
   id: 51
   etymon: 2ary
+
+chained_B:
+  id: 52
+  etymon: 1ary A
+  next_etymon_id: 53
+
+chained_B2:
+  id: 53
+  etymon: 1ary B
+
+chained_B3:
+  id: 54
+  etymon: 2ary A
+
+chained_B4:
+  id: 55
+  etymon: 2ary B

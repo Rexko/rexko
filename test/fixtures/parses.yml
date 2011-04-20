@@ -69,3 +69,15 @@ for_chainA:
   parsable_id: 50
   parsable_type: Etymology
   parsed_form: primary
+
+for_chainB:
+  id: 51
+  parsable_id: 52
+  parsable_type: Etymology
+  parsed_form: test
+
+for_chainB2:
+  id: 52
+  parsable_id: 53
+  parsable_type: Etymology
+  parsed_form: test2

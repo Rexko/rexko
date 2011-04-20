@@ -10,6 +10,18 @@ class Etymology < ActiveRecord::Base
   accepts_nested_attributes_for :notes, :parses, {:allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }}
   accepts_nested_attributes_for :next_etymon, :allow_destroy => true, :reject_if => proc {|attrs| Etymology.rejectable?(attrs) }
   
+  def to_s
+    [original_language.try(:name), etymon].compact.join " "
+  end
+  
+  # Hash map of this etymon and its parent etyma
+  def ancestor_map
+    parent_etym = primary_parent
+    
+    selfmap = parent_etym ? { self => parent_etym.ancestor_map } : { self => {} }
+    next_etymon ? [selfmap, next_etymon.ancestor_map] : selfmap
+  end
+  
   def primary_parent
     prim_sub = Subentry.attesting(self, "Etymology").first
     prim_sub.etymologies.first if prim_sub
@@ -22,7 +34,7 @@ class Etymology < ActiveRecord::Base
   def self.rejectable?(attrs)
     !new(attrs.delete_if{|key, value| key == "_delete"}).valid?
   end
-
+  
 protected 
   def validate
     if [etymon, original_language, gloss, notes].all?(&:blank?)
