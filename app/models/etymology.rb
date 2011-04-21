@@ -15,11 +15,14 @@ class Etymology < ActiveRecord::Base
   end
   
   # Hash map of this etymon and its parent etyma
-  def ancestor_map
+  def ancestor_map ignore=[]
+    return { self => {} } if ignore.include? self
+    
+    ignore << self
     parent_etym = primary_parent
     
-    selfmap = parent_etym ? { self => parent_etym.ancestor_map } : { self => {} }
-    next_etymon ? [selfmap, next_etymon.ancestor_map] : selfmap
+    selfmap = parent_etym ? { self => parent_etym.ancestor_map(ignore) } : { self => {} }
+    next_etymon ? [selfmap, next_etymon.ancestor_map(ignore)] : selfmap
   end
   
   def primary_parent
