@@ -1,34 +1,9 @@
 module EtymologiesHelper
   def html_format etym, parent = nil
-    language = content_tag :span, :class => "lexform-source-language" do
-      html_escape etym.original_language.name
-    end if etym.original_language unless
-      parent && parent.original_language == etym.original_language
-    
-    etymon = content_tag :span, :class => "lexform-etymon" do
-      wh etym.etymon
-    end
-    
-    gloss = content_tag :span, :class => "lexform-etymon-gloss" do
-      html_escape etym.primary_gloss
-    end
-  
-    next_etym = html_format(etym.next_etymon, etym) if etym.next_etymon
-    
-    pre_note = [language, etymon, gloss, next_etym].compact.join(" ") 
-    pre_note = pre_note << "." unless etym.next_etymon
-    pre_note = "+ " << pre_note if parent
-        
-    notes = etym.notes.collect do |note|
-       "<span class=\"lexform-note\" #{lang_for(note)}>#{wh note.content}</span>"
-    end
-    notes = notes.join(" ") 
-    notes = notes.blank? ? nil : notes
-    
-    [pre_note, notes].compact.join(" ")
+    wiki_format etym, nil, nil, true
   end
   
-  def wiki_format etym, parent = nil, tree = nil
+  def wiki_format etym, parent = nil, tree = nil, use_html = false # FIX: "use_html" is kludgy
     unless tree
       top_level = true
       map = etym.ancestor_map
@@ -47,21 +22,21 @@ module EtymologiesHelper
     case etym
     when Hash
       each_tree = etym.collect do |key, value|
-        wiki_format key, parent, value
+        wiki_format key, parent, value, use_html
       end
       
       pre_note = ", from " + each_tree.to_sentence
     when Array
       parent_ancestor = etym.shift
-      parent_ancestor = wiki_format parent_ancestor.keys[0], parent, parent_ancestor.values[0] unless parent_ancestor.blank?
+      parent_ancestor = wiki_format parent_ancestor.keys[0], parent, parent_ancestor.values[0], use_html unless parent_ancestor.blank?
 
       peers = etym.collect do |peer_hash|
-        wiki_format peer_hash.keys[0], parent, ""
+        wiki_format peer_hash.keys[0], parent, "", use_html
       end
 
       each_etym = etym.collect do |peer_hash|
         peer_hash.collect do |key, value|
-          wiki_format key, parent, value
+          wiki_format key, parent, value, use_html
         end
       end.flatten(1)
 
@@ -70,29 +45,71 @@ module EtymologiesHelper
         pre_note << " + #{peer}"
       end
       unless parent_ancestor.blank?
-        pre_note << "; where #{parent} is from #{parent_ancestor}"
+        short_parent = if use_html 
+          language = content_tag :span, :class => "lexform-source-language" do
+            html_escape parent.original_language.name
+          end if parent.original_language 
+
+          etymon = content_tag :span, :class => "lexform-etymon" do
+            wh parent.etymon
+          end
+          
+          [language, etymon].compact.join(" ")
+        else
+          parent.to_s
+        end
+        pre_note << "; where #{short_parent} is from #{parent_ancestor}"
       end
       etym.each do |peer_hash|
         peer = peer_hash.keys[0]
         ancestor = peer_hash.values[0]
         unless ancestor.blank?
-          ancestry = wiki_format ancestor.keys[0], peer, ancestor.values[0]
-          pre_note << ", and where #{peer} is from #{ancestry}"
+          short_peer = if use_html 
+            language = content_tag :span, :class => "lexform-source-language" do
+              html_escape peer.original_language.name
+            end if peer.original_language 
+
+            etymon = content_tag :span, :class => "lexform-etymon" do
+              wh peer.etymon
+            end
+
+            [language, etymon].compact.join(" ")
+          else
+            peer.to_s
+          end
+
+          ancestry = wiki_format ancestor.keys[0], peer, ancestor.values[0], use_html
+          pre_note << ", and where #{short_peer} is from #{ancestry}"
         end
       end
     when Etymology
-      language = html_escape(etym.original_language.name) if 
-        etym.original_language unless
-        parent && parent.original_language == etym.original_language
+      if use_html
+        language = content_tag :span, :class => "lexform-source-language" do
+          html_escape etym.original_language.name
+        end if etym.original_language unless
+          parent && parent.original_language == etym.original_language
 
-      etymon = html_escape etym.etymon
+        etymon = content_tag :span, :class => "lexform-etymon" do
+          wh etym.etymon
+        end
 
-      gloss = html_escape('"' << etym.primary_gloss << '"') if etym.primary_gloss
+        gloss = content_tag :span, :class => "lexform-etymon-gloss" do
+          html_escape etym.primary_gloss
+        end unless etym.primary_gloss.blank?
+      else
+        language = html_escape(etym.original_language.name) if 
+          etym.original_language unless
+          parent && parent.original_language == etym.original_language
+
+        etymon = html_escape etym.etymon
+
+        gloss = html_escape('"' << etym.primary_gloss << '"') if etym.primary_gloss
+      end
 
       pre_note = [language, etymon, gloss].compact.join(" ") 
 
       unless tree.blank?
-        tree_note = wiki_format tree, etym, tree 
+        tree_note = wiki_format tree, etym, tree, use_html
         pre_note = pre_note + tree_note
       end
     end
