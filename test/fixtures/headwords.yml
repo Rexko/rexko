@@ -45,3 +45,7 @@ appearing_in_construction_a:
 appearing_in_construction_b:
   form: jay
   lexeme_id: 31
+
+with_construction:
+  form: blue jay
+  lexeme_id: 32

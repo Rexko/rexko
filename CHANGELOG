@@ -3,7 +3,8 @@
 * [#87] Fixed issue with /unattached crashing due to reference to removed column
 * [#84] Formatting of errors and flash notices in main layout
 * [#83] Fixed issue with saving lexeme with blank etymon subform
-# [#26 (51)] Etymology in lexeme show now refers to the etymon's etymology, and so forth
+* [#26 (51)] Etymology in lexeme show now refers to the etymon's etymology, and so forth
+* [#90] Fixed display of loci attesting a construction but not the main lexeme
 
 ==Since 0.2.6==
 * For [#26 (51)] Upgraded handling of etymologies.

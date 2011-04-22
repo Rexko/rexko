@@ -119,4 +119,16 @@ class LexemesControllerTest < ActionController::TestCase
     
     assert_redirected_to "/lexemes/matching/liter"
   end
+  
+  test "don't fail if locus contains a construction that does not reference it" do
+    blue = lexemes(:appearing_in_construction_a)
+    blue_jay = lexemes(:with_construction)
+    assert Lexeme.attested_by(loci(:with_constructions).attestations, "Attestation").include? blue_jay
+    assert Lexeme.attested_by(loci(:with_constructions).attestations, "Attestation").include? blue
+    assert Lexeme.attested_by(loci(:with_same_construction).attestations, "Attestation").include? blue_jay
+    assert !Lexeme.attested_by(loci(:with_same_construction).attestations, "Attestation").include?(blue)  
+      
+    get :show, :id => lexemes(:appearing_in_construction_a).id
+    assert_response :success
+  end
 end

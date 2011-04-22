@@ -58,6 +58,12 @@ construction:
   parsable_type: Attestation
   parsed_form: blue jay
 
+construction_b:
+  id: 33
+  parsable_id: 33
+  parsable_type: Attestation
+  parsed_form: blue jay
+
 attesting_etymology:
   id: 40
   parsable_id: 30

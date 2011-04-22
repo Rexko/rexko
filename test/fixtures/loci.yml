@@ -27,4 +27,8 @@ wrong_case_locus:
 
 with_constructions:
   id: 30
-  
+  source_id: 1
+
+with_same_construction:
+  id: 31
+  source_id: 1

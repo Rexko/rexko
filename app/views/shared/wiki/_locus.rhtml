@@ -4,6 +4,6 @@
 |sect=<%=h locus.source.try(:pointer) %>
 |note=
 |refs=<%= render :partial => "shared/wiki/note", :collection => @constructions.collect {|constr| constr if constr.loci.include?(locus)}.compact, :locals => { :locus => count } %>
-|text=<%=h locus.example.strip %>
-|trans=<%=h locus.example_translation.strip %>
+|text=<%=h locus.example.try(:strip) %>
+|trans=<%=h locus.example_translation.try(:strip) %>
 }}

@@ -50,3 +50,7 @@ with_constructions:
   attested_form: blue jays
   locus_id: 30
 
+with_constructions_2:
+  id: 33
+  attested_form: blue jays
+  locus_id: 31
