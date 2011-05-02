@@ -1,4 +1,4 @@
-<% unless (f.object._delete) %>
+<% unless (f.object._destroy) %>
 	<div class="interpretation type-select">
 		<%= f.label :sense, "Sense #{remove_link_unless_new_record(f)}" %>
 		<%= f.grouped_collection_select :sense_id, 

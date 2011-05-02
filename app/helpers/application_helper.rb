@@ -83,9 +83,9 @@ module ApplicationHelper
   
   def remove_link_unless_new_record(form_builder)  
     unless form_builder.object.try(:new_record?)
-      "<span class=\"type-check\">%s</span>" % [form_builder.check_box(:_delete) + " " +  form_builder.label(:_delete, 'Delete', :class => 'delete_label')]
+      "<span class=\"type-check\">%s</span>" % [form_builder.check_box(:_destroy) + " " +  form_builder.label(:_destroy, 'Delete', :class => 'delete_label')]
     else  
-      form_builder.hidden_field(:_delete) + " " + link_to("(remove)", "##{form_builder.object.class.name.underscore}", :class => 'remove delete_label')
+      form_builder.hidden_field(:_destroy) + " " + link_to("(remove)", "##{form_builder.object.class.name.underscore}", :class => 'remove delete_label')
     end  
   end
   

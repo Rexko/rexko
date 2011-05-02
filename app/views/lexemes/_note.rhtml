@@ -1,4 +1,4 @@
-<% unless (f.object.try(:_delete)) %>
+<% unless (f.object.try(:_destroy)) %>
 		<div class="note">
 			<div class="type-text">
 				<%= f.label :content, "Note &nbsp; #{remove_link_unless_new_record(f)}" %>

@@ -1,4 +1,4 @@
-<% unless (f.object.try(:_delete)) %>
+<% unless (f.object.try(:_destroy)) %>
 	<% nested_attributes_for f, [:interpretations, :parses, :attestation] %>
 	<fieldset class="parse">
 		<legend>Parse <%= remove_link_unless_new_record(f) %></legend>
