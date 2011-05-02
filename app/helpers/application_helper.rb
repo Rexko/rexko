@@ -47,7 +47,7 @@ module ApplicationHelper
   end
   
   def sentence_case str
-    returning str.dup do |x|
+    str.dup.tap do |x|
       x[0,1] = x[0,1].upcase
     end
   end
