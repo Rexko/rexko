@@ -1,0 +1,6 @@
+db/development.sqlite3
+db/development.sqlite3.old
+db/production.sqlite3
+db/test.sqlite3
+.DS_Store
+log/
