@@ -19,7 +19,7 @@ if Gem::VERSION >= "1.3.6"
       end
     end
   end
-end
+end unless true
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
