@@ -1,92 +1,58 @@
-ActionController::Routing::Routes.draw do |map|
-  map.matching "lexemes/matching/:headword",
-    :controller => "lexemes",
-    :action => "matching" 
-  
-  map.connect "author/:author",
-    :controller => "loci",
-    :action => "show_by_author"
-  
-  map.connect "unattached/:id",
-    :controller => "loci",
-    :action => "unattached"
-  
-  map.exact_lexeme "html/:headword",
-    :controller => "lexemes",
-    :action => "show_by_headword" 
-    
-  map.resources :interpretations
-
-  map.resources :parses
-
-  map.resources :attestations
-
-  map.resources :orthographs
-
-  map.resources :etymotheses
-
-  map.resources :dictionary_scopes
-
-  map.resources :authorships
-
-  map.resources :authors
-
-  map.resources :titles
-
-  map.resources :sources
-
-  map.resources :loci
-
-  map.resources :glosses
-
-  map.resources :senses
-
-  map.resources :etymologies
-
-  map.resources :phonetic_forms
-
-  map.resources :headwords
-
-  map.resources :subentries
-
-  map.resources :lexemes
-
-  map.resources :dictionaries
-  
-  map.resources :languages
-
-  # The priority is based upon order of creation: first created -> highest priority.
+Lexicon::Application.routes.draw do
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
 
   # Sample of regular route:
-  #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
+  #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
-  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
+  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   map.resources :products
+  #   resources :products
 
   # Sample resource route with options:
-  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-
-  # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-
-  # Sample resource route within a namespace:
-  #   map.namespace :admin do |admin|
-  #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-  #     admin.resources :products
+  #   resources :products do
+  #     member do
+  #       get 'short'
+  #       post 'toggle'
+  #     end
+  #
+  #     collection do
+  #       get 'sold'
+  #     end
   #   end
 
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
-  map.root :controller => "editor"
+  # Sample resource route with sub-resources:
+  #   resources :products do
+  #     resources :comments, :sales
+  #     resource :seller
+  #   end
+
+  # Sample resource route with more complex sub-resources
+  #   resources :products do
+  #     resources :comments
+  #     resources :sales do
+  #       get 'recent', :on => :collection
+  #     end
+  #   end
+
+  # Sample resource route within a namespace:
+  #   namespace :admin do
+  #     # Directs /admin/products/* to Admin::ProductsController
+  #     # (app/controllers/admin/products_controller.rb)
+  #     resources :products
+  #   end
+
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  # root :to => "welcome#index"
 
   # See how all your routes lay out with "rake routes"
 
-  # Install the default routes as the lowest priority.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  # This is a legacy wild controller route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controller accessible via GET requests.
+  # match ':controller(/:action(/:id(.:format)))'
 end
