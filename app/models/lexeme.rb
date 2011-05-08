@@ -24,7 +24,7 @@ class Lexeme < ActiveRecord::Base
   end
  
   def loci(options = {})
-    Locus.attesting(self).find(:all, :include => options[:include])
+    Locus.attesting(self).includes(options[:include])
     # old include:
     # :include => { :parses => { :interpretations => { :sense => { :subentry => { :lexeme => :headwords }}}}}
   end
@@ -41,7 +41,7 @@ class Lexeme < ActiveRecord::Base
       [("AND dictionaries.id = ?" if from_dictionary),
       headlike]), id, from_dictionary.try(:id), *heads].compact
 
-    Lexeme.attested_by(loci.collect(&:attestations).flatten, "Attestation").find(:all, :conditions => conditions, :include => [:headwords, :dictionaries, :subentries]).uniq
+    Lexeme.attested_by(loci.collect(&:attestations).flatten, "Attestation").where(conditions).includes([:headwords, :dictionaries, :subentries]).uniq
   end  
   
   # Return all lexemes with a headword matching a string or the string with
@@ -63,9 +63,9 @@ class Lexeme < ActiveRecord::Base
     when SUBSTRING
       headwords_like = "(headwords.form LIKE ?" + " OR headwords.form LIKE ?" * (forms.length - 1) + ")"
       wildcarded_forms = forms.collect {|form| "%#{form}%"}
-      Lexeme.find(:all, :joins => :headwords, :conditions => [headwords_like, *wildcarded_forms], :include => options[:include], :group => :lexeme_id)
+      Lexeme.joins(:headwords).where([headwords_like, *wildcarded_forms]).includes(options[:include]).group(:lexeme_id)
     when EXACT
-      Lexeme.find(:all, :joins => :headwords, :conditions => ["headwords.form IN (?)", forms], :include => options[:include])
+      Lexeme.joins(:headwords).where(["headwords.form IN (?)", forms]).includes(options[:include])
     end
   end
   
@@ -75,7 +75,7 @@ class Lexeme < ActiveRecord::Base
     swapform = form.dup
     swapform[0,1] = swapform[0,1].swapcase
     
-    Lexeme.find(:first, :joins => :headwords, :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform])
+    Lexeme.joins(:headwords).where(["headwords.form = ? OR headwords.form = ?", form, swapform]).first
   end
   
   # Return the language of the lexeme, based on the first dictionary it's in.   
