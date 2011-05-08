@@ -37,7 +37,7 @@ class LociController < ApplicationController
 
   # GET /loci/1/edit
   def edit
-    @locus = Locus.find(params[:id], :include => {:attestations => {:parses => :interpretations}})
+    @locus = Locus.where(:id => params[:id]).includes(:attestations => {:parses => :interpretations}).first
     @source = @locus.source
     @authorship = @source.authorship if @source
     @nests = {}
@@ -55,7 +55,7 @@ class LociController < ApplicationController
     end
 
     # Find all potential interpretations of this locus' parses
-    all_interpretations = Sense.find(:all, :select => 'DISTINCT "senses".*, "headwords"."form" AS hw_form', :joins => ['INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id INNER JOIN "parses" ON "parses"."parsed_form" = "headwords"."form" INNER JOIN "attestations" ON ("parses"."parsable_id" = "attestations"."id" AND "parses"."parsable_type" = \'Attestation\')'], :conditions => ['"attestations"."locus_id" = ?', @locus.id])
+    all_interpretations = Sense.select('DISTINCT "senses".*, "headwords"."form" AS hw_form').joins(['INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id INNER JOIN "parses" ON "parses"."parsed_form" = "headwords"."form" INNER JOIN "attestations" ON ("parses"."parsable_id" = "attestations"."id" AND "parses"."parsable_type" = \'Attestation\')']).where(['"attestations"."locus_id" = ?', @locus.id])
     @interpretations = {}
     @locus.parses.each do |parse|
         @interpretations[parse.parsed_form] = all_interpretations.select{|ip| ip.hw_form == parse.parsed_form}
@@ -141,7 +141,7 @@ class LociController < ApplicationController
   end
   
   def unattached
-    lexeme = Lexeme.find(params[:id], :include => :headwords)
+    lexeme = Lexeme.find(params[:id]).includes(:headwords)
     
     @loci = Locus.unattached(lexeme).paginate(:page => params[:page], :include => {:source => {:authorship => [:author, :title]}})
     
@@ -149,7 +149,7 @@ class LociController < ApplicationController
   end
   
   def show_by_author
-    author = Author.find(:first, :conditions => ["name LIKE ?", "%" + params[:author] + "%"])
+    author = Author.where(["name LIKE ?", "%" + params[:author] + "%"]).first
     if author 
       author_loci = author.sources.collect(&:loci).flatten #ugh
     
