@@ -3,8 +3,8 @@ class Parse < ActiveRecord::Base
   validates_presence_of :parsed_form
   belongs_to :parsable, :polymorphic => true
   
-  named_scope :without_entries, :conditions => ['NOT EXISTS (SELECT "form" FROM "headwords" WHERE headwords.form = parsed_form)']
-  named_scope :uninterpreted, :include => :interpretations, :conditions => { "interpretations.parse_id" => nil }
+  scope :without_entries, :conditions => ['NOT EXISTS (SELECT "form" FROM "headwords" WHERE headwords.form = parsed_form)']
+  scope :uninterpreted, :include => :interpretations, :conditions => { "interpretations.parse_id" => nil }
   
   accepts_nested_attributes_for :interpretations, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
     

@@ -3,7 +3,7 @@ class Gloss < ActiveRecord::Base
   validates_presence_of :gloss
   belongs_to :language
   
-  named_scope :attesting, lambda {|parsables, type|
+  scope :attesting, lambda {|parsables, type|
     joins(HASH_MAP_TO_PARSE).where({ :parses => { :parsable_id => parsables, :parsable_type => type }})
   }
   

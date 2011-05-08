@@ -6,7 +6,7 @@ class Lexeme < ActiveRecord::Base
   has_many :headwords
   has_many :phonetic_forms
   
-  named_scope :attested_by, lambda {|parsables, type|
+  scope :attested_by, lambda {|parsables, type|
     joins(HASH_MAP_TO_PARSE).where({ :parses => { :parsable_id => parsables, :parsable_type => type }})
   }
   
