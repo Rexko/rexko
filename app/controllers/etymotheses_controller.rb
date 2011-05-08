@@ -2,7 +2,7 @@ class EtymothesesController < ApplicationController
   # GET /etymotheses
   # GET /etymotheses.xml
   def index
-    @etymotheses = Etymothesis.find(:all)
+    @etymotheses = Etymothesis.all
 
     respond_to do |format|
       format.html # index.html.erb

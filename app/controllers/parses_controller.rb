@@ -2,7 +2,7 @@ class ParsesController < ApplicationController
   # GET /parses
   # GET /parses.xml
   def index
-    @parses = Parse.find(:all)
+    @parses = Parse.all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -2,7 +2,7 @@ class PhoneticFormsController < ApplicationController
   # GET /phonetic_forms
   # GET /phonetic_forms.xml
   def index
-    @phonetic_forms = PhoneticForm.find(:all)
+    @phonetic_forms = PhoneticForm.all
 
     respond_to do |format|
       format.html # index.html.erb

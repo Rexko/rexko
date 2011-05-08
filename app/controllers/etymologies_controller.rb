@@ -2,7 +2,7 @@ class EtymologiesController < ApplicationController
   # GET /etymologies
   # GET /etymologies.xml
   def index
-    @etymologies = Etymology.find(:all)
+    @etymologies = Etymology.all
 
     respond_to do |format|
       format.html # index.html.erb

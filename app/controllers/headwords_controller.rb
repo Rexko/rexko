@@ -2,7 +2,7 @@ class HeadwordsController < ApplicationController
   # GET /headwords
   # GET /headwords.xml
   def index
-    @headwords = Headword.find(:all)
+    @headwords = Headword.all
 
     respond_to do |format|
       format.html # index.html.erb

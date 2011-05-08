@@ -2,7 +2,7 @@ class InterpretationsController < ApplicationController
   # GET /interpretations
   # GET /interpretations.xml
   def index
-    @interpretations = Interpretation.find(:all)
+    @interpretations = Interpretation.all
 
     respond_to do |format|
       format.html # index.html.erb

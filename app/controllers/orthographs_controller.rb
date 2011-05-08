@@ -2,7 +2,7 @@ class OrthographsController < ApplicationController
   # GET /orthographs
   # GET /orthographs.xml
   def index
-    @orthographs = Orthograph.find(:all)
+    @orthographs = Orthograph.all
 
     respond_to do |format|
       format.html # index.html.erb

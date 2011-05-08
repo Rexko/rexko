@@ -2,7 +2,7 @@ class DictionaryScopesController < ApplicationController
   # GET /dictionary_scopes
   # GET /dictionary_scopes.xml
   def index
-    @dictionary_scopes = DictionaryScope.find(:all)
+    @dictionary_scopes = DictionaryScope.all
 
     respond_to do |format|
       format.html # index.html.erb

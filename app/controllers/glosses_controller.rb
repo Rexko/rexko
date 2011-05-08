@@ -2,7 +2,7 @@ class GlossesController < ApplicationController
   # GET /glosses
   # GET /glosses.xml
   def index
-    @glosses = Gloss.find(:all)
+    @glosses = Gloss.all
 
     respond_to do |format|
       format.html # index.html.erb

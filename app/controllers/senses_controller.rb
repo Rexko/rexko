@@ -2,7 +2,7 @@ class SensesController < ApplicationController
   # GET /senses
   # GET /senses.xml
   def index
-    @senses = Sense.find(:all)
+    @senses = Sense.all
 
     respond_to do |format|
       format.html # index.html.erb

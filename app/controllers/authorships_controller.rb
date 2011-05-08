@@ -2,7 +2,7 @@ class AuthorshipsController < ApplicationController
   # GET /authorships
   # GET /authorships.xml
   def index
-    @authorships = Authorship.find(:all)
+    @authorships = Authorship.all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -2,7 +2,7 @@ class SourcesController < ApplicationController
   # GET /sources
   # GET /sources.xml
   def index
-    @sources = Source.find(:all)
+    @sources = Source.all
 
     respond_to do |format|
       format.html # index.html.erb

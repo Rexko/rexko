@@ -2,7 +2,7 @@ class SubentriesController < ApplicationController
   # GET /subentries
   # GET /subentries.xml
   def index
-    @subentries = Subentry.find(:all)
+    @subentries = Subentry.all
 
     respond_to do |format|
       format.html # index.html.erb

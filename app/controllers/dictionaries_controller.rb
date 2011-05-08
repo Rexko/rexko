@@ -3,7 +3,7 @@ class DictionariesController < ApplicationController
   # GET /dictionaries
   # GET /dictionaries.xml
   def index
-    @dictionaries = Dictionary.find(:all)
+    @dictionaries = Dictionary.all
 
     respond_to do |format|
       format.html # index.html.erb
