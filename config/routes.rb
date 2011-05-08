@@ -46,11 +46,35 @@ Lexicon::Application.routes.draw do
   #     resources :products
   #   end
 
+  match 'lexemes/matching/:headword' => 'lexemes#matching', :as => :matching
+  match 'author/:author' => 'loci#show_by_author'
+  match 'unattached/:id' => 'loci#unattached'
+  match 'html/:headword' => 'lexemes#show_by_headword', :as => :exact_lexeme
+  resources :interpretations
+  resources :parses
+  resources :attestations
+  resources :orthographs
+  resources :etymotheses
+  resources :dictionary_scopes
+  resources :authorships
+  resources :authors
+  resources :titles
+  resources :sources
+  resources :loci
+  resources :glosses
+  resources :senses
+  resources :etymologies
+  resources :phonetic_forms
+  resources :headwords
+  resources :subentries
+  resources :lexemes
+  resources :dictionaries
+  resources :languages
+
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => "welcome#index"
-
-  # See how all your routes lay out with "rake routes"
+  root :to => 'editor#index'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
