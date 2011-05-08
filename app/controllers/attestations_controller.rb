@@ -2,7 +2,7 @@ class AttestationsController < ApplicationController
   # GET /attestations
   # GET /attestations.xml
   def index
-    @attestations = Attestation.find(:all)
+    @attestations = Attestation.all
 
     respond_to do |format|
       format.html # index.html.erb
