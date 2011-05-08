@@ -27,9 +27,9 @@ module ApplicationHelper
     head = @headwords ? @headwords[parse.parsed_form] : Lexeme.lookup_by_headword(parse.parsed_form)
 
     if head
-      link_to("<span class='hw-link%s'>#{html_escape parse.parsed_form}</span>" % [
+      link_to(("<span class='hw-link%s'>#{html_escape parse.parsed_form}</span>" % [
         (" wanted" if is_wanted),
-      ], head.respond_to?(:lexeme) ? head.lexeme : head )
+      ]).html_safe, head.respond_to?(:lexeme) ? head.lexeme : head )
     else
       new_headword_link parse, is_wanted
     end
@@ -38,11 +38,11 @@ module ApplicationHelper
   # Verbose link to create a new lexeme based on a headword, which lists how many
   # times that headword is attested in the loci
   def new_headword_link (parse, is_wanted = false)
-    link_to("<span class='hw-link%s'>[No entry for <i>%s</i> &times;%d]</span>" % [
+    link_to(("<span class='hw-link%s'>[No entry for <i>%s</i> &times;%d]</span>" % [
       (" wanted" if is_wanted),
       html_escape(parse.parsed_form),
       parse.respond_to?(:count_all) ? parse.count_all : parse.count
-    ], exact_lexeme_path(:headword => parse.parsed_form))
+    ]).html_safe, exact_lexeme_path(:headword => parse.parsed_form))
   end
   
   def sentence_case str
