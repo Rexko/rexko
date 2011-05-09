@@ -12,7 +12,7 @@
 	  </div>
 	
 	  <!-- Phonetic form -->
-	  	<% f.fields_for :phonetic_forms do |pf_form| %>
+	  	<%= f.fields_for :phonetic_forms do |pf_form| %>
 		    <%= render :partial => 'phonetic_form', :locals => { :f => pf_form } %>
 		  <% end %>
 			<div class="par">

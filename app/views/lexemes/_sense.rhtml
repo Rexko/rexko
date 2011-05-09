@@ -11,14 +11,14 @@
     </div>
 
     <!-- Gloss -->
-    <% f.fields_for :glosses do |g_form| %>
+    <%= f.fields_for :glosses do |g_form| %>
       <%= render :partial => 'gloss', :locals => { :f => g_form } %>
     <% end %>
 		<div class="par">
 			<%= link_to 'Add gloss', '#glosses', :class => 'add_nested', :rel => "[subentry][senses][glosses]" %>
 		</div>
 			
-		<% f.fields_for :notes do |e_form| %>
+		<%= f.fields_for :notes do |e_form| %>
 	    <%= render :partial => 'note', :locals => { :f => e_form } %>
 	  <% end %>
 		<div class="par">

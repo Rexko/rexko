@@ -15,7 +15,7 @@
 
 		  <% if f.object %>
 				<% @parse = f.object.parses.empty? ? f.object.parses.build : f.object.parses %>
-				<% f.fields_for :parses do |p_form| %>
+				<%= f.fields_for :parses do |p_form| %>
 					<%= render :partial => 'parse', :locals => { :f => p_form } %>
 				<% end %>
 			<% end %>
@@ -24,7 +24,7 @@
 				<%= link_to 'Add parse', '#parses', :class => 'add_nested', :rel => "[subentry][etymologies][parses]" %>
 			</div>
 	
-			<% f.fields_for :notes do |e_form| %>
+			<%= f.fields_for :notes do |e_form| %>
 	    	<%= render :partial => 'note', :locals => { :f => e_form } %>
 	  	<% end %>
 

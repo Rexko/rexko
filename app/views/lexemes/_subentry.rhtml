@@ -12,7 +12,7 @@
 	      <%= f.label :part_of_speech %>
 	      <%= f.text_field :part_of_speech %>
 	  </div>
-		<% f.fields_for :notes do |e_form| %>
+		<%= f.fields_for :notes do |e_form| %>
 	    <%= render :partial => 'note', :locals => { :f => e_form } %>
 	  <% end %>
 		<div class="par">
