@@ -1,1 +1,1 @@
-<%= author.name %> <%= spaced_render(:collection => construction.loci & @loci, :partial => "shared/wiki/ref") %>
+<%= author.name %> <%= spaced_render(:collection => construction.loci.merge(@loci), :partial => "shared/wiki/ref") %>
