@@ -10,7 +10,7 @@
 <link href="css/patches/patch_my_layout.css" rel="stylesheet" type="text/css" />
 <![endif]-->
 	<%= javascript_include_tag :defaults %>
-	<% javascript_tag do %>
+	<%= javascript_tag do %>
 		<%= yield(:javascript) %>
 	<% end -%>
 </head>

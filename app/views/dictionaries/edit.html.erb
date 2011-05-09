@@ -2,7 +2,7 @@
 
 <%= error_messages_for :dictionary %>
 
-<% form_for(@dictionary) do |f| %>
+<%= form_for(@dictionary) do |f| %>
   <p>
     <b>Title</b><br />
     <%= f.text_field :title %>

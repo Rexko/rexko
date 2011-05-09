@@ -1,4 +1,4 @@
-<% form_tag form[:for_url], {:method => form[:method], :action => form[:action], :id => params[:id]}  do %>
+<%= form_tag form[:for_url], {:method => form[:method], :action => form[:action], :id => params[:id]}  do %>
 	<% fields_for :authorship do |f| %>
 		<p>
 		  <b>Author</b><br />
