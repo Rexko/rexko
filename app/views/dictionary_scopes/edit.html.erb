@@ -2,7 +2,7 @@
 
 <%= error_messages_for :dictionary_scope %>
 
-<% form_for(@dictionary_scope) do |f| %>
+<%= form_for(@dictionary_scope) do |f| %>
   <p>
     <b>Dictionary</b><br />
     <%= f.text_field :dictionary_id %>

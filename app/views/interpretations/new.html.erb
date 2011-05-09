@@ -2,7 +2,7 @@
 
 <%= error_messages_for :interpretation %>
 
-<% form_for(@interpretation) do |f| %>
+<%= form_for(@interpretation) do |f| %>
   <p>
     <b>Parse</b><br />
     <%= f.text_field :parse_id %>
