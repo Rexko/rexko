@@ -10,7 +10,7 @@
 			<%= f.text_field :attested_form %>
 		</div>  
 		<% @parse = f.object.parses.empty? ? f.object.parses.build : f.object.parses %>
-		<% f.fields_for :parses do |p_form| %>
+		<%= f.fields_for :parses do |p_form| %>
 		  <%= render :partial => 'parse', :locals => { :f => p_form } %>
 		<% end %>
 		<div class="par">

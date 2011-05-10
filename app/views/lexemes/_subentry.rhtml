@@ -21,7 +21,7 @@
     
 	  <!-- Sense -->
 	  <% @sense = f.object.senses.empty? ? f.object.senses.build : f.object.senses %>
-	  <% f.fields_for :senses do |s_form| %>
+	  <%= f.fields_for :senses do |s_form| %>
 	    <%= render :partial => 'sense', :locals => { :f => s_form } %>
 	  <% end %>
 		<div class="par">
@@ -29,7 +29,7 @@
 		</div>
 
 	  <!-- Etymology -->
-    <% f.fields_for :etymologies do |e_form| %>
+    <%= f.fields_for :etymologies do |e_form| %>
       <%= render :partial => 'etymology', :locals => { :f => e_form } %>
     <% end %>
 		<div class="par">

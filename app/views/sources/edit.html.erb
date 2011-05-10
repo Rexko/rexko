@@ -2,7 +2,7 @@
 
 <%= error_messages_for :source %>
 
-<% form_for(@source) do |f| %>
+<%= form_for(@source) do |f| %>
 	<%= "No title" unless @source.title  %>
   <p>
     <b>Author</b><br />

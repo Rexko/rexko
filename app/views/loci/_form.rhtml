@@ -1,4 +1,4 @@
-<% form_for @locus, {:method => form[:method], :action => form[:action], :html => {:class => "yform"}} do |l_form| %>
+<%= form_for @locus, {:method => form[:method], :action => form[:action], :html => {:class => "yform"}} do |l_form| %>
 <% nested_attributes_for l_form, :attestations %>
 <fieldset>
 	<legend>Author</legend>
@@ -67,7 +67,7 @@
 </fieldset>
 
 	<% unless l_form.object.attestations.empty? %>
-		<% l_form.fields_for :attestations do |a_form| %>
+		<%= l_form.fields_for :attestations do |a_form| %>
 	    <%= render :partial => 'attestation', :locals => { :f => a_form } %>
 	  <% end %>
 	<% end %>

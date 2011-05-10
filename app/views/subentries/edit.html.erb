@@ -2,7 +2,7 @@
 
 <%= error_messages_for :subentry %>
 
-<% form_for(@subentry) do |f| %>
+<%= form_for(@subentry) do |f| %>
   <p>
     <b>Lexeme</b><br />
     <%= f.text_field :lexeme_id %>
