@@ -6,6 +6,7 @@ class Sense < ActiveRecord::Base
   has_many :interpretations
   has_many :parses, :through => :interpretations
   has_many :notes, :as => :annotatable
+  validate :validate_sufficient_data
   
   accepts_nested_attributes_for :glosses, :parses, :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
@@ -19,7 +20,7 @@ class Sense < ActiveRecord::Base
   end
   
 protected
-  def validate
+  def validate_sufficient_data
     if definition.blank? && glosses.empty?
       errors.add_to_base("Definition or gloss must be supplied for a sense") 
     end
