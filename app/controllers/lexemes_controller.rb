@@ -18,7 +18,7 @@ class LexemesController < ApplicationController
     @lexemes = @lexeme.paginate(:page => params[:page], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}])
 
     respond_to do |format|
-      format.html { render @lexemes, :action => 'index', :layout => '1col_layout' }
+      format.html { render :index, :layout => '1col_layout' }
     end
   end
 

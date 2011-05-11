@@ -87,7 +87,7 @@ class LexemesControllerTest < ActionController::TestCase
   def test_matching_uses_template
     get :matching, :headword => "spring"
     
-    assert_equal "layouts/1col_layout", @response.layout
+    assert_template "layouts/1col_layout"
   end
   
   def test_matching_sets_title
