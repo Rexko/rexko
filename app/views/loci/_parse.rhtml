@@ -12,7 +12,7 @@
 			<% unless @interpretations ? @interpretations[f.object.parsed_form].blank? : f.object.potential_interpretations.blank? %>
 				<% @interpretation = f.object.interpretations.empty? ? f.object.interpretations.build : f.object.interpretations %>
 				
-				<% f.fields_for :interpretations do |i_form| %>
+				<%= f.fields_for :interpretations do |i_form| %>
 				  <%= render :partial => 'interpretation', :locals => { :f => i_form } %>
 				<% end %>
 				

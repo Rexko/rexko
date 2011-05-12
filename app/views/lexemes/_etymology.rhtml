@@ -34,7 +34,7 @@
 			
 			<% if f.object && !f.object.new_record? %>
 		  	<% @next_etymon = f.object.next_etymon.blank? ? f.object.build_next_etymon : f.object.next_etymon %>
-				<% f.fields_for :next_etymon do |n_form| %>
+				<%= f.fields_for :next_etymon do |n_form| %>
 					<%= render :partial => 'etymology', :locals => { :f => n_form } %>
 				<% end %>
 			<% end %>

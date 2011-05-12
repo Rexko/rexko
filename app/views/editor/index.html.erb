@@ -2,7 +2,7 @@
 	<div class="c50l">
 		<div class="subcl">
 			<h2>Tools</h2>
-			<% form_tag({:controller => :lexemes, :action => :show_by_headword}, {:class => "yform"}) do %>
+			<%= form_tag({:controller => :lexemes, :action => :show_by_headword}, {:class => "yform"}) do %>
 			<div class="subcolumns full">
 				<div class="c66l">
 					<div class="subcl type-text">
@@ -21,7 +21,7 @@
 			</div>
 			<% end %>
 
-			<% form_tag({:controller => :loci, :action => :show_by_author}, {:class => "yform"}) do %>
+			<%= form_tag({:controller => :loci, :action => :show_by_author}, {:class => "yform"}) do %>
 			<div class="type-text">
 				<label>Browse loci by author (substring search)</label>
 				<%= text_field_tag :author, '', :size => 20 %>
