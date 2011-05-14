@@ -103,7 +103,7 @@ module ApplicationHelper
   # Create a <li> link suitable for the navbar, unless we are already on the page.
   # Modified form of #link_to_unless.
   def navlink_unless_current name, options = {}, html_options = {}, &block
-    if current_page?(options)
+    output = if current_page?(options)
       "<li class=\"active\"><strong>%s</strong></li>" % [
         if block_given?
           block.arity <= 1 ? capture(name, &block) : capture(name, options, html_options_ & block)
@@ -113,7 +113,9 @@ module ApplicationHelper
       ]
     else
       "<li>%s</li>" % [link_to(name, options, html_options)]
-    end 
+    end
+    
+    sanitize(output)
   end
   
   # Return @page_title, or a default of "Controller -  action".
