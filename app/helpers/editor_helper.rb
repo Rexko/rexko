@@ -1,8 +1,8 @@
 module EditorHelper
   def ten_most_wanted
-    '<ul><li>%s</li></ul>' % [
-      Parse.most_wanted(10).collect{|parse| new_headword_link(parse)}.join("</li><li>")
-    ]
+    ('<ul><li>%s</li></ul>' % [
+      Parse.most_wanted(10).collect{|parse| sanitize new_headword_link(parse)}.join("</li><li>")
+    ]).html_safe
   end
   
   def expandlist
