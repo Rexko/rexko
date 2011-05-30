@@ -62,7 +62,7 @@ module ApplicationHelper
         content << "\nvar #{assoc_key}_template='#{generate_template(form_builder, association[0].to_sym)}';" unless @nests[assoc_key] 
         @nests[assoc_key] = true
       end  
-      content  
+      content.html_safe
     end  
   end  
 
@@ -83,9 +83,9 @@ module ApplicationHelper
   def remove_link_unless_new_record(form_builder)  
     unless form_builder.object.try(:new_record?)
       "<span class=\"type-check\">%s</span>" % [form_builder.check_box(:_destroy) + " " +  form_builder.label(:_destroy, 'Delete', :class => 'delete_label')]
-    else  
+    else
       form_builder.hidden_field(:_destroy) + " " + link_to("(remove)", "##{form_builder.object.class.name.underscore}", :class => 'remove delete_label')
-    end  
+    end
   end
   
   def spaced_render(options = {})
