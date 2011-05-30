@@ -33,4 +33,4 @@ gem 'sqlite3'
 # end
 
 source 'http://gemcutter.org'
-gem 'will_paginate', '~> 2.3.15'
+gem 'will_paginate', '~> 3.0.pre2'
