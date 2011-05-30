@@ -2,8 +2,7 @@
 	<% nested_attributes_for f, [:parses, :attestation] %>
 	<fieldset class="attestation">
 		<legend>
-			Attestation 
-			<%= remove_link_unless_new_record(f) %>
+			<%= label_with_remove_option_for "Attestation", f %>
 		</legend>
 		<div class="type-text">
 			<%= f.label :attested_form %>

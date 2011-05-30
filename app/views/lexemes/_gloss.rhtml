@@ -1,7 +1,7 @@
 <% unless (f.object._destroy) %>
 	<div class="gloss">
 		<div class="type-text">
-			<%= f.label :gloss, "Gloss &nbsp; #{remove_link_unless_new_record(f)}" %>
+			<%= f.label :gloss, label_with_remove_option_for("Gloss", f) %>
 		  <%= f.text_field :gloss %>
 		</div>
 	</div>

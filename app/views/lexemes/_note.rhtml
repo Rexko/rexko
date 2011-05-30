@@ -1,7 +1,7 @@
 <% unless (f.object.try(:_destroy)) %>
 		<div class="note">
 			<div class="type-text">
-				<%= f.label :content, "Note &nbsp; #{remove_link_unless_new_record(f)}" %>
+				<%= f.label :content, label_with_remove_option_for("Note", f) %>
 				<%= f.text_area :content, :size => "80x3" %>
 			</div>
 		</div>

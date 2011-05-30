@@ -88,6 +88,11 @@ module ApplicationHelper
     end
   end
   
+  def label_with_remove_option_for label_name = "Section", form_builder
+  	label = "%s &nbsp; %s" % [sanitize(label_name), remove_link_unless_new_record(form_builder)]
+  	label.html_safe
+	end
+  
   def spaced_render(options = {})
     coll = options[:collection].collect do |item|
       render :partial => options[:partial], :object => item, :locals => options[:locals]

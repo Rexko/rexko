@@ -2,8 +2,7 @@
 	<% nested_attributes_for f, [:glosses, :senses, :subentry], [:notes, :senses, :subentry] %>
 	<fieldset class="sense">
 	  <legend>
-			Sense <%= sense_counter + 1 if defined? sense_counter %> &nbsp; 
-			<%= remove_link_unless_new_record(f) %>
+			<%= label_with_remove_option_for "Sense #{sense_counter + 1 if defined? sense_counter}", f %>
 		</legend>
 		<div class="type-text">
 	      <%= f.label :definition %>

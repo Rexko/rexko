@@ -2,8 +2,7 @@
 	<% nested_attributes_for f, :phonetic_forms %>
 	<fieldset class="headword">
 		<legend>
-			Headword <%= headword_counter + 1 if defined? headword_counter %> &nbsp; 
-			<%= remove_link_unless_new_record(f) %>
+			<%= label_with_remove_option_for "Headword #{headword_counter + 1 if defined? headword_counter}", f %>
 		</legend>
 		
 		<div class="type-text">

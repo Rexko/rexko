@@ -1,6 +1,6 @@
 <% unless (f.object._destroy) %>
 	<div class="interpretation type-select">
-		<%= f.label :sense, "Sense #{remove_link_unless_new_record(f)}" %>
+		<%= f.label :sense, label_with_remove_option_for("Sense", f) %>
 		<%= f.grouped_collection_select :sense_id, 
 																		sense_select(@interpretations ? 
 																			@interpretations[f.object.parse.parsed_form] :
