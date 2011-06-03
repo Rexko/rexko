@@ -141,7 +141,7 @@ class LociController < ApplicationController
   end
   
   def unattached
-    lexeme = Lexeme.find(params[:id]).includes(:headwords)
+    lexeme = Lexeme.where(:id => params[:id]).includes(:headwords)
     
     @loci = Locus.unattached(lexeme).paginate(:page => params[:page], :include => {:source => {:authorship => [:author, :title]}})
     

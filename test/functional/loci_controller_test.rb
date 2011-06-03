@@ -50,4 +50,10 @@ class LociControllerTest < ActionController::TestCase
     
     assert_not_nil heads["Liter"], "failed to find a lexeme for 'Liter'. @headwords = #{heads}"
   end
+  
+  test "should get unattached" do
+  	get :unattached, :id => loci(:nemo).id
+  	
+  	assert_response :success
+  end
 end
