@@ -98,11 +98,11 @@ module ApplicationHelper
       render :partial => options[:partial], :object => item, :locals => options[:locals]
     end
     
-    coll.to_sentence({
+    sanitize(coll.to_sentence({
       :words_connector => options[:spacer] || ", ",
       :last_word_connector => options[:last_spacer] || options[:spacer] || ", ",
       :two_words_connector => options[:dual_spacer] || options[:spacer] || ", "
-    })
+    }))
   end
   
   # Create a <li> link suitable for the navbar, unless we are already on the page.
