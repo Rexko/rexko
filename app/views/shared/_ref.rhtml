@@ -1,5 +1,5 @@
 <%= if @loci.include?(ref) 
 			link_to "[#{greek_numeral(@loci.index(ref).next)}]", :anchor => "locus-#{ref.id}"
 		else
-			link_to "(#{greek_numeral(ref.id)})", ref	
+			link_to "(#{greek_numeral(ref.id)})", ref
 		end %>

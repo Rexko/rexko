@@ -36,7 +36,7 @@ class Etymology < ActiveRecord::Base
   end
   
   def self.rejectable?(attrs)
-    !new(attrs.delete_if{|key, value| key == "_destroy"}).valid?
+    !new(attrs.delete_if{|key, value| ["_destroy", "parses_attributes"].include? key}).valid?
   end
   
 protected 
