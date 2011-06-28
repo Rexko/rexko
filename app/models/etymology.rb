@@ -35,8 +35,10 @@ class Etymology < ActiveRecord::Base
     gloss.present? ? gloss : Gloss.attesting(self, "Etymology").first.try(:gloss)
   end
   
+  # Determine whether the given attribute hash would create an invalid etymology.
   def self.rejectable?(attrs)
-    !new(attrs.delete_if{|key, value| ["_destroy", "parses_attributes"].include? key}).valid?
+  	next_etymon_rejectable = (attrs["next_etymology_attributes"] ? Etymology.rejectable?(attrs["next_etymology_attributes"]) : nil)
+  	[next_etymon_rejectable, attrs["etymon"], attrs["original_language"], attrs["gloss"], attrs["notes"]].all?(&:blank?)
   end
   
 protected 

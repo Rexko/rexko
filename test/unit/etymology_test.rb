@@ -27,4 +27,42 @@ class EtymologyTest < ActiveSupport::TestCase
   test "ancestor_map with next_etymon" do
     assert_equal [{etymologies(:with_same_language_next) => {}}, {etymologies(:with_same_language_next_b) => {}}], etymologies(:with_same_language_next).ancestor_map
   end
+  
+  # Issue #114.
+  test "rejectable?" do
+  	assert !Etymology.rejectable?(
+  		{"_destroy"=>"0",
+ 				"original_language_id"=>"",
+ 				"etymon"=>"[[novem]]",
+ 				"gloss"=>"",
+ 				"parses_attributes"=>
+ 				{"0"=>
+ 					{"_destroy"=>"false",
+ 					"parsed_form"=>""}
+ 				},
+ 				"next_etymon_attributes"=>
+ 				{"_destroy"=>"0",
+ 					"original_language_id"=>"14",
+ 					"etymon"=>"''*mens-ri-''",
+ 					"gloss"=>"",
+ 					"parses_attributes"=>
+ 					{"0"=>
+ 						{"_destroy"=>"false",
+ 						"parsed_form"=>""}
+ 					},
+ 					"next_etymon_attributes"=>
+ 					{"_destroy"=>"false",
+						"original_language_id"=>"",
+ 						"etymon"=>"",
+ 						"gloss"=>"",
+ 						"parses_attributes"=>
+ 						{"0"=>
+ 							{"_destroy"=>"false",
+ 								"parsed_form"=>""}
+ 						}
+ 				},
+				"id"=>"738"},
+ 			"id"=>"737"})
+  end
 end
+
