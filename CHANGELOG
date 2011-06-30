@@ -1,6 +1,7 @@
 ==Since 0.3.1==
 * Updated code for Rails 3
 * [#102] Auto-select-all in lexeme show should now select the correct box when multiple
+* [#98] Use simple sortkey in wiki heading ({{dict|Titlewords}} instead of just {{dict}})
 
 ==Since 0.3==
 * Fix several issues with handling missing data

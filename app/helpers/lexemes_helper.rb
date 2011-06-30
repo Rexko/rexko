@@ -21,9 +21,11 @@ module LexemesHelper
     homographs = dict.try(:homographs_of, headword.form)
     count = homographs.try(:size) || 1
     index = homographs.try(:index, lexeme) || 0
+    sortkey = headword.form.capitalize.delete " " # This will eventually want language- or dictionary-sensitive rules
     
-    "{{%s}}%s" % [
+    "{{%s|%s}}%s" % [
       dict.try(:title),
+      sortkey,
       (" #{roman_numeral(index.next)}." unless count == 1)
     ]
   end
