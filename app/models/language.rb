@@ -42,8 +42,8 @@ class Language < ActiveRecord::Base
 	end
   
   def self.code_for content, subtags = {}
-  	code = self.lang_for(content).iso_639_code
-    
-    code += '-' + subtags[:variant] unless subtags[:variant].blank?
+  	self.lang_for(content).iso_639_code.tap do |code|
+    	code += '-' + subtags[:variant] unless subtags[:variant].blank?
+    end
 	end
 end
