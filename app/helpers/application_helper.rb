@@ -14,7 +14,7 @@ module ApplicationHelper
   def lang_for content, subtags = {}
     langtag = Language.code_for content, subtags
 
-    "xml:lang=\"#{langtag}\" lang=\"#{langtag}\""
+    "xml:lang=\"#{h langtag}\" lang=\"#{h langtag}\"".html_safe
   end
     
   # Link to the first lexeme whose headword matches a given parse's parsed form.
