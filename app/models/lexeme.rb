@@ -80,7 +80,7 @@ class Lexeme < ActiveRecord::Base
   
   # Return the language of the lexeme, based on the dictionaries it's in.   
   def language
-		Language.lang_for(dictionaries)
+		Language.lang_for(dictionaries, :source_language)
   end
   
   # Return all lexemes the parsables attest.

@@ -11,6 +11,12 @@ class Headword < ActiveRecord::Base
   belongs_to :language
   validates_presence_of :form
   
+  before_save :set_defaults
+  
+  def set_defaults
+  	self.language ||= lexeme.language
+	end
+  
   def self.lookup_all_by_parse parse
     self.find_all_by_form(parse.parsed_form)
   end

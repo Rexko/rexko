@@ -34,9 +34,9 @@ class Language < ActiveRecord::Base
   # * 'mul' (ISO 639: 'multiple languages') if more than one 
   #   language is found in the array's content
   # * the Language associated to the content, if they all use the same
-  def self.lang_for content
+  def self.lang_for content, lang_attr = nil
   	[*content].inject(nil) do |memo, elem| 
-      lang = elem ? elem.language || UNDETERMINED : NO_LINGUISTIC_CONTENT
+      lang = elem ? elem.send(lang_attr || :language) || UNDETERMINED : NO_LINGUISTIC_CONTENT
       memo ? if lang == memo then memo else break MULTIPLE_LANGUAGES end : lang
     end || UNDETERMINED
 	end
