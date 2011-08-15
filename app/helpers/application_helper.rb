@@ -12,12 +12,9 @@ module ApplicationHelper
   # May also take a hash of subtags. At the moment the only one specifically
   # handled is 'variant'.
   def lang_for content, subtags = {}
-    langtag = [*content].inject(nil) do |memo, elem| 
-      lang = elem ? elem.language.try(:iso_639_code) || 'und' : 'zxx'
-      memo ? if lang == memo then memo else break 'mul' end : lang
-    end
-    langtag += '-' + subtags[:variant] unless subtags[:variant].blank?
-    "xml:lang=\"#{html_escape langtag}\" lang=\"#{html_escape langtag}\""
+    langtag = Language.code_for content, subtags
+
+    "xml:lang=\"#{langtag}\" lang=\"#{langtag}\""
   end
     
   # Link to the first lexeme whose headword matches a given parse's parsed form.

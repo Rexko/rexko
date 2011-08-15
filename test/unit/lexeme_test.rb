@@ -37,7 +37,7 @@ class LexemeTest < ActiveSupport::TestCase
   test "language" do
     assert lexemes(:literal).respond_to?(:language), "lexeme should respond to #language"
     assert_equal languages(:testwegian), lexemes(:literal).language
-    assert_equal "und", lexemes(:lexeme_without_dictionary).language.name
+    assert_equal Language::UNDETERMINED, lexemes(:lexeme_without_dictionary).language
   end
   
   test "constructions" do

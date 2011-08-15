@@ -5,7 +5,7 @@ class Lexeme < ActiveRecord::Base
   has_many :senses, :through => :subentries
   has_many :headwords
   has_many :phonetic_forms
-  
+    
   scope :attested_by, lambda {|parsables, type|
     joins(HASH_MAP_TO_PARSE).where({ :parses => { :parsable_id => parsables, :parsable_type => type }})
   }
@@ -78,9 +78,9 @@ class Lexeme < ActiveRecord::Base
     Lexeme.joins(:headwords).where(["headwords.form = ? OR headwords.form = ?", form, swapform]).first
   end
   
-  # Return the language of the lexeme, based on the first dictionary it's in.   
+  # Return the language of the lexeme, based on the dictionaries it's in.   
   def language
-    dictionaries.first.try(:language) || Language.new(:iso_639_code => "und")
+		Language.lang_for(dictionaries)
   end
   
   # Return all lexemes the parsables attest.
