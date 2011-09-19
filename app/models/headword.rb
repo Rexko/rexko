@@ -14,7 +14,9 @@ class Headword < ActiveRecord::Base
   before_save :set_defaults
   
   def set_defaults
-  	self.language ||= lexeme.language
+  	default_language = lexeme.try(:language) || Language.new
+ 
+  	self.language ||= default_language
 	end
   
   def self.lookup_all_by_parse parse
