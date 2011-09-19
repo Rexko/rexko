@@ -10,4 +10,4 @@ two:
 three:
   id: 3
   title: Test dictionary
-  language_id: 1
+  source_language_id: 1
