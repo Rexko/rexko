@@ -18,4 +18,10 @@ class LocusTest < ActiveSupport::TestCase
     
     assert Locus.unattached(lexemes(:liter_lex)).present?
   end
+  
+  test "attesting should not return dups" do
+  	loci = Locus.attesting(lexemes(:literal)).all
+  	
+  	assert_equal loci.uniq, loci
+  end
 end

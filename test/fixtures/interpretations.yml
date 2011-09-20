@@ -43,3 +43,11 @@ for_chainB:
 for_chainB2:
   parse_id: 52
   sense_id: 52
+
+orig_one:
+  parse_id: 1
+  sense_id: 1
+
+dup_one:
+  parse_id: 12
+  sense_id: 1

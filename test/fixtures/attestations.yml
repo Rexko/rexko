@@ -8,8 +8,13 @@ one: #
 
 valid_attestation:
     id:             1
-    locus:          1
+    locus_id:          1
     attested_form:  foo
+
+dup_of_valid_attestation:
+  id:   40
+  locus_id:  1
+  attested_form: foo
 
 invalid_attestation:
     id:     2

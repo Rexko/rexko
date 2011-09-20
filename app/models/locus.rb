@@ -6,7 +6,8 @@ class Locus < ActiveRecord::Base
   # Takes a lexeme and returns 
   scope :attesting, lambda { |lexeme|
     { :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}},
-    :conditions => { :subentries => { :lexeme_id => [*lexeme].collect(&:id) }} }
+    :conditions => { :subentries => { :lexeme_id => [*lexeme].collect(&:id) }},
+    :group => 'loci.id' }
   }
   
   scope :unattached, lambda {|lexeme|

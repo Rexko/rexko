@@ -46,9 +46,9 @@ class LexemesControllerTest < ActionController::TestCase
   def test_fixture_should_set_up_correctly
     assert lexemes(:liter_lex).headwords.count > 0, "Test fixture should have more than zero headwords"
     assert loci(:nemo).attests?("litre"), "Fixture loci(:nemo) should attest 'litre'."
-    assert Locus.attesting(lexemes(:liter_lex)).count > 0, "Loci should attest the 'liter' lexeme."
+    assert Locus.attesting(lexemes(:liter_lex)).all.count > 0, "Loci should attest the 'liter' lexeme."
 
-    assert lexemes(:liter_lex).loci.count > 0, "Test fixture does not have any loci for further tests"    
+    assert lexemes(:liter_lex).loci.all.count > 0, "Test fixture does not have any loci for further tests"    
   end
   
   # 'show' should create a @loci_for hash that breaks out constructions by 

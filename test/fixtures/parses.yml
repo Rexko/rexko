@@ -5,6 +5,12 @@ one:
     parsable_id: 1
     parsable_type: Attestation
     parsed_form:  foo
+    
+dup_of_one:
+    id: 12
+    parsable_id: 40
+    parsable_type: Attestation
+    parsed_form: foo
 
 two:
     id: 2
