@@ -43,4 +43,17 @@ class EtymologiesHelperTest < ActionView::TestCase
     assert_equal html_escape("1ary A \"test\" + 1ary B \"test 2\"; where 1ary A is from 2ary A, and where 1ary B is from 2ary B."), wiki_format(etymologies(:chained_B))
     assert_equal "#{ETYMON % "1ary A"} #{GLOSS % "test"} + #{ETYMON % "1ary B"} #{GLOSS % "test 2"}; where #{ETYMON % "1ary A"} is from #{ETYMON % "2ary A"}, and where #{ETYMON % "1ary B"} is from #{ETYMON % "2ary B"}.", html_format(etymologies(:chained_B))
   end
+  
+  test "more than two etyma" do
+  	etym = etymologies(:with_same_language_next)
+  	new_etym = Etymology.create({:etymon => "phobos", :gloss => "fear", :original_language => languages(:latin)})
+  	etymologies(:with_same_language_next_b).next_etymon = new_etym
+
+		assert_equal new_etym, etymologies(:with_same_language_next_b).next_etymon
+
+    assert_equal "#{SOURCE_LANG % "Latin"} #{ETYMON % "unus"} #{GLOSS % "one"} + #{ETYMON % "cornu"} #{GLOSS % "horn"} + #{ETYMON % "phobos"} #{GLOSS % "fear"}.", 
+      html_format(etymologies(:with_same_language_next))  	
+		assert_equal html_escape("Latin unus \"one\" + cornu \"horn\" + phobos \"fear\""),
+			wiki_format(etymologies(:with_same_language_next))
+	end
 end
