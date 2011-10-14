@@ -17,7 +17,13 @@ class Etymology < ActiveRecord::Base
   
   # Hash map of this etymon and its parent etyma
   def ancestor_map ignore=[]
-    return { self => {} } if ignore.include? self
+ 		if ignore.include? self
+			if next_etymon.present? && !(ignore.include?(next_etymon))
+				return [ { self => {} }, next_etymon.ancestor_map(ignore) ]
+			else
+				return { self => {} } 
+			end
+ 		end
     
     ignore << self
     parent_etym = primary_parent

@@ -3,35 +3,61 @@ module EtymologiesHelper
     wiki_format etym, nil, nil, true
   end
   
+  # Given an Etymology, format it and all its ancestors into a convenient text format.
+  # The additional arguments 'parent' and 'tree' are used by the method when calling itself recursively.
+  # 'Parent' should be the previous word in the etymology (which is not necessarily the ancestor word, I think)
+  # 'tree' is all further etyma in the ancestry that will need to be recursed this round through.
   def wiki_format etym, parent = nil, tree = nil, use_html = false # FIX: "use_html" is kludgy
+		# On first run-through, assert we're at the top level and define the 'tree' variable as etym's ancestor hash with etym removed.
     unless tree
       top_level = true
       map = etym.ancestor_map
+
+			# An ancestor map will be a Hash if there is no next_etymon; otherwise it will be an Array.
+			# e.g. { etym => { parent_etym => { grandparent_etym => {} } } }
+			# or   [ { etym => { parent_etym => { grandparent_etym => {} } } }, { next_etym => {} } ]
       if map.is_a? Hash
-        tree = map[etym]
+        tree = map[etym] # { parent_etym => { grandparent_etym => {}}}
       else
         until map[0].is_a? Hash
           map = map[0]
         end
         
-        map[0] = map[0][etym]
+        map[0] = map[0][etym] # [ { etym => { parent_etym => { grandparent_etym => {} } } }, { next_etym => {} } ]
+                              # becomes
+                              # [ { parent_etym => { grandparent_etym => {} } }, { next_etym => {} } ]
         tree = map
       end
     end
     
+    # Different actions based on what we're working with.
+    # On initial run etym should only be an Etymology.
+    # On subsequent runs, etym will be a Hash if there is no next_etymon; otherwise it will be an Array.
     case etym
+    # If the tree to recurse does not have a next_etymon
+    # e.g. { parent_etym => { grandparent_etym => {}}}
+    # or   { parent_etym => [{ grandparent_etym => {}}, { next_grandparent_etym => {}}]
+    # Then get the wiki_format of the parent_etym, keeping the value of parent, and using the value of parent_etym as the tree.
+    # We should get ", from [etymology of parent_etym]"
     when Hash
       each_tree = etym.collect do |key, value|
         wiki_format key, parent, value, use_html
       end
       
       pre_note = ", from " + each_tree.to_sentence
+    # If the tree to recurse has a next_etymon
+    # e.g. [ { parent_etym => { grandparent_etym => {} } }, { next_etym => {} } ]
+    # or   [ { parent_etym => { grandparent_etym => {} } }, [{ next_etym => {} }, { third_etym => {} }] ]
+    # or   [ { parent_etym => [ {grandparent_etym => {} }, {next_grandparent_etym => {} }], [{ next_etym => {}}, {third_etym => {} }]]
+    # or   [ { parent_etym => {} }, [{ next_etym => {} }, { third_etym => {} ]] 
+    # etc.
     when Array
       parent_ancestor = etym.shift
       parent_ancestor = wiki_format parent_ancestor.keys[0], parent, parent_ancestor.values[0], use_html unless parent_ancestor.blank?
 
+			etym.flatten!
       peers = etym.collect do |peer_hash|
-        wiki_format peer_hash.keys[0], parent, "", use_html
+     		wiki_format peer_hash.keys[0], parent, "", use_html
       end
 
       each_etym = etym.collect do |peer_hash|
@@ -82,6 +108,8 @@ module EtymologiesHelper
           pre_note << ", and where #{short_peer} is from #{ancestry}"
         end
       end
+    # When 'etym' is an etymology set pre_note to 'Language etymon "gloss"' and recurse, 
+    # using 'tree' as both the etymon and the tree, and using the etymon as the parent.
     when Etymology
       if use_html
         language = content_tag :span, :class => "lexform-source-language" do

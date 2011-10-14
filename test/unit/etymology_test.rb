@@ -25,7 +25,7 @@ class EtymologyTest < ActiveSupport::TestCase
   end
   
   test "ancestor_map with next_etymon" do
-    assert_equal [{etymologies(:with_same_language_next) => {}}, {etymologies(:with_same_language_next_b) => {}}], etymologies(:with_same_language_next).ancestor_map
+    assert_equal [{etymologies(:with_same_language_next) => {}}, [{etymologies(:with_same_language_next_b) => {}}, {etymologies(:second_etym) => {}}]], etymologies(:with_same_language_next).ancestor_map
   end
   
   # Issue #114.

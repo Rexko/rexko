@@ -12,13 +12,13 @@ class EtymologiesHelperTest < ActionView::TestCase
   end
   
   test "html_format with nested etyma" do
-    assert_equal "#{SOURCE_LANG % "Latin"} #{ETYMON % "unus"} #{GLOSS % "one"} + #{ETYMON % "cornu"} #{GLOSS % "horn"}.", 
+    assert_equal "#{SOURCE_LANG % "Latin"} #{ETYMON % "unus"} #{GLOSS % "one"} + #{ETYMON % "cornu"} #{GLOSS % "horn"} + #{SOURCE_LANG % "Testwegian"} #{ETYMON % "phobos"}.", 
       html_format(etymologies(:with_same_language_next))
   end
   
   test "wiki_format" do
     assert_equal html_escape("Latin unum \"one\"."), wiki_format(etymologies(:simple))
-    assert_equal html_escape("Latin unus \"one\" + cornu \"horn\"."),
+    assert_equal html_escape("Latin unus \"one\" + cornu \"horn\" + Testwegian phobos."),
       wiki_format(etymologies(:with_same_language_next))
   end
   
@@ -46,14 +46,10 @@ class EtymologiesHelperTest < ActionView::TestCase
   
   test "more than two etyma" do
   	etym = etymologies(:with_same_language_next)
-  	new_etym = Etymology.create({:etymon => "phobos", :gloss => "fear", :original_language => languages(:latin)})
-  	etymologies(:with_same_language_next_b).next_etymon = new_etym
 
-		assert_equal new_etym, etymologies(:with_same_language_next_b).next_etymon
-
-    assert_equal "#{SOURCE_LANG % "Latin"} #{ETYMON % "unus"} #{GLOSS % "one"} + #{ETYMON % "cornu"} #{GLOSS % "horn"} + #{ETYMON % "phobos"} #{GLOSS % "fear"}.", 
+    assert_equal "#{SOURCE_LANG % "Latin"} #{ETYMON % "unus"} #{GLOSS % "one"} + #{ETYMON % "cornu"} #{GLOSS % "horn"} + #{SOURCE_LANG % "Testwegian"} #{ETYMON % "phobos"}.", 
       html_format(etymologies(:with_same_language_next))  	
-		assert_equal html_escape("Latin unus \"one\" + cornu \"horn\" + phobos \"fear\""),
+		assert_equal html_escape("Latin unus \"one\" + cornu \"horn\" + Testwegian phobos."),
 			wiki_format(etymologies(:with_same_language_next))
 	end
 end

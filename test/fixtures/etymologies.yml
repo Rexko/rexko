@@ -28,6 +28,7 @@ with_same_language_next_b:
   etymon: cornu
   original_language_id: 2
   gloss: horn
+  next_etymon_id: 60
 
 with_parse:
   id: 30
@@ -64,3 +65,8 @@ chained_B3:
 chained_B4:
   id: 55
   etymon: 2ary B
+
+second_etym:
+  id: 60
+  etymon: phobos
+  original_language_id: 1
