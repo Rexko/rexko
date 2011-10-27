@@ -1,4 +1,7 @@
 module ApplicationHelper
+	HW_LINK = "<span class='hw-link%s'>%s</span>"
+	NO_ENTRY_TEXT = "[No entry for <i>%s</i> &times;%d]"
+
   # lang_for: Builds a string with lang= and xml:lang= attributes usable in an 
   # XHTML element.  Takes as argument an element or an array.
   #
@@ -22,11 +25,10 @@ module ApplicationHelper
   def headword_link (parse)
     is_wanted = parse == @wantedparse
     head = @headwords ? @headwords[parse.parsed_form] : Lexeme.lookup_by_headword(parse.parsed_form)
+		head = head.respond_to?(:lexeme) ? head.lexeme : head
 
     if head
-      link_to(("<span class='hw-link%s'>#{html_escape parse.parsed_form}</span>" % [
-        (" wanted" if is_wanted),
-      ]).html_safe, head.respond_to?(:lexeme) ? head.lexeme : head )
+      link_to((HW_LINK % [(" wanted" if is_wanted), html_escape(parse.parsed_form)]).html_safe, head )
     else
       new_headword_link parse, is_wanted
     end
@@ -35,11 +37,11 @@ module ApplicationHelper
   # Verbose link to create a new lexeme based on a headword, which lists how many
   # times that headword is attested in the loci
   def new_headword_link (parse, is_wanted = false)
-    link_to(("<span class='hw-link%s'>[No entry for <i>%s</i> &times;%d]</span>" % [
-      (" wanted" if is_wanted),
-      html_escape(parse.parsed_form),
-      parse.respond_to?(:count_all) ? parse.count_all : parse.count
-    ]).html_safe, exact_lexeme_path(:headword => parse.parsed_form))
+  	count = parse.respond_to?(:count_all) ? parse.count_all : parse.count
+  	no_entry = NO_ENTRY_TEXT % [html_escape(parse.parsed_form), count]
+  
+    link_to((HW_LINK % [(" wanted" if is_wanted), no_entry]).html_safe, 
+    	exact_lexeme_path(:headword => parse.parsed_form))
   end
   
   def sentence_case str
