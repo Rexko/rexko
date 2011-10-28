@@ -44,7 +44,7 @@ class Etymology < ActiveRecord::Base
   # Determine whether the given attribute hash would create an invalid etymology.
   def self.rejectable?(attrs)
   	next_etymon_rejectable = (attrs["next_etymology_attributes"] ? Etymology.rejectable?(attrs["next_etymology_attributes"]) : nil)
-  	[next_etymon_rejectable, attrs["etymon"], attrs["original_language"], attrs["gloss"], attrs["notes"]].all?(&:blank?)
+  	[next_etymon_rejectable, attrs["etymon"], attrs["original_language"], attrs["gloss"], attrs["notes_attributes"]].all?(&:blank?)
   end
   
 protected 
