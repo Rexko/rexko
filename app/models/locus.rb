@@ -27,6 +27,6 @@ class Locus < ActiveRecord::Base
   # Returns true if form attests either an attested_form or a parsed_form under this locus.
   # Option to limit to one or the other may be needed later.
   def attests? form
-     (attestations.collect(&:attested_form) + parses.collect(&:parsed_form)).include? form
+     (attestations.collect(&:attested_form) + Parse.forms_of(parses)).include? form
   end
 end

@@ -35,6 +35,12 @@ class Parse < ActiveRecord::Base
   def count
     Parse.count(:conditions => {:parsed_form => parsed_form})
   end
+
+	# Return an array of all the parsed_forms in the supplied array of parses
+	def self.forms_of parse_array
+		result = Parse.select(:parsed_form).where(:id => parse_array)
+		result.collect(&:parsed_form)
+	end
   
   # Return a count of all uninterpreted parses whose parsed form matches the given headwords
   def self.count_unattached_to *headwords
