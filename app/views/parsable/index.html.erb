@@ -1,2 +1,32 @@
-<h1>Parsable#index</h1>
-<p>Find me in app/views/parsable/index.html.erb</p>
+<h1>Listing parsables</h1>
+
+<% if @parsables %>
+<table width="100%">
+<% @parsables.each_with_index do |pable, i| %>
+			<% if pable.parsable %>
+	<tr>
+		<td colspan="3">
+			<%= render(:partial => "shared/%s" % [pable.parsable_type.underscore], :object => pable.parsable, :locals => { :locus_counter => display_obj_of(pable).id - 1 })%>
+		</td>
+	</tr>
+	<tr>
+	  <td><%= link_to 'Show', display_obj_of(pable) %></td>
+	  <td><%= link_to 'Edit', edit_polymorphic_path(display_obj_of(pable)) %></td>
+	  <td><%= link_to 'Destroy', display_obj_of(pable), :confirm => 'Are you sure?', :method => :delete %></td>
+	</tr>
+			<% else %>
+	<tr>
+		<td colspan="3">
+				Parse <%= pable.id %> with parsed form <%= pable.parsed_form %> does not have a parsable. <%= link_to 'Destroy it', pable, :confirm => 'Are you sure?', :method => :delete %>
+		</td>
+	</tr>
+			<% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= will_paginate @parsables %>
+<% else %>
+<p><i>No parsables to list</i></p>
+<% end %>

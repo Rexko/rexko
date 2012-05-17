@@ -1,0 +1,2 @@
+﻿<p>Attested as <b><%= attestation.attested_form %></b> in:</p>
+<%= attestation.locus ? render(:partial => "shared/locus", :object => attestation.locus, :locals => { :locus_counter => locus_counter }) : sanitize("<i>Locus not found</i>") %>
