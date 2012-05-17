@@ -3,8 +3,17 @@ module ParsableHelper
 		case parse.parsable_type
 		when "Attestation"
 			parse.parsable.locus || parse.parsable
+		when "Etymology"
+			parse.parsable.subentries.first.try(:lexeme) || parse.parsable
 		else
 			parse.parsable
 		end	
+	end
+	
+	def display_form_for parse
+		kind = parse.parsable_type.underscore
+		lookup_context.exists?("parsable/" + kind, [], :partial) ? 
+			"parsable/" + kind :
+			"shared/" + kind
 	end
 end

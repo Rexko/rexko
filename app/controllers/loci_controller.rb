@@ -140,12 +140,15 @@ class LociController < ApplicationController
     end
   end
   
+  # TODO: Replace references to this with direct references to parsable/index
   def unattached
-    lexeme = Lexeme.where(:id => params[:id]).includes(:headwords)
+    lexeme = Lexeme.where(:id => params[:id]).includes(:headwords).first
+  	forms = lexeme.headword_forms
+
+  	@parsables = Parse.unattached_to(forms).paginate(:page => params[:page], :per_page => 5)
+  	@page_title = "Unattached to %s" % forms.to_sentence
     
-    @loci = Locus.unattached(lexeme).paginate(:page => params[:page], :include => {:source => {:authorship => [:author, :title]}})
-    
-    render "index"
+    render "parsable/index"
   end
   
   def show_by_author

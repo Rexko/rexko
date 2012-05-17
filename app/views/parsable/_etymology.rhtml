@@ -1,0 +1,2 @@
+﻿<p>Etymon of <%= etymology.subentries.first.try(:lexeme).try(:language).try(:name) || '' %> <b><%= etymology.subentries.first.try(:lexeme).try(:headword_forms).try(:to_sentence) || '(Lexeme not found)' %></b> in:</p>
+<%= render :partial => "shared/subentry", :collection => etymology.subentries %>
