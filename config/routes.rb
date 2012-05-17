@@ -1,4 +1,6 @@
 Lexicon::Application.routes.draw do
+  get "parsable/index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
