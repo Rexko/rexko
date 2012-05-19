@@ -3,6 +3,7 @@
 * [#118] Fixed crash of etymology formatter when a compound has 3+ components
 * [#120] Fixed issue with creating note-only etymologies
 * [#73], [#105] Display of unattached parses now shows more than just loci, resolving count discrepancy
+* [#46] Can now create new senses from locus edit form
 
 ==Since 0.3.1==
 * Updated code for Rails 3

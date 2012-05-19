@@ -72,7 +72,7 @@ module ApplicationHelper
 
     form_builder.fields_for(method, options[:object], :child_index => 'NEW_RECORD') do |f|  
       render(:partial => options[:partial], :locals => { options[:form_builder_local] => f })  
-    end  
+    end
   end  
 
   def generate_template(form_builder, method, options = {})  

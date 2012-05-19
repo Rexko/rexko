@@ -106,6 +106,20 @@ class LociController < ApplicationController
     @authorship.title = params[:authorship][:title_id].empty? ? @authorship.build_title(params[:new_title]) : Title.find(params[:authorship][:title_id])
     @authorship.author = params[:authorship][:author_id].empty? ? @authorship.build_author(params[:new_author]) : Author.find(params[:authorship][:author_id])
 
+		atesute = params[:locus][:attestations_attributes]
+		atesute.each {|att_k, att_v|
+			paasu = att_v[:parses_attributes]
+			paasu.each {|par_k, par_v|
+				intah = par_v[:interpretations_attributes]
+				intah.each {|int_k, int_v|
+					if int_v[:sense_id].try(:slice, "new")
+						int_v[:sense_attributes][:subentry_id] = int_v[:sense_id].split('-')[1]
+						int_v.delete(:sense_id)
+					end
+				} if intah
+			} if paasu
+		} if atesute
+		
     @locus.attributes = params[:locus]
     @source.attributes = params[:source]
     @authorship.attributes = params[:authorship]
