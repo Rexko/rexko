@@ -8,4 +8,9 @@ class Gloss < ActiveRecord::Base
   }
   
   HASH_MAP_TO_PARSE = { :sense => Sense::HASH_MAP_TO_PARSE }
+  
+  # Default to the target_language of the lexeme's dictionaries if not defined
+  def language
+  	read_attribute(:language) || (Language.lang_for(sense.lexeme.dictionaries, :target_language) if sense.try(:lexeme))
+	end
 end

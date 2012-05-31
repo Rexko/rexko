@@ -47,6 +47,12 @@ class Etymology < ActiveRecord::Base
   	[next_etymon_rejectable, attrs["etymon"], attrs["original_language"], attrs["gloss"], attrs["notes_attributes"]].all?(&:blank?)
   end
   
+  # Default to multiple (as it usually is)
+  # Correct behaviour should be language of dictionaries + language of etyma
+  def language
+  	read_attribute(:language) || Language::MULTIPLE_LANGUAGES
+	end
+  
 protected 
   def validate_sufficient_data
     if [etymon, original_language, gloss, notes].all?(&:blank?)

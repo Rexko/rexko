@@ -19,6 +19,11 @@ class Sense < ActiveRecord::Base
     Sense.find(:all, :joins => [{ :subentry => { :lexeme => :headwords} } ], :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform])
   end
   
+  # Default to the language of the lexeme's dictionaries if not defined
+  def language
+  	read_attribute(:language) || (Language.lang_for(lexeme.dictionaries) if lexeme)
+	end
+  
 protected
   def validate_sufficient_data
     if definition.blank? && glosses.empty?
