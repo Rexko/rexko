@@ -1,6 +1,6 @@
 class Attestation < ActiveRecord::Base
   belongs_to :locus
-  has_many :parses, :as => :parsable
+  has_many :parses, :as => :parsable, :dependent => :destroy
   validates_presence_of :attested_form
   
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
