@@ -1,3 +1,6 @@
+==Since 0.3.3==
+* [#124] Locus search by author should not be limited to one author
+
 ==Since 0.3.2==
 * [#69] Locus#attesting should not return duplicate loci
 * [#118] Fixed crash of etymology formatter when a compound has 3+ components

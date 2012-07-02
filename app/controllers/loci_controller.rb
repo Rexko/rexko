@@ -166,9 +166,9 @@ class LociController < ApplicationController
   end
   
   def show_by_author
-    author = Author.where(["name LIKE ?", "%" + params[:author] + "%"]).first
-    if author 
-      author_loci = author.sources.collect(&:loci).flatten #ugh
+    authors = Author.where(["name LIKE ?", "%" + params[:author] + "%"])
+    if authors
+      author_loci = Locus.authored_by authors
     
       @loci = author_loci.paginate(:page => params[:page], :include => {:source => {:authorship => [:author, :title]}})
     end

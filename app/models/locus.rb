@@ -29,4 +29,9 @@ class Locus < ActiveRecord::Base
   def attests? form
      (attestations.collect(&:attested_form) + Parse.forms_of(parses)).include? form
   end
+
+	# Given an Author or array of Authors, return all loci authored by them.
+  def self.authored_by author_array
+		Locus.joins( :source => :authorship ).where( :authorships => { :author_id => author_array }).uniq
+	end
 end
