@@ -11,25 +11,7 @@ module EtymologiesHelper
 		# On first run-through, assert we're at the top level and define the 'tree' variable as etym's ancestor hash with etym removed.
     unless tree
       top_level = true
-#      map = etym.ancestor_map
 			tree = etym.try(:ancestor_map)
-			
-			# An ancestor map will be a Hash if there is no next_etymon; otherwise it will be an Array.
-			# e.g. { etym => { parent_etym => { grandparent_etym => {} } } }
-			# or   [ { etym => { parent_etym => { grandparent_etym => {} } } }, { next_etym => {} } ]
-      if map.is_a? Hash
-        tree = map[etym] # { parent_etym => { grandparent_etym => {}}}
-      else
-        until map[0].is_a? Hash
-          map = map[0]
-        end
-        
-#        map[0] = map[0][etym] # [ { etym => { parent_etym => { grandparent_etym => {} } } }, { next_etym => {} } ]
-        map[0][{}] = map[0].delete(etym)                     # becomes
-                              # [ { parent_etym => { grandparent_etym => {} } }, { next_etym => {} } ]
-                              # check for an error in this logic
-        tree = map
-      end if false
     end
     
     # Different actions based on what we're working with.
@@ -57,12 +39,10 @@ module EtymologiesHelper
     # etc.
     when Array
       parent_ancestor = etym.shift
-#      is_first_level_parent = parent_ancestor[{}].present?
      	orig_parent = parent_ancestor.keys[0]
      	orig_ancestor = parent_ancestor.values[0]
      	parent_ancestor = parent_ancestor.keys[0]
       pre_note = ""
-#	    unless parent_ancestor.blank? || is_first_level_parent
      	pre_note << ", from " if parent
      	pre_note << wiki_format(parent_ancestor, parent, "", use_html)
 
@@ -72,16 +52,8 @@ module EtymologiesHelper
 			etym.flatten!
       peers = etym.collect do |peer_hash|
      		wiki_format peer_hash.keys[0], parent, "", use_html
-#     		parent = peer_hash.keys[0]
       end
 
-      each_etym = etym.collect do |peer_hash|
-        peer_hash.collect do |key, value|
-          wiki_format key, parent, value, use_html
-        end
-      end.flatten(1) if false
-
-#      pre_note = ""
       peers.each do |peer|
         pre_note << " + #{peer}"
       end
