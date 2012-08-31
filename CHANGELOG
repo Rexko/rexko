@@ -1,5 +1,6 @@
 ==Since 0.3.3==
 * [#124] Locus search by author should not be limited to one author
+* [#117] Rewrote etymology text generator
 
 ==Since 0.3.2==
 * [#69] Locus#attesting should not return duplicate loci

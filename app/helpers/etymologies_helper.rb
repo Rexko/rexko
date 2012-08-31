@@ -11,8 +11,9 @@ module EtymologiesHelper
 		# On first run-through, assert we're at the top level and define the 'tree' variable as etym's ancestor hash with etym removed.
     unless tree
       top_level = true
-      map = etym.ancestor_map
-
+#      map = etym.ancestor_map
+			tree = etym.try(:ancestor_map)
+			
 			# An ancestor map will be a Hash if there is no next_etymon; otherwise it will be an Array.
 			# e.g. { etym => { parent_etym => { grandparent_etym => {} } } }
 			# or   [ { etym => { parent_etym => { grandparent_etym => {} } } }, { next_etym => {} } ]
@@ -23,11 +24,12 @@ module EtymologiesHelper
           map = map[0]
         end
         
-        map[0] = map[0][etym] # [ { etym => { parent_etym => { grandparent_etym => {} } } }, { next_etym => {} } ]
-                              # becomes
+#        map[0] = map[0][etym] # [ { etym => { parent_etym => { grandparent_etym => {} } } }, { next_etym => {} } ]
+        map[0][{}] = map[0].delete(etym)                     # becomes
                               # [ { parent_etym => { grandparent_etym => {} } }, { next_etym => {} } ]
+                              # check for an error in this logic
         tree = map
-      end
+      end if false
     end
     
     # Different actions based on what we're working with.
@@ -44,47 +46,64 @@ module EtymologiesHelper
         wiki_format key, parent, value, use_html
       end
       
-      pre_note = ", from " + each_tree.to_sentence
+      
+      pre_note = ", from " if parent
+      pre_note = (pre_note || "") << each_tree.to_sentence
     # If the tree to recurse has a next_etymon
-    # e.g. [ { parent_etym => { grandparent_etym => {} } }, { next_etym => {} } ]
-    # or   [ { parent_etym => { grandparent_etym => {} } }, [{ next_etym => {} }, { third_etym => {} }] ]
-    # or   [ { parent_etym => [ {grandparent_etym => {} }, {next_grandparent_etym => {} }], [{ next_etym => {}}, {third_etym => {} }]]
-    # or   [ { parent_etym => {} }, [{ next_etym => {} }, { third_etym => {} ]] 
+    # e.g. [ {{} => { parent_etym => { grandparent_etym => {} } }}, { next_etym => {} } ]
+    # or   [ {{} => { parent_etym => { grandparent_etym => {} } }}, [{ next_etym => {} }, { third_etym => {} }] ]
+    # or   [ {{} => { parent_etym => [ {grandparent_etym => {} }}, {next_grandparent_etym => {} }], [{ next_etym => {}}, {third_etym => {} }]]
+    # or   [ {{} => { parent_etym => {} }}, [{ next_etym => {} }, { third_etym => {} ]] 
     # etc.
     when Array
       parent_ancestor = etym.shift
-      parent_ancestor = wiki_format parent_ancestor.keys[0], parent, parent_ancestor.values[0], use_html unless parent_ancestor.blank?
+#      is_first_level_parent = parent_ancestor[{}].present?
+     	orig_parent = parent_ancestor.keys[0]
+     	orig_ancestor = parent_ancestor.values[0]
+     	parent_ancestor = parent_ancestor.keys[0]
+      pre_note = ""
+#	    unless parent_ancestor.blank? || is_first_level_parent
+     	pre_note << ", from " if parent
+     	pre_note << wiki_format(parent_ancestor, parent, "", use_html)
+
+      parent_ancestor = wiki_format parent_ancestor.keys[0], parent, parent_ancestor.values[0], use_html unless (parent_ancestor.blank? || parent_ancestor.is_a?(Etymology))
+			parent = orig_parent
 
 			etym.flatten!
       peers = etym.collect do |peer_hash|
      		wiki_format peer_hash.keys[0], parent, "", use_html
+#     		parent = peer_hash.keys[0]
       end
 
       each_etym = etym.collect do |peer_hash|
         peer_hash.collect do |key, value|
           wiki_format key, parent, value, use_html
         end
-      end.flatten(1)
+      end.flatten(1) if false
 
-      pre_note = ""
+#      pre_note = ""
       peers.each do |peer|
         pre_note << " + #{peer}"
       end
+      
+      appended_ancestor = false
       unless parent_ancestor.blank?
         short_parent = if use_html 
           language = content_tag :span, :class => "lexform-source-language" do
-            html_escape parent.original_language.name
-          end if parent.original_language 
+            html_escape orig_parent.original_language.name
+          end if orig_parent && orig_parent.original_language 
 
           etymon = content_tag :span, :class => "lexform-etymon" do
-            wh parent.etymon
+            wh orig_parent.etymon
           end
           
           [language, etymon].compact.join(" ")
         else
-          parent.to_s
+          orig_parent.to_s
         end
-        pre_note << "; where #{short_parent} is from #{parent_ancestor}"
+        orig_ancestry = wiki_format(orig_ancestor.keys[0], parent, orig_ancestor.values[0], use_html) if orig_ancestor.values[0]
+        pre_note << "; where #{short_parent} is from #{orig_ancestry}" if orig_ancestry
+        appended_ancestor = true if orig_ancestry
       end
       etym.each do |peer_hash|
         peer = peer_hash.keys[0]
@@ -104,8 +123,13 @@ module EtymologiesHelper
             peer.to_s
           end
 
-          ancestry = wiki_format ancestor.keys[0], peer, ancestor.values[0], use_html
-          pre_note << ", and where #{short_peer} is from #{ancestry}"
+					case ancestor
+					when Hash
+	          ancestry = wiki_format ancestor.keys[0], peer, ancestor.values[0], use_html
+	        when Array
+	        	#TODO: Issue 126
+	        end
+          pre_note << (appended_ancestor ? ", and " : "; ") << "where #{short_peer} is from #{ancestry}"
         end
       end
     # When 'etym' is an etymology set pre_note to 'Language etymon "gloss"' and recurse, 
@@ -132,17 +156,17 @@ module EtymologiesHelper
         etymon = html_escape etym.etymon
 
         gloss = html_escape('"' << etym.primary_gloss << '"') if etym.primary_gloss
-      end
+      end unless top_level
 
       pre_note = [language, etymon, gloss].compact.join(" ") 
 
       unless tree.blank?
-        tree_note = wiki_format tree, etym, tree, use_html
+        tree_note = wiki_format tree, (etym unless top_level), tree, use_html
         pre_note = pre_note + tree_note
       end
     end
     
-    pre_note << "." if top_level
+    pre_note = (pre_note || "") << "." if top_level
     pre_note 
   end
 end

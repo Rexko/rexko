@@ -48,8 +48,47 @@ class EtymologiesHelperTest < ActionView::TestCase
   	etym = etymologies(:with_same_language_next)
 
     assert_equal "#{SOURCE_LANG % "Latin"} #{ETYMON % "unus"} #{GLOSS % "one"} + #{ETYMON % "cornu"} #{GLOSS % "horn"} + #{SOURCE_LANG % "Testwegian"} #{ETYMON % "phobos"}.", 
-      html_format(etymologies(:with_same_language_next))  	
+      html_format(etymologies(:with_same_language_next))
 		assert_equal html_escape("Latin unus \"one\" + cornu \"horn\" + Testwegian phobos."),
 			wiki_format(etymologies(:with_same_language_next))
+	end
+	
+	# Was returning:
+	# [abdo + do; where abdo is from ab, from Proto-Indo-European *apo, and where do is from Proto-Indo-European *dH3-.]
+	# Should be returning:
+	# [abdo; from ab + do, where ab is from Proto-Indo-European *apo, and where do is from Proto-Indo-European *dH3-..]
+	test "issue #117 - anomalous output" do
+		words = [[:abdomen, :abdo], [:abdo, [:ab, :do]], [:ab, :apo], [:do, :dh3], [:apo], [:dh3]]
+		subentries = {}
+		
+		words.each do |word|
+			subentries[word[0]] = Subentry.create!(:paradigm => word[0].to_s)
+			subentries[word[0]].senses.create(:definition => word[0].to_s)
+		end
+		words.each do |word|
+			cur = subentries[word[0]]
+			if word.shift
+				if word[0].is_a? Array
+					next_etym = Etymology.create!(:etymon => word[0][1].to_s)
+					pars = next_etym.parses.create(:parsed_form => word[0][1].to_s)
+					terp = pars.interpretations.create(:sense => subentries[word[0][1]].senses.first)
+
+					etym = cur.etymologies.create(:etymon => word[0][0].to_s, :next_etymon => next_etym)
+					pars = etym.parses.create(:parsed_form => word[0][0].to_s)
+					terp = pars.interpretations.create(:sense => subentries[word[0][0]].senses.first)
+				else 
+					unless word.blank?
+						etym = cur.etymologies.create!(:etymon => word[0].to_s)
+						pars = etym.parses.create(:parsed_form => word[0].to_s)
+						terp = pars.interpretations.create(:sense => subentries[word[0]].senses.first)
+					end
+				end
+			end
+		end
+
+    assert_equal "#{ETYMON % "abdo"}, from #{ETYMON % "ab"} + #{ETYMON % "do"}; where #{ETYMON % "ab"} is from #{ETYMON % "apo"}, and where #{ETYMON % "do"} is from #{ETYMON % "dh3"}.", 
+      html_format(subentries[:abdomen].etymologies.first)  	
+		assert_equal html_escape("abdo, from ab + do; where ab is from apo, and where do is from dh3."),
+			wiki_format(subentries[:abdomen].etymologies.first)
 	end
 end
