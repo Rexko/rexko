@@ -39,19 +39,19 @@ module EtymologiesHelper
     # etc.
     when Array
       parent_ancestor = etym.shift
-     	orig_parent = parent_ancestor.keys[0]
-     	orig_ancestor = parent_ancestor.values[0]
-     	parent_ancestor = parent_ancestor.keys[0]
+      orig_parent = parent_ancestor.keys[0]
+      orig_ancestor = parent_ancestor.values[0]
+      parent_ancestor = parent_ancestor.keys[0]
       pre_note = ""
-     	pre_note << ", from " if parent
-     	pre_note << wiki_format(parent_ancestor, parent, "", use_html)
+      add_from = true if parent
+      pre_note << wiki_format(parent_ancestor, parent, "", use_html)
 
       parent_ancestor = wiki_format parent_ancestor.keys[0], parent, parent_ancestor.values[0], use_html unless (parent_ancestor.blank? || parent_ancestor.is_a?(Etymology))
-			parent = orig_parent
+      parent = orig_parent
 
-			etym.flatten!
+      etym.flatten!
       peers = etym.collect do |peer_hash|
-     		wiki_format peer_hash.keys[0], parent, "", use_html
+        wiki_format peer_hash.keys[0], parent, "", use_html
       end
 
       peers.each do |peer|
@@ -95,13 +95,14 @@ module EtymologiesHelper
             peer.to_s
           end
 
-					case ancestor
-					when Hash
-	          ancestry = wiki_format ancestor.keys[0], peer, ancestor.values[0], use_html
-	        when Array
-	        	#TODO: Issue 126
-	        end
-          pre_note << (appended_ancestor ? ", and " : "; ") << "where #{short_peer} is from #{ancestry}"
+          case ancestor
+          when Hash
+            pre_note = ", from " + pre_note if add_from
+            ancestry = wiki_format ancestor.keys[0], peer, ancestor.values[0], use_html
+          when Array
+            ancestry = wiki_format ancestor, peer, (ancestor.size == 1 ? nil : ancestor[1..-1]), use_html
+          end
+        pre_note << (appended_ancestor ? ", and " : "; ") << "where #{short_peer} is from #{ancestry}"
         end
       end
     # When 'etym' is an etymology set pre_note to 'Language etymon "gloss"' and recurse, 
