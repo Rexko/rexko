@@ -1,6 +1,8 @@
 ==Since 0.3.3==
 * [#124] Locus search by author should not be limited to one author
 * [#117, #126] Rewrote etymology text generator
+* [#86] Removed stray quotes in wiki format when part of speech absent
+* [#133] Fixed issue where exact search with multiple results would return substring results instead
 
 ==Since 0.3.2==
 * [#69] Locus#attesting should not return duplicate loci

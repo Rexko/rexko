@@ -12,7 +12,7 @@ class LexemesController < ApplicationController
   end
 
   def matching
-    @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => Lexeme::SUBSTRING)
+    @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => params[:matchtype] || Lexeme::SUBSTRING)
     
     @page_title = "Lexemes - #{@lexeme.length} results for \"#{params[:headword]}\""
     @lexemes = @lexeme.paginate(:page => params[:page], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}])
@@ -59,7 +59,7 @@ class LexemesController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to :action => 'matching', :headword => params[:headword] }
+        format.html { redirect_to :action => 'matching', :headword => params[:headword], :matchtype => params[:matchtype] }
       end
     end
   end
