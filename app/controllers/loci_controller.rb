@@ -156,8 +156,12 @@ class LociController < ApplicationController
   
   # TODO: Replace references to this with direct references to parsable/index
   def unattached
-    lexeme = Lexeme.where(:id => params[:id]).includes(:headwords).first
-  	forms = lexeme.headword_forms
+  	if params[:forms] 
+  		forms = [params[:forms]]
+  	else
+	    lexeme = Lexeme.where(:id => params[:id]).includes(:headwords).first
+ 		 	forms = lexeme.headword_forms
+ 		end
 
   	@parsables = Parse.unattached_to(forms).paginate(:page => params[:page], :per_page => 5)
   	@page_title = "Unattached to %s" % forms.to_sentence

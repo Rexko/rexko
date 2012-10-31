@@ -8,6 +8,13 @@
 		<div class="type-text">
 	    	<%= f.label :form, "Orthographic form" %>
 	    	<%= f.text_field :form %>
+	    	<% unattached = Parse.count_unattached_to(f.object.form)
+	    		 if unattached > 0 %>
+	    	<small>
+					<i><%= link_to h(pluralize(unattached, "parse")), :controller => "loci", :action => "unattached", :forms => f.object.form %> unattached to this spelling</i>
+				</small>
+				<% end %>
+
 	  </div>
 	
 	  <!-- Phonetic form -->
