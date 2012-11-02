@@ -3,7 +3,7 @@ class LociController < ApplicationController
   # GET /loci
   # GET /loci.xml
   def index
-    @loci = Locus.includes({:source => {:authorship => [:author, :title]}}).paginate(:page => params[:page])
+    @loci = Locus.sorted.includes({:source => {:authorship => [:author, :title]}}).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -172,9 +172,9 @@ class LociController < ApplicationController
   def show_by_author
     authors = Author.where(["name LIKE ?", "%" + params[:author] + "%"])
     if authors
-      author_loci = Locus.authored_by authors
+      author_loci = Locus.sorted.includes({:source => {:authorship => [:author, :title]}}).authored_by(authors)
     
-      @loci = author_loci.paginate(:page => params[:page], :include => {:source => {:authorship => [:author, :title]}})
+      @loci = author_loci.paginate(:page => params[:page])
     end
     
     render "index"

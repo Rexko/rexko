@@ -3,6 +3,8 @@ class Locus < ActiveRecord::Base
   has_many :attestations, :dependent => :destroy
   has_many :parses, :through => :attestations
 
+	scope :sorted, order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).order(Source.arel_table[:pointer].asc)
+
   # Takes a lexeme and returns 
   scope :attesting, lambda { |lexeme|
     { :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}},

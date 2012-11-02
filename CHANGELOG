@@ -3,6 +3,8 @@
 * [#117, #126] Rewrote etymology text generator
 * [#86] Removed stray quotes in wiki format when part of speech absent
 * [#133] Fixed issue where exact search with multiple results would return substring results instead
+* [#76] Added link to unattached loci in lexeme edit form under each headword
+* [#59] Loci browse and search are now sorted by Author, Title, and Pointer.
 
 ==Since 0.3.2==
 * [#69] Locus#attesting should not return duplicate loci
