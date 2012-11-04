@@ -169,7 +169,7 @@ class LociController < ApplicationController
     render "parsable/index"
   end
   
-  def show_by_author
+  def matching
     authors = Author.where(["name LIKE ?", "%" + params[:author] + "%"])
     if authors
       author_loci = Locus.sorted.includes({:source => {:authorship => [:author, :title]}}).authored_by(authors)
@@ -179,6 +179,11 @@ class LociController < ApplicationController
     
     render "index"
   end
+  
+  def show_by_author
+    redirect_to :action => 'matching', :author => params[:author]
+  end
+
   
 protected
   def each_wikilink to_break

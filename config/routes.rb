@@ -49,7 +49,8 @@ Lexicon::Application.routes.draw do
   #   end
 
   match 'lexemes/matching/:headword' => 'lexemes#matching', :as => :matching
-  match 'author(/:author)' => 'loci#show_by_author'
+  match 'author(/:author(/:page))' => 'loci#matching'
+  match 'loci/show_by_author(/:author)' => 'loci#show_by_author'
   match 'unattached/matching/:forms' => 'loci#unattached'
   match 'unattached/:id' => 'loci#unattached'
   match 'html(/:headword)' => 'lexemes#show_by_headword', :as => :exact_lexeme
