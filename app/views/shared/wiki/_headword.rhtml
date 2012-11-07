@@ -1,1 +1,1 @@
-<%= render :partial => "shared/wiki/lexeme", :collection => Lexeme.lookup_all_by_headword(headword.form, :include => [:dictionaries, {:subentries => [{:senses => :glosses}, :etymologies]}]), :locals => { :headword => headword } %>
+<%= render :partial => "shared/wiki/lexeme", :collection => Lexeme.lookup_all_by_headword(headword.form, :initial_case_insensitive => true, :include => [:dictionaries, {:subentries => [{:senses => :glosses}, :etymologies]}]), :locals => { :headword => headword } %>

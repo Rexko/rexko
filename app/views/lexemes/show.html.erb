@@ -15,7 +15,7 @@
 <%= render(:partial => "shared/locus", :collection => @loci) %>
 <% end %>
 
-<% for headword in @lexeme.headwords do %>
+<% for headword in @lexeme.initial_case_insensitive_headwords do %>
 <h3><a href="http://ttt.frath.net/html/<%=h headword.form %>"><%=h headword.form %></a> - This entry</h3>
 <div class="wikified-lexeme">
 <textarea cols="72" rows="10" id="textarea-lexeme-<%= headword.id %>" onClick="select_all('textarea-lexeme-<%= headword.id %>')">

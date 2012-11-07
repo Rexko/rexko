@@ -57,7 +57,7 @@ class Lexeme < ActiveRecord::Base
       swapform = form.dup
       swapform[0,1] = swapform[0,1].swapcase
       memo << form << swapform
-    end
+    end unless options[:initial_case_insensitive]
     
     case options[:matchtype] ||= EXACT
     when SUBSTRING
@@ -87,4 +87,19 @@ class Lexeme < ActiveRecord::Base
 #  def Lexeme.attested_by parsables, type
 #    Lexeme.find(:all, :joins => HASH_MAP_TO_PARSE, :conditions => { :parses => { :parsable_id => parsables, :parsable_type => type }})
 #  end
+
+	# Returns a list of headwords minus those that differ only in the casing
+	# of the first letter.  
+	def initial_case_insensitive_headwords
+	  hw_forms = headword_forms.inject([]) do |memo, form|
+      swapform = form.dup
+      swapform[0,1] = swapform[0,1].swapcase
+      
+      memo.include?(swapform) ? memo : memo << form
+    end
+
+		headwords.reject do |hw|
+			!hw_forms.include? hw.form
+		end
+	end
 end
