@@ -27,6 +27,17 @@
           <a class="skip" title="skip link" href="#navigation">Skip to the navigation</a><span class="hideme">.</span>
           <a class="skip" title="skip link" href="#content">Skip to the content</a><span class="hideme">.</span>
           <!-- end: skip link navigation -->
+     	<%= form_tag({:controller => :lexemes, :action => :show_by_headword}) do %>
+				<span class="type-text">
+						<%= text_field_tag :headword, '', :size => 25, :placeholder => 'Find or create a lexeme' %>
+				</span>
+		
+				<span class="type-select">
+						<%= select_tag :matchtype, 
+													 options_for_select(Lexeme::SEARCH_OPTIONS, Lexeme::SUBSTRING) %>
+				</span>
+			<% end unless current_page? :controller => :editor, :action => :index %>
+
 					<!--<a href="#">Login</a> | <a href="#">Contact</a> | <a href="#">Imprint</a>-->
         </div>
 				<h1><%= page_title %></h1>
