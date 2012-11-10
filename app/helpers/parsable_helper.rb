@@ -4,7 +4,7 @@ module ParsableHelper
 		when "Attestation"
 			parse.parsable.locus || parse.parsable
 		when "Etymology"
-			parse.parsable.subentries.first.try(:lexeme) || parse.parsable
+			parse.parsable.subentries.try(:first).try(:lexeme) || parse.parsable
 		else
 			parse.parsable
 		end	

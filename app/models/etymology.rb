@@ -53,6 +53,21 @@ class Etymology < ActiveRecord::Base
   	read_attribute(:language) || Language::MULTIPLE_LANGUAGES
 	end
   
+  # Next_etyma do not have subentries themselves.
+  # This is ugly.
+  def subentries
+		# If we have our own subentries, use them.
+		own_subentries = Subentry.joins(:etymotheses).where(:etymotheses => {:etymology_id => id}).all
+		return own_subentries if own_subentries.present?
+		
+		# If we are next etymon of anything else, use that etymon's subentries.
+		prev_etymon = Etymology.where(:next_etymon_id => id).first
+		return prev_etymon.subentries if prev_etymon
+		
+		# Default response
+		[]
+	end 
+  
 protected 
   def validate_sufficient_data
     if [etymon, original_language, gloss, notes].all?(&:blank?)
