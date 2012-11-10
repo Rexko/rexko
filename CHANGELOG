@@ -1,6 +1,7 @@
 ==Since 0.3.4==
 * [#77] Headwords differing only by initial case should not be listed separately in wikiform.
 * [#123] Add search box to every page
+* [#129] Display message when no results found on unattached page
 
 ==Since 0.3.3==
 * [#124] Locus search by author should not be limited to one author

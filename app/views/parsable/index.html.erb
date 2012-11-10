@@ -1,4 +1,4 @@
-<% if @parsables %>
+<% if @parsables.present? %>
 <table width="100%">
 <% @parsables.each_with_index do |pable, i| %>
 			<% if pable.parsable %>
@@ -25,5 +25,5 @@
 
 <%= will_paginate @parsables %>
 <% else %>
-<p><i>No parsables to list</i></p>
+<p><i>No results found.</i></p>
 <% end %>
