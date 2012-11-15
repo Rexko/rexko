@@ -44,6 +44,7 @@ module EtymologiesHelper
       parent_ancestor = parent_ancestor.keys[0]
       pre_note = ""
       add_from = true if parent
+          			pre_note = (pre_note || "") << ", from " if add_from #DEBUG
       pre_note << wiki_format(parent_ancestor, parent, "", use_html)
 
       parent_ancestor = wiki_format parent_ancestor.keys[0], parent, parent_ancestor.values[0], use_html unless (parent_ancestor.blank? || parent_ancestor.is_a?(Etymology))
@@ -97,7 +98,7 @@ module EtymologiesHelper
 
           case ancestor
           when Hash
-            pre_note = ", from " + pre_note if add_from
+#            pre_note = ", from " + pre_note if add_from
             ancestry = wiki_format ancestor.keys[0], peer, ancestor.values[0], use_html
           when Array
             ancestry = wiki_format ancestor, peer, (ancestor.size == 1 ? nil : ancestor[1..-1]), use_html
@@ -107,7 +108,7 @@ module EtymologiesHelper
       end
     # When 'etym' is an etymology set pre_note to 'Language etymon "gloss"' and recurse, 
     # using 'tree' as both the etymon and the tree, and using the etymon as the parent.
-    when Etymology
+   when Etymology
       if use_html
         language = content_tag :span, :class => "lexform-source-language" do
           html_escape etym.original_language.name
