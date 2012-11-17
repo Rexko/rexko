@@ -57,7 +57,7 @@
         </div>
       </div>
       <div id="main">
-				<%= content_tag :div, sanitize(flash[:notice]), :class => "note" if flash[:notice].present? %>
+				<%= content_tag :div, sanitize(flash[:notice]), :class => "notice" if flash[:notice].present? %>
 
 				<%= yield  %>
       </div>

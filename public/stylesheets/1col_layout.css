@@ -53,3 +53,6 @@
 #errorExplanation p { color:#400; margin-bottom: 0; padding-left: 10px; }
 #errorExplanation ul { padding-left: 15px; }
 #errorExplanation ul li { list-style: square; }
+
+.note { background: inherit; color: inherit; border: inherit; padding: inherit; margin-bottom: inherit; }
+.notice { background:#efe; color:#040; border:2px #484 solid; padding:10px; margin-bottom:1em; }

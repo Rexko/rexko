@@ -4,6 +4,7 @@
 * [#129] Display message when no results found on unattached page
 * [#134] Fixed issue where only the first etymon of a lexeme could be found on the unattached page
 * [#135] Fixed missing text in etymologies
+* [#103] Box for adding notes is no longer green
 
 ==Since 0.3.3==
 * [#124] Locus search by author should not be limited to one author
