@@ -19,7 +19,7 @@ class DictionariesController < ApplicationController
     @lexemes = (
       @dictionary.headword_language == 'la' ?
         sort_latin(@dictionary.lexemes) : 
-        @dictionary.lexemes
+        @dictionary.lexemes.sorted.joins(:headwords)
       ).paginate(:page => params[:page])
 
     respond_to do |format|

@@ -5,7 +5,9 @@ class Lexeme < ActiveRecord::Base
   has_many :senses, :through => :subentries
   has_many :headwords
   has_many :phonetic_forms
-    
+  
+  scope :sorted, order(Headword.arel_table[:form].asc)
+  
   scope :attested_by, lambda {|parsables, type|
     joins(HASH_MAP_TO_PARSE).where({ :parses => { :parsable_id => parsables, :parsable_type => type }})
   }

@@ -3,7 +3,7 @@ class LexemesController < ApplicationController
   # GET /lexemes
   # GET /lexemes.xml
   def index
-    @lexemes = Lexeme.includes([{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}]).paginate(:page => params[:page])
+    @lexemes = Lexeme.sorted.includes([{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}]).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
