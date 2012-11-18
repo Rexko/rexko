@@ -173,7 +173,8 @@ class LociController < ApplicationController
     authors = Author.where(["name LIKE ?", "%" + params[:author] + "%"])
     if authors
       author_loci = Locus.sorted.includes({:source => {:authorship => [:author, :title]}}).authored_by(authors)
-    
+
+	    @page_title = "Loci - #{author_loci.length} results for \"#{params[:author]}\""
       @loci = author_loci.paginate(:page => params[:page])
     end
     

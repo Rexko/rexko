@@ -5,6 +5,7 @@
 * [#134] Fixed issue where only the first etymon of a lexeme could be found on the unattached page
 * [#135] Fixed missing text in etymologies
 * [#103] Box for adding notes is no longer green
+* [#109] Author search now displays what was queried in page title
 
 ==Since 0.3.3==
 * [#124] Locus search by author should not be limited to one author
