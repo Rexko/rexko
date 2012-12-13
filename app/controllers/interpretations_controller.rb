@@ -25,9 +25,15 @@ class InterpretationsController < ApplicationController
   # GET /interpretations/new.xml
   def new
     @interpretation = Interpretation.new
-
+    @interpretation.parse = Parse.find(params[:parse]) if params[:parse].present? 
+    @path = params[:path].sub(/(interpretation.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    
     respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+      	if request.xhr?
+      		render :partial => "form"
+      	end
+      end
       format.xml  { render :xml => @interpretation }
     end
   end

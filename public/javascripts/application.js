@@ -81,6 +81,37 @@ var NestedAttributesJs = {
 			before: replace_ids(template)
 		})		
 		activate_links(child_container.previous());
+	},
+	pull_nested : function(e) {
+		el = Event.findElement(e);
+		elements = el.rel.match(/(\w+)/g)
+		// refactor this later, after it works
+		switch (elements.length) {
+		case 2:
+			par = '.'+elements[0]
+			child = '.'+elements[1]
+		
+			child_container = el.up('.par')
+			parent_object_id = el.up(par).down('input').name.match(/.*\[(\d+)\]/)[1]
+		
+			template = e.memo.responseText;
+			break;
+		case 3:
+			par = '.'+elements[0]
+			child = '.'+elements[2]
+			
+			child_container = el.up('.par')
+			parent_object_id = el.up(par).down('input').name.match(/.*\[(\d+)\]/)[1]
+			middle_object_id = el.up('fieldset').down('input').name.match(/\d+/g)[1]
+			
+			template = e.memo.responseText;
+			break;
+		}
+		child_container.insert({
+			before: template
+		})
+		el.next('.throb').remove();
+		activate_links(child_container.previous());
 	}
 }; 
   
@@ -93,6 +124,12 @@ Event.observe(window, 'load', function(){
 	}); 
 	$$('.add_nested').each(function(link){
 		link.observe('click', NestedAttributesJs.add_nested);
+	});
+	$$('.pull_nested').each(function(link){ 
+		link.observe('click', function(e) {
+			this.insert({after: "<img class=\"throb\" src=\"/images/icons/throbber.gif\" style=\"vertical-align:middle\">"})
+		});
+		link.observe('ajax:success', NestedAttributesJs.pull_nested);
 	});
 });
 
