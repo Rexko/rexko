@@ -25,7 +25,11 @@ class InterpretationsController < ApplicationController
   # GET /interpretations/new.xml
   def new
     @interpretation = Interpretation.new
-    @interpretation.parse = Parse.find(params[:parse]) if params[:parse].present? 
+    if params[:live_value].present? 
+	    @interpretation.build_parse(:parsed_form => params[:live_value])
+	  elsif params[:parse].present?
+			@interpretation.parse = Parse.find(params[:parse])
+		end
     @path = params[:path].sub(/(interpretation.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
     
     respond_to do |format|

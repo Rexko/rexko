@@ -129,6 +129,12 @@ Event.observe(window, 'load', function(){
 		link.observe('click', function(e) {
 			this.insert({after: "<img class=\"throb\" src=\"/images/icons/throbber.gif\" style=\"vertical-align:middle\">"})
 		});
+		link.observe('ajax:before', function(e) {
+			live_value = this.up('fieldset').down('.type-text').down('input').value; // generalize this
+			query = e.target.search.toQueryParams()
+			query['live_value'] = live_value
+			e.target.search = '?'+Object.toQueryString(query); 
+		});
 		link.observe('ajax:success', NestedAttributesJs.pull_nested);
 	});
 });
