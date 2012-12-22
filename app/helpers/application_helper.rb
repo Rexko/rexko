@@ -95,7 +95,6 @@ module ApplicationHelper
 	def children_and_child_reference_for f, obj
 		obj = obj.to_s
 		form_name = nil
-		#created_object = nil
 		output = ""
 
 		children = f.object.send(obj.pluralize)

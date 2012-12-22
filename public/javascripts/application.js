@@ -19,7 +19,7 @@ activate_links = function(element){
 	});
 	element.getElementsBySelector('.pull_nested').each(function(link){  
 		link.observe('click', function(e) {
-			this.insert({after: "<img class=\"throb\" src=\"/images/icons/throbber.gif\" style=\"vertical-align:middle\">"})
+			this.insert({after: "<img class=\"throb\" src=\"/images/icons/throbber.gif\" style=\"vertical-align:middle\" width=\"16\" height=\"16\">"})
 		});
 		link.observe('ajax:before', function(e) {
 			live_value = this.up('fieldset').down('.type-text').down('input').value; // generalize this
@@ -120,8 +120,9 @@ var NestedAttributesJs = {
 			break;
 		}
 		child_container.insert({
-			before: template
+			before: '<div style="display:none;">'+template+'</div>'
 		})
+		Effect.BlindDown(child_container.previous().identify(), {duration: 0.25} );
 		el.next('.throb').remove();
 		activate_links(child_container.previous());
 	}
