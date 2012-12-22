@@ -17,6 +17,18 @@ activate_links = function(element){
 	element.getElementsBySelector('.add_nested').each(function(link){  
 			link.observe('click', NestedAttributesJs.add_nested);  
 	});
+	element.getElementsBySelector('.pull_nested').each(function(link){  
+		link.observe('click', function(e) {
+			this.insert({after: "<img class=\"throb\" src=\"/images/icons/throbber.gif\" style=\"vertical-align:middle\">"})
+		});
+		link.observe('ajax:before', function(e) {
+			live_value = this.up('fieldset').down('.type-text').down('input').value; // generalize this
+			query = e.target.search.toQueryParams()
+			query['live_value'] = live_value
+			e.target.search = '?'+Object.toQueryString(query); 
+		});
+		link.observe('ajax:success', NestedAttributesJs.pull_nested);
+	});
 }
 
 var NestedAttributesJs = {  
@@ -116,27 +128,7 @@ var NestedAttributesJs = {
 }; 
   
 Event.observe(window, 'load', function(){  
-	$$('.add').each(function(link){  
-		link.observe('click', NestedAttributesJs.add);  
-	});  
-	$$('.remove').each(function(link){
-		link.observe('click', NestedAttributesJs.remove);
-	}); 
-	$$('.add_nested').each(function(link){
-		link.observe('click', NestedAttributesJs.add_nested);
-	});
-	$$('.pull_nested').each(function(link){ 
-		link.observe('click', function(e) {
-			this.insert({after: "<img class=\"throb\" src=\"/images/icons/throbber.gif\" style=\"vertical-align:middle\">"})
-		});
-		link.observe('ajax:before', function(e) {
-			live_value = this.up('fieldset').down('.type-text').down('input').value; // generalize this
-			query = e.target.search.toQueryParams()
-			query['live_value'] = live_value
-			e.target.search = '?'+Object.toQueryString(query); 
-		});
-		link.observe('ajax:success', NestedAttributesJs.pull_nested);
-	});
+	activate_links($$('body')[0]);
 });
 
 

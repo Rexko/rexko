@@ -1,7 +1,7 @@
 ﻿<%= fields_for @path, @interpretation, :child_index => Time.now.to_i.to_s do |f|  %>
-	<div class="subcolumns full equalize">
+	<div class="subcolumns full equalize interpretation ">
 		<div class="c50l">
-	<div class="subcl interpretation type-select">
+	<div class="subcl type-select">
 		<%= f.label :sense, label_with_remove_option_for("Sense", f) %>
 		<%= f.grouped_collection_select :sense_id, 
 																		sense_select(@interpretations ? 
