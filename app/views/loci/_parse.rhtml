@@ -9,21 +9,11 @@
 				<%= f.text_field :parsed_form %>
 			</div>
 
-				<% form_name = nil
-					created_object = nil
-					@interpretation = if f.object.interpretations.empty? 
-						created_object = f.object.interpretations.build
-					else
-						f.object.interpretations
-					end %>
+			<% children, child_reference = children_and_child_reference_for f, :interpretation %>
+			<%= children %>
 				
-				<%= f.fields_for :interpretations do |i_form| %>
-					<% form_name = i_form.object_name %>
-				  <%= render :partial => 'interpretation', :locals => { :f => i_form } unless created_object %>
-				<% end %>
-				
-				<div class="par">
-					<%= link_to 'Add interpretation', new_interpretation_path(:parse => f.object, :path => form_name), {:remote => true, :class => 'pull_nested', :rel => '[attestation][parses][interpretations]'} %>
-				</div>
+			<div class="par">
+				<%= link_to 'Add interpretation', new_interpretation_path(:parse => f.object, :path => child_reference), {:remote => true, :class => 'pull_nested', :rel => '[attestation][parses][interpretations]'} %>
+			</div>
 	</fieldset>
 <% end %>

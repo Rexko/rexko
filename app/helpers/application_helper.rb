@@ -91,6 +91,30 @@ module ApplicationHelper
   	label = "%s &nbsp; %s" % [sanitize(label_name), remove_link_unless_new_record(form_builder)]
   	label.html_safe
 	end
+
+	def children_and_child_reference_for f, obj
+		obj = obj.to_s
+		form_name = nil
+		#created_object = nil
+		output = ""
+
+		children = f.object.send(obj.pluralize)
+		
+		children = if children.empty?
+			created_object = children.build
+		else
+			children
+		end
+		
+		instance_variable_set("@#{obj}", children)
+		
+		f.fields_for obj.pluralize do |i_form|
+			form_name = i_form.object_name
+			output = render :partial => obj, :locals => { :f => i_form } unless created_object
+		end
+		
+		return output, form_name
+	end
   
   def spaced_render(options = {})
     coll = options[:collection].collect do |item|
