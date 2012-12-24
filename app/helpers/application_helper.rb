@@ -114,6 +114,18 @@ module ApplicationHelper
 		
 		return output, form_name
 	end
+	
+	# The rel attribute for the add links. Used by the JS to determine where things go.
+	# This may be needlessly byzantine and there is probably a way to simplify the system.
+	def addlink_rel child_ref
+		# input is like:
+		# locus[attestations_attributes][2][parses_attributes][0][interpretations_attributes][0]
+		# output should be like:
+		# [attestation][parses][interpretations]
+		elements = child_ref.gsub(/\[(\d+|NEW_RECORD)\]/, '').scan(/\[(.*?)_attributes\]/).flatten
+		elements[0] = elements.first.singularize
+		elements.collect {|el| "[%s]" % el }.join
+	end
   
   def spaced_render(options = {})
     coll = options[:collection].collect do |item|

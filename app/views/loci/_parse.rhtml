@@ -13,7 +13,7 @@
 			<%= children %>
 				
 			<div class="par">
-				<%= link_to 'Add interpretation', new_interpretation_path(:parse => f.object, :path => child_reference), {:remote => true, :class => 'pull_nested', :rel => '[attestation][parses][interpretations]'} %>
+				<%= link_to 'Add interpretation', new_interpretation_path(:parse => f.object, :path => child_reference), {:remote => true, :class => 'pull_nested', :rel => addlink_rel(child_reference) } %>
 			</div>
 	</fieldset>
 <% end %>
