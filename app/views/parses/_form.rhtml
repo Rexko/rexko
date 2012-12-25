@@ -1,0 +1,18 @@
+﻿<%= fields_for @path, @parse, :child_index => Time.now.to_i.to_s do |f|  %>
+	<fieldset class="parse">
+		<legend><%= label_with_remove_option_for "Parse", f %></legend>
+			<div class="type-text">
+				<%= f.label :parsed_form, nil, :style => "float:left" %>
+				<%= headword_link(f.object) unless f.object.parsed_form.blank? %>
+				<div style="clear:both"/>
+				<%= f.text_field :parsed_form %>
+			</div>
+
+			<% children, child_reference = children_and_child_reference_for f, :interpretation %>
+			<%= children %>
+				
+			<div class="par">
+				<%= link_to 'Add interpretation', new_interpretation_path(:parse => f.object, :path => child_reference), {:remote => true, :class => 'pull_nested', :rel => addlink_rel(child_reference) } %>
+			</div>
+	</fieldset>
+<% end %>

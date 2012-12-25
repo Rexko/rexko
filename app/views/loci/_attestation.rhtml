@@ -8,12 +8,12 @@
 			<%= f.label :attested_form %>
 			<%= f.text_field :attested_form %>
 		</div>  
-		<% @parse = f.object.parses.empty? ? f.object.parses.build : f.object.parses %>
-		<%= f.fields_for :parses do |p_form| %>
-		  <%= render :partial => 'parse', :locals => { :f => p_form } %>
-		<% end %>
+
+		<% children, child_reference = children_and_child_reference_for f, :parse %>
+		<%= children %>
+
 		<div class="par">
-			<%= link_to 'Add parse', '#parses', :class => 'add_nested', :rel => "[attestation][parses]" %>
+			<%= link_to 'Add parse', new_parse_path(:parsable_id => f.object, :parsable_type => f.object.class, :path => child_reference), {:remote => true, :class => 'pull_nested', :rel => addlink_rel(child_reference)} %>
 		</div>
 	</fieldset>
 <% end %>
