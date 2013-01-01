@@ -8,11 +8,6 @@
 				<%= f.text_field :parsed_form %>
 			</div>
 
-			<% children, child_reference = children_and_child_reference_for f, :interpretation %>
-			<%= children %>
-				
-			<div class="par">
-				<%= link_to 'Add interpretation', new_interpretation_path(:parse => f.object, :path => child_reference), {:remote => true, :class => 'pull_nested', :rel => addlink_rel(child_reference) } %>
-			</div>
+			<%= list_children_with_option_to_add :interpretation, f %>
 	</fieldset>
 <% end %>

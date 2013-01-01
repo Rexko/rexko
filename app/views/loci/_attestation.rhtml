@@ -9,11 +9,6 @@
 			<%= f.text_field :attested_form %>
 		</div>  
 
-		<% children, child_reference = children_and_child_reference_for f, :parse %>
-		<%= children %>
-
-		<div class="par">
-			<%= link_to 'Add parse', new_parse_path(:parsable_id => f.object, :parsable_type => f.object.class, :path => child_reference), {:remote => true, :class => 'pull_nested', :rel => addlink_rel(child_reference)} %>
-		</div>
+		<%= list_children_with_option_to_add :parse, f, :as => :parsable %>
 	</fieldset>
 <% end %>

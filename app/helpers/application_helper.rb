@@ -112,7 +112,28 @@ module ApplicationHelper
 			output = render :partial => obj, :locals => { :f => i_form } unless created_object
 		end
 		
-		return output, form_name
+		return output.html_safe, form_name
+	end
+	
+	def list_children_with_option_to_add item, form, options = {}
+		children, child_reference = children_and_child_reference_for form, item
+		
+		output = children
+
+		link_options = { :path => child_reference }
+
+		if options[:as]
+			link_options['%s_id' % options[:as].to_s] = form.object
+			link_options['%s_type' % options[:as].to_s] = form.object.class 
+		else 
+			link_options[item] = form.object
+		end
+		
+		link = link_to 'Add %s' % item.to_s.humanize.downcase, 
+			send('new_%s_path' % item.to_s, link_options),
+			{:remote => true, :class => 'pull_nested', :rel => addlink_rel(child_reference)}
+
+		output << content_tag(:div, :class => "par") { link }
 	end
 	
 	# The rel attribute for the add links. Used by the JS to determine where things go.
