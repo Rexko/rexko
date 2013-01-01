@@ -49,9 +49,11 @@ var NestedAttributesJs = {
 	},
 	add : function(e) {  
 		element = Event.findElement(e);
-		template = replace_ids(eval(element.href.replace(/.*#/, '') + '_template'));  
-		element.up('.par').insert({before: template});
-		activate_links(element.up('.par').previous());
+		template = replace_ids(eval(element.href.replace(/.*#/, '') + '_template'));
+		par = element.up('.par')
+		par.insert({before: '<div style="display:none;">'+template+'</div>'});
+		Effect.BlindDown(par.previous().identify(), {duration: 0.25} );
+		activate_links(par.previous());
 	},
 	add_nested : function(e) {
 		el = Event.findElement(e);
