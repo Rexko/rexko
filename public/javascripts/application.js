@@ -50,10 +50,7 @@ var NestedAttributesJs = {
 	add : function(e) {  
 		element = Event.findElement(e);
 		template = replace_ids(eval(element.href.replace(/.*#/, '') + '_template'));
-		par = element.up('.par')
-		par.insert({before: '<div style="display:none;">'+template+'</div>'});
-		Effect.BlindDown(par.previous().identify(), {duration: 0.25} );
-		activate_links(par.previous());
+		insert_with_effect(element.up('.par'), template);
 	},
 	add_nested : function(e) {
 		el = Event.findElement(e);
@@ -91,10 +88,8 @@ var NestedAttributesJs = {
 			template = template.replace(re, "$1NEW_RECORD");
 			break;
 		}
-		child_container.insert({
-			before: replace_ids(template)
-		})		
-		activate_links(child_container.previous());
+		
+		insert_with_effect(child_container, replace_ids(template));
 	},
 	pull_nested : function(e) {
 		el = Event.findElement(e);
@@ -121,12 +116,9 @@ var NestedAttributesJs = {
 			template = e.memo.responseText;
 			break;
 		}
-		child_container.insert({
-			before: '<div style="display:none;">'+template+'</div>'
-		})
-		Effect.BlindDown(child_container.previous().identify(), {duration: 0.25} );
+		
+		insert_with_effect(child_container, template);
 		el.next('.throb').remove();
-		activate_links(child_container.previous());
 	}
 }; 
   
@@ -134,6 +126,14 @@ Event.observe(window, 'load', function(){
 	activate_links($$('body')[0]);
 });
 
+// Simple add effect
+function insert_with_effect(container, content){
+	container.insert({
+		before: '<div style="display:none;">'+content+'</div>'
+	})
+	Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
+	activate_links(container.previous());
+};
 
 // For select-all textfields
 function select_all(id){
