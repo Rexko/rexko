@@ -107,9 +107,9 @@ module ApplicationHelper
 		
 		instance_variable_set("@#{obj}", children)
 		
-		f.fields_for obj.pluralize do |i_form|
+		output = f.fields_for obj.pluralize.to_sym do |i_form|
 			form_name = i_form.object_name
-			output = render :partial => obj, :locals => { :f => i_form } unless created_object
+			render :partial => obj, :locals => { :f => i_form } unless created_object
 		end
 		
 		return output.html_safe, form_name
