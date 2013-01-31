@@ -12,8 +12,8 @@
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.plural /^(loc)us/i, '\1i'
   inflect.singular /^(loc)i/i, '\1us'
-  inflect.plural /^(etym)on/i, '\1a'
-  inflect.singular /^(etym)a/i, '\1on'
+  inflect.plural /(.*etym)on/i, '\1a'
+  inflect.singular /(.*etym)a/i, '\1on'
   inflect.plural /^(etymothes)is/i, '\1es'
   inflect.singular /^(etymothes)es/i, '\1is'
 end

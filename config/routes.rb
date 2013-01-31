@@ -54,6 +54,7 @@ Lexicon::Application.routes.draw do
   match 'unattached/matching/:forms' => 'loci#unattached'
   match 'unattached/:id' => 'loci#unattached'
   match 'html(/:headword)' => 'lexemes#show_by_headword', :as => :exact_lexeme
+  resources :notes
   resources :interpretations
   resources :parses
   resources :attestations

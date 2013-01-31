@@ -8,6 +8,6 @@
 				<%= f.text_field :parsed_form %>
 			</div>
 
-			<%= list_children_with_option_to_add :interpretation, f %>
+			<%= list_children_with_option_to_add :interpretation, f, :remote => true %>
 	</fieldset>
 <% end %>

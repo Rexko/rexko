@@ -28,11 +28,6 @@
 		</div>
 
 	  <!-- Etymology -->
-    <%= f.fields_for :etymologies do |e_form| %>
-      <%= render :partial => 'etymology', :locals => { :f => e_form } %>
-    <% end %>
-		<div class="par">
-				<%= link_to 'Add etymology', '#etymologies', :class => 'add_nested', :rel => "[subentry][etymologies]" %>
-		</div>
+		<%= list_children_with_option_to_add :etymology, f, :remote => true %>
 	</fieldset>
 <% end %>

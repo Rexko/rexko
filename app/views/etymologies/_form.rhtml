@@ -1,5 +1,4 @@
-<% unless (f.object.try(:_destroy)) %>
-	<% nested_attributes_for f, [:parses, :etymologies, :subentry], [:notes, :etymologies, :subentry] %>
+<%= fields_for @path, @etymology, :child_index => Time.now.to_i.to_s do |f|  %>
 	<fieldset class="etymology">
 		<legend><%= label_with_remove_option_for "Etymology", f %></legend>
 			<div class="type-text">
@@ -13,15 +12,14 @@
 				<%= f.text_field :gloss, :class => "warning" %>
 			</div>
 
-			<%= list_children_with_option_to_add :parse, f, :remote => true, :create_blank => true %>
+			<%= list_children_with_option_to_add :parse, f, :remote => true %>
 			
 			<%= list_children_with_option_to_add :note, f, :remote => true %>
-
+			
 			<%= list_children_with_option_to_add :next_etymon, f, 
 					  :class_name => :etymology, 
 					  :limit_one => true, 
 					  :remote => true,
-					  :create_blank => (f.object && !f.object.new_record?),
 					  :list_if => (f.object && !f.object.new_record?)
 			%>
 	</fieldset>

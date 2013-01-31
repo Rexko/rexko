@@ -66,14 +66,7 @@
 	</div>
 </fieldset>
 
-	<% unless l_form.object.attestations.empty? %>
-		<%= l_form.fields_for :attestations do |a_form| %>
-	    <%= render :partial => 'attestation', :locals => { :f => a_form } %>
-	  <% end %>
-	<% end %>
-	<span class="par">
-		<br/><%= link_to 'Add attestation', '#attestations', :class => 'add' %>
-	</span>
+  <%= list_children_with_option_to_add :attestation, l_form, :remote => true %>
 
   <div class="type-button">
 		<%= submit_tag form[:label] %> <%= submit_tag "#{form[:label]} and continue editing" %>

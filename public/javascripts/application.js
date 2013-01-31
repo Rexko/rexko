@@ -94,31 +94,15 @@ var NestedAttributesJs = {
 	pull_nested : function(e) {
 		el = Event.findElement(e);
 		elements = el.rel.match(/(\w+)/g)
-		// refactor this later, after it works
-		switch (elements.length) {
-		case 2:
-			par = '.'+elements[0]
-			child = '.'+elements[1]
+		par = '.'+elements[0]
 		
-			child_container = el.up('.par')
-			parent_object_id = el.up(par).down('input').name.match(/.*\[(\d+)\]/)[1]
+		child_container = el.up('.par')
 		
-			template = e.memo.responseText;
-			break;
-		case 3:
-			par = '.'+elements[0]
-			child = '.'+elements[2]
-			
-			child_container = el.up('.par')
-			parent_object_id = el.up(par).down('input').name.match(/.*\[(\d+)\]/)[1]
-			middle_object_id = el.up('fieldset').down('input').name.match(/\d+/g)[1]
-			
-			template = e.memo.responseText;
-			break;
-		}
+		template = e.memo.responseText;
 		
 		insert_with_effect(child_container, template);
 		el.next('.throb').remove();
+		if(el.hasClassName('limit-one')) el.remove();
 	}
 }; 
   

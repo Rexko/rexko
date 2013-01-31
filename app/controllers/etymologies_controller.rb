@@ -24,10 +24,21 @@ class EtymologiesController < ApplicationController
   # GET /etymologies/new
   # GET /etymologies/new.xml
   def new
-    @etymology = Etymology.new
-
+    @etymology = Etymology.new(params.slice(Etymology.new.attribute_names))
+    if params[:path].include? "next_etymon"
+    	@path = params[:path]
+    else
+     	pos = params[:path].rpartition(/(etymolog.*)\[\d*\]/)
+    	pos[1].sub!(/\[\d*\]/, '['+Time.now.to_i.to_s+']')
+    	@path = pos.join
+    end
+    
     respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+      	if request.xhr?
+      		render :partial => "form"
+      	end
+      end
       format.xml  { render :xml => @etymology }
     end
   end

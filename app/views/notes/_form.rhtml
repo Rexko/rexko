@@ -1,0 +1,8 @@
+﻿<%= fields_for @path, @note, :child_index => Time.now.to_i.to_s do |f|  %>
+	<div class="note">
+  	<div class="type-text">
+			<%= f.label :content, label_with_remove_option_for("Note", f) %>
+			<%= f.text_area :content, :size => "80x3" %>
+		</div>
+	</div>
+<% end %>
