@@ -6,6 +6,8 @@
 * [#135] Fixed missing text in etymologies
 * [#103] Box for adding notes is no longer green
 * [#109] Author search now displays what was queried in page title
+* [#81] Added AJAX to edit views to lower the necessity of using "Create/Update and continue editing"
+* [#122] Fixed issue where notes were being added to the wrong etymologies when using 'next etymon'
 
 ==Since 0.3.3==
 * [#124] Locus search by author should not be limited to one author
