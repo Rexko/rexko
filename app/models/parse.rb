@@ -6,8 +6,8 @@ class Parse < ActiveRecord::Base
   scope :without_entries, :conditions => ['NOT EXISTS (SELECT "form" FROM "headwords" WHERE headwords.form = parsed_form)']
   scope :uninterpreted, :include => :interpretations, :conditions => { "interpretations.parse_id" => nil }
   
-  accepts_nested_attributes_for :interpretations, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
-    
+  accepts_nested_attributes_for :interpretations, :allow_destroy => true, :reject_if => proc { |attributes| attributes[:sense].blank? }
+     
   def interpretation=(terp_params)
     terp_params.each do |id, attributes|
       this_terp = Interpretation.find(id)

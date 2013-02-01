@@ -1,3 +1,6 @@
+==Since 0.3.5==
+* [#137] Prevent blank interpretations from being saved (was breaking 'unattached' counts)
+
 ==Since 0.3.4==
 * [#77] Headwords differing only by initial case should not be listed separately in wikiform.
 * [#123] Add search box to every page
