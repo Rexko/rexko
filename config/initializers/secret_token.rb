@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Lexicon::Application.config.secret_token = 'd9945314bec9fa193f31bef4bf44e02c5663d48c42c17c7df6cb295092b8bbcb79969faae5a1f031916a8478028aee3b0ee469302d036fecce9ea8f36e30926a'
+Lexicon::Application.config.secret_token = '50d07b11d3e73f4b3cba2692097947880c28459ad0908540dc8c0cf089ff00c31f06a9acd2a465c138948adaab7f719c560e5de5e17b91b6b8baf40c93f6195f'
