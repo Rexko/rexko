@@ -25,13 +25,13 @@ class EtymologiesController < ApplicationController
   # GET /etymologies/new.xml
   def new
     @etymology = Etymology.new(params.slice(Etymology.new.attribute_names))
-    if params[:path].include? "next_etymon"
+    if params[:path].include?, "next_etymon"
     	@path = params[:path]
     else
      	pos = params[:path].rpartition(/(etymolog.*)\[\d*\]/)
     	pos[1].sub!(/\[\d*\]/, '['+Time.now.to_i.to_s+']')
     	@path = pos.join
-    end
+    end unless params[:path].blank?
     
     respond_to do |format|
       format.html do

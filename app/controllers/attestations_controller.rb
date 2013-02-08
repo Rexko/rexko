@@ -25,7 +25,7 @@ class AttestationsController < ApplicationController
   # GET /attestations/new.xml
   def new
     @attestation = Attestation.new(params.slice(Attestation.new.attribute_names))
-    @path = params[:path].sub(/(attestation.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @path = params[:path].try(:sub, /(attestation.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
     
     respond_to do |format|
       format.html do
