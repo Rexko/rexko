@@ -25,7 +25,7 @@ class ParsesController < ApplicationController
   # GET /parses/new.xml
   def new
     @parse = Parse.new(params.slice(Parse.new.attribute_names))
-    @path = params[:path].sub(/(parse.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @path = params[:path].try(:sub, /(parse.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
     
     respond_to do |format|
       format.html do

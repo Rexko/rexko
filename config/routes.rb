@@ -48,7 +48,7 @@ Lexicon::Application.routes.draw do
   #     resources :products
   #   end
 
-  match 'lexemes/matching/:headword' => 'lexemes#matching', :as => :matching
+  match 'lexemes/matching/:headword' => 'lexemes#matching', :as => :matching, :defaults => { :matchtype => Lexeme::SUBSTRING }
   match 'author(/:author(/:page))' => 'loci#matching'
   match 'loci/show_by_author(/:author)' => 'loci#show_by_author'
   match 'unattached/matching/:forms' => 'loci#unattached'

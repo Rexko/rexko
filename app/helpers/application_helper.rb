@@ -188,8 +188,8 @@ module ApplicationHelper
   # Translate a string in wiki format into HTML
   def wh text
     output = html_escape(text)
-    output.gsub!(/'''(.+?)'''/, '<b>\1</b>')
-    output.gsub!(/''(.+?)''/, '<i>\1</i>')
+    output.gsub!(/&\#x27;&\#x27;&\#x27;(.+?)&\#x27;&\#x27;&\#x27;/, '<b>\1</b>')
+    output.gsub!(/&\#x27;&\#x27;(.+?)&\#x27;&\#x27;/, '<i>\1</i>')
     output.gsub!(/\[\[([^|]+?)\]\](\w*)/, '<a href="/html/\1" title="\1">\1\2</a>')
     output.gsub!(/\[\[(.+?)\|(.+?)\]\](\w*)/, '<a href="/html/\1" title="\1">\2\3</a>')
     output.html_safe

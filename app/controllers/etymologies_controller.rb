@@ -25,7 +25,7 @@ class EtymologiesController < ApplicationController
   # GET /etymologies/new.xml
   def new
     @etymology = Etymology.new(params.slice(Etymology.new.attribute_names))
-    if params[:path].include?, "next_etymon"
+    if params[:path].include? "next_etymon"
     	@path = params[:path]
     else
      	pos = params[:path].rpartition(/(etymolog.*)\[\d*\]/)

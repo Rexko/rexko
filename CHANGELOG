@@ -1,4 +1,5 @@
 ==Since 0.3.5==
+- Require Rails 3.0.20
 * [#137] Prevent blank interpretations from being saved (was breaking 'unattached' counts)
 
 ==Since 0.3.4==
