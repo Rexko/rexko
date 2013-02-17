@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include ERB::Util
+  
 	HW_LINK = "<span class='hw-link%s'>%s</span>"
 	NO_ENTRY_TEXT = "[No entry for <i>%s</i> &times;%d]"
 
