@@ -14,7 +14,7 @@ class InterpretationsControllerTest < ActionController::TestCase
 
   def test_should_create_interpretation
     assert_difference('Interpretation.count') do
-      post :create, :interpretation => { :sense => senses(:one) }
+      post :create, :interpretation => { :sense_attributes => { :definition => "First sense" }}
     end
 
     assert_redirected_to interpretation_path(assigns(:interpretation))
@@ -31,7 +31,7 @@ class InterpretationsControllerTest < ActionController::TestCase
   end
 
   def test_should_update_interpretation
-    put :update, :id => interpretations(:one).id, :interpretation => { :sense => senses(:one) }
+    put :update, :id => interpretations(:one).id, :interpretation => { :sense_attributes => { :definition => "First sense" }}
     assert_redirected_to interpretation_path(assigns(:interpretation))
   end
 
