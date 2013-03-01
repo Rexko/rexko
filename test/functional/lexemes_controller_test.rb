@@ -71,13 +71,13 @@ class LexemesControllerTest < ActionController::TestCase
   end
   
   def test_show_by_headword_can_return_multiple_results
-    get :show_by_headword, :headword => "liter"
+    get :show_by_headword, :headword => "liter", :matchtype => Lexeme::EXACT
     
     lexeme = assigns(:lexeme)
     assert_not_nil lexeme, "Headword 'liter' should return a lexeme; 'liter's lexeme is #{Lexeme.lookup_by_headword('liter')}"
     assert_equal 1, lexeme.length, "Headword 'liter' should return only one lexeme"
     
-    get :show_by_headword, :headword => "spring"
+    get :show_by_headword, :headword => "spring", :matchtype => Lexeme::EXACT
     
     lexeme = assigns(:lexeme)
     assert_not_nil lexeme, "Headword 'spring' should return a lexeme"
@@ -85,13 +85,13 @@ class LexemesControllerTest < ActionController::TestCase
   end
   
   def test_matching_uses_template
-    get :matching, :headword => "spring"
+    get :matching, :headword => "spring", :matchtype => Lexeme::SUBSTRING
     
     assert_template "layouts/1col_layout"
   end
   
   def test_matching_sets_title
-    get :matching, :headword => "spring"
+    get :matching, :headword => "spring", :matchtype => Lexeme::SUBSTRING
     
     title = assigns(:page_title)
     assert_not_nil title, "Show_by_headword should set a title"
@@ -113,7 +113,7 @@ class LexemesControllerTest < ActionController::TestCase
   end
   
   def test_substring_search_friendly_url
-    assert_recognizes({:controller => "lexemes", :action => "matching", :headword => 'liter' }, "/lexemes/matching/liter")
+    assert_recognizes({:controller => "lexemes", :action => "matching", :headword => 'liter', :matchtype => Lexeme::SUBSTRING }, "/lexemes/matching/liter")
     
     get :show_by_headword, :headword => "liter", :matchtype => Lexeme::SUBSTRING
     
