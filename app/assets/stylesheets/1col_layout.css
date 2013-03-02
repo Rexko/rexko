@@ -1,0 +1,68 @@
+/*
+*= require ../yaml/core/base
+*= require ../yaml/navigation/nav_shinybuttons
+*= require ../yaml/screen/forms
+*= require screen/basemod
+*= require screen/content
+*= require ../yaml/print/print_draft
+*= require_self
+*/
+
+/**
+ * "Yet Another Multicolumn Layout" - (X)HTML/CSS framework
+ * (en) central stylesheet
+ * (de) zentrales Stylesheet
+ *
+ * @creator       YAML Builder V1.2.1 (http://builder.yaml.de)
+ * @file          my_layout.css
+ * @-yaml-minver  3.3
+ * 
+ */
+
+/* import core styles | Basis-Stylesheets einbinden */
+/*@import url(../yaml/core/base.css);*/
+
+/* import screen layout | Screen-Layout einbinden */
+/*@import url(../yaml/navigation/nav_shinybuttons.css);
+@import url(../yaml/screen/forms.css);
+@import url(screen/basemod.css);
+@import url(screen/content.css);*/
+
+/* import print layout | Druck-Layout einbinden */
+/*@import url(../yaml/print/print_draft.css);*/
+
+/* Semantic formatting */
+.lexform-headword { font-weight: bold; font-size: larger; color: blue; }
+.lexform-paradigm { font-weight: bold; }
+.lexform-part-of-speech { font-style: italic; }
+.lexform-phonetic-form { font-family: monospace; }
+.delete_label {	font-size: 80%; }
+.type-text .hw-link { text-align: right; float: right; margin-right: 41.5%; }
+.wanted { color: red; }
+
+/* Rails divs */
+.fieldWithErrors { padding: 10px; background: #f44; color:#400; }
+
+#errorExplanation {
+  border:2px #844 solid;
+  padding:0px;
+	margin-bottom:1em;
+  background:#fee;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 125%;
+  margin-bottom:1em;
+  background-color: #f44;
+  color: #fff;
+}
+
+#errorExplanation p { color:#400; margin-bottom: 0; padding-left: 10px; }
+#errorExplanation ul { padding-left: 15px; }
+#errorExplanation ul li { list-style: square; }
+
+.note { background: inherit; color: inherit; border: inherit; padding: inherit; margin-bottom: inherit; }
+.notice { background:#efe; color:#040; border:2px #484 solid; padding:10px; margin-bottom:1em; }
