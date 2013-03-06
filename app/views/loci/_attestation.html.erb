@@ -9,6 +9,6 @@
 			<%= f.text_field :attested_form %>
 		</div>  
 
-		<%= list_children_with_option_to_add :parse, f, :as => :parsable %>
+		<%= list_children_with_option_to_add :parse, f, :as => :parsable, :remote => true %>
 	</fieldset>
 <% end %>
