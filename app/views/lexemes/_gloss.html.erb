@@ -1,8 +1,11 @@
 <% unless (f.object._destroy) %>
+	<% nested_attributes_for f, [:parses, :glosses, :senses, :subentry] %>
 	<div class="gloss">
 		<div class="type-text">
 			<%= f.label :gloss, label_with_remove_option_for("Gloss", f) %>
 		  <%= f.text_field :gloss %>
 		</div>
+
+		<%= list_children_with_option_to_add :parse, f, :remote => true %>
 	</div>
 <% end %>

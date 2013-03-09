@@ -19,13 +19,7 @@
 		</div>
     
 	  <!-- Sense -->
-	  <% @sense = f.object.senses.empty? ? f.object.senses.build : f.object.senses %>
-	  <%= f.fields_for :senses do |s_form| %>
-	    <%= render :partial => 'sense', :locals => { :f => s_form } %>
-	  <% end %>
-		<div class="par">
-			<%= link_to 'Add sense', '#senses', :class => 'add_nested', :rel => "[subentry][senses]" %>
-		</div>
+	  <%= list_children_with_option_to_add :sense, f, remote: true, create_blank: true %>
 
 	  <!-- Etymology -->
 		<%= list_children_with_option_to_add :etymology, f, :remote => true %>

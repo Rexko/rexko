@@ -1,0 +1,2 @@
+﻿<p>Glosses <%= gloss.sense.try(:lexeme).try(:dictionaries).try(:collect) {|d| d.source_language.name }.try(:uniq).try(:to_sentence) %> <b><%= gloss.sense.try(:lexeme).try(:headword_forms).try(:to_sentence) || '(Lexeme not found)' %></b> meaning:</p>
+<%= render :partial => "shared/sense", :object => gloss.sense %>

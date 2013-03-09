@@ -3,7 +3,7 @@ class Etymology < ActiveRecord::Base
   has_many :subentries, :through => :etymotheses
   belongs_to :language # language of gloss and source_language name
   has_many :notes, :as => :annotatable
-  has_many :parses, :as => :parsable
+  has_many :parses, :as => :parsable, :dependent => :destroy
   belongs_to :next_etymon, :class_name => "Etymology"
   belongs_to :original_language, :class_name => "Language" # language of etymon
   validate :validate_sufficient_data

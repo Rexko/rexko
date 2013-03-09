@@ -1,0 +1,10 @@
+﻿<%= fields_for @path, @gloss, :child_index => Time.now.to_i.to_s do |f|  %>
+	<div class="gloss">
+		<div class="type-text">
+			<%= f.label :gloss, label_with_remove_option_for("Gloss", f) %>
+		  <%= f.text_field :gloss %>
+		</div>
+
+ 		<%= list_children_with_option_to_add :parse, f, :remote => true %>
+	</div>
+<% end %>

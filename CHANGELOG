@@ -3,6 +3,7 @@
 * [#137] Prevent blank interpretations from being saved (was breaking 'unattached' counts)
 * [#136] URLs with certain Unicode characters should no longer fail
 * [#138] Fixed issue where adding interpretations to new parses on the locus form would throw an error
+* [#132] Glosses are now parsable
 
 ==Since 0.3.4==
 * [#77] Headwords differing only by initial case should not be listed separately in wikiform.

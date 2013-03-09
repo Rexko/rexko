@@ -1,5 +1,4 @@
-<% unless (f.object._destroy) %>
-	<% nested_attributes_for f, [:glosses, :senses, :subentry], [:notes, :senses, :subentry] %>
+﻿<%= fields_for @path, @sense, :child_index => Time.now.to_i.to_s do |f|  %>
 	<fieldset class="sense">
 	  <legend>
 			<%= label_with_remove_option_for "Sense #{sense_counter + 1 if defined? sense_counter}", f %>
@@ -10,7 +9,7 @@
     </div>
 
     <!-- Gloss -->
-		<%= list_children_with_option_to_add :gloss, f, :remote => true, :create_blank => true %>
+		<%= list_children_with_option_to_add :gloss, f, :remote => true %>
 
     <!-- Note -->
     <%= list_children_with_option_to_add :note, f, :remote => true %>

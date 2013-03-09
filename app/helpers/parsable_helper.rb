@@ -5,6 +5,8 @@ module ParsableHelper
 			parse.parsable.locus || parse.parsable
 		when "Etymology"
 			parse.parsable.subentries.try(:first).try(:lexeme) || parse.parsable
+		when "Gloss"
+		  parse.parsable.sense.try(:lexeme) || parse.parsable
 		else
 			parse.parsable
 		end	

@@ -24,10 +24,15 @@ class SensesController < ApplicationController
   # GET /senses/new
   # GET /senses/new.xml
   def new
-    @sense = Sense.new
-
+    @sense = Sense.new(params.slice(Sense.new.attribute_names))
+    @path = params[:path].try(:sub, /(sense.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    
     respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+      	if request.xhr?
+      		render :partial => "form"
+      	end
+      end
       format.xml  { render :xml => @sense }
     end
   end

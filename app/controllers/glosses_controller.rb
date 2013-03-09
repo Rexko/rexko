@@ -24,10 +24,15 @@ class GlossesController < ApplicationController
   # GET /glosses/new
   # GET /glosses/new.xml
   def new
-    @gloss = Gloss.new
-
+    @gloss = Gloss.new(params.slice(Gloss.new.attribute_names))
+    @path = params[:path].try(:sub, /(gloss.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    
     respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+      	if request.xhr?
+      		render :partial => "form"
+      	end
+      end
       format.xml  { render :xml => @gloss }
     end
   end

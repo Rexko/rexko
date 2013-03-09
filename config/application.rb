@@ -41,6 +41,5 @@ module Lexicon
     
     config.assets.enabled = true
     config.assets.version = '1.0'
-    config.assets.paths += "#{Rails.root}/app/assets/images/icons"
   end
 end
