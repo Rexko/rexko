@@ -17,6 +17,10 @@ class Locus < ActiveRecord::Base
      :conditions => { "interpretations.parse_id" => nil, "parses.parsed_form" => [*lexeme].collect(&:headword_forms) }
     }
   }
+
+  scope :possibly_construing_with, lambda {|attested_forms|
+    attesting(Lexeme.lookup_all_by_headwords(attested_forms))
+  }
   
   accepts_nested_attributes_for :attestations, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
 
@@ -36,4 +40,26 @@ class Locus < ActiveRecord::Base
   def self.authored_by author_array
 		Locus.joins( :source => :authorship ).where( :authorships => { :author_id => author_array }).uniq
 	end
+	
+	# Return other loci that attest two lexemes in common with this one, arranged by which two lexemes.
+	#
+	# Return value is a hash like { ["word1", "word2"] => [locus1, locus2, locus3], ... }
+	def potential_constructions
+	  parses = attestations.collect(&:parses).flatten.collect(&:parsed_form)
+	  construes = Hash[parses.collect {|parse|
+	    [parse, Locus.possibly_construing_with([parse]).where(Locus.arel_table[:id].not_eq(self.id))]
+	  }]
+
+    potentials = {}   
+    loop do
+      parse, loci = construes.shift
+      break unless parse
+      
+      construes.each do |c_parse, c_loci|
+        potentials[[parse,c_parse]] = loci & c_loci
+      end
+    end 
+
+    potentials.delete_if {|k,v| v.blank?}
+  end
 end
