@@ -43,23 +43,34 @@ class Locus < ActiveRecord::Base
 	
 	# Return other loci that attest two lexemes in common with this one, arranged by which two lexemes.
 	#
-	# Return value is a hash like { ["word1", "word2"] => [locus1, locus2, locus3], ... }
+	# Return value is a hash like { ["attest", "phrase"] => { :phrase => ["attested phrase", ...], :loci => [locus1, locus2, locus3, ...] } }
 	def potential_constructions
-	  parses = attestations.collect(&:parses).flatten.collect(&:parsed_form)
-	  construes = Hash[parses.collect {|parse|
-	    [parse, Locus.possibly_construing_with([parse]).where(Locus.arel_table[:id].not_eq(self.id))]
-	  }]
+	  parses = attestations.inject([]) do |memo, att|
+	    att.parses.collect(&:parsed_form).each do |pf|
+	      memo << [att.attested_form, pf]
+	    end
+      memo
+	  end
 
-    potentials = {}   
+	  construes = parses.collect do |forms|
+	    [forms[0], forms[1], Locus.possibly_construing_with([forms[1]]).where(Locus.arel_table[:id].not_eq(self.id))]
+	  end
+
+    potentials = {}
     loop do
-      parse, loci = construes.shift
+      attest, parse, loci = construes.shift
       break unless parse
       
-      construes.each do |c_parse, c_loci|
-        potentials[[parse,c_parse]] = loci & c_loci
+      construes.each do |c_attest, c_parse, c_loci|
+        construe = { [parse, c_parse] => { :phrase => ["%s %s" % [attest, c_attest]], :loci => loci & c_loci } }
+        potentials.update (construe) do |key, oldval, newval|
+          oldval.merge(newval) do |key, oldval, newval|
+            oldval | newval 
+          end
+        end
       end
     end 
 
-    potentials.delete_if {|k,v| v.blank?}
+    potentials.delete_if {|k,v| v[:loci].blank?}
   end
 end
