@@ -66,6 +66,23 @@
 	</div>
 </fieldset>
 
+  <% unless @locus.new_record? %>
+    <fieldset>
+      <legend>Potential constructions</legend>
+      <% potcon = @locus.potential_constructions %>
+      <% potcon.each do |words, data| %>
+        <b>? <%= data[:phrase].to_sentence %></b> - <%= words.to_sentence %> appear together in: 
+        <div>
+          <%= render :partial => 'shared/locus', :collection => data[:loci].take(5) %>
+          <% if data[:loci].size > 5 %>
+            (Five results out of <%= data[:loci].size %> listed; <%= link_to "see more...", :controller => "loci", :action => "index", :loci => data[:loci] %>)
+          <% end%>
+        </div>
+      <% end unless potcon.blank? %>
+      <%= "No potential constructions detected." if potcon.blank? %>
+    </fieldset>
+  <% end %>
+
   <%= list_children_with_option_to_add :attestation, l_form, :remote => true %>
 
   <div class="type-button">

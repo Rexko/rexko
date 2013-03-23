@@ -60,7 +60,7 @@ class Locus < ActiveRecord::Base
     loop do
       attest, parse, loci = construes.shift
       break unless parse
-      
+
       construes.each do |c_attest, c_parse, c_loci|
         construe = { [parse, c_parse] => { :phrase => ["%s %s" % [attest, c_attest]], :loci => loci & c_loci } }
         potentials.update (construe) do |key, oldval, newval|
