@@ -4,9 +4,9 @@
 <%= sanitize "<i>#{h locus.source.title.name}</i>" unless (locus.source.nil? || locus.source.title.nil?)  %>
 <%=h locus.source.pointer unless locus.source.nil? %>:
 
-<div class="subcolumns" style="margin-left:35px">
+<div class="subcolumns">
 	<div class="c50l" style="border-right:3px double gray">
-		<div class="subcl">
+		<div class="subcl" style="padding-left:35px">
 			<%=wh locus.example %>
 		</div>
 	</div>
