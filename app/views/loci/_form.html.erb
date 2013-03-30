@@ -66,6 +66,8 @@
 	</div>
 </fieldset>
 
+  <%= list_children_with_option_to_add :attestation, l_form, :remote => true %>
+
   <% unless @locus.new_record? %>
     <fieldset>
       <legend>Potential constructions</legend>
@@ -82,8 +84,6 @@
       <%= "No potential constructions detected." if potcon.blank? %>
     </fieldset>
   <% end %>
-
-  <%= list_children_with_option_to_add :attestation, l_form, :remote => true %>
 
   <div class="type-button">
 		<%= submit_tag form[:label] %> <%= submit_tag "#{form[:label]} and continue editing" %>
