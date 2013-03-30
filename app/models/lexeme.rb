@@ -55,7 +55,7 @@ class Lexeme < ActiveRecord::Base
   # Return all lexemes with a headword matching any of the given strings, ignoring
   # the case of the initial character.  
   def self.lookup_all_by_headwords(forms, options ={})
-    forms = forms.inject([]) do |memo, form|
+    forms = forms.compact.inject([]) do |memo, form|
       swapform = form.dup
       swapform[0,1] = swapform[0,1].swapcase
       memo << form << swapform
