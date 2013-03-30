@@ -188,12 +188,18 @@ module ApplicationHelper
   end
   
   # Translate a string in wiki format into HTML
-  def wh text
-    output = html_escape(text)
+  def wh text, highlight = []
+    output = html_escape(text).to_str
     output.gsub!(/&\#x27;&\#x27;&\#x27;(.+?)&\#x27;&\#x27;&\#x27;/, '<b>\1</b>')
     output.gsub!(/&\#x27;&\#x27;(.+?)&\#x27;&\#x27;/, '<i>\1</i>')
-    output.gsub!(/\[\[([^|]+?)\]\](\w*)/, '<a href="/html/\1" title="\1">\1\2</a>')
-    output.gsub!(/\[\[(.+?)\|(.+?)\]\](\w*)/, '<a href="/html/\1" title="\1">\2\3</a>')
+    output.gsub!(/\[\[([^|]+?)\]\](\w*)/) do |match|
+      bold = highlight.include?($1)
+      '<a href="/html/%{lexeme}" title="%{lexeme}">%{bb}%{lexeme}%{ending}%{eb}</a>' % { :lexeme => $1, :ending => $2, :bb => ('<b>' if bold), :eb => ('</b>' if bold) }
+    end
+    output.gsub!(/\[\[(.+?)\|(.+?)\]\](\w*)/) do |match|
+      bold = highlight.include?($1)
+      '<a href="/html/%{lexeme}" title="%{lexeme}">%{bb}%{stem}%{ending}%{eb}</a>' % { :lexeme => $1, :stem => $2, :ending => $3, :bb => ('<b>' if bold), :eb => ('</b>' if bold) }
+    end
     output.html_safe
   end  
 end
