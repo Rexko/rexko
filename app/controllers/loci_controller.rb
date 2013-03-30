@@ -3,7 +3,11 @@ class LociController < ApplicationController
   # GET /loci
   # GET /loci.xml
   def index
-    @loci = (Locus.where(:id => params[:loci].split('/').collect(&:to_i)) || Locus.sorted).includes({:source => {:authorship => [:author, :title]}}).paginate(:page => params[:page])
+    @loci = if params[:loci]
+      @loci = Locus.where(:id => params[:loci].split('/').collect(&:to_i))
+    else
+      @loci = Locus.sorted
+    end.includes({:source => {:authorship => [:author, :title]}}).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
