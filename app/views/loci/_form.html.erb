@@ -77,7 +77,7 @@
         <%= a_form.hidden_field :attested_form %>
         <b><%= a_form.check_box '_destroy', {}, "0", "1" %> <%= data[:phrase].to_sentence %></b> - <%= words.to_sentence %> appear together in: 
         <div style="font-size:90%">
-          <%= render :partial => 'shared/locus', :collection => data[:loci].take(5), :locals => { :highlight => words } %>
+          <%= render :partial => 'shared/locus', :collection => data[:loci].take(5), :locals => { :emphasis => words } %>
           <% if data[:loci].size > 5 %>
             (Five results out of <%= data[:loci].size %> listed; <%= link_to "see more...", :controller => "loci", :action => "index", :loci => data[:loci] %>)
           <% end %>
