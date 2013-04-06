@@ -21,7 +21,7 @@ module LociHelper
         ]
 
 			# need to set id or otherwise make it optionable
-			new_senses[optgroup] = sense.subentry.senses.build(:definition => "(new sense under this subentry...)")
+			new_senses[optgroup] = [sense.subentry.senses.build(:definition => "(new sense under this subentry...)"), sense.subentry.id]
 
       [optgroup, sense.definition, sense.id]
     end
@@ -37,7 +37,7 @@ module LociHelper
     end
     
     output.each do |k_group, v_members|
-    	v_members << [new_senses[k_group].definition, "new-%d" % new_senses[k_group].subentry.id]
+    	v_members << [new_senses[k_group][0].definition, "new-%d" % new_senses[k_group][1]]
     end
     
     output.to_a
