@@ -99,6 +99,7 @@ module ApplicationHelper
 	# options[:list_if] - only list children if true; if false just give addlink
 	# options[:create_blank] - add a blank child to the list
 	# options[:remote] - use AJAX
+	# options[:locals] - pass variables to partial
 	def list_children_with_option_to_add child, form, options = {}
 		class_name = (options[:class_name] || child).to_s
 		child_or_children = options[:limit_one] ? form.object.send(child) : form.object.send(child.to_s.pluralize)
@@ -117,7 +118,9 @@ module ApplicationHelper
 		output = form.fields_for(child_ref) do |subform|
 			subform_ref = subform.object_name
       printed_child = if (options[:list_if].blank? || options[:list_if]) && (had_child || options[:create_blank])
-				render :partial => class_name, :locals => { :f => subform } 
+        locals = { :f => subform }
+        locals.update(options[:locals]) if options[:locals]
+				render :partial => class_name, :locals => locals
 			end
 		end
 		
