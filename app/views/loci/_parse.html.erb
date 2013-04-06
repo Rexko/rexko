@@ -9,6 +9,6 @@
 				<%= f.text_field :parsed_form %>
 			</div>
 
-      <%= list_children_with_option_to_add :interpretation, f, :remote => true %>
+      <%= list_children_with_option_to_add :interpretation, f, :remote => true, :locals => { :parse => f.object } %>
 	</fieldset>
 <% end %>
