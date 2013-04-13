@@ -19,7 +19,7 @@ class Locus < ActiveRecord::Base
   }
 
   scope :possibly_construing_with, lambda {|attested_forms|
-    attesting(Lexeme.lookup_all_by_headwords(attested_forms))
+    select('"loci".*, "parses"."parsed_form"').joins(:attestations => { :parses => { :interpretations => { :sense => :subentry }}}).where( :subentries => { :lexeme_id => Lexeme.lookup_all_by_headwords(attested_forms).collect(&:id) })
   }
   
   accepts_nested_attributes_for :attestations, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
@@ -52,8 +52,10 @@ class Locus < ActiveRecord::Base
       memo
 	  end
 
+    raw_construes = Locus.possibly_construing_with(parses.collect{|f| f[1]}).where(Locus.arel_table[:id].not_eq(self.id)).group_by {|l| l.parsed_form}
+
 	  construes = parses.collect do |forms|
-	    [forms[0], forms[1], Locus.possibly_construing_with([forms[1]]).where(Locus.arel_table[:id].not_eq(self.id))]
+	    [forms[0], forms[1], (raw_construes[forms[1]] || [])]
 	  end
 
     potentials = {}
