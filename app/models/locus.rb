@@ -52,10 +52,16 @@ class Locus < ActiveRecord::Base
       memo
 	  end
 
-    raw_construes = Locus.possibly_construing_with(parses.collect{|f| f[1]}).where(Locus.arel_table[:id].not_eq(self.id)).group_by {|l| l.parsed_form}
+    raw_construes = Locus.possibly_construing_with(parses.collect{|f| f[1]}).includes({:source => {:authorship => [:author, :title]}}).where(Locus.arel_table[:id].not_eq(self.id))
+    grouped_construes = raw_construes.group_by {|l| l.parsed_form}
+
 
 	  construes = parses.collect do |forms|
-	    [forms[0], forms[1], (raw_construes[forms[1]] || [])]
+      # For whatever reason, when the same Locus is returned multiple times in raw_construes, only the first one has the eager-loaded data.
+      loci = (grouped_construes[forms[1]] || []).collect do |gcl|
+        raw_construes.find{|l| l.id == gcl.id }
+      end
+	    [forms[0], forms[1], (loci || [])]
 	  end
 
     potentials = {}
