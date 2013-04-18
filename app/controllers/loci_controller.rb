@@ -66,6 +66,7 @@ class LociController < ApplicationController
       end
     
     @wantedparse = @locus.most_wanted_parse
+    @potential_constructions = @locus.potential_constructions
   end
 
   # POST /loci

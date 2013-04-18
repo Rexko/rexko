@@ -69,7 +69,7 @@
   <%= list_children_with_option_to_add :attestation, l_form, :remote => true %>
 
   <% unless @locus.new_record? %>
-    <% potcon = @locus.potential_constructions %>
+    <% potcon = @potential_constructions || @locus.potential_constructions %>
     <fieldset style="height: <%= [50, (potcon.size+1)*10].min %>em; overflow: scroll">
       <legend>Potential constructions</legend>
       <% potcon.each do |words, data| %>
