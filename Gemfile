@@ -42,4 +42,3 @@ group :assets do
 end
 
 gem 'prototype-rails'
- 

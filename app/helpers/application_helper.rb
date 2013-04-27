@@ -83,15 +83,14 @@ module ApplicationHelper
   
   def remove_link_unless_new_record(form_builder)  
     unless form_builder.object.try(:new_record?)
-      "<span class=\"type-check\">%s</span>" % [form_builder.check_box(:_destroy) + " " +  form_builder.label(:_destroy, 'Delete', :class => 'delete_label')]
+      "<span class=\"type-check\">#{form_builder.check_box(:_destroy)} #{form_builder.label(:_destroy, 'Delete', :class => 'delete_label')}</span>"
     else
-      form_builder.hidden_field(:_destroy) + " " + link_to("(remove)", "##{form_builder.object.class.name.underscore}", :class => 'remove delete_label')
+      "#{form_builder.hidden_field(:_destroy)} #{link_to("(remove)", "##{form_builder.object.class.name.underscore}", :class => 'remove delete_label')}"
     end
   end
   
   def label_with_remove_option_for label_name = "Section", form_builder
-  	label = "%s &nbsp; %s" % [sanitize(label_name), remove_link_unless_new_record(form_builder)]
-  	label.html_safe
+  	"#{sanitize(label_name)} &nbsp; #{remove_link_unless_new_record(form_builder)}".html_safe
 	end
 
 	# options[:class_name] - if the class is different, i.e. next_etymon is an Etymology
