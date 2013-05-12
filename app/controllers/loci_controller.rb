@@ -33,6 +33,9 @@ class LociController < ApplicationController
     @source = @locus.source
     @authorship = @source.authorship if @source
 
+    @authors = Author.find(:all, :order => "name")
+    @titles = Title.find(:all, :order => "name")
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml { render :xml => @locus }
