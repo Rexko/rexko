@@ -108,7 +108,7 @@ module ApplicationHelper
 
     # Have to have a child to get the subform. We're only keeping it if options[:create_blank]
 		unless had_child
-			new_child = (options[:limit_one] ? form.object.send("build_%s" % child) : child_or_children.build) if child_or_children.blank? 
+			new_child = (options[:limit_one] ? form.object.send("build_#{child}") : child_or_children.build) if child_or_children.blank? 
 			instance_variable_set("@#{child}", new_child || child_or_children)
 			created_blank = true
 		end	
@@ -128,14 +128,14 @@ module ApplicationHelper
 		link_class = [(options[:remote] ? "pull_nested" : "add_nested"), ("limit-one" if options[:limit_one])]
 		
 		link_path_options = { :path => subform_ref, child => form.object } 
-		link_path = options[:remote] ? send('new_%s_path' % class_name, link_path_options) : "#%s" % child_ref
+		link_path = options[:remote] ? send("new_#{class_name}_path", link_path_options) : "##{child_ref}"
 		
 		link_options = { :class => link_class, :rel => (addlink_rel(subform_ref) unless subform_ref.blank?) }
 		link_options[:remote] = true if options[:remote]
 		
 		unless options[:limit_one] && printed_child.present? 
 	  	output << content_tag(:div, :class => "par") do
-	  		link_to "Add %s" % child.to_s.humanize.downcase, link_path, link_options
+	  		link_to "Add #{child.to_s.humanize.downcase}", link_path, link_options
 	  	end 
 	  end
 	  
@@ -151,7 +151,7 @@ module ApplicationHelper
 		# [attestation][parses][interpretations]
 		elements = child_ref.gsub(/\[(\d+|NEW_RECORD)\]/, '').scan(/\[(.*?)_attributes\]/).flatten
 		elements[0] = elements.first.singularize
-		elements.collect {|el| "[%s]" % el }.join
+		elements.collect {|el| "[#{el}]" }.join
 	end
   
   def spaced_render(options = {})
@@ -178,7 +178,7 @@ module ApplicationHelper
         end
       ]
     else
-      "<li>%s</li>" % [link_to(name, options, html_options)]
+      "<li>#{link_to(name, options, html_options)}</li>"
     end
     
     sanitize(output)
@@ -196,11 +196,13 @@ module ApplicationHelper
     output.gsub!(/&\#x27;&\#x27;(.+?)&\#x27;&\#x27;/, '<i>\1</i>')
     output.gsub!(/\[\[([^|]+?)\]\](\w*)/) do |match|
       bold = highlight.include?($1)
-      '<a href="/html/%{lexeme}" title="%{lexeme}">%{bb}%{lexeme}%{ending}%{eb}</a>' % { :lexeme => $1, :ending => $2, :bb => ('<b>' if bold), :eb => ('</b>' if bold) }
+      lexeme, ending, bb, eb = $1, $2, ('<b>' if bold), ('</b>' if bold) 
+      "<a href=\"/html/#{lexeme}\" title=\"#{lexeme}\">#{bb}#{lexeme}#{ending}#{eb}</a>"
     end
     output.gsub!(/\[\[(.+?)\|(.+?)\]\](\w*)/) do |match|
       bold = highlight.include?($1)
-      '<a href="/html/%{lexeme}" title="%{lexeme}">%{bb}%{stem}%{ending}%{eb}</a>' % { :lexeme => $1, :stem => $2, :ending => $3, :bb => ('<b>' if bold), :eb => ('</b>' if bold) }
+    lexeme, stem, ending, bb, eb = $1, $2, $3, ('<b>' if bold), ('</b>' if bold)
+      "<a href=\"/html/#{lexeme}\" title=\"#{lexeme}\">#{bb}#{stem}#{ending}#{eb}</a>"
     end
     output.html_safe
   end  

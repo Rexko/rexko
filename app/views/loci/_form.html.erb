@@ -8,7 +8,7 @@
 		    <!-- these need a better interface -->
 		    <%= collection_select(:authorship, 
 															:author_id, 
-															Author.find(:all, :order => "name"), 
+															@authors, 
 															:id, 
 															:name, 
 															{:include_blank => "[Other:]"}) %> 
@@ -29,7 +29,7 @@
 		  <div class="subcl type-select">
 		    <%= collection_select(:authorship, 
 															:title_id, 
-															Title.find(:all, :order => "name"), 
+															@titles, 
 															:id, 
 															:name, 
 															{:include_blank => "[Other:]"}) %> 
