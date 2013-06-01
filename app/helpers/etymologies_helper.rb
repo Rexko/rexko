@@ -127,7 +127,7 @@ module EtymologiesHelper
           etym.original_language unless
           parent && parent.original_language == etym.original_language
 
-        etymon = html_escape etym.etymon
+        etymon = sanitize etym.etymon
 
         gloss = html_escape('"' << etym.primary_gloss << '"') if etym.primary_gloss
       end unless top_level
