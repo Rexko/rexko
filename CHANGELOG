@@ -5,6 +5,7 @@
 * [#138] Fixed issue where adding interpretations to new parses on the locus form would throw an error
 * [#132] Glosses are now parsable
 * [#60] Locus edit now autosuggests possible constructions based on existing loci.
+* [#55] Phonetic forms should now appear only with the appopriate lexemes in the wiki format
 
 ==Since 0.3.4==
 * [#77] Headwords differing only by initial case should not be listed separately in wikiform.
