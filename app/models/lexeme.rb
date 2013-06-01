@@ -4,7 +4,7 @@ class Lexeme < ActiveRecord::Base
   has_many :subentries
   has_many :senses, :through => :subentries
   has_many :headwords
-  has_many :phonetic_forms
+  has_many :phonetic_forms, :through => :headwords
   
   scope :sorted, order(Headword.arel_table[:form].asc)
   
@@ -24,7 +24,7 @@ class Lexeme < ActiveRecord::Base
   def headword_forms
     headwords.collect(&:form)
   end
- 
+  
   def loci(options = {})
     Locus.attesting(self).includes(options[:include])
     # old include:
