@@ -27,7 +27,7 @@
   /* (en) Marginal areas & page background */
   /* (de) Randbereiche & Seitenhintergrund */
 /*  body { background: #3b69ad none; padding: 10px 0; } */
-	body { background:#cecaee url("../bg_purple.png") repeat-x top left fixed; padding:10px 0; }
+	body { background:#cecaee url(<%= image_path "bg_purple.png" %>) repeat-x top left fixed; padding:10px 0; }
 
   /* Layout Alignment | Layout-Ausrichtung */
   .page_margins { margin: 0 auto; }
@@ -58,7 +58,7 @@
 
   .page_margins {
     border: 0 none;
-    background-image:  url(../gfxborder/border_left.gif);
+    background-image:  url(<%= image_path "gfxborder/border_left.gif" %>);
     background-repeat:repeat-y;
     background-position:left;
   }
@@ -66,7 +66,7 @@
   .page {
     border: 0 none;
     margin: 0 0 0 5px; padding: 10px 15px 10px 10px;
-    background-image:  url(../gfxborder/border_right.gif);
+    background-image:  url(<%= image_path "gfxborder/border_right.gif" %>);
     background-repeat:repeat-y;
     background-position:right;
   }
@@ -78,7 +78,7 @@
     height: 20px;
     font-size:0;
     margin-bottom: -15px;
-    background-image:  url(../gfxborder/border_top.gif);
+    background-image:  url(<%= image_path "gfxborder/border_top.gif" %>);
     background-repeat:repeat-x;
     background-position:top left;
   }
@@ -89,7 +89,7 @@
     height: 20px;
     margin-top: -15px;
     font-size:0;
-    background-image:  url(../gfxborder/border_bottom.gif);
+    background-image:  url(<%= image_path "gfxborder/border_bottom.gif" %>);
     background-repeat:repeat-x;
     background-position:bottom left;
   }
@@ -99,7 +99,7 @@
     width: 20px;
     height: 20px;
     font-size:0;
-    background-image:  url(../gfxborder/corner_tl.gif);
+    background-image:  url(<%= image_path "gfxborder/corner_tl.gif" %>);
     background-position: top left;
   }
 
@@ -109,7 +109,7 @@
     width: 20px;
     height: 20px;
     font-size:0;
-    background-image:  url(../gfxborder/corner_tr.gif);
+    background-image:  url(<%= image_path "gfxborder/corner_tr.gif" %>);
     background-position: top right;
   }
 
@@ -117,7 +117,7 @@
     float:left;
     width: 20px;
     height: 20px;
-    background-image:  url(../gfxborder/corner_bl.gif);
+    background-image:  url(<%= image_path "gfxborder/corner_bl.gif" %>);
     background-position: bottom left;
   }
 
@@ -126,7 +126,7 @@
     float:right;
     width: 20px;
     height: 20px;
-    background-image:  url(../gfxborder/corner_br.gif);
+    background-image:  url(<%= image_path "gfxborder/corner_br.gif" %>);
     background-position: bottom right;
   }
 

@@ -41,5 +41,6 @@ module Lexicon
     
     config.assets.enabled = true
     config.assets.version = '1.0'
+    config.assets.precompile += ['1col_layout.css']
   end
 end

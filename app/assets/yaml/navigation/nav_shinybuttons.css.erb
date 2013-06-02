@@ -29,7 +29,7 @@
     position:relative;
     /* (en) Repeat the main color from the image */
     /* (de) Wiederholung der Hauptfarbe aus der Bilddatei */
-    background:#c0c0c0 url("images/shiny_buttons/background.png") repeat-x center right;
+    background:#c0c0c0 url(<%= image_path "shiny_buttons/background.png" %>) repeat-x center right;
     border-top:1px #333 solid;
     border-bottom:1px #333 solid;
     line-height:0;
@@ -80,7 +80,7 @@
   .hlist ul li.active {
     /* (en) Repeat the main color from the image */
     /* (de) Wiederholung der Hauptfarbe aus der Bilddatei */
-    background:#272727 url("images/shiny_buttons/background_active.png") repeat-x center right;
+    background:#272727 url(<%= image_path "shiny_buttons/background_active.png" %>) repeat-x center right;
     border-left:1px #444 solid;
     border-right:1px #888 solid;
   }
