@@ -5,6 +5,9 @@ class Locus < ActiveRecord::Base
 
 	scope :sorted, order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).order(Source.arel_table[:pointer].asc)
 
+	# Given an Author or array of Authors, return all loci authored by them.
+  scope :authored_by, ->(author_array) { joins( :source => :authorship ).where( :authorships => { :author_id => author_array }).uniq }
+
   # Takes a lexeme and returns 
   scope :attesting, lambda { |lexeme|
     { :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}},
@@ -36,11 +39,6 @@ class Locus < ActiveRecord::Base
      (attestations.collect(&:attested_form) + Parse.forms_of(parses)).include? form
   end
 
-	# Given an Author or array of Authors, return all loci authored by them.
-  def self.authored_by author_array
-		Locus.joins( :source => :authorship ).where( :authorships => { :author_id => author_array }).uniq
-	end
-	
 	# Return other loci that attest two lexemes in common with this one, arranged by which two lexemes.
 	#
 	# Return value is a hash like { ["attest", "phrase"] => { :phrase => ["attested phrase", ...], :loci => [locus1, locus2, locus3, ...] } }
