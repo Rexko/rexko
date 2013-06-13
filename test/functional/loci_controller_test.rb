@@ -56,4 +56,10 @@ class LociControllerTest < ActionController::TestCase
   	
   	assert_response :success
   end
+  
+  test "should get author search" do
+    get :matching, :author => authors(:one).id
+    
+    assert_response :success
+  end
 end
