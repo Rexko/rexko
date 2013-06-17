@@ -1,5 +1,6 @@
 ==Since 0.3.6==
 * [#142] Fixed failure of will_paginate on Locus search
+* [#141] Fixed issue where interpretations wouldn't save
 
 ==Since 0.3.5==
 * Updated code for Rails 3.1 

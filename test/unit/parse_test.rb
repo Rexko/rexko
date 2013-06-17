@@ -19,4 +19,17 @@ class ParseTest < ActiveSupport::TestCase
   		assert_equal Parse.count_unattached_to(f), result.length 
   	end
 	end
+	
+	test "should reject blank interpretations and only blank interpretations" do
+	  valid_params = { :parsed_form => "valid", :interpretations_attributes => [{ :sense_id => senses(:one).id }] }
+    invalid_params = { :parsed_form => "valid", :interpretations_attributes => [{ :sense_id => "" }] }
+	  
+	  assert_difference('Interpretation.count') do
+      Parse.create(valid_params)
+	  end
+	  
+	  assert_no_difference('Interpretation.count') do
+	    Parse.create(invalid_params)
+	  end
+  end
 end
