@@ -18,6 +18,9 @@ class LociControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to locus_path(assigns(:locus))
+    
+    # 141: A broken route caused us to be unable to save loci.
+    assert_routing({ method: 'post', path: '/loci' }, { controller: 'locus', action: 'create' })
   end
 
   def test_should_show_locus
