@@ -54,7 +54,6 @@ Lexicon::Application.routes.draw do
   match 'unattached/matching/:forms' => 'loci#unattached'
   match 'unattached/:id' => 'loci#unattached'
   match 'html(/:headword)' => 'lexemes#show_by_headword', :as => :exact_lexeme
-  match 'loci(/index(/*loci))' => 'loci#index'  #replace this
   resources :notes
   resources :interpretations
   resources :parses
@@ -67,6 +66,7 @@ Lexicon::Application.routes.draw do
   resources :titles
   resources :sources
   resources :loci
+  match 'loci(/index(/*loci))' => 'loci#index'  #replace this
   resources :glosses
   resources :senses
   resources :etymologies
