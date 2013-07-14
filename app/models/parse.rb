@@ -3,8 +3,23 @@ class Parse < ActiveRecord::Base
   validates_presence_of :parsed_form
   belongs_to :parsable, :polymorphic => true
   
-  scope :without_entries, :conditions => ['NOT EXISTS (SELECT "form" FROM "headwords" WHERE headwords.form = parsed_form)']
+  # Returns parses without entries (determined by comparing parsed_form to headword forms).
+  # Initial letter case insensitive (if the DB is smart enough)
+  scope :without_entries, -> {
+    where('NOT EXISTS (SELECT "form" FROM "headwords" WHERE "headwords"."form" IN (LOWER(SUBSTR(parsed_form, 1, 1)) || SUBSTR(parsed_form, 2), UPPER(SUBSTR(parsed_form, 1, 1)) || SUBSTR(parsed_form, 2)))')
+  }
+  
   scope :uninterpreted, :include => :interpretations, :conditions => { "interpretations.parse_id" => nil }
+
+  # Returns the most commonly appearing parses without entries.
+  # count = number of results to return (defaults to 1)
+  scope :most_wanted, ->(count = 1) { 
+    select([:parsed_form, arel_table[:parsed_form].count.as('count_all')]).
+    without_entries.
+    group(:parsed_form).
+    order('count_all DESC').
+    limit(count) 
+  }
   
   accepts_nested_attributes_for :interpretations, :allow_destroy => true, :reject_if => proc { |attributes| attributes[:sense_id].blank? }
      
@@ -50,10 +65,6 @@ class Parse < ActiveRecord::Base
   # Return all uninterpreted parses whose parsed form matches the given headwords
   def self.unattached_to headwords
     uninterpreted.where(:parsed_form => headwords)
-  end
-  
-  def self.most_wanted count  
-    Parse.find(:all, :select => '"parses"."parsed_form", COUNT("parsed_form") AS count_all', :joins => ['LEFT OUTER JOIN "headwords" ON "headwords"."form" = "parsed_form"'], :conditions => {:headwords => {:form => nil}}, :group => '"parses"."parsed_form"', :order => 'count_all DESC', :limit => count)
   end
   
   def self.less_popular_than times, count=nil

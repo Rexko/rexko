@@ -1,6 +1,7 @@
 ==Since 0.3.6==
 * [#142] Fixed failure of will_paginate on Locus search
 * [#141] Fixed issue where interpretations and loci wouldn't save
+* [#74] Fixed issue where "most wanted parse" was not initial-case-insensitive.
 
 ==Since 0.3.5==
 * Updated code for Rails 3.1 
