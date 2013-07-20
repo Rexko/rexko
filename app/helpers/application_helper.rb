@@ -25,7 +25,7 @@ module ApplicationHelper
   # Link to the first lexeme whose headword matches a given parse's parsed form.
   # Passes to #new_headword_link if no such lexeme.
   def headword_link (parse)
-    is_wanted = parse == @wantedparse
+    is_wanted = parse.try(:parsed_form) == @wantedparse.try(:parsed_form)
     head = @headwords ? @headwords[parse.parsed_form] : Lexeme.lookup_by_headword(parse.parsed_form)
 		head = head.respond_to?(:lexeme) ? head.lexeme : head
 

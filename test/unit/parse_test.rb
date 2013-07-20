@@ -43,4 +43,23 @@ class ParseTest < ActiveSupport::TestCase
     
     assert_not_equal "Blue", most_wanted.first.parsed_form
   end
+
+  # 119: Locus#most_wanted_parse is doing a lot of work that Parse
+  # should be doing. Moved it to Parse#most_wanted_in
+  test "most_wanted_in(locus, count) should be a functioning scope" do
+    assert Parse.respond_to?(:most_wanted_in)
+
+    Locus.find_each do |roka|
+      mwi_parse = Parse.most_wanted_in(roka).first
+      roka_parse = roka.parses.without_entries.inject([]) { |memo, paasu| 
+        memo.count > paasu.count ? memo : paasu
+      }
+
+      if roka_parse.present? && mwi_parse.present?
+        assert_equal roka_parse.count, mwi_parse.count, "Locus #{roka.id} does not match - Locus gives #{roka_parse}, MWI gives #{mwi_parse}"
+      else # if one is empty, there are no wanted parses, and both should be empty
+        assert_equal mwi_parse.blank?, roka_parse.blank?
+      end
+    end
+  end
 end
