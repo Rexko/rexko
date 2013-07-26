@@ -64,5 +64,15 @@ class EtymologyTest < ActiveSupport::TestCase
 				"id"=>"738"},
  			"id"=>"737"})
   end
-end
 
+  # 137: Accepts_nested_attributes_for was not correctly testing the blankness of parses
+  test "associated Parses should be rejectable if their parsed_form is empty" do
+    assert_no_difference 'Parse.count' do
+      Etymology.find_each do |echi|
+        paa = echi.parses.build(parsed_form: "")
+        assert Parse.rejectable?(paa), "#{echi.id}: attributes #{paa.attributes}"
+      end
+    end
+  end
+
+end

@@ -15,4 +15,9 @@ class Gloss < ActiveRecord::Base
   def language
   	read_attribute(:language) || (Language.lang_for(sense.lexeme.dictionaries, :target_language) if sense.try(:lexeme))
 	end
+	
+	# Determine whether we should hit reject_if when something accepts_nested_attributes_for glosses.
+	def self.rejectable?(attrs)
+	  attrs[:gloss].blank?
+	end
 end

@@ -3,6 +3,7 @@
 * [#141] Fixed issue where interpretations and loci wouldn't save
 * [#74, #119] Fixed issue where "most wanted parse" was not initial-case-insensitive.
 * [#119] Fixed an issue where the "most wanted parse" was not necessarily so.
+* [#140] Fields that default to blank (gloss, parsed form) should no longer inhibit saving lexemes
 
 ==Since 0.3.5==
 * Updated code for Rails 3.1 

@@ -8,7 +8,8 @@ class Etymology < ActiveRecord::Base
   belongs_to :original_language, :class_name => "Language" # language of etymon
   validate :validate_sufficient_data
   
-  accepts_nested_attributes_for :notes, :parses, {:allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }}
+  accepts_nested_attributes_for :notes, {:allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }}
+  accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc {|attrs| Parse.rejectable?(attrs) }
   accepts_nested_attributes_for :next_etymon, :allow_destroy => true, :reject_if => proc {|attrs| Etymology.rejectable?(attrs) }
   
   def to_s
