@@ -46,4 +46,27 @@ class Language < ActiveRecord::Base
     	code += '-' + subtags[:variant] unless subtags[:variant].blank?
     end
 	end
+	
+	# Sort ordinandum
+	# Options:
+	# :by - attribute to sort by
+	# :sub - substitutions, a hash like { "J" => "I" }
+	# :order - exceptions to default order, a hash like { "Ñ" => "N" }
+	def sort ordinandum, options = {}
+	  [*ordinandum].sort_by {|o|
+	    key = options[:by] ? o.send(options[:by]) : o
+      key = options[:sub].inject(key) {|memo, (orig, xform)|
+	      memo.gsub(Regexp.new(orig, Regexp::IGNORECASE), xform)
+	    } if options[:sub]
+	    key = options[:order].inject(key) {|memo, (latter, former)|
+	      memo.gsub(Regexp.new(latter, Regexp::IGNORECASE), "#{former}\u{FFFF}")
+	    } if options[:order]
+	    key.downcase
+	  }
+  end
+  
+  # Determine language of ordinandum and sort by its sort
+  def self.sort_using_lang_for ordinandum, options = {}
+    lang_for(ordinandum, options[:lang_attr]).sort(ordinandum, options)
+  end
 end
