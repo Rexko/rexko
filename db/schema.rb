@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110412174710) do
+ActiveRecord::Schema.define(:version => 20130811213939) do
 
   create_table "attestations", :force => true do |t|
     t.integer  "locus_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20110412174710) do
     t.integer  "language_id"
     t.integer  "source_language_id"
     t.integer  "target_language_id"
+    t.integer  "sort_order_id"
   end
 
   create_table "dictionary_scopes", :force => true do |t|
@@ -109,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20110412174710) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "default_name"
+    t.integer  "sort_order_id"
   end
 
   create_table "lexemes", :force => true do |t|
@@ -166,6 +168,17 @@ ActiveRecord::Schema.define(:version => 20110412174710) do
   end
 
   add_index "senses", ["subentry_id"], :name => "index_senses_on_subentry_id"
+
+  create_table "sort_orders", :force => true do |t|
+    t.string   "name"
+    t.text     "substitutions"
+    t.text     "orderings"
+    t.integer  "language_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sort_orders", ["language_id"], :name => "index_sort_orders_on_language_id"
 
   create_table "sources", :force => true do |t|
     t.string   "pointer"

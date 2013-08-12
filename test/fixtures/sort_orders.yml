@@ -1,0 +1,22 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+latin:
+  substitutions: 
+    "J": "I"
+    "V": "U"
+    "W": "UU"
+  language_id: 2
+
+old_fashioned_spanish:
+  substitutions: 
+    "Á": "A"
+    "É": "E"
+    "Í": "I"
+    "Ó": "O"
+    "Ú": "U"
+    "Ü": "U"
+  orderings: 
+    "CH": "C"
+    "Ñ": "N"
+    "LL": "L"
+  language_id: 3

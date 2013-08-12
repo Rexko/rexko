@@ -9,11 +9,13 @@ latin:
   id: 2
   iso_639_code: la
   default_name: Latin
+  sort_order_id: latin
 
 spanish:
   id: 3
   iso_639_code: es
   default_name: Spanish
+  sort_order_id: old_fashioned_spanish
 
 without_code:
   id: 10

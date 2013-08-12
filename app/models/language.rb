@@ -5,6 +5,8 @@ class Language < ActiveRecord::Base
   has_many :headwords
   has_many :senses
   has_many :subentries
+  belongs_to :sort_order # The language's default sort order
+  has_many :sort_orders  # All sort orders defined for this language
   
   MULTIPLE_LANGUAGES = new(:default_name => 'Multiple languages', :iso_639_code => 'mul')
   UNDETERMINED = new(:default_name => 'Undetermined', :iso_639_code => 'und')
@@ -24,6 +26,13 @@ class Language < ActiveRecord::Base
     (default_name if default_name.present?) || 
     (iso_639_code if iso_639_code.present?) || 
     UNKNOWN_LANGUAGE % id
+  end
+
+  # Return the best sort order for the language
+  def default_order
+    (sort_order if sort_order.present?)               || 
+    (sort_orders.try(:first) if sort_orders.present?) ||
+    SortOrder::DEFAULT
   end
   
   # lang_for: Returns the Language used in the element or array.
@@ -55,12 +64,12 @@ class Language < ActiveRecord::Base
 	def sort ordinandum, options = {}
 	  [*ordinandum].sort_by {|o|
 	    key = options[:by] ? o.send(options[:by]) : o
-      key = options[:sub].inject(key) {|memo, (orig, xform)|
+      key = (options[:sub] || default_order.substitutions).inject(key) {|memo, (orig, xform)|
 	      memo.gsub(Regexp.new(orig, Regexp::IGNORECASE), xform)
-	    } if options[:sub]
-	    key = options[:order].inject(key) {|memo, (latter, former)|
+	    } 
+	    key = (options[:order] || default_order.orderings).inject(key) {|memo, (latter, former)|
 	      memo.gsub(Regexp.new(latter, Regexp::IGNORECASE), "#{former}\u{FFFF}")
-	    } if options[:order]
+	    }
 	    key.downcase
 	  }
   end

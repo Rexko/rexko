@@ -36,18 +36,26 @@ class LanguageTest < ActiveSupport::TestCase
   end
   
   test "should be able to sort based on custom sort order using substitutions" do
-    # In Latin, J sorts as I; and nowhere really should case be primary
-    la = languages(:latin)
+    la, tw = languages(:latin), languages(:testwegian)
     hw1, hw2, hw3 = Headword.new(form: "Iapetus"), Headword.new(form: "jaspis"), Headword.new(form: "ibex")
     
-    assert_equal [hw1, hw2, hw3], la.sort([hw3, hw1, hw2], by: :form, sub: {"J" => "I"}), "order should be Iapetus, jaspis, ibex"
+    # Using substitutions defined for the language
+    # In Latin, J sorts as I; and nowhere really should case be primary
+    assert_equal [hw1, hw2, hw3], la.sort([hw3, hw1, hw2], by: :form), "Latin order should be Iapetus, jaspis, ibex"
+    
+    # Specifying substitutions explicitly
+    assert_equal [hw1, hw2, hw3], tw.sort([hw3, hw1, hw2], by: :form, sub: {"J" => "I"}), "Custom order should be Iapetus, jaspis, ibex"
   end
 
   test "should be able to sort based on custom sort order using reorderings" do
-    # In Spanish, Ñ sorts after N
-    es = languages(:spanish)
+    es, tw = languages(:spanish), languages(:testwegian)
     hw1, hw2, hw3 = Headword.new(form: "ananás"), Headword.new(form: "ñame"), Headword.new(form: "plátano")
-    
-    assert_equal [hw1, hw2, hw3], es.sort([hw3, hw1, hw2], by: :form, order: { "Ñ" => "N" }), "order should be ananás, ñame, plátano"
+
+    # Using reorderings defined for the language
+    # In Spanish, Ñ sorts just after N
+    assert_equal [hw1, hw2, hw3], es.sort([hw3, hw1, hw2], by: :form), "Spanish order should be ananás, ñame, plátano"
+
+    # Specifying substitutions explicitly
+    assert_equal [hw1, hw2, hw3], tw.sort([hw3, hw1, hw2], by: :form, order: { "Ñ" => "N" }), "Custom order should be ananás, ñame, plátano"
   end
 end
