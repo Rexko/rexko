@@ -1,0 +1,15 @@
+﻿	<fieldset class="sort_order">
+		<legend><%= label_with_remove_option_for "Default sort", f %></legend>
+			<div class="type-text">
+				<%= f.label :name %>
+				<%= f.text_field :name %>
+
+				<%= f.label :substitutions %>
+				<i>If X sorts as if it were Y, enter:</i> <tt>X Y</tt> <i>(one rule per line)</i>
+				<%= f.text_area :substitutions, value: friendly_subst(f.object.substitutions) %>
+
+				<%= f.label :orderings %>
+				<i>If Ý sorts after Y, enter</i> <tt>Y Ý</tt> <i>(one rule per line)</i>
+				<%= f.text_area :orderings, value: friendly_order(f.object.orderings) %>
+			</div>
+	</fieldset>

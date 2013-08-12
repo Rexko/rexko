@@ -5,7 +5,7 @@
 
 <h1>Listing lexemes in <%=h @dictionary.title %></h1>
 
-<% for lexeme in @lexemes %>
+<% for lexeme in @lexemes_current_page %>
 	<%= render(:partial => "shared/lexeme", :object => lexeme ) 
 	%>
 <table>

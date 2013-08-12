@@ -15,12 +15,8 @@ class DictionariesController < ApplicationController
   # GET /dictionaries/1.xml
   def show
     @dictionary = Dictionary.find(params[:id])
-    # 'sort_latin(@dictionary.lexemes).paginate' is pretty bad, I think 
-    @lexemes = (
-      @dictionary.headword_language == 'la' ?
-        sort_latin(@dictionary.lexemes) : 
-        @dictionary.lexemes.sorted.joins(:headwords)
-      ).paginate(:page => params[:page])
+    @lexemes = @dictionary.source_language.sort(@dictionary.lexemes.includes(:headwords), by: :primary_headword).paginate(:page => params[:page])
+    @lexemes_current_page = Lexeme.where(:id => @lexemes).includes([{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -87,23 +83,6 @@ class DictionariesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(dictionaries_url) }
       format.xml  { head :ok }
-    end
-  end
-  
-  def sort_latin collection
-    collection.sort_by do |x|
-      sub_latin(x.headwords[0].form).downcase
-    end
-  end
-
-protected
-  def sub_latin str
-    str.gsub(/[jvw]/i) do |unkosher|
-      case unkosher
-      when /j/i then "i"
-      when /v/i then "u"
-      when /w/i then "uu"
-      end
     end
   end
 end

@@ -25,6 +25,10 @@ class Lexeme < ActiveRecord::Base
     headwords.collect(&:form)
   end
   
+  def primary_headword
+    headwords.first.try(:form)
+  end
+  
   def loci(options = {})
     Locus.attesting(self).includes(options[:include])
     # old include:

@@ -9,6 +9,8 @@
 		<%= f.text_field :iso_639_code %>
 	</div>
 
+  <%= list_children_with_option_to_add :sort_order, f, remote: true, limit_one: true %>
+
   <div class="type-button">
     <%= f.submit form[:label] %>
   </div>

@@ -1,0 +1,17 @@
+﻿<%= fields_for @path, @sort_order, :child_index => Time.now.to_i.to_s do |f|  %>
+	<fieldset class="sort_order">
+		<legend><%= label_with_remove_option_for "Default sort", f %></legend>
+			<div class="type-text">
+				<%= f.label :name %>
+				<%= f.text_field :name %>
+
+				<%= f.label :substitutions %>
+				<i>If X sorts as if it were Y, enter:</i> <tt>X Y</tt> <i>(one rule per line)</i>
+				<%= f.text_area :substitutions %>
+
+				<%= f.label :orderings %>
+				<i>If Ý sorts after Y, enter</i> <tt>Y Ý</tt> <i>(one rule per line)</i>
+				<%= f.text_area :orderings %>
+			</div>
+	</fieldset>
+<% end %>
