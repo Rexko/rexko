@@ -15,7 +15,7 @@ class DictionariesController < ApplicationController
   # GET /dictionaries/1.xml
   def show
     @dictionary = Dictionary.find(params[:id])
-    @lexemes = @dictionary.source_language.sort(@dictionary.lexemes.includes(:headwords), by: :primary_headword).paginate(:page => params[:page])
+    @lexemes = (@dictionary.source_language || Language::UNDETERMINED).sort(@dictionary.lexemes.includes(:headwords), by: :primary_headword).paginate(:page => params[:page])
     @lexemes_current_page = Lexeme.where(:id => @lexemes).includes([{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}])
 
     respond_to do |format|
