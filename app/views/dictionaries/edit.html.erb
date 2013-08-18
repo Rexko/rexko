@@ -23,8 +23,12 @@
 		<%= collection_select(:dictionary, :target_language_id, Language.find(:all), :id, :iso_639_code) %>
 	</p>
 
-    <%= f.submit "Update" %>
+  <p>
+    <b>External address</b><br />
+    <%= f.text_field :external_address %>
   </p>
+
+    <%= f.submit "Update" %>
 <% end %>
 
 <%= link_to 'Show', @dictionary %> |

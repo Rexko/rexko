@@ -42,4 +42,10 @@ class DictionariesControllerTest < ActionController::TestCase
 
     assert_redirected_to dictionaries_path
   end
+  
+  # 82
+  test "should be able to edit external address" do
+    get :edit, :id => dictionaries(:one).id
+    assert_select 'input[name=?]', "dictionary[external_address]"
+  end
 end

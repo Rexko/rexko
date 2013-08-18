@@ -131,4 +131,13 @@ class LexemesControllerTest < ActionController::TestCase
     get :show, :id => lexemes(:appearing_in_construction_a).id
     assert_response :success
   end
+    
+  # 82
+  test "should use dictionary's external address when linking" do
+    reku = dictionaries(:one).lexemes.first
+    get :show, :id => reku.id
+    assert_present reku.dictionaries
+    assert_present reku.headwords
+    assert_select "a[href=?]", /#{Regexp.escape(dictionaries(:one).external_address)}.*/
+  end
 end

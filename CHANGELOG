@@ -5,6 +5,7 @@
 * [#119] Fixed an issue where the "most wanted parse" was not necessarily so.
 * [#140] Fields that default to blank (gloss, parsed form) should no longer inhibit saving lexemes
 * [#125] Basic ability to specify dictionary sorting on language edit page 
+* [#82] Ability to specify convenience link on dictionary edit page (TTT no longer hardcoded)
 
 ==Since 0.3.5==
 * Updated code for Rails 3.1 

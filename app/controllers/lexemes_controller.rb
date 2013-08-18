@@ -33,6 +33,7 @@ class LexemesController < ApplicationController
     @lexeme.headword_forms.each { |headword|
       @loci_for[headword] = @loci.find_all{ |locus| locus.attests?(headword) }
     }
+    @external_addresses = @lexeme.dictionaries.collect(&:external_address).uniq.delete_if {|addy| addy.blank? }
 
     respond_to do |format|
       format.html # show.html.erb

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130811213939) do
+ActiveRecord::Schema.define(:version => 20130818171408) do
 
   create_table "attestations", :force => true do |t|
     t.integer  "locus_id"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20130811213939) do
     t.integer  "source_language_id"
     t.integer  "target_language_id"
     t.integer  "sort_order_id"
+    t.string   "external_address"
   end
 
   create_table "dictionary_scopes", :force => true do |t|
