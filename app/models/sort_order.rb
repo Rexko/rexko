@@ -12,7 +12,7 @@ class SortOrder < ActiveRecord::Base
 
   def substitutions=(attributes)
     if attributes.is_a? String
-      attributes = attributes.split("\n").inject({}) do |memo, obj|
+      attributes = attributes.split(/\r?\n/).inject({}) do |memo, obj|
         orig, xform = obj.split("\s", 2)
         memo[orig] = xform
         memo 
@@ -27,7 +27,7 @@ class SortOrder < ActiveRecord::Base
 
   def orderings=(attributes)
     if attributes.is_a? String
-      attributes = attributes.split("\n").inject({}) do |memo, obj|
+      attributes = attributes.split(/\r?\n/).inject({}) do |memo, obj|
         former, latter = obj.split("\s", 2)
         memo[latter] = former
         memo 

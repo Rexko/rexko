@@ -68,7 +68,7 @@ class Language < ActiveRecord::Base
 	    key = options[:by] ? o.send(options[:by]) : o
       key = (options[:sub] || default_order.substitutions).inject(key) {|memo, (orig, xform)|
 	      memo.gsub(Regexp.new(orig, Regexp::IGNORECASE), xform)
-	    } 
+	    }
 	    key = (options[:order] || default_order.orderings).inject(key) {|memo, (latter, former)|
 	      memo.gsub(Regexp.new(latter, Regexp::IGNORECASE), "#{former}\u{FFFF}")
 	    }
