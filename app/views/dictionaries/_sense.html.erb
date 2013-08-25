@@ -1,0 +1,13 @@
+﻿<dd class="dictform-sense" <%= lang_for(sense) %>>
+	<%=wh sense.definition %>
+	<% unless sense.glosses.empty? %>
+		<dl class="dictform-glosses">
+			<%= render :partial => "gloss", :collection => sense.glosses %>	
+		</dl>
+		<% unless sense.notes.empty? %>
+		<dl>
+			<dd><b>¶</b> <%= render :partial => "comment", :collection => sense.notes %>
+		</dl>
+		<% end %>
+	<% end %>
+</dd>

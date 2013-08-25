@@ -48,7 +48,7 @@ module ApplicationHelper
   
   def sentence_case str
     str.dup.tap do |x|
-      x[0,1] = x[0,1].upcase
+      x[0,1] = x[0,1].mb_chars.upcase
     end
   end
   

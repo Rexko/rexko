@@ -1,0 +1,5 @@
+﻿<dl class="dictform-entry">
+	<dt class="dictform-headword" <%= lang_for(lexeme.headwords) %>><%= titleize_headwords_for lexeme %>.</dt>
+	<%= render :partial => "headword", :collection => lexeme.headwords %>
+	<%= render :partial => "subentry", :collection => lexeme.subentries %>
+</dl>

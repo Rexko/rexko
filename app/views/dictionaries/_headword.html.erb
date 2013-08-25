@@ -1,0 +1,1 @@
+﻿<dd class="dictform-phonetic-form" <%= lang_for(headword, :variant => 'fonipa') %>><%= h headword.phonetic_forms.compact.collect{|x| "/#{x.form}/"}.to_sentence(:two_words_connector  => ' or ', :last_word_connector => ", or ") %></dd>
