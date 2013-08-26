@@ -26,9 +26,4 @@ class Headword < ActiveRecord::Base
   def self.lookup_by_parse parse
     self.find_by_form(parse.parsed_form)
   end
-  
-  # Default to lexeme's language if language not defined.
-  def language
-  	read_attribute(:language) || lexeme.try(:language)
-	end
 end

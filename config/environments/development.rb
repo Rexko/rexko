@@ -24,5 +24,10 @@ Lexicon::Application.configure do
   
   config.assets.compress = false
   config.assets.debug = true
+  
+  config.after_initialize do
+  	Bullet.enable = true
+  	Bullet.rails_logger = true
+ 	end
 end
 

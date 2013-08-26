@@ -20,9 +20,13 @@ class Sense < ActiveRecord::Base
     Sense.find(:all, :joins => [{ :subentry => { :lexeme => :headwords} } ], :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform])
   end
   
-  # Default to the language of the lexeme's dictionaries if not defined
-  def language
-  	read_attribute(:language) || (Language.lang_for(lexeme.dictionaries) if lexeme)
+  before_save :set_defaults
+  
+  # Default to lexeme's language if language not defined.
+  def set_defaults
+  	default_language = lexeme.try(:language) || Language.new
+ 
+  	self.language ||= default_language
 	end
   
 protected

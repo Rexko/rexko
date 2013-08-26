@@ -64,7 +64,7 @@ class Language < ActiveRecord::Base
 	# :sub - substitutions, a hash like { "J" => "I" }
 	# :order - exceptions to default order, a hash like { "Ñ" => "N" }
 	def sort ordinandum, options = {}
-	  [*ordinandum].sort_by {|o|
+	 ordinandum.sort_by {|o|
 	    key = options[:by] ? o.send(options[:by]) : o
       key = (options[:sub] || default_order.substitutions).inject(key) {|memo, (orig, xform)|
 	      memo.gsub(Regexp.new(orig, Regexp::IGNORECASE), xform)
@@ -79,5 +79,10 @@ class Language < ActiveRecord::Base
   # Determine language of ordinandum and sort by its sort
   def self.sort_using_lang_for ordinandum, options = {}
     lang_for(ordinandum, options[:lang_attr]).sort(ordinandum, options)
+  end
+  
+  # Returns the language itself.
+  def language
+    self
   end
 end

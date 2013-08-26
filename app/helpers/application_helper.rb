@@ -21,7 +21,7 @@ module ApplicationHelper
 
     "xml:lang=\"#{h langtag}\" lang=\"#{h langtag}\"".html_safe
   end
-    
+  
   # Link to the first lexeme whose headword matches a given parse's parsed form.
   # Passes to #new_headword_link if no such lexeme.
   def headword_link (parse)

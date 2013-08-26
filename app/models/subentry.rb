@@ -18,8 +18,12 @@ class Subentry < ActiveRecord::Base
   
   HASH_MAP_TO_PARSE = { :senses => Sense::HASH_MAP_TO_PARSE }
   
+  before_save :set_defaults
+  
   # Default to lexeme's language if language not defined.
-  def language
-  	read_attribute(:language) || lexeme.try(:language)
+  def set_defaults
+  	default_language = lexeme.try(:language) || Language.new
+ 
+  	self.language ||= default_language
 	end
 end

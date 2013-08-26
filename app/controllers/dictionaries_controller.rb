@@ -3,7 +3,7 @@ class DictionariesController < ApplicationController
   # GET /dictionaries
   # GET /dictionaries.xml
   def index
-    @dictionaries = Dictionary.all
+    @dictionaries = Dictionary.includes([:language, :source_language, :target_language]).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,7 @@ class DictionariesController < ApplicationController
   def show
     @dictionary = Dictionary.find(params[:id])
     @source_language = (@dictionary.source_language || Language::UNDETERMINED)
-    @lexemes = @source_language.sort(@dictionary.lexemes.includes(:headwords).includes([{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}]), by: :primary_headword)
+    @lexemes = @source_language.sort(@dictionary.lexemes.includes([{:dictionaries => [:source_language]}, {:headwords => [:phonetic_forms, :language]}, {:subentries => [{:senses => [:glosses, :notes, :language]}, {:etymologies => [:notes, :original_language, {:next_etymon => [:notes, :original_language, :next_etymon] }]}, {:notes => :language}, :language]}]), by: :primary_headword)
 
     respond_to do |format|
       format.html # show.html.erb
