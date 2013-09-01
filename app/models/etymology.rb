@@ -38,8 +38,10 @@ class Etymology < ActiveRecord::Base
     prim_sub.etymologies.first if prim_sub
   end
   
+  # What was this for?
   def primary_gloss
-    gloss.present? ? gloss : Gloss.attesting(self, "Etymology").first.try(:gloss)
+    # gloss.present? ? gloss : Gloss.attesting(self, "Etymology").first.try(:gloss)
+    gloss
   end
   
   # Determine whether the given attribute hash would create an invalid etymology.
