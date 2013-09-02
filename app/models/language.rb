@@ -46,34 +46,39 @@ class Language < ActiveRecord::Base
   #   language is found in the array's content
   # * the Language associated to the content, if they all use the same
   def self.lang_for content, lang_attr = nil
-  	[*content].inject(nil) do |memo, elem| 
+    [*content].inject(nil) do |memo, elem| 
       lang = elem ? elem.send(lang_attr || :language) || UNDETERMINED : NO_LINGUISTIC_CONTENT
       memo ? if lang == memo then memo else break MULTIPLE_LANGUAGES end : lang
     end || UNDETERMINED
-	end
+  end
   
   def self.code_for content, subtags = {}
-  	self.lang_for(content).iso_639_code.tap do |code|
-    	code += '-' + subtags[:variant] unless subtags[:variant].blank?
+    self.lang_for(content).iso_639_code.tap do |code|
+      code += '-' + subtags[:variant] unless subtags[:variant].blank?
     end
-	end
-	
-	# Sort ordinandum
-	# Options:
-	# :by - attribute to sort by
-	# :sub - substitutions, a hash like { "J" => "I" }
-	# :order - exceptions to default order, a hash like { "Ñ" => "N" }
-	def sort ordinandum, options = {}
-	 ordinandum.sort_by {|o|
-	    key = options[:by] ? o.send(options[:by]) : o
-      key = (options[:sub] || default_order.substitutions).inject(key) {|memo, (orig, xform)|
-	      memo.gsub(Regexp.new(orig, Regexp::IGNORECASE), xform)
-	    }
-	    key = (options[:order] || default_order.orderings).inject(key) {|memo, (latter, former)|
-	      memo.gsub(Regexp.new(latter, Regexp::IGNORECASE), "#{former}\u{FFFF}")
-	    }
-	    key.downcase
-	  }
+  end
+  
+  # Sort ordinandum
+  # Options:
+  # :by - attribute to sort by
+  # :sub - substitutions, a hash like { "J" => "I" }
+  # :order - exceptions to default order, a hash like { "Ñ" => "N" }
+  def sort ordinandum, options = {}
+    substs = options[:sub] || default_order.substitutions
+    substs.keys.each {|k| substs["#{k.mb_chars.downcase}"] ||= substs[k]} 
+    orders = options[:order] || default_order.orderings
+    orders.keys.each do |k| 
+      orders[k] = "#{orders[k]}\u{FFFF}"
+      orders["#{k.mb_chars.downcase}"] ||= orders[k]
+    end
+    changes = substs.merge(orders)
+
+    ordinandum.sort_by {|o|
+      key = (options[:by] ? o.send(options[:by]) : o).dup
+
+      key.gsub!(Regexp.new(Regexp.union(changes.keys).source, Regexp::IGNORECASE), changes)
+      key.mb_chars.downcase
+    }
   end
   
   # Determine language of ordinandum and sort by its sort

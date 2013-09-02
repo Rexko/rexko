@@ -16,7 +16,8 @@ class DictionariesController < ApplicationController
   def show
     @dictionary = Dictionary.find(params[:id])
     @source_language = (@dictionary.source_language || Language::UNDETERMINED)
-    @lexemes = @source_language.sort(@dictionary.lexemes.includes([{:dictionaries => [:source_language]}, {:headwords => [:phonetic_forms, :language]}, {:subentries => [{:senses => [:glosses, :notes, :language]}, {:etymologies => [:notes, :original_language, {:next_etymon => [:notes, :original_language, :next_etymon] }]}, {:notes => :language}, :language]}]), by: :primary_headword)
+    unsorted_lexemes = @dictionary.lexemes.includes([{:dictionaries => [:source_language]}, {:headwords => [:phonetic_forms, :language]}, {:subentries => [{:senses => [{:glosses => :language}, :notes, :language]}, {:etymologies => [:notes, :original_language, {:next_etymon => [:notes, :original_language, :next_etymon] }]}, {:notes => :language}, :language]}])
+    @lexemes = @source_language.sort(unsorted_lexemes, by: :primary_headword)
 
     respond_to do |format|
       format.html # show.html.erb

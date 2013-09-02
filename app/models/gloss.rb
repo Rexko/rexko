@@ -12,12 +12,17 @@ class Gloss < ActiveRecord::Base
   HASH_MAP_TO_PARSE = { :sense => Sense::HASH_MAP_TO_PARSE }
   
   # Default to the target_language of the lexeme's dictionaries if not defined
-  def language
-  	read_attribute(:language) || (Language.lang_for(sense.lexeme.dictionaries, :target_language) if sense.try(:lexeme))
-	end
-	
-	# Determine whether we should hit reject_if when something accepts_nested_attributes_for glosses.
-	def self.rejectable?(attrs)
-	  attrs[:gloss].blank?
-	end
+  before_save :set_defaults
+  
+  # Default to lexeme's language if language not defined.
+  def set_defaults
+    default_language = (Language.lang_for(sense.lexeme.dictionaries, :target_language) if sense.try(:lexeme)) || Language.new
+ 
+    self.language ||= default_language
+  end
+  
+  # Determine whether we should hit reject_if when something accepts_nested_attributes_for glosses.
+  def self.rejectable?(attrs)
+    attrs[:gloss].blank?
+  end
 end
