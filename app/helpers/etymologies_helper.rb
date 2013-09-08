@@ -120,8 +120,8 @@ module EtymologiesHelper
         end
 
         gloss = content_tag :span, :class => "lexform-etymon-gloss" do
-          html_escape etym.primary_gloss
-        end unless etym.primary_gloss.blank?
+          html_escape etym.gloss
+        end unless etym.gloss.blank?
       else
         language = html_escape(etym.original_language.name) if 
           etym.original_language unless
@@ -129,7 +129,7 @@ module EtymologiesHelper
 
         etymon = sanitize etym.etymon
 
-        gloss = html_escape('"' << etym.primary_gloss << '"') if etym.primary_gloss
+        gloss = html_escape('"' << etym.gloss << '"') if etym.gloss.present?
       end unless top_level
 
       pre_note = [language, etymon, gloss].compact.join(" ") 
