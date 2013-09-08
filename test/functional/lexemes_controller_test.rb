@@ -140,4 +140,10 @@ class LexemesControllerTest < ActionController::TestCase
     assert_present reku.headwords
     assert_select "a[href=?]", /#{Regexp.escape(dictionaries(:one).external_address)}.*/
   end
+  
+  #139: Make sure the button images behind the submit buttons exist
+  test "button images should exist" do
+  	assert File.exists?("#{Rails.root}/public/assets/button_yellow.png"), "Yellow button is missing"
+  	assert File.exists?("#{Rails.root}/public/assets/button_gray.png"), "Gray button is missing"
+  end
 end
