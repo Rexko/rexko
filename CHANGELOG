@@ -8,6 +8,7 @@
 * [#82] Ability to specify convenience link on dictionary edit page (TTT no longer hardcoded)
 * [#37 (61)] Dictionary show page now shows full dictionary
 * [#139] Fixed missing button images
+* [#121] Loci now appear under their senses in lexeme view.
 
 ==Since 0.3.5==
 * Updated code for Rails 3.1 

@@ -15,6 +15,13 @@ class Locus < ActiveRecord::Base
     :group => 'loci.id' }
   }
   
+  # Takes a sense or array of senses and returns all loci attesting them.
+  scope :attesting_sense, lambda {|sense|
+    { :joins => { :attestations => { :parses => :interpretations }},
+    :conditions => { :interpretations => { :sense_id => [*sense].collect(&:id) }},
+    :group => 'loci.id' }
+  }
+  
   scope :unattached, lambda {|lexeme|
     { :joins => "INNER JOIN attestations ON attestations.locus_id = loci.id INNER JOIN parses ON (parses.parsable_id = attestations.id AND parses.parsable_type = 'Attestation') LEFT OUTER JOIN interpretations ON interpretations.parse_id = parses.id",
      :conditions => { "interpretations.parse_id" => nil, "parses.parsed_form" => [*lexeme].collect(&:headword_forms) }

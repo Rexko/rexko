@@ -1,5 +1,6 @@
 <%= if @loci.include?(ref) 
-			link_to "[#{greek_numeral(@loci.index(ref).next)}]", :anchor => "locus-#{ref.id}"
+sense = @loci_for_sense.keep_if{|k,v| v.include?(ref)}.keys.first
+		    link_to "[#{@lexeme.senses.index(sense).next}.#{greek_numeral(@loci_for_sense[sense].index(ref).next)}]", :anchor => "locus-#{ref.id}"
 		else
 			link_to "(#{greek_numeral(ref.id)})", ref
 		end %>

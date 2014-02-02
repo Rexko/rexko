@@ -35,6 +35,11 @@ class LexemesController < ApplicationController
     }
     @external_addresses = @lexeme.dictionaries.collect(&:external_address).uniq.delete_if {|addy| addy.blank? }
 
+    @loci_for_sense = Hash.new
+    @lexeme.senses.each do |sense|
+      @loci_for_sense[sense] = Locus.attesting_sense(sense)
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @lexeme }

@@ -10,4 +10,9 @@
 		</dl>
 		<% end %>
 	<% end %>
+    <% unless @loci_for_sense.try(:[], sense).blank? %>
+    <div class="loci">
+        <%= render(:partial => "shared/locus", :collection => @loci_for_sense[sense]) %>
+    </div>
+    <% end %>
 </li>

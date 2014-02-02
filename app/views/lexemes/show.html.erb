@@ -10,10 +10,6 @@
 <% if @unattached > 0 %>
 	<i>Found <%= link_to h(pluralize(@unattached, "unattached parse")), :controller => "loci", :action => "unattached", :id => @lexeme %> pointing to a lexeme with this spelling.</i>
 <% end %>
-<% unless @loci.empty? %>
-<h3>Loci</h3>
-<%= render(:partial => "shared/locus", :collection => @loci) %>
-<% end %>
 
 <% for external_address in @external_addresses do %>
 <% for headword in @lexeme.initial_case_insensitive_headwords do %>
