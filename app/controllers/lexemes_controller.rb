@@ -40,6 +40,19 @@ class LexemesController < ApplicationController
       @loci_for_sense[sense] = Locus.attesting_sense(sense)
     end
 
+    @authors_of = Hash.new
+    @constructions.each do |construction|
+      @authors_of[construction] = construction.loci.collect(&:source).collect(&:author).uniq
+    end
+
+    @loci_by = Hash.new
+    @authors_of.each do |construction, authors|
+      @loci_by[construction] = Hash.new
+      authors.each do |author|
+        @loci_by[construction][author] = Locus.attesting([construction, @lexeme]).find(:all, :joins => { :source => :authorship }, :conditions => { :id => construction.loci, :authorships => {:author_id => author}}, :group => "loci.id")
+      end
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @lexeme }
