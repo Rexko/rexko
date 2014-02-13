@@ -1,1 +1,1 @@
-<%= author.name %> <%= spaced_render(:collection => construction.loci.merge(@loci), :partial => "shared/wiki/ref") %>
+<%= author.name %> <%= spaced_render(:collection => @loci_by[construction][author].keep_if {|l| @loci_for[headword.form].include?(l)}, :locals => { :headword => headword }, :partial => "shared/wiki/ref") %>

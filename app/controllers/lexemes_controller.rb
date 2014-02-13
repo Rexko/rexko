@@ -29,16 +29,11 @@ class LexemesController < ApplicationController
     @loci = @lexeme.loci(:include => {:source => {:authorship => [:author, :title]}})
     @constructions = @lexeme.constructions
     @unattached = Parse.count_unattached_to @lexeme.headword_forms
-    @loci_for = Hash.new 
-    @lexeme.headword_forms.each { |headword|
-      @loci_for[headword] = @loci.find_all{ |locus| locus.attests?(headword) }
-    }
+    @loci_for = Hash[@lexeme.headword_forms.collect { |headword| [headword, @loci.find_all { |locus| locus.attests? headword }] }]
     @external_addresses = @lexeme.dictionaries.collect(&:external_address).uniq.delete_if {|addy| addy.blank? }
-
-    @loci_for_sense = Hash.new
-    @lexeme.senses.each do |sense|
-      @loci_for_sense[sense] = Locus.attesting_sense(sense)
-    end
+    @loci_for_sense = Hash[@lexeme.senses.collect { |sense| [sense, Locus.attesting_sense(sense)] }]
+    @authors_of = Hash[@constructions.collect {|construction| [construction, construction.loci.collect(&:source).collect(&:author).uniq] }]
+    @loci_by = Hash[@authors_of.collect { |construction, authors| [construction, Hash[authors.collect {|author| [author, Locus.attesting([construction, @lexeme]).find(:all, :joins => { :source => :authorship }, :conditions => { :id => construction.loci, :authorships => {:author_id => author}}, :group => "loci.id")] }]]}]
 
     respond_to do |format|
       format.html # show.html.erb
