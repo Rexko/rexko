@@ -1,6 +1,7 @@
 class Headword < ActiveRecord::Base
   has_many :orthographs
   has_many :phonetic_forms, :through => :orthographs
+  has_many :notes, as: :annotatable
   
   accepts_nested_attributes_for :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
@@ -13,6 +14,9 @@ class Headword < ActiveRecord::Base
   
   before_save :set_defaults
   
+  DESCRIPTIVE = 1
+  PRESCRIPTIVE = 2
+
   def set_defaults
   	default_language = lexeme.try(:language) || Language.new
  
@@ -25,5 +29,15 @@ class Headword < ActiveRecord::Base
   
   def self.lookup_by_parse parse
     self.find_by_form(parse.parsed_form)
+  end
+  
+  # Returns whether the headword has been marked as descriptively correct
+  def descriptively_ok?
+    acceptance & DESCRIPTIVE == DESCRIPTIVE
+  end
+  
+  # Returns whether the headword has been marked as prescriptively correct
+  def prescriptively_ok?
+    acceptance & PRESCRIPTIVE == PRESCRIPTIVE
   end
 end
