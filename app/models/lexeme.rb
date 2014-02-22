@@ -26,7 +26,7 @@ class Lexeme < ActiveRecord::Base
   end
   
   def primary_headword
-    headwords.first.try(:form)
+    headwords.order('acceptance DESC').first.try(:form)
   end
   
   def loci(options = {})
