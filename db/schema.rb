@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130818171408) do
+ActiveRecord::Schema.define(:version => 20140222172655) do
 
   create_table "attestations", :force => true do |t|
     t.integer  "locus_id"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20130818171408) do
     t.datetime "updated_at"
     t.integer  "language_id"
     t.integer  "lexeme_id"
+    t.integer  "acceptance"
   end
 
   add_index "headwords", ["form"], :name => "index_headwords_on_form"
