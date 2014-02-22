@@ -8,9 +8,14 @@
 		<div class="type-text">
 	    	<%= f.label :form, "Orthographic form" %>
 	    	<%= f.text_field :form %>
+            <small>
+                Acceptable: 
+                <span class="type-check"><%= f.check_box :descriptively_ok? %> <%= f.label :descriptively_ok?, 'descriptively' %> </span>
+                <span class="type-check"><%= f.check_box :prescriptively_ok? %> <%= f.label :prescriptively_ok?, 'prescriptively' %></span>
+            </small>
 	    	<% unattached = Parse.count_unattached_to(f.object.form)
 	    		 if unattached > 0 %>
-	    	<small>
+	    	<br/><small>
 					<i><%= link_to h(pluralize(unattached, "parse")), :controller => "loci", :action => "unattached", :forms => f.object.form %> unattached to this spelling</i>
 				</small>
 				<% end %>
@@ -25,5 +30,8 @@
 				<%= link_to 'Add phonetic form', '#phonetic_forms', :class => 'add_nested', :rel => "[headword][phonetic_forms]" %>
 			</div>
 		</ul>
+
+        <!-- Notes -->
+		<%= list_children_with_option_to_add :note, f, :remote => true %>
 	</fieldset>
 <% end %>
