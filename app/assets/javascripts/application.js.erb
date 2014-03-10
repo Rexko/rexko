@@ -29,7 +29,7 @@ activate_links = function(element){
 			this.insert({after: "<img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"16\" height=\"16\">"})
 		});
 		link.observe('ajax:before', function(e) {
-			live_value = this.up('fieldset').down('.type-text').down('input').value; // generalize this
+			live_value = this.up('fieldset').down('.bequeathed').value;
 			query = e.target.search.toQueryParams()
 			query['live_value'] = live_value
 			e.target.search = '?'+Object.toQueryString(query); 

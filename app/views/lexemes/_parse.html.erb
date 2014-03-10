@@ -6,7 +6,7 @@
 				<%= f.label :parsed_form, nil, :style => "float:left" %>
 				<%= headword_link(f.object) unless f.object.nil? || f.object.parsed_form.blank? %>
 				<div style="clear:both"/>
-				<%= f.text_field :parsed_form %>
+				<%= f.text_field :parsed_form, class: 'bequeathed' %>
 			</div>
 
 			<% unless @interpretations ? @interpretations[f.object.parsed_form].blank? : f.object.nil? || f.object.potential_interpretations.blank? %>
