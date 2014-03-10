@@ -80,10 +80,11 @@ class LociController < ApplicationController
   def create
     @locus = Locus.new(params[:locus])
     @source = @locus.build_source(params[:source])
-    @authorship = @source.build_authorship(params[:authorship])
-
-    @authorship.title = params[:authorship][:title_id].empty? ? @authorship.build_title(params[:new_title]) : Title.find(params[:authorship][:title_id])
-    @authorship.author = params[:authorship][:author_id].empty? ? @authorship.build_author(params[:new_author]) : Author.find(params[:authorship][:author_id])
+    
+    @authorship = Authorship.where(params[:authorship]).first || @source.build_authorship(params[:authorship]).tap do |as|
+      as.title = params[:authorship][:title_id].empty? ? as.build_title(params[:new_title]) : Title.find(params[:authorship][:title_id])
+      as.author = params[:authorship][:author_id].empty? ? as.build_author(params[:new_author]) : Author.find(params[:authorship][:author_id])
+    end
 
     each_wikilink(params[:locus][:example]) do |linked, shown|
       att = @locus.attestations.build(:attested_form => shown)
