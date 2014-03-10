@@ -1,8 +1,13 @@
 class AuthorshipsController < ApplicationController
+  layout '1col_layout'
+  
   # GET /authorships
   # GET /authorships.xml
   def index
-    @authorships = Authorship.all
+    @authorships = Authorship.
+      includes(:author, :title, { :sources => :loci }).
+      order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).
+      paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
