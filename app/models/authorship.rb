@@ -13,4 +13,17 @@ class Authorship < ActiveRecord::Base
     else "#{authorname}, #{titlename}"
     end
   end
+  
+  # Given a string +query+, return all authorships where each word in +query+ 
+  # appears as a substring of either the author or the title (or both) 
+  def Authorship.matching query
+    terms = query.split.inject(true) {|sumquery, term|
+      [Author, Title].
+        collect {|klass| klass.arel_table[:name].matches("%#{term.chomp ','}%")}.
+        inject(:or).
+        and(sumquery)
+    }
+
+    Authorship.includes(:author, :title).where(terms)
+  end
 end
