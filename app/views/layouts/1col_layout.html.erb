@@ -13,6 +13,7 @@
 	<%= javascript_tag do %>
 		<%= yield(:javascript) %>
 	<% end -%>
+    <%= csrf_meta_tag %>
 </head>
 <body>
   <div class="page_margins">
