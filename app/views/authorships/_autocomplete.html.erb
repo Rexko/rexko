@@ -1,0 +1,6 @@
+<ul>
+    <% @authorships.each do |as| %>
+        <li id="<%= as.id %>-authorship"><%= as.cited_name %></li>
+    <% end %>
+        <li id="new-authorship" class="highlight"><i>(New source)</i></li>
+</ul>

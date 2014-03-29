@@ -1,0 +1,6 @@
+<ul>
+    <% @authors.each do |a| %>
+        <li id="<%= a.id %>-author"><%= a.name %></li>
+    <% end %>
+        <li id="new-author" class="highlight"><i>(New author)</i></li>
+</ul>

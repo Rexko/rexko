@@ -10,6 +10,14 @@ class AuthorsController < ApplicationController
     end
   end
 
+  def matching
+    @authors = Author.where(Author.arel_table[:name].matches("%#{params[:value]}%")).order(:name)
+    
+    respond_to do |format|
+      format.js { render :partial => "autocomplete" }
+    end
+  end
+
   # GET /authors/1
   # GET /authors/1.xml
   def show

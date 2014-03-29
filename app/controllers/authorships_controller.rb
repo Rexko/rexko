@@ -14,6 +14,14 @@ class AuthorshipsController < ApplicationController
       format.xml  { render :xml => @authorships }
     end
   end
+  
+  def matching
+    @authorships = Authorship.matching(params[:value]).sort_by {|as| as.cited_name }
+    
+    respond_to do |format|
+      format.js { render :partial => "autocomplete" }
+    end
+  end
 
   # GET /authorships/1
   # GET /authorships/1.xml

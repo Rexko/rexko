@@ -62,8 +62,12 @@ Lexicon::Application.routes.draw do
   resources :orthographs
   resources :etymotheses
   resources :dictionary_scopes
-  resources :authorships
-  resources :authors
+  resources :authorships do
+    post 'matching', on: :collection
+  end
+  resources :authors do
+    post 'matching', on: :collection
+  end
   resources :titles
   resources :sources
   resources :loci
