@@ -4,6 +4,8 @@ class Authorship < ActiveRecord::Base
   has_many :sources
   
   def cited_name # isn't this Helper material?
+    return "" if new_record? 
+    
     authorname = author.try(:name) || "Anonymous"
     titlename = title.try(:name) || "Untitled"
     case 
