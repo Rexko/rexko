@@ -1,51 +1,13 @@
 <%= form_for @locus, {:method => form[:method], :action => form[:action], :html => {:class => "yform"}} do |l_form| %>
 <% nested_attributes_for l_form, :attestations %>
 <fieldset>
-	<legend>Author</legend>
-	<div class="subcolumns full">
-		<div class="c50l">
-		  <div class="subcl type-select">
-		    <!-- these need a better interface -->
-		    <%= collection_select(:authorship, 
-															:author_id, 
-															@authors, 
-															:id, 
-															:name, 
-															{:include_blank => "[Other:]"}) %> 
-			</div>
-		</div>
-		<div class="c50r">
-			<div class="subcr type-text">
-				<%= text_field :new_author, :name %>
-			</div>
-		</div>
-	</div>
-</fieldset>
-
-<fieldset>
-	<legend>Text</legend>
-	<div class="subcolumns full">
-		<div class="c50l">
-		  <div class="subcl type-select">
-		    <%= collection_select(:authorship, 
-															:title_id, 
-															@titles, 
-															:id, 
-															:name, 
-															{:include_blank => "[Other:]"}) %> 
-			</div>
-		</div>
-		<div class="c50r">
-			<div class="subcr type-text">
-				<%= text_field :new_title, :name %>
-			</div>
-		</div>
-	</div>
-
+    <%= l_form.fields_for :source do |source_form| %>
+        <%= list_children_with_option_to_add :authorship, source_form, limit_one: true, create_blank: true %>
 	<div class="type-text">
 	  <label for="source">Pointer</label>
-	  <%= text_field :source, :pointer %>
+	  <%= source_form.text_field :pointer %>
 	</div>
+    <% end %>
 </fieldset>
 
 <fieldset>
