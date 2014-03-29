@@ -12,6 +12,10 @@ class Source < ActiveRecord::Base
   def authorship_attributes=(attributes)
     if attributes['id'].present?
       self.authorship = Authorship.find(attributes['id'])
+      
+      # If we're pulling the authorship, don't change its data 
+      attributes.delete(:author_attributes)
+      attributes.delete(:title_attributes)
     end
     attributes.delete(:cited_name)
     assign_nested_attributes_for_one_to_one_association(:authorship, attributes)
