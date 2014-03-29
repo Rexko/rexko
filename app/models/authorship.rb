@@ -3,6 +3,9 @@ class Authorship < ActiveRecord::Base
   belongs_to :title
   has_many :sources
   
+  accepts_nested_attributes_for :author, reject_if: :all_blank
+  accepts_nested_attributes_for :title, allow_destroy: true, reject_if: :all_blank
+  
   def cited_name # isn't this Helper material?
     return "" if new_record? 
     
@@ -27,5 +30,12 @@ class Authorship < ActiveRecord::Base
     }
 
     Authorship.includes(:author, :title).where(terms)
+  end
+  
+  def author_attributes=(attributes)
+    if attributes['id'].present?
+      self.author = Author.find(attributes['id'])
+    end
+    assign_nested_attributes_for_one_to_one_association(:author, attributes)
   end
 end

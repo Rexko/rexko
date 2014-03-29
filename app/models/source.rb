@@ -6,4 +6,14 @@ class Source < ActiveRecord::Base
   # => would be nice:
   # has_one :title, "through" => :authorship
   # has_one :author, "through" => :authorship  
+  
+  accepts_nested_attributes_for :authorship, :allow_destroy => false, reject_if: :all_blank
+  
+  def authorship_attributes=(attributes)
+    if attributes['id'].present?
+      self.authorship = Authorship.find(attributes['id'])
+    end
+    attributes.delete(:cited_name)
+    assign_nested_attributes_for_one_to_one_association(:authorship, attributes)
+  end
 end

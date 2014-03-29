@@ -30,8 +30,8 @@ class LociController < ApplicationController
   # GET /loci/new.xml
   def new
     @locus = Locus.new
-    @source = @locus.source
-    @authorship = @source.authorship if @source
+    @source = @locus.build_source
+    @authorship = @source.authorship
 
     @authors = Author.find(:all, :order => "name")
     @titles = Title.find(:all, :order => "name")
@@ -72,19 +72,13 @@ class LociController < ApplicationController
     @potential_constructions = @locus.potential_constructions
     
     @authors = Author.find(:all, :order => "name")
-    @titles = Title.find(:all, :order => "name")
+    @titles = @authorship ? Title.joins(:authors).where(:authors => { :id => @authorship.author}).order(:name) : Title.find(:all, :order => "name")
   end
 
   # POST /loci
   # POST /loci.xml
   def create
     @locus = Locus.new(params[:locus])
-    @source = @locus.build_source(params[:source])
-    
-    @authorship = Authorship.where(params[:authorship]).first || @source.build_authorship(params[:authorship]).tap do |as|
-      as.title = params[:authorship][:title_id].empty? ? as.build_title(params[:new_title]) : Title.find(params[:authorship][:title_id])
-      as.author = params[:authorship][:author_id].empty? ? as.build_author(params[:new_author]) : Author.find(params[:authorship][:author_id])
-    end
 
     each_wikilink(params[:locus][:example]) do |linked, shown|
       att = @locus.attestations.build(:attested_form => shown)
@@ -92,7 +86,7 @@ class LociController < ApplicationController
     end
 
     respond_to do |format|
-      if [@source, @locus, @authorship].all?(&:save) #FIX
+      if @locus.save
         flash[:notice] = 'Locus was successfully created.'
         format.html do
           case params[:commit]
@@ -112,11 +106,6 @@ class LociController < ApplicationController
   # PUT /loci/1.xml
   def update
     @locus = Locus.find(params[:id])
-    @source = @locus.source || @locus.build_source(params[:source])
-    @authorship = @source.authorship || @source.build_authorship(params[:authorship])
-
-    @authorship.title = params[:authorship][:title_id].empty? ? @authorship.build_title(params[:new_title]) : Title.find(params[:authorship][:title_id])
-    @authorship.author = params[:authorship][:author_id].empty? ? @authorship.build_author(params[:new_author]) : Author.find(params[:authorship][:author_id])
 
 		atesute = params[:locus][:attestations_attributes]
 		atesute.each {|att_k, att_v|
@@ -133,11 +122,9 @@ class LociController < ApplicationController
 		} if atesute
 		
     @locus.attributes = params[:locus]
-    @source.attributes = params[:source]
-    @authorship.attributes = params[:authorship]
 
     respond_to do |format|
-      if [@source, @locus, @authorship].all?(&:save)
+      if @locus.save
         flash[:notice] = 'Locus was successfully updated.'
         format.html do
           case params[:commit]
