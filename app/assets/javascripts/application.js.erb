@@ -113,15 +113,45 @@ var NestedAttributesJs = {
 	}
 }; 
   
+activate_autocompletes = function(element){  
+    element.getElementsBySelector('.autocomplete').each(function(div){
+        complendum = div.identify().match(/.*(?=_choices)/g)[0];
+        complenda = div.readAttribute('data-plural');
+        
+        new Ajax.Autocompleter(complendum+"_search", complendum+"_choices", "/"+complenda+"/matching", {
+            paramName: "value",
+            minchars: 2,
+            indicator: complendum+"-search-indicator",
+            afterUpdateElement: function(text, li) { 
+                complendum = li.id.substr(li.id.indexOf("-")+1);
+                if(li.id == "new-"+complendum) { // User chose the 'new X' option 
+                    $(complendum+"_id").value = "";
+                    newform = $(complendum+'_new');
+                    if(newform) {
+                        $(complendum+"_search").value = "";
+                        Effect.BlindDown(newform, {duration: 0.25} );
+                    }
+                } 
+                else { // User chose a given option
+                    $(complendum+"_id").value = parseInt(li.id);
+                    newform = $(complendum+'_new');
+                    if(newform) Effect.BlindUp(newform, {duration: 0.25} );
+                }
+            }
+        });
+    });
+} 
+
 Event.observe(window, 'load', function(){  
 	activate_links($$('body')[0]);
+    activate_autocompletes($$('body')[0]);
 });
 
 // Simple add effect
 function insert_with_effect(container, content){
 	container.insert({
 		before: '<div style="display:none;">'+content+'</div>'
-	})
+	});
 	Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
 	activate_links(container.previous());
 };
@@ -130,4 +160,5 @@ function insert_with_effect(container, content){
 function select_all(id){
 	document.getElementById(id).focus();
 	document.getElementById(id).select();
-}
+};
+
