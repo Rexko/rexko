@@ -1,6 +1,7 @@
 class Authorship < ActiveRecord::Base
   belongs_to :author
   belongs_to :title
+  belongs_to :authorship_type
   has_many :sources
   
   accepts_nested_attributes_for :author, reject_if: :all_blank
@@ -11,10 +12,10 @@ class Authorship < ActiveRecord::Base
     
     authorname = author.try(:name) || "Anonymous"
     titlename = title.try(:name) || "Untitled"
-    case 
-    when primary_author then "#{authorname}, #{titlename}"
-    when contributor then "#{authorname}, in #{titlename}"
-    when quoted then "#{authorname}, quoted in #{titlename}"
+    case authorship_type.try(:name)
+    when "primary author" then "#{authorname}, #{titlename}"
+    when "contributor" then "#{authorname}, in #{titlename}"
+    when "quoted" then "#{authorname}, quoted in #{titlename}"
     else "#{authorname}, #{titlename}"
     end
   end
