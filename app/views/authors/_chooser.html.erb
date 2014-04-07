@@ -1,0 +1,10 @@
+<label for="author_search">Author</label>
+<%= author_form.text_field :name, id: 'author_search' %>
+<span id="author-search-indicator" style="display:none">
+    <img src="<%= asset_path('icons/throbber.gif') %>" style="vertical-align:middle" width="16" height="16">
+</span>
+<%= author_form.hidden_field :id, id: :author_id %>
+<div id="author_choices" class="autocomplete" data-plural="authors"></div>
+<div id="author_new" style="display:none">
+    <%= render partial: 'authors/form', locals: { author_form: author_form } %>
+</div>

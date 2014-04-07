@@ -9,13 +9,7 @@
     <div id="authorship_new" style="display:none">
         <fieldset>
             <%= f.fields_for :author, f.object.build_author do |author_form| %>
-            <label for="new_author_name">Author</label>
-            <%= author_form.text_field :name, id: 'author_search' %>
-            <span id="author-search-indicator" style="display:none">
-                <img src="<%= asset_path('icons/throbber.gif') %>" style="vertical-align:middle" width="16" height="16">
-            </span>
-            <%= author_form.hidden_field :id, id: :author_id %>
-            <div id="author_choices" class="autocomplete" data-plural="authors"></div>
+                <%= render partial: 'authors/chooser', locals: { author_form: author_form }%>
             <% end %>
 
             <%= f.fields_for :title, f.object.build_title do |title_form| %>

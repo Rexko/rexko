@@ -1,8 +1,9 @@
 class AuthorsController < ApplicationController
+  layout '1col_layout'
   # GET /authors
   # GET /authors.xml
   def index
-    @authors = Author.all
+    @authors = Author.all.sort_by {|a| a.sort_key.present? ? a.sort_key : a.name }
 
     respond_to do |format|
       format.html # index.html.erb

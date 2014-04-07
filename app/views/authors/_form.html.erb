@@ -1,0 +1,35 @@
+<fieldset class="author yform">
+    <legend>Author</legend>
+    
+    <div class="type-text">
+        <%= author_form.label :name, "Full Name" %>
+        <%= author_form.text_field :name %>
+        <small>
+            Full name as it would appear in a list, e.g. <i>Smith, John</i> or <i>Zhang Wei</i>.
+        </small>
+    </div>
+
+    <div class="type-text">
+        <%= author_form.label :romanized_name, "Transliteration" %>
+        <%= author_form.text_field :romanized_name %>
+        <small>
+            If applicable.
+        </small>
+    </div>
+
+    <div class="type-text">
+        <%= author_form.label :short_name, "Short form name" %>
+        <%= author_form.text_field :short_name %>
+        <small>
+            Name to use in short citations of the type (<i>Smith</i>, 1963).
+        </small>
+    </div>
+
+    <div class="type-text">
+        <%= author_form.label :sort_key, "Sort key" %>
+        <%= author_form.text_field :sort_key %>
+        <small>
+            Form of the name to sort by, if different from full name given above.  
+        </small>
+    </div>
+</fieldset>

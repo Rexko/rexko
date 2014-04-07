@@ -2,11 +2,14 @@
 
 <%= error_messages_for :author %>
 
-<%= form_for(@author) do |f| %>
+<%= form_for @author do |author_form|  %>
+    <%=	render partial: "form", locals: { author_form: author_form }  %>
+
   <p>
-    <%= f.submit "Update" %>
+    <%= author_form.submit "Update" %>
   </p>
 <% end %>
+
 
 <%= link_to 'Show', @author %> |
 <%= link_to 'Back', authors_path %>
