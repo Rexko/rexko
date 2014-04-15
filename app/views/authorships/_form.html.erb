@@ -4,11 +4,12 @@
           <%= f.fields_for :author do |author_form| %>
               <%= render partial: 'authors/chooser', locals: { author_form: author_form }%>
           <% end %>
-		<p>
-		 <b>Title</b><br />
-			<%= f.collection_select(:title_id, Title.find(:all), :id, :name, {:prompt => "[Other:]"})%>
-			<%= text_field :new_title, :name %>
-		</p>
+        </p>
+        <p>
+            <%= f.fields_for :title do |title_form| %>
+                <%= render partial: 'titles/chooser', locals: { title_form: title_form }%>
+            <% end %>
+        </p>
 	<% end %>
   <p>
     <%= submit_tag form[:label] %>

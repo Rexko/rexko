@@ -5,6 +5,12 @@
   </tr>
 
 <% for title in @titles %>
+<tr>
+    <td colspan="3">
+        <%= htmlize_title title %>
+    </td>
+</tr>
+
   <tr>
     <td><%= link_to 'Show', title %></td>
     <td><%= link_to 'Edit', edit_title_path(title) %></td>

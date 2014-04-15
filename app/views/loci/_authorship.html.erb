@@ -13,8 +13,7 @@
             <% end %>
 
             <%= f.fields_for :title, f.object.build_title do |title_form| %>
-            <label for="new_title_name">Title</label>
-            <%= title_form.text_field :name %>
+                <%= render partial: 'titles/form', locals: { title_form: title_form } %>
             <% end %>
         </fieldset>
     </div>
