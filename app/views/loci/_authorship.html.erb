@@ -1,6 +1,6 @@
 <legend>Source</legend>
 <div class="type-text">
-    <%= f.text_field :cited_name, id: 'authorship_search', placeholder: 'search for author and/or title' %>
+    <%= text_field_tag :cited_name, cited_name(f.object, format: :text), id: 'authorship_search', placeholder: 'search for author and/or title' %>
     <span id="authorship-search-indicator" style="display:none">
         <img src="<%= asset_path('icons/throbber.gif') %>" style="vertical-align:middle" width="16" height="16">
     </span>

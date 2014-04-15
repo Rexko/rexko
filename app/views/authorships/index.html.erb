@@ -6,7 +6,7 @@
 
 <% for authorship in @authorships %>
 	<tr>
-		<td colspan="3"><%= authorship.cited_name %></td>
+		<td colspan="3"><%= cited_name authorship %></td>
     </tr>
     <% unless authorship.sources.empty? %>
     <tr>

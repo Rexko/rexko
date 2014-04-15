@@ -17,7 +17,6 @@ class Source < ActiveRecord::Base
       attributes.delete(:author_attributes)
       attributes.delete(:title_attributes)
     end
-    attributes.delete(:cited_name)
     assign_nested_attributes_for_one_to_one_association(:authorship, attributes)
   end
 end
