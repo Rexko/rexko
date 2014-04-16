@@ -15,3 +15,7 @@
     <%= submit_tag form[:label] %>
   </p>
 <% end %>
+    <p>
+        <%= f.label :authorship_type_id %>
+        <%= f.collection_select :authorship_type_id, AuthorshipType.all, :id, :name, prompt: true %>
+    </p>
