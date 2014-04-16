@@ -8,8 +8,8 @@
     <tr> 
         <td colspan="3">
             <%= author.name %>
-            <%= "[#{author.romanized_name}]" if author.romanized_name %>
-            <%= "(#{author.short_name})" if author.short_name %>
+            <%= "[#{author.romanized_name}]" if author.romanized_name.present? %>
+            <%= "(#{author.short_name})" if author.short_name.present? %>
         </td>
     </tr>
 
