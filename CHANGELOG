@@ -11,6 +11,7 @@
 * [#121] Loci now appear under their senses in lexeme view.
 * [#127] Fixed association of constructions with authors in wiki view.
 * [#10 (32)] Specify preferred headwords and allow annotations.
+* [#12 (34)] Better bibliographic referencing.
 
 ==Since 0.3.5==
 * Updated code for Rails 3.1 
