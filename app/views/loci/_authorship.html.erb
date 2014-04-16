@@ -8,12 +8,8 @@
     <div id="authorship_choices" class="autocomplete" data-plural="authorships"></div>
     <div id="authorship_new" style="display:none">
         <fieldset>
-            <%= f.fields_for :author, f.object.build_author do |author_form| %>
-                <%= render partial: 'authors/chooser', locals: { author_form: author_form }%>
-            <% end %>
-
-            <%= f.fields_for :title, f.object.build_title do |title_form| %>
-                <%= render partial: 'titles/form', locals: { title_form: title_form } %>
+            <%= f.fields_for :authorship do |authorship_form| %>
+                <%= render partial: 'authorships/form', locals: { f: authorship_form }%>
             <% end %>
         </fieldset>
     </div>
