@@ -38,6 +38,8 @@ class AuthorshipsController < ApplicationController
   # GET /authorships/new.xml
   def new
     @authorship = Authorship.new
+    @authorship.build_author
+    @authorship.build_title
 
     respond_to do |format|
       format.html # new.html.erb

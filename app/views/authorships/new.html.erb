@@ -2,9 +2,11 @@
 
 <%= error_messages_for :authorship %>
 
-<%= form_for(@authorship) do |f| %>
+<%= form_for @authorship do |authorship_form|  %>
+    <%=	render partial: "form", locals: { f: authorship_form }  %>
+
   <p>
-    <%= f.submit "Create" %>
+    <%= authorship_form.submit "Create" %>
   </p>
 <% end %>
 
