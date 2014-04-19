@@ -1,16 +1,16 @@
 <fieldset class="authorship yform">
     <p>
-        <%= f.label :authorship_type_id %>
-        <%= f.collection_select :authorship_type_id, AuthorshipType.all, :id, :name, prompt: true %>
+        <%= authorship_form.label :authorship_type_id %>
+        <%= authorship_form.collection_select :authorship_type_id, AuthorshipType.all, :id, :name, prompt: true %>
     </p>
     <p>
-        <%= autocomplete :author, f %>
+        <%= autocomplete :author, authorship_form %>
     </p>
     <p>
-        <%= autocomplete :title, f %>
+        <%= autocomplete :title, authorship_form %>
     </p>
     <p>
-        <%= f.label :year %>
-        <%= f.text_field :year %>
+        <%= authorship_form.label :year %>
+        <%= authorship_form.text_field :year %>
     </p>
 </fieldset>

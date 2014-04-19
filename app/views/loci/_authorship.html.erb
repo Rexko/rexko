@@ -1,16 +1,6 @@
 <legend>Source</legend>
 <div class="type-text">
-    <%= text_field_tag :cited_name, cited_name(f.object, format: :text), id: 'authorship_search', placeholder: 'search for author and/or title' %>
-    <span id="authorship-search-indicator" style="display:none">
-        <img src="<%= asset_path('icons/throbber.gif') %>" style="vertical-align:middle" width="16" height="16">
-    </span>
-    <%= f.hidden_field :id, id: :authorship_id %>
-    <div id="authorship_choices" class="autocomplete" data-plural="authorships"></div>
-    <div id="authorship_new" style="display:none">
-        <fieldset>
-            <%= f.fields_for :authorship do |authorship_form| %>
-                <%= render partial: 'authorships/form', locals: { f: authorship_form }%>
-            <% end %>
-        </fieldset>
-    </div>
+    <%= autocomplete :authorship, f, 
+            custom_search: cited_name(f.object, format: :text), 
+            prompt: 'search for author and/or title' %>
 </div>
