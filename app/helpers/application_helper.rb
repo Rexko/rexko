@@ -208,11 +208,17 @@ module ApplicationHelper
   end
   
   # Generate an autocomplete text field for +child+ in +form+.
-  def autocomplete child, form
+  # +options[:custom_search]+ - what will be shown in the search field (if different from #name)
+  # +options[:prompt]+        - placeholder text of empty search field
+  def autocomplete child, form, options = {}
     form.fields_for child do |child_form|
       label_tag("#{child}_search", child.to_s.titleize ) <<
     
-      child_form.text_field(:name, id: "#{child}_search") <<
+      if options[:custom_search].blank? 
+        child_form.text_field(:name, id: "#{child}_search", placeholder: options[:prompt]) 
+      else
+        text_field_tag(:search, options[:custom_search], id: "#{child}_search", placeholder: options[:prompt])
+      end <<
       
       content_tag(:span, id: "#{child}-search-indicator", style: "display: none") do
         tag :img, src: asset_path('icons/throbber.gif'), style: "vertical-align:middle", width: 16, height: 16
