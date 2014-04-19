@@ -205,5 +205,26 @@ module ApplicationHelper
       "<a href=\"/html/#{lexeme}\" title=\"#{lexeme}\">#{bb}#{stem}#{ending}#{eb}</a>"
     end
     output.html_safe
-  end  
+  end
+  
+  # Generate an autocomplete text field for +child+ in +form+.
+  def autocomplete child, form
+    "".html_safe << 
+    
+    label_tag("#{child}_search", child.to_s.titleize ) <<
+    
+    form.text_field(:name, id: "#{child}_search") <<
+      
+    content_tag(:span, id: "#{child}-search-indicator", style: "display: none") do
+      tag :img, src: asset_path('icons/throbber.gif'), style: "vertical-align:middle", width: 16, height: 16
+    end <<
+
+    form.hidden_field(:id, id: "#{child}_id") <<
+      
+    content_tag(:div, nil, id: "#{child}_choices", class: 'autocomplete', data: { plural: child.to_s.pluralize }) <<
+
+    content_tag(:div, id: "#{child}_new", style: "display: none") do
+      render partial: "#{child.to_s.pluralize}/form", locals: { "#{child}_form".to_sym => form } 
+    end
+  end
 end
