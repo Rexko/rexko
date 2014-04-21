@@ -23,7 +23,8 @@ class Authorship < ActiveRecord::Base
   def author_attributes=(attributes)
     if attributes['id'].present?
       self.author = Author.find(attributes['id'])
+    else
+      assign_nested_attributes_for_one_to_one_association(:author, attributes)
     end
-    assign_nested_attributes_for_one_to_one_association(:author, attributes)
   end
 end
