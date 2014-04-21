@@ -212,23 +212,25 @@ module ApplicationHelper
   # +options[:prompt]+        - placeholder text of empty search field
   def autocomplete child, form, options = {}
     form.fields_for child do |child_form|
-      label_tag("#{child}_search", child.to_s.titleize ) <<
+      ref = child_form.object_name
+      
+      label_tag("#{ref}_search", child.to_s.titleize ) <<
     
-      if options[:custom_search].blank? 
-        child_form.text_field(:name, id: "#{child}_search", placeholder: options[:prompt]) 
+      if options[:custom_search]
+        text_field_tag(:search, options[:custom_search], id: "#{ref}_search", placeholder: options[:prompt])
       else
-        text_field_tag(:search, options[:custom_search], id: "#{child}_search", placeholder: options[:prompt])
+        child_form.text_field(:name, id: "#{ref}_search", placeholder: options[:prompt]) 
       end <<
       
-      content_tag(:span, id: "#{child}-search-indicator", style: "display: none") do
+      content_tag(:span, id: "#{ref}-search-indicator", style: "display: none") do
         tag :img, src: asset_path('icons/throbber.gif'), style: "vertical-align:middle", width: 16, height: 16
       end <<
 
-      child_form.hidden_field(:id, id: "#{child}_id") <<
+      child_form.hidden_field(:id, id: "#{ref}_id") <<
       
-      content_tag(:div, nil, id: "#{child}_choices", class: 'autocomplete', data: { plural: child.to_s.pluralize }) <<
+      content_tag(:div, nil, id: "#{ref}_choices", class: 'autocomplete', data: { ref: ref, plural: child.to_s.pluralize }) <<
 
-      content_tag(:div, id: "#{child}_new", style: "display: none") do
+      content_tag(:div, id: "#{ref}_new", style: "display: none") do
         render partial: "#{child.to_s.pluralize}/form", locals: { "#{child}_form".to_sym => child_form } 
       end
     end

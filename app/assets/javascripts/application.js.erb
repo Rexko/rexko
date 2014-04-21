@@ -120,6 +120,7 @@ activate_autocompletes = function(element){
         
         new Ajax.Autocompleter(complendum+"_search", complendum+"_choices", "/"+complenda+"/matching", {
             paramName: "value",
+            parameters: "ref="+complendum,
             minchars: 2,
             indicator: complendum+"-search-indicator",
             afterUpdateElement: function(text, li) { 
