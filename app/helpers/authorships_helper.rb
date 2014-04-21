@@ -1,6 +1,6 @@
 module AuthorshipsHelper
   def cited_name authorship, options = {}
-    return "" if authorship.new_record? 
+    return "" if authorship.nil? or authorship.new_record? 
     
     authorname = authorship.author.try(:name) || "Anonymous"
     titlename = htmlize_title(authorship.title)
