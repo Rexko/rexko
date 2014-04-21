@@ -1,6 +1,6 @@
 <ul>
     <% @titles.each do |t| %>
-        <li id="<%= t.id %>-author"><%= t.name %></li>
+        <li id="<%= t.id %>-<%= @ref %>"><%= t.name %></li>
     <% end %>
-        <li id="new-title" class="highlight"><i>(New title)</i></li>
+        <li id="new-<%= @ref %>" class="highlight"><i>(New title)</i></li>
 </ul>

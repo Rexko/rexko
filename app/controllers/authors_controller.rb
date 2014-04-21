@@ -13,6 +13,7 @@ class AuthorsController < ApplicationController
 
   def matching
     @authors = Author.where(Author.arel_table[:name].matches("%#{params[:value]}%")).order(:name)
+    @ref = params[:ref]
     
     respond_to do |format|
       format.js { render :partial => "autocomplete" }

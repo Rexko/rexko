@@ -17,6 +17,7 @@ class AuthorshipsController < ApplicationController
   
   def matching
     @authorships = Authorship.matching(params[:value]).sort_by {|as| view_context.cited_name as, format: :text }
+    @ref = params[:ref]
     
     respond_to do |format|
       format.js { render :partial => "autocomplete" }

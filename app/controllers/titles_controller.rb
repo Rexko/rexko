@@ -13,6 +13,7 @@ class TitlesController < ApplicationController
 
   def matching
     @titles = Title.where(Title.arel_table[:name].matches("%#{params[:value]}%")).order(:name)
+    @ref = params[:ref]
     
     respond_to do |format|
       format.js { render :partial => "autocomplete" }
