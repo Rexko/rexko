@@ -31,7 +31,9 @@ class LociController < ApplicationController
   def new
     @locus = Locus.new
     @source = @locus.build_source
-    @authorship = @source.authorship
+    @authorship = @source.build_authorship
+    @authorship.build_author
+    @authorship.build_title
 
     @authors = Author.find(:all, :order => "name")
     @titles = Title.find(:all, :order => "name")

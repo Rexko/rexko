@@ -2,7 +2,12 @@
 <% nested_attributes_for l_form, :attestations %>
 <fieldset>
     <%= l_form.fields_for :source do |source_form| %>
-        <%= list_children_with_option_to_add :authorship, source_form, limit_one: true, create_blank: true %>
+    <legend>Source</legend>
+    <div class="type-text">
+        <%= autocomplete :authorship, source_form, 
+            custom_search: cited_name(source_form.object.authorship, format: :text), 
+            prompt: 'search for author and/or title' %>
+    </div>
 	<div class="type-text">
 	  <label for="source">Pointer</label>
 	  <%= source_form.text_field :pointer %>
