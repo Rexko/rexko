@@ -99,6 +99,7 @@ module ApplicationHelper
 	# options[:create_blank] - add a blank child to the list
 	# options[:remote] - use AJAX
 	# options[:locals] - pass variables to partial
+  # options[:display_name] - what to put in the "Add _____" link (default is child)
 	def list_children_with_option_to_add child, form, options = {}
 		class_name = (options[:class_name] || child).to_s
 		child_or_children = options[:limit_one] ? form.object.send(child) : form.object.send(child.to_s.pluralize)
@@ -135,7 +136,7 @@ module ApplicationHelper
 		
 		unless options[:limit_one] && printed_child.present? 
 	  	output << content_tag(:div, :class => "par") do
-	  		link_to "Add #{child.to_s.humanize.downcase}", link_path, link_options
+	  		link_to "Add #{options[:display_name] || child.to_s.humanize.downcase}", link_path, link_options
 	  	end 
 	  end
 	  
