@@ -24,10 +24,16 @@ class SourcesController < ApplicationController
   # GET /sources/new
   # GET /sources/new.xml
   def new
-    @source = Source.new
+    @source = Source.new(params.slice(Source.new.attribute_names))
+    @source.build_authorship
+    @path = params[:path].sub(/(etymothes.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+      	if request.xhr?
+      		render :partial => "form"
+      	end
+      end
       format.xml  { render :xml => @source }
     end
   end
