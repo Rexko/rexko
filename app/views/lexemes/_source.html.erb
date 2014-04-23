@@ -1,0 +1,12 @@
+<% unless (f.object.try(:_destroy)) %>
+    <legend>Source</legend>
+    <div class="type-text">
+        <%= autocomplete :authorship, f, 
+            custom_search: cited_name(f.object.authorship, format: :text), 
+            prompt: 'search for author and/or title' %>
+    </div>
+	<div class="type-text">
+	  <label for="source">Pointer</label>
+	  <%= f.text_field :pointer %>
+	</div>
+<% end %>

@@ -1,5 +1,5 @@
 <% unless (f.object._destroy) %>
-	<% nested_attributes_for f, :senses, :etymologies, [:notes, :subentry] %>
+	<% nested_attributes_for f, :senses, :etymotheses, [:notes, :subentry] %>
 	<fieldset class="subentry">
 	  <legend>
 			<%= label_with_remove_option_for "Subentry #{subentry_counter + 1  if defined? subentry_counter}", f %>
@@ -22,6 +22,6 @@
 	  <%= list_children_with_option_to_add :sense, f, remote: true, create_blank: true %>
 
 	  <!-- Etymology -->
-		<%= list_children_with_option_to_add :etymology, f, :remote => true %>
+		<%= list_children_with_option_to_add :etymothesis, f, remote: true, display_name: 'etymology' %>
 	</fieldset>
 <% end %>

@@ -1,5 +1,5 @@
 <% unless (f.object.try(:_destroy)) %>
-	<% nested_attributes_for f, [:parses, :etymologies, :subentry], [:notes, :etymologies, :subentry] %>
+	<% nested_attributes_for f, [:parses, :etymologies, :etymothesis, :subentry], [:notes, :etymologies, :etymothesis, :subentry] %>
 	<fieldset class="etymology">
 		<legend><%= label_with_remove_option_for "Etymology", f %></legend>
 			<div class="type-text">
