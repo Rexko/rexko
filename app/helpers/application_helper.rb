@@ -212,7 +212,9 @@ module ApplicationHelper
   # +options[:custom_search]+ - what will be shown in the search field (if different from #name)
   # +options[:prompt]+        - placeholder text of empty search field
   def autocomplete child, form, options = {}
-    form.fields_for child do |child_form|
+    child_obj = form.object.send(child).present? ? form.object.send(child) : form.object.send("build_#{child}")
+    
+    form.fields_for child, child_obj do |child_form|
       ref = child_form.object_name
       
       label_tag("#{ref}_search", child.to_s.titleize ) <<
