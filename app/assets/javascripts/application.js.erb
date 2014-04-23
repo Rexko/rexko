@@ -150,11 +150,12 @@ Event.observe(window, 'load', function(){
 
 // Simple add effect
 function insert_with_effect(container, content){
-	container.insert({
-		before: '<div style="display:none;">'+content+'</div>'
-	});
-	Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
-	activate_links(container.previous());
+    container.insert({
+        before: '<div style="display:none;">'+content+'</div>'
+    });
+    Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
+    activate_links(container.previous());
+    activate_autocompletes(container.previous());
 };
 
 // For select-all textfields
