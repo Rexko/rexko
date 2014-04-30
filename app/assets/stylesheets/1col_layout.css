@@ -75,3 +75,29 @@
 
 .note { background: inherit; color: inherit; border: inherit; padding: inherit; margin-bottom: inherit; }
 .notice { background:#efe; color:#040; border:2px #484 solid; padding:10px; margin-bottom:1em; }
+
+/* Autocomplete */
+div.autocomplete {
+  position:absolute;
+  width:250px;
+  background-color:white;
+  border:1px solid #888;
+  margin:0;
+  padding:0;
+  z-index:1000;
+  overflow:auto;
+  max-height:10em;
+}
+div.autocomplete ul {
+  list-style-type:none;
+  margin:0;
+  padding:0;
+}
+div.autocomplete ul li.selected { background-color: #B1D1FC;}
+div.autocomplete ul li {
+  list-style-type:none;
+  display:block;
+  margin:0;
+  padding:2px;
+  cursor:pointer;
+}

@@ -5,6 +5,14 @@
   </tr>
 
 <% for author in @authors %>
+    <tr> 
+        <td colspan="3">
+            <%= author.name %>
+            <%= "[#{author.romanized_name}]" if author.romanized_name.present? %>
+            <%= "(#{author.short_name})" if author.short_name.present? %>
+        </td>
+    </tr>
+
   <tr>
     <td><%= link_to 'Show', author %></td>
     <td><%= link_to 'Edit', edit_author_path(author) %></td>

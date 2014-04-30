@@ -1,4 +1,5 @@
 class TitlesController < ApplicationController
+  layout '1col_layout'
   # GET /titles
   # GET /titles.xml
   def index
@@ -7,6 +8,15 @@ class TitlesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @titles }
+    end
+  end
+
+  def matching
+    @titles = Title.where(Title.arel_table[:name].matches("%#{params[:value]}%")).order(:name)
+    @ref = params[:ref]
+    
+    respond_to do |format|
+      format.js { render :partial => "autocomplete" }
     end
   end
 

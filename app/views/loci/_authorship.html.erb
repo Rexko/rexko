@@ -1,0 +1,6 @@
+<legend>Source</legend>
+<div class="type-text">
+    <%= autocomplete :authorship, f, 
+            custom_search: cited_name(f.object, format: :text), 
+            prompt: 'search for author and/or title' %>
+</div>

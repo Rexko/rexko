@@ -1,0 +1,12 @@
+<% unless (f.object.try(:_destroy)) %>
+<fieldset class="etymothesis">
+    <legend><%= label_with_remove_option_for "Etymology", f %></legend>
+    <%= list_children_with_option_to_add :etymology, f, 
+            limit_one: true, 
+            display_name: 'etymon',
+            create_blank: f.object.new_record?,
+            remote: true %>
+    
+    <%= list_children_with_option_to_add :source, f, remote: true, limit_one: true %>
+</fieldset>
+<% end %>

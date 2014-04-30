@@ -1,0 +1,30 @@
+<%= fields_for @path, @etymothesis, :child_index => Time.now.to_i.to_s do |f|  %>
+    <%= f.fields_for :etymology do |etym_form| %>
+	<fieldset class="etymology">
+		<legend><%= label_with_remove_option_for "Etymology", etym_form %></legend>
+			<div class="type-text">
+				<%= etym_form.label :source_language %>
+				<%= etym_form.collection_select :original_language_id, Language.all, :id, :to_s, { :include_blank => true } %>
+
+				<%= etym_form.label :etymon %> 
+				<%= etym_form.text_field :etymon %>
+
+				<%= etym_form.label :gloss %>
+				<%= etym_form.text_field :gloss, :class => "warning" %>
+			</div>
+
+			<%= list_children_with_option_to_add :parse, etym_form, :remote => true %>
+			
+			<%= list_children_with_option_to_add :note, etym_form, :remote => true %>
+
+			<%= list_children_with_option_to_add :next_etymon, etym_form, 
+					  :class_name => :etymology, 
+					  :limit_one => true, 
+					  :remote => true,
+                      :list_if => false
+			%>
+	</fieldset>
+    <% end %>
+    
+    <%= list_children_with_option_to_add :source, f, remote: true, limit_one: true %>
+<% end %>

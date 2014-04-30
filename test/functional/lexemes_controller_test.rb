@@ -143,7 +143,7 @@ class LexemesControllerTest < ActionController::TestCase
   
   #139: Make sure the button images behind the submit buttons exist
   test "button images should exist" do
-  	assert File.exists?("#{Rails.root}/public/assets/button_yellow.png"), "Yellow button is missing"
-  	assert File.exists?("#{Rails.root}/public/assets/button_gray.png"), "Gray button is missing"
+    assert Rails.application.assets.find_asset('button_yellow.png'), "Yellow button is missing"
+    assert Rails.application.assets.find_asset('button_gray.png'), "Gray button is missing"
   end
 end

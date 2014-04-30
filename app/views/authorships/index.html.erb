@@ -6,8 +6,20 @@
 
 <% for authorship in @authorships %>
 	<tr>
-		<td colspan="3"><%= authorship.cited_name %>
+		<td colspan="3"><%= cited_name authorship %></td>
+    </tr>
+    <% unless authorship.sources.empty? %>
+    <tr>
+		<td colspan="3">
+            Cited in: 
+		    <% for source in authorship.sources %>
+            <% for locus in source.loci %>
+                <%= link_to "(#{greek_numeral(locus.id)})", locus %>
+            <% end %>
+            <% end %>
+		</td>
 	</tr>
+    <% end %>
   <tr>
     <td><%= link_to 'Show', authorship %></td>
     <td><%= link_to 'Edit', edit_authorship_path(authorship) %></td>
@@ -19,3 +31,5 @@
 <br />
 
 <%= link_to 'New authorship', new_authorship_path %>
+
+<%= will_paginate @authorships %>

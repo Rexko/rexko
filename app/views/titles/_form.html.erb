@@ -1,0 +1,33 @@
+<fieldset class="title yform">
+    <legend>Title</legend>
+
+    <div class="type-text">
+        <%= title_form.label :name %>
+        <%= title_form.text_field :name %>
+    </div>
+
+    <div class="type-text">
+        <%= title_form.label :publisher %>
+        <%= title_form.text_field :publisher %>
+    </div>
+
+    <div class="type-text">
+        <%= title_form.label :publication_year %>
+        <%= title_form.text_field :publication_year %>
+    </div>
+
+    <div class="type-text">
+        <%= title_form.label :publication_place %>
+        <%= title_form.text_field :publication_place %>
+    </div>
+
+    <div class="type-text">
+        <%= title_form.label :url, "URL" %>
+        <%= title_form.text_field :url %>
+    </div>
+
+    <div class="type-text">
+        <%= title_form.label :access_date, "URL access date" %>
+        <%= title_form.date_select :access_date, include_blank: true, start_year: 1990 %>
+    </div>
+</fieldset>

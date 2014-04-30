@@ -13,6 +13,7 @@
 	<%= javascript_tag do %>
 		<%= yield(:javascript) %>
 	<% end -%>
+    <%= csrf_meta_tag %>
 </head>
 <body>
   <div class="page_margins">
@@ -53,6 +54,7 @@
 						<%= navlink_unless_current "Dictionaries", :controller => :dictionaries %>
 						<%= navlink_unless_current "Lexemes", :controller => :lexemes %>
 						<%= navlink_unless_current "Loci", :controller => :loci %>
+						<%= navlink_unless_current "Sources", :controller => :authorships %>
           </ul>
         </div>
       </div>

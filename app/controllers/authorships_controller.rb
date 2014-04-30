@@ -1,12 +1,26 @@
 class AuthorshipsController < ApplicationController
+  layout '1col_layout'
+  
   # GET /authorships
   # GET /authorships.xml
   def index
-    @authorships = Authorship.all
+    @authorships = Authorship.
+      includes(:author, :title, { :sources => :loci }).
+      order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).
+      paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @authorships }
+    end
+  end
+  
+  def matching
+    @authorships = Authorship.matching(params[:value]).sort_by {|as| view_context.cited_name as, format: :text }
+    @ref = params[:ref]
+    
+    respond_to do |format|
+      format.js { render :partial => "autocomplete" }
     end
   end
 
@@ -25,6 +39,8 @@ class AuthorshipsController < ApplicationController
   # GET /authorships/new.xml
   def new
     @authorship = Authorship.new
+    @authorship.build_author
+    @authorship.build_title
 
     respond_to do |format|
       format.html # new.html.erb

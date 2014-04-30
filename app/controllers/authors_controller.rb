@@ -1,12 +1,22 @@
 class AuthorsController < ApplicationController
+  layout '1col_layout'
   # GET /authors
   # GET /authors.xml
   def index
-    @authors = Author.all
+    @authors = Author.all.sort_by {|a| a.sort_key.present? ? a.sort_key : a.name }
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @authors }
+    end
+  end
+
+  def matching
+    @authors = Author.where(Author.arel_table[:name].matches("%#{params[:value]}%")).order(:name)
+    @ref = params[:ref]
+    
+    respond_to do |format|
+      format.js { render :partial => "autocomplete" }
     end
   end
 

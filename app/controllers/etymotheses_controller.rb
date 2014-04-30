@@ -24,10 +24,16 @@ class EtymothesesController < ApplicationController
   # GET /etymotheses/new
   # GET /etymotheses/new.xml
   def new
-    @etymothesis = Etymothesis.new
+    @etymothesis = Etymothesis.new(params.slice(Etymothesis.new.attribute_names))
+    @etymothesis.build_etymology
+    @path = params[:path].try(:sub, /(subentr.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+      	if request.xhr?
+          render :partial => "form"
+      	end
+      end
       format.xml  { render :xml => @etymothesis }
     end
   end

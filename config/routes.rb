@@ -62,9 +62,15 @@ Lexicon::Application.routes.draw do
   resources :orthographs
   resources :etymotheses
   resources :dictionary_scopes
-  resources :authorships
-  resources :authors
-  resources :titles
+  resources :authorships do
+    post 'matching', on: :collection
+  end
+  resources :authors do
+    post 'matching', on: :collection
+  end
+  resources :titles do
+    post 'matching', on: :collection
+  end
   resources :sources
   resources :loci
   match 'loci(/index(/*loci))' => 'loci#index'  #replace this

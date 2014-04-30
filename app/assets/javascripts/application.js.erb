@@ -29,7 +29,7 @@ activate_links = function(element){
 			this.insert({after: "<img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"16\" height=\"16\">"})
 		});
 		link.observe('ajax:before', function(e) {
-			live_value = this.up('fieldset').down('.type-text').down('input').value; // generalize this
+			live_value = this.up('fieldset').down('.bequeathed').value;
 			query = e.target.search.toQueryParams()
 			query['live_value'] = live_value
 			e.target.search = '?'+Object.toQueryString(query); 
@@ -113,21 +113,54 @@ var NestedAttributesJs = {
 	}
 }; 
   
+activate_autocompletes = function(element){  
+    element.getElementsBySelector('.autocomplete').each(function(div){
+        complendum = div.identify().match(/.*(?=_choices)/g)[0];
+        complenda = div.readAttribute('data-plural');
+        
+        new Ajax.Autocompleter(complendum+"_search", complendum+"_choices", "/"+complenda+"/matching", {
+            paramName: "value",
+            parameters: "ref="+complendum,
+            minchars: 2,
+            indicator: complendum+"-search-indicator",
+            afterUpdateElement: function(text, li) { 
+                complendum = li.id.substr(li.id.indexOf("-")+1);
+                if(li.id == "new-"+complendum) { // User chose the 'new X' option 
+                    $(complendum+"_id").value = "";
+                    newform = $(complendum+'_new');
+                    if(newform) {
+                        $(complendum+"_search").value = "";
+                        Effect.BlindDown(newform, {duration: 0.25} );
+                    }
+                } 
+                else { // User chose a given option
+                    $(complendum+"_id").value = parseInt(li.id);
+                    newform = $(complendum+'_new');
+                    if(newform) Effect.BlindUp(newform, {duration: 0.25} );
+                }
+            }
+        });
+    });
+} 
+
 Event.observe(window, 'load', function(){  
 	activate_links($$('body')[0]);
+    activate_autocompletes($$('body')[0]);
 });
 
 // Simple add effect
 function insert_with_effect(container, content){
-	container.insert({
-		before: '<div style="display:none;">'+content+'</div>'
-	})
-	Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
-	activate_links(container.previous());
+    container.insert({
+        before: '<div style="display:none;">'+content+'</div>'
+    });
+    Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
+    activate_links(container.previous());
+    activate_autocompletes(container.previous());
 };
 
 // For select-all textfields
 function select_all(id){
 	document.getElementById(id).focus();
 	document.getElementById(id).select();
-}
+};
+

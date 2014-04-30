@@ -5,3 +5,15 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+# Authorship types
+[
+  "primary author", 
+  "co-author",
+  "contributor",
+  "quoted",
+  "editor",
+  "illustrator",
+  "translator"
+].each {|at| AuthorshipType.find_or_create_by_name at }
+

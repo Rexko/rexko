@@ -2,7 +2,13 @@
 
 <%= error_messages_for :authorship %>
 
-<%=	render(:partial => "form", :object => { :label => 'Update', :action => 'update', :method => :put, :for_url => "/authorships/#{@authorship.id}" }) %>
+<%= form_for @authorship do |authorship_form|  %>
+    <%=	render partial: "form", locals: { authorship_form: authorship_form }  %>
+
+  <p>
+    <%= authorship_form.submit "Update" %>
+  </p>
+<% end %>
 
 <%= link_to 'Show', @authorship %> |
 <%= link_to 'Back', authorships_path %>

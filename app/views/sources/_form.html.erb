@@ -1,0 +1,14 @@
+<%= fields_for @path, @source, :child_index => Time.now.to_i.to_s do |source_form|  %>
+<fieldset class="source">
+    <legend><%= label_with_remove_option_for "Source", source_form %></legend>
+    <div class="type-text">
+        <%= autocomplete :authorship, source_form, 
+            custom_search: cited_name(source_form.object.authorship, format: :text), 
+            prompt: 'search for author and/or title' %>
+    </div>
+	<div class="type-text">
+	  <label for="source">Pointer</label>
+	  <%= source_form.text_field :pointer %>
+	</div>
+</fieldset>
+<% end %>

@@ -1,3 +1,8 @@
+<p>
+    <%= @author.name %>
+    <%= "[#{@author.romanized_name}]" if @author.romanized_name.present? %>
+    <%= "(#{@author.short_name})" if @author.short_name.present? %>
+</p>
 
 <%= link_to 'Edit', edit_author_path(@author) %> |
 <%= link_to 'Back', authors_path %>

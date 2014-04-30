@@ -1,16 +1,16 @@
-<%= form_tag form[:for_url], {:method => form[:method], :action => form[:action], :id => params[:id]}  do %>
-	<%= fields_for :authorship do |f| %>
-		<p>
-		  <b>Author</b><br />
-			<%= f.collection_select(:author_id, Author.find(:all), :id, :name, {:prompt => "[Other:]"})%>
-			<%= text_field :new_author, :name %>  </p>
-		<p>
-		 <b>Title</b><br />
-			<%= f.collection_select(:title_id, Title.find(:all), :id, :name, {:prompt => "[Other:]"})%>
-			<%= text_field :new_title, :name %>
-		</p>
-	<% end %>
-  <p>
-    <%= submit_tag form[:label] %>
-  </p>
-<% end %>
+<fieldset class="authorship yform">
+    <p>
+        <%= authorship_form.label :authorship_type_id %>
+        <%= authorship_form.collection_select :authorship_type_id, AuthorshipType.all, :id, :name, prompt: true %>
+    </p>
+    <p>
+        <%= autocomplete :author, authorship_form %>
+    </p>
+    <p>
+        <%= autocomplete :title, authorship_form %>
+    </p>
+    <p>
+        <%= authorship_form.label :year %>
+        <%= authorship_form.text_field :year %>
+    </p>
+</fieldset>

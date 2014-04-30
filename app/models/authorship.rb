@@ -1,16 +1,30 @@
 class Authorship < ActiveRecord::Base
   belongs_to :author
   belongs_to :title
+  belongs_to :authorship_type
   has_many :sources
   
-  def cited_name # isn't this Helper material?
-    authorname = author.try(:name) || "Anonymous"
-    titlename = title.try(:name) || "Untitled"
-    case 
-    when primary_author then "#{authorname}, #{titlename}"
-    when contributor then "#{authorname}, in #{titlename}"
-    when quoted then "#{authorname}, quoted in #{titlename}"
-    else "#{authorname}, #{titlename}"
+  accepts_nested_attributes_for :author, reject_if: :all_blank
+  accepts_nested_attributes_for :title, allow_destroy: true, reject_if: :all_blank
+  
+  # Given a string +query+, return all authorships where each word in +query+ 
+  # appears as a substring of either the author or the title (or both) 
+  def Authorship.matching query
+    terms = query.split.inject(true) {|sumquery, term|
+      [Author, Title].
+        collect {|klass| klass.arel_table[:name].matches("%#{term.chomp ','}%")}.
+        inject(:or).
+        and(sumquery)
+    }
+
+    Authorship.includes(:author, :title).where(terms)
+  end
+  
+  def author_attributes=(attributes)
+    if attributes['id'].present?
+      self.author = Author.find(attributes['id'])
+    else
+      assign_nested_attributes_for_one_to_one_association(:author, attributes)
     end
   end
 end

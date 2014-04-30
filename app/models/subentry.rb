@@ -7,7 +7,7 @@ class Subentry < ActiveRecord::Base
   has_many :notes, :as => :annotatable
   validates_presence_of :paradigm
   
-  accepts_nested_attributes_for :senses, :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+  accepts_nested_attributes_for :senses, :notes, :etymotheses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :etymologies, :allow_destroy => true, :reject_if => proc {|attrs| Etymology.rejectable?(attrs) }
   
   scope :attesting, lambda {|parsables, type|

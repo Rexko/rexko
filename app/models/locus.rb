@@ -32,7 +32,7 @@ class Locus < ActiveRecord::Base
     select('"loci".*, "parses"."parsed_form"').joins(:attestations => { :parses => { :interpretations => { :sense => :subentry }}}).where( :subentries => { :lexeme_id => Lexeme.lookup_all_by_headwords(attested_forms).collect(&:id) })
   }
   
-  accepts_nested_attributes_for :attestations, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+  accepts_nested_attributes_for :attestations, :source, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
 
   # Returns the parse with the most attestations that doesn't have an entry yet. 
   def most_wanted_parse

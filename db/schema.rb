@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140222172655) do
+ActiveRecord::Schema.define(:version => 20140404233445) do
 
   create_table "attestations", :force => true do |t|
     t.integer  "locus_id"
@@ -26,16 +26,24 @@ ActiveRecord::Schema.define(:version => 20140222172655) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "romanized_name"
+    t.string   "short_name"
+    t.string   "sort_key"
+  end
+
+  create_table "authorship_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "authorships", :force => true do |t|
     t.integer  "author_id"
     t.integer  "title_id"
-    t.boolean  "primary_author"
-    t.boolean  "contributor"
-    t.boolean  "quoted"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "year"
+    t.integer  "authorship_type_id"
   end
 
   create_table "dictionaries", :force => true do |t|
@@ -204,6 +212,11 @@ ActiveRecord::Schema.define(:version => 20140222172655) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "publication_year"
+    t.string   "publisher"
+    t.string   "publication_place"
+    t.string   "url"
+    t.date     "access_date"
   end
 
 end

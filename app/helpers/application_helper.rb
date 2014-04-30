@@ -99,6 +99,7 @@ module ApplicationHelper
 	# options[:create_blank] - add a blank child to the list
 	# options[:remote] - use AJAX
 	# options[:locals] - pass variables to partial
+  # options[:display_name] - what to put in the "Add _____" link (default is child)
 	def list_children_with_option_to_add child, form, options = {}
 		class_name = (options[:class_name] || child).to_s
 		child_or_children = options[:limit_one] ? form.object.send(child) : form.object.send(child.to_s.pluralize)
@@ -135,7 +136,7 @@ module ApplicationHelper
 		
 		unless options[:limit_one] && printed_child.present? 
 	  	output << content_tag(:div, :class => "par") do
-	  		link_to "Add #{child.to_s.humanize.downcase}", link_path, link_options
+	  		link_to "Add #{options[:display_name] || child.to_s.humanize.downcase}", link_path, link_options
 	  	end 
 	  end
 	  
@@ -205,5 +206,36 @@ module ApplicationHelper
       "<a href=\"/html/#{lexeme}\" title=\"#{lexeme}\">#{bb}#{stem}#{ending}#{eb}</a>"
     end
     output.html_safe
-  end  
+  end
+  
+  # Generate an autocomplete text field for +child+ in +form+.
+  # +options[:custom_search]+ - what will be shown in the search field (if different from #name)
+  # +options[:prompt]+        - placeholder text of empty search field
+  def autocomplete child, form, options = {}
+    child_obj = form.object.send(child).present? ? form.object.send(child) : form.object.send("build_#{child}")
+    
+    form.fields_for child, child_obj do |child_form|
+      ref = child_form.object_name
+      
+      label_tag("#{ref}_search", child.to_s.titleize ) <<
+    
+      if options[:custom_search]
+        text_field_tag(:search, options[:custom_search], id: "#{ref}_search", placeholder: options[:prompt])
+      else
+        child_form.text_field(:name, id: "#{ref}_search", placeholder: options[:prompt]) 
+      end <<
+      
+      content_tag(:span, id: "#{ref}-search-indicator", style: "display: none") do
+        tag :img, src: asset_path('icons/throbber.gif'), style: "vertical-align:middle", width: 16, height: 16
+      end <<
+
+      child_form.hidden_field(:id, id: "#{ref}_id") <<
+      
+      content_tag(:div, nil, id: "#{ref}_choices", class: 'autocomplete', data: { ref: ref, plural: child.to_s.pluralize }) <<
+
+      content_tag(:div, id: "#{ref}_new", style: "display: none") do
+        render partial: "#{child.to_s.pluralize}/form", locals: { "#{child}_form".to_sym => child_form } 
+      end
+    end
+  end
 end
