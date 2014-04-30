@@ -26,7 +26,7 @@ class SourcesController < ApplicationController
   def new
     @source = Source.new(params.slice(Source.new.attribute_names))
     @source.build_authorship
-    @path = params[:path].sub(/(etymothes.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @path = params[:path]
 
     respond_to do |format|
       format.html do
