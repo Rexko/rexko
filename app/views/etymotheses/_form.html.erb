@@ -21,8 +21,7 @@
 					  :class_name => :etymology, 
 					  :limit_one => true, 
 					  :remote => true,
-					  :create_blank => (etym_form.object && !etym_form.object.new_record?),
-					  :list_if => (etym_form.object && !etym_form.object.new_record?)
+                      :list_if => false
 			%>
 	</fieldset>
     <% end %>
