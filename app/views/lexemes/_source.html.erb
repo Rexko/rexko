@@ -1,5 +1,6 @@
 <% unless (f.object.try(:_destroy)) %>
-    <legend>Source</legend>
+<fieldset class="source">
+    <legend><%= label_with_remove_option_for "Source", f %></legend>
     <div class="type-text">
         <%= autocomplete :authorship, f, 
             custom_search: cited_name(f.object.authorship, format: :text), 
@@ -9,4 +10,5 @@
 	  <label for="source">Pointer</label>
 	  <%= f.text_field :pointer %>
 	</div>
+</fieldset>
 <% end %>
