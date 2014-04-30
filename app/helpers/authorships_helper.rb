@@ -14,4 +14,13 @@ module AuthorshipsHelper
     
     options[:format] == :text ? strip_tags(name) : name
   end
+  
+  def short_cite authorship
+    return "" if authorship.nil? or authorship.new_record? 
+
+    author = [authorship.author.try(:short_name), authorship.author.try(:name), "Anonymous"].detect(&:present?)
+    year = [authorship.year, authorship.title.try(:publication_year)].detect(&:present?)
+    
+    "#{author}#{", #{year}" if year.present?}"
+  end
 end

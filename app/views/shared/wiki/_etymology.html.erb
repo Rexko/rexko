@@ -1,1 +1,1 @@
-[<%= wiki_format etymology %>]
+[<%= wiki_format etymology %><%= " (#{short_cite etymology.sources.first.authorship})" if etymology.sources.first.present?  %>]
