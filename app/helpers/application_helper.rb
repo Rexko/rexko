@@ -128,7 +128,7 @@ module ApplicationHelper
 		
 		link_class = [(options[:remote] ? "pull_nested" : "add_nested"), ("limit-one" if options[:limit_one])]
 		
-		link_path_options = { :path => subform_ref, child => form.object } 
+		link_path_options = { :path => subform_ref, child => form.object }.merge(options[:locals] || {})
 		link_path = options[:remote] ? send("new_#{class_name}_path", link_path_options) : "##{child_ref}"
 		
 		link_options = { :class => link_class, :rel => (addlink_rel(subform_ref) unless subform_ref.blank?) }
