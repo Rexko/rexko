@@ -33,7 +33,11 @@
 	</div>
 </fieldset>
 
-  <%= list_children_with_option_to_add :attestation, l_form, :remote => true %>
+<div class="attestation interlinear">
+    <dl>
+        <%= list_children_with_option_to_add :attestation, l_form, :remote => true %>
+    </dl>
+</div>
 
   <% unless @locus.new_record? %>
     <% potcon = @potential_constructions || @locus.potential_constructions %>
