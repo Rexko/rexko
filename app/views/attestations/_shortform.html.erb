@@ -1,0 +1,11 @@
+<dl>
+    <fieldset class="attestation">
+        <dt>
+            <%= f.label :attested_form, '<abbr class="dimmed" title="Attested form">A</abbr>&nbsp;'.html_safe %>
+            <%= f.text_field :attested_form, size: width  %>
+        </dt>
+
+        <%= list_children_with_option_to_add :parse, f, as: :parsable, remote: true, locals: { width: width } %>
+        <%= remove_link_unless_new_record(f).html_safe %>
+    </fieldset>
+</dl>
