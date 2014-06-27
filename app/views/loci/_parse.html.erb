@@ -1,8 +1,0 @@
-<% unless (f.object.try(:_destroy)) %>
-	<%# nested_attributes_for f, [:interpretations, :parses, :attestation] %>
-    <dd>
-        <%= f.label :parsed_form, '<abbr class="dimmed" title="Parsed form">P</abbr>&nbsp;'.html_safe %>
-		<%= f.text_field :parsed_form, size: width, class: 'bequeathed' %>
-    </dd>
-      <%= list_children_with_option_to_add :interpretation, f, remote: true, locals: { parse: f.object, width: width } %>
-<% end %>

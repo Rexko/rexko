@@ -1,7 +1,6 @@
-﻿<%= fields_for @path, @parse, :child_index => Time.now.to_i.to_s do |f|  %>
-<dd>
-    <%= f.label :parsed_form, '<abbr class="dimmed" title="Parsed form">P</abbr>'.html_safe %>
-    <%= f.text_field :parsed_form, size: sanitize(params[:width]), class: 'bequeathed' %>
-</dd>
-<%= list_children_with_option_to_add :interpretation, f, :remote => true, :locals => { :parse => f.object } %>
-<% end %>
+﻿<%= 
+fields_for @path, @parse, :child_index => Time.now.to_i.to_s do |f|
+    width ||= sanitize(params[:width])
+    render partial: 'shortform', locals: { f: f, width: width }
+end 
+%>
