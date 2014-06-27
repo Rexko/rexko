@@ -1,0 +1,17 @@
+<%= fields_for @path, @interpretation, :child_index => Time.now.to_i.to_s do |f|  %>
+<% width = sanitize(params[:width]).to_f %>
+<dd>
+    <%= f.label :sense_id, '<abbr class="dimmed" title="Sense">S</abbr>'.html_safe %>
+    <%= f.grouped_collection_select :sense_id, 
+    sense_select(@interpretations ? 
+    @interpretations[f.object.parse.parsed_form] :
+    f.object.parse.potential_interpretations), 
+    :last, :first, :last, :first,
+    {:include_blank => true}, {style: "width:100px; min-width:100%" } if f.object.parse %> 
+</dd>
+<dd>
+    <%= f.fields_for :sense, Sense.new do |s_form| %>
+    <%= s_form.text_field :definition, size: width %>
+    <% end %>
+</dd>
+<% end %>

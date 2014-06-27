@@ -1,22 +1,16 @@
 <% unless (f.object._destroy) %>
-	<div class="subcolumns full equalize">
-		<div class="c50l">
-	<div class="subcl interpretation type-select">
-		<%= f.label :sense, label_with_remove_option_for("Sense", f) %>
-		<%= f.grouped_collection_select :sense_id, 
-																		sense_select(@interpretations ? 
-																			@interpretations[parse.parsed_form] :
-																			parse.potential_interpretations), 
-																		:last, :first, :last, :first,
-																		{:include_blank => true} if defined?(parse) %> 
-	</div>
-		</div>
-		<div class="c50r" style="vertical-align: bottom">
-			<div class="subcr type-text">
-				<%= f.fields_for :sense, Sense.new do |s_form| %>
-					<%= s_form.text_field :definition %>
-				<% end %>
-			</div>
-		</div>		
-	</div>
+<dd>
+    <%= f.label :sense_id, '<abbr class="dimmed" title="Sense">S</abbr>&nbsp;'.html_safe %>
+    <%= f.grouped_collection_select :sense_id, 
+    sense_select(@interpretations ? 
+    @interpretations[parse.parsed_form] :
+    parse.potential_interpretations), 
+    :last, :first, :last, :first,
+    {:include_blank => true}, {style: "width:100px; min-width:100%" } if defined?(parse) %> 
+</dd>
+<dd>
+    <%= f.fields_for :sense, Sense.new do |s_form| %>
+    <%= s_form.text_field :definition, size: width %>
+    <% end %>
+</dd>
 <% end %>
