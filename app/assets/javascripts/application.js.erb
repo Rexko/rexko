@@ -36,6 +36,17 @@ activate_links = function(element){
 		});
 		link.observe('ajax:success', NestedAttributesJs.pull_nested);
 	});
+
+    element.getElementsBySelector('.combobox').each(function(e){
+       e.observe('change', function(e2){
+         combotext = e.up().next('.comboform');
+         if (e.options[e.selectedIndex].value.indexOf("new-") == 0) {
+             if (combotext) Effect.BlindDown(combotext, {duration: 0.25});
+         } else {
+             if (combotext) Effect.BlindUp(combotext, {duration: 0.25});
+         };
+       });
+    });
 }
 
 var NestedAttributesJs = {  
