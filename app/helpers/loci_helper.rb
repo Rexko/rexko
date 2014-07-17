@@ -40,4 +40,18 @@ module LociHelper
     
     output.to_a
   end
+  
+  # Injects into ApplicationHelper#wh's tooltip the first definition assigned 
+  # to each word.
+  # Assumes parses are as given in the example, in the same order, but not 
+  # necessarily contiguous (can probably tidy if we assume no insertions?)
+  def wh_parsed locus, text, highlight=[]
+    wh(text, highlight) do |parse, index|
+      words = locus.example.scan(/\[\[([^|]+?)\]\]|\[\[(.+?)\|/).flatten.compact
+      nth_parse = words[0, index].count(parse) 
+      all_matching = locus.parses.find_all {|p| parse == (p.parsed_form) }
+      sense = all_matching[nth_parse].try(:interpretations).try(:first).try(:sense)
+      sense.try(:definition)
+    end
+  end
 end
