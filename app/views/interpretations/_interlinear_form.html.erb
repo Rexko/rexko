@@ -1,0 +1,7 @@
+<%= 
+fields_for @path, @interpretation, :child_index => Time.now.to_i.to_s do |f|
+    width = sanitize(params[:width]).to_f 
+    parse = f.object.parse
+    render partial: 'shortform', locals: { f: f, width: width, parse: parse }
+end 
+%>

@@ -1,14 +1,5 @@
-<% unless (f.object.try(:_destroy)) %>
-	<% nested_attributes_for f, [:interpretations, :parses, :attestation] %>
-	<fieldset class="parse">
-		<legend><%= label_with_remove_option_for "Parse", f %></legend>
-			<div class="type-text">
-				<%= f.label :parsed_form, nil, :style => "float:left" %>
-				<%= headword_link(f.object) unless f.object.parsed_form.blank? %>
-				<div style="clear:both"/>
-				<%= f.text_field :parsed_form %>
-			</div>
-
-      <%= list_children_with_option_to_add :interpretation, f, :remote => true, :locals => { :parse => f.object } %>
-	</fieldset>
-<% end %>
+<%= 
+unless (f.object._destroy) 
+    render partial: 'parses/shortform', locals: { f: f, width: width }
+end 
+%>

@@ -128,7 +128,7 @@ module ApplicationHelper
 		
 		link_class = [(options[:remote] ? "pull_nested" : "add_nested"), ("limit-one" if options[:limit_one])]
 		
-		link_path_options = { :path => subform_ref, child => form.object } 
+		link_path_options = { :path => subform_ref, child => form.object }.merge(options[:locals] || {})
 		link_path = options[:remote] ? send("new_#{class_name}_path", link_path_options) : "##{child_ref}"
 		
 		link_options = { :class => link_class, :rel => (addlink_rel(subform_ref) unless subform_ref.blank?) }
@@ -195,17 +195,14 @@ module ApplicationHelper
     output = html_escape(text).to_str
     output.gsub!(/&\#x27;&\#x27;&\#x27;(.+?)&\#x27;&\#x27;&\#x27;/, '<b>\1</b>')
     output.gsub!(/&\#x27;&\#x27;(.+?)&\#x27;&\#x27;/, '<i>\1</i>')
-    output.gsub!(/\[\[([^|]+?)\]\](\w*)/) do |match|
-      bold = highlight.include?($1)
-      lexeme, ending, bb, eb = $1, $2, ('<b>' if bold), ('</b>' if bold) 
-      "<a href=\"/html/#{lexeme}\" title=\"#{lexeme}\">#{bb}#{lexeme}#{ending}#{eb}</a>"
+    output.gsub!(/\[\[(?<lexeme>[^|]+?)\]\](?<ending>\w*)|\[\[(?<lexeme>.+?)\|(?<stem>.+?)\]\](?<ending>\w*)/).with_index do |match, index|
+      bold = highlight.include?($~[:lexeme])
+      bb, eb = ('<b>' if bold), ('</b>' if bold)
+      parse = yield $~[:lexeme], index if block_given?
+      parse = "" << ":"" #{parse}" if parse.present?
+      "<a href=\"/html/#{$~[:lexeme]}\" title=\"#{$~[:lexeme]}#{parse}\">#{bb}#{$~[:stem] || $~[:lexeme]}#{$~[:ending]}#{eb}</a>"
     end
-    output.gsub!(/\[\[(.+?)\|(.+?)\]\](\w*)/) do |match|
-      bold = highlight.include?($1)
-    lexeme, stem, ending, bb, eb = $1, $2, $3, ('<b>' if bold), ('</b>' if bold)
-      "<a href=\"/html/#{lexeme}\" title=\"#{lexeme}\">#{bb}#{stem}#{ending}#{eb}</a>"
-    end
-    output.html_safe
+    output.html_safe 
   end
   
   # Generate an autocomplete text field for +child+ in +form+.

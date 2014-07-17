@@ -1,13 +1,6 @@
-﻿<%= fields_for @path, @attestation, :child_index => Time.now.to_i.to_s do |f|  %>
-	<fieldset class="attestation">
-		<legend>
-			<%= label_with_remove_option_for "Attestation", f %>
-		</legend>
-		<div class="type-text">
-			<%= f.label :attested_form %>
-			<%= f.text_field :attested_form %>
-		</div>  
-
-		<%= list_children_with_option_to_add :parse, f, :as => :parsable, :remote => true %>
-	</fieldset>
-<% end %>
+﻿<%= 
+fields_for @path, @attestation, :child_index => Time.now.to_i.to_s do |f|
+    width = (f.object.attested_form.try(:size) || 25) * 1.2
+    render partial: 'shortform', locals: { f: f, width: width }
+end 
+%>

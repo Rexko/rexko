@@ -101,3 +101,23 @@ div.autocomplete ul li {
   padding:2px;
   cursor:pointer;
 }
+
+
+/* Interlinear */
+.interlinear > dl > dl, .interlinear > dl > div { display:inline-block; vertical-align: top; margin: 0.5em 0.5em 0 0;}
+.interlinear dl dt { font-style: italic; }
+.interlinear dl dd { margin-left: 0; }
+.interlinear .par { clear:both; padding-top: 0.5em; margin-bottom: 0.5em; }
+.interlinear > fieldset { border-radius: 5px; }
+.interlinear fieldset fieldset { border: 0px; margin: 0px; padding: 0px; }
+.interlinear .attestation { display: inline; padding-right: 10px; min-width: 0; }
+.interlinear .attestation dt, .interlinear .attestation dd { display: table; width:100%; }
+.interlinear .attestation dt label, .interlinear .attestation dd label { display: table-cell; }
+.interlinear .attestation dt input, 
+.interlinear .attestation dd input,
+.interlinear .attestation .dd select { 
+    display: table-cell; 
+    box-sizing: border-box; 
+    width: 100%; 
+}
+
