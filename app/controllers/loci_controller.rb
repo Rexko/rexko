@@ -7,7 +7,7 @@ class LociController < ApplicationController
       @loci = Locus.where(:id => params[:loci].split('/').collect(&:to_i))
     else
       @loci = Locus.sorted
-    end.includes({:source => {:authorship => [:author, :title]}}).paginate(:page => params[:page])
+    end.includes([{:source => {:authorship => [:author, :title]}}, :parses => {:interpretations => :sense}]).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,7 +18,7 @@ class LociController < ApplicationController
   # GET /loci/1
   # GET /loci/1.xml
   def show
-    @locus = Locus.find(params[:id])
+    @locus = Locus.includes(:parses => {:interpretations => :sense}).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -173,7 +173,7 @@ class LociController < ApplicationController
   def matching
     authors = Author.where(["name LIKE ?", "%" + params[:author] + "%"])
     if authors
-      author_loci = Locus.sorted.includes({:source => {:authorship => [:author, :title]}}).authored_by(authors)
+      author_loci = Locus.sorted.includes([{:source => {:authorship => [:author, :title]}}, :parses => {:interpretations => :sense}]).authored_by(authors)
 
 	    @page_title = "Loci - #{author_loci.length} results for \"#{params[:author]}\""
       @loci = author_loci.paginate(:page => params[:page])
