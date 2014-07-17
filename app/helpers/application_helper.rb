@@ -195,17 +195,14 @@ module ApplicationHelper
     output = html_escape(text).to_str
     output.gsub!(/&\#x27;&\#x27;&\#x27;(.+?)&\#x27;&\#x27;&\#x27;/, '<b>\1</b>')
     output.gsub!(/&\#x27;&\#x27;(.+?)&\#x27;&\#x27;/, '<i>\1</i>')
-    output.gsub!(/\[\[([^|]+?)\]\](\w*)/) do |match|
-      bold = highlight.include?($1)
-      lexeme, ending, bb, eb = $1, $2, ('<b>' if bold), ('</b>' if bold) 
-      "<a href=\"/html/#{lexeme}\" title=\"#{lexeme}\">#{bb}#{lexeme}#{ending}#{eb}</a>"
+    output.gsub!(/\[\[(?<lexeme>[^|]+?)\]\](?<ending>\w*)|\[\[(?<lexeme>.+?)\|(?<stem>.+?)\]\](?<ending>\w*)/).with_index do |match, index|
+      bold = highlight.include?($~[:lexeme])
+      bb, eb = ('<b>' if bold), ('</b>' if bold)
+      parse = yield $~[:lexeme], index if block_given?
+      parse = "" << ":"" #{parse}" if parse.present?
+      "<a href=\"/html/#{$~[:lexeme]}\" title=\"#{$~[:lexeme]}#{parse}\">#{bb}#{$~[:stem] || $~[:lexeme]}#{$~[:ending]}#{eb}</a>"
     end
-    output.gsub!(/\[\[(.+?)\|(.+?)\]\](\w*)/) do |match|
-      bold = highlight.include?($1)
-    lexeme, stem, ending, bb, eb = $1, $2, $3, ('<b>' if bold), ('</b>' if bold)
-      "<a href=\"/html/#{lexeme}\" title=\"#{lexeme}\">#{bb}#{stem}#{ending}#{eb}</a>"
-    end
-    output.html_safe
+    output.html_safe 
   end
   
   # Generate an autocomplete text field for +child+ in +form+.
