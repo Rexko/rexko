@@ -14,6 +14,7 @@
 * [#12 (34)] Better bibliographic referencing.
 * [#19 (44), #128] Locus edit form redesigned; locus display now includes definitions in mouseover info
 * [#148] Added .ruby-version file
+* [#147] Releasing under MIT license
 
 ==Since 0.3.5==
 * Updated code for Rails 3.1 
