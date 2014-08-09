@@ -3,7 +3,7 @@ class DictionariesController < ApplicationController
   # GET /dictionaries
   # GET /dictionaries.xml
   def index
-    @dictionaries = Dictionary.includes([:language, :source_language, :target_language]).all
+    @dictionaries = Dictionary.includes([:language, :source_language, :target_language]).all.sort_by {|d| d.title }
 
     respond_to do |format|
       format.html # index.html.erb

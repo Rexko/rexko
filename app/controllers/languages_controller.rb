@@ -3,7 +3,7 @@ class LanguagesController < ApplicationController
   # GET /languages
   # GET /languages.xml
   def index
-    @languages = Language.all
+    @languages = Language.all.sort_by{|l| l.to_s}
 
     respond_to do |format|
       format.html # index.html.erb
