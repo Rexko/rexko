@@ -33,6 +33,7 @@ group :development, :test do
   gem 'ruby-prof'
   gem 'test-unit'
   gem 'bullet'
+  gem 'missing_t', '~> 0.3.1'
 end
 
 source 'http://gemcutter.org'
