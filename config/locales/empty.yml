@@ -1,0 +1,11 @@
+empty:
+  editor:
+    index:
+      tools: '***'
+      find_or_create_a_lexeme: '***'
+      match_type: '***'
+      browse_loci_by_author_substring_search: '***'
+      create_a_locus: '***'
+      things_to_do: '***'
+      addlist: '***'
+      expandlist: '***'
