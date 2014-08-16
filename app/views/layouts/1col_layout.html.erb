@@ -34,7 +34,6 @@
           <!-- end: skip link navigation -->
      	<%= form_tag({:controller => :lexemes, :action => :show_by_headword}) do %>
 				<span class="type-text">
-						<%= text_field_tag :headword, '', :size => 25, :placeholder => 'Find or create a lexeme' %>
 				</span>
 		
 				<span class="type-select">
@@ -42,6 +41,9 @@
 													 options_for_select(Lexeme::SEARCH_OPTIONS, Lexeme::SUBSTRING) %>
 				</span>
 			<% end unless current_page? :controller => :editor, :action => :index %>
+					        <%= text_field_tag :headword, '', :size => 25, 
+                                :placeholder => t("layouts.1col_layout.find_or_create_a_lexeme", 
+                                    :default => "Find or create a lexeme") %>
 
 					<!-- Login link will go here -->
         </div>  

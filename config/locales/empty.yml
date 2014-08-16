@@ -13,6 +13,7 @@ empty:
     1col_layout:
       skip_to_the_navigation: '***'
       skip_to_the_content: '***'
+      find_or_create_a_lexeme: '***'
       home: '***'
       languages: '***'
       dictionaries: '***'
