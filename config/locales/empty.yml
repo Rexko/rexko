@@ -1,6 +1,7 @@
 empty:
   editor:
     index:
+      page title: '***'
       tools: '***'
       find_or_create_a_lexeme: '***'
       match_type: '***'

@@ -187,7 +187,7 @@ module ApplicationHelper
   
   # Return @page_title, or a default of "Controller -  action".
   def page_title
-    html_escape (@page_title || [params[:controller].camelize, params[:action]].join(" - "))
+    html_escape (@page_title || I18n.t("#{params[:controller]}.#{params[:action]}.page title"))
   end
   
   # Translate a string in wiki format into HTML
