@@ -22,3 +22,8 @@ empty:
       loci: '***'
       sources: '***'
       layout_based_on_yaml_html: '***'
+  lexeme:
+    search:
+      options:
+        - '***'
+        - '***'

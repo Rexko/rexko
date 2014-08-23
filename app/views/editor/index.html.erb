@@ -18,7 +18,9 @@
                     <%= t("editor.index.match_type", :default => "Match type") %>
                 </label>
                 
-                <%= select_tag :matchtype, options_for_select(Lexeme::SEARCH_OPTIONS, Lexeme::SUBSTRING) %>
+                <%= select_tag :matchtype,
+                options_for_select(t('lexeme.search.options', :default => [["contains", "exact match"]]).zip(Lexeme::SEARCH_OPTIONS),
+                Lexeme::SUBSTRING) %>
             </div></div>
         </div>
         <% end %>
