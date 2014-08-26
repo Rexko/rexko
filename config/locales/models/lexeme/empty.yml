@@ -1,0 +1,6 @@
+empty:
+  lexeme:
+    search:
+      options:
+        - '***'
+        - '***'
