@@ -2,7 +2,6 @@ module ApplicationHelper
   include ERB::Util
   
 	HW_LINK = "<span class='hw-link%s'>%s</span>"
-	NO_ENTRY_TEXT = "[No entry for <i>%s</i> &times;%d]"
 
   # lang_for: Builds a string with lang= and xml:lang= attributes usable in an 
   # XHTML element.  Takes as argument an element or an array.
@@ -40,7 +39,7 @@ module ApplicationHelper
   # times that headword is attested in the loci
   def new_headword_link (parse, is_wanted = false)
   	count = parse.respond_to?(:count_all) ? parse.count_all : parse.count
-  	no_entry = NO_ENTRY_TEXT % [html_escape(parse.parsed_form), count]
+  	no_entry = t('lexeme.no_entry_linktext', headword: html_escape(parse.parsed_form), count: count)
   
     link_to((HW_LINK % [(" wanted" if is_wanted), no_entry]).html_safe, 
     	exact_lexeme_path(:headword => parse.parsed_form))

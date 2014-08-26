@@ -4,3 +4,4 @@ empty:
       options:
         - '***'
         - '***'
+    no_entry_linktext: "[*** <i>%{headword}</i> *** %{count}]" 
