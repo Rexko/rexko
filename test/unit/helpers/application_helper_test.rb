@@ -29,11 +29,11 @@ class ApplicationHelperTest < ActionView::TestCase
   
   test "headword link is initial case insensitive" do
     # without @headwords
-    assert_equal "<a href=\"/lexemes/1\"><span class='hw-link'>Liter</span></a>", headword_link(Parse.new(:parsed_form => "Liter"))
+    assert_equal "<a href=\"/en/lexemes/1\"><span class='hw-link'>Liter</span></a>", headword_link(Parse.new(:parsed_form => "Liter"))
     
     # with @headwords
     @headwords = { "Liter" => headwords(:liter) }
-    assert_equal "<a href=\"/lexemes/1\"><span class='hw-link'>Liter</span></a>", headword_link(Parse.new(:parsed_form => "Liter"))
+    assert_equal "<a href=\"/en/lexemes/1\"><span class='hw-link'>Liter</span></a>", headword_link(Parse.new(:parsed_form => "Liter"))
   end
   
   test "sentence case" do
