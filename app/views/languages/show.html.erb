@@ -1,4 +1,4 @@
 <p><%= h @language %></p>
 
-<%= link_to 'Edit', edit_language_path(@language) %> |
-<%= link_to 'Back', languages_path %>
+<%= link_to t("languages.show.edit", :default => 'Edit'), edit_language_path(@language) %> |
+<%= link_to t("languages.show.back", :default => 'Back'), languages_path %>

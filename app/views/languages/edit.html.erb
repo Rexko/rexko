@@ -1,8 +1,8 @@
-<h1>Editing language</h1>
+<h1><%= t("languages.edit.editing_language", :default => "Editing language") %></h1>
 
 <%= error_messages_for :language %>
 
-<%=	render(:partial => "form", :object => { :label => 'Update', :action => 'update', :method => :put, :for_url => "/languages/#{@language.id}" }) %>
+<%=	render(:partial => "form", :object => { :label => t("languages.edit.update_action_=>_update_method_=>_put_for_url_=>_", :default => 'Update', :action => 'update', :method => :put, :for_url => ")/languages/#{@language.id}" }) %>
 
-<%= link_to 'Show', @language %> |
-<%= link_to 'Back', languages_path %>
+<%= link_to t("languages.edit.show", :default => 'Show'), @language %> |
+<%= link_to t("languages.edit.back", :default => 'Back'), languages_path %>
