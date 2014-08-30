@@ -14,8 +14,8 @@ class Lexeme < ActiveRecord::Base
   
   accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
-  SUBSTRING = :contains
-  EXACT = :exact_match
+  SUBSTRING = 'contains'
+  EXACT = 'exact_match'
   SEARCH_OPTIONS = [SUBSTRING, EXACT]
 
   HASH_MAP_TO_PARSE = { :subentries => Subentry::HASH_MAP_TO_PARSE }
