@@ -24,7 +24,7 @@ class ApplicationHelperTest < ActionView::TestCase
   end
   
   def test_new_headword_link
-    assert_equal "<a href=\"/html/unattested\"><span class='hw-link'>[No entry for <i>unattested</i> &times;0]</span></a>", new_headword_link(Parse.new(:parsed_form => "unattested")), "new_headword_link does not return expected format for link to new lexeme"
+    assert_equal "<a href=\"/en/html/unattested\"><span class='hw-link'>#{t('lexeme.no_entry_linktext', headword: 'unattested', count: 0)}</span></a>", new_headword_link(Parse.new(:parsed_form => "unattested")), "new_headword_link does not return expected format for link to new lexeme"
   end
   
   test "headword link is initial case insensitive" do
