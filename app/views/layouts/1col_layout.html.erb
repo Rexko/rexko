@@ -43,7 +43,9 @@
 
                         <span class="type-select">
 					        <%= select_tag :matchtype,
-					            options_for_select(Lexeme::SEARCH_OPTIONS, Lexeme::SUBSTRING) %>
+                            options_for_select(t('lexeme.search.options', 
+                                :default => [["contains", "exact match"]]).zip(Lexeme::SEARCH_OPTIONS),
+                            Lexeme::SUBSTRING) %>
                         </span>
 					<% end unless current_page? :controller => :editor, :action => :index %>
 
