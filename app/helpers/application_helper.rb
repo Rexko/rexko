@@ -135,7 +135,8 @@ module ApplicationHelper
 		
 		unless options[:limit_one] && printed_child.present? 
 	  	output << content_tag(:div, :class => "par") do
-	  		link_to "Add #{options[:display_name] || child.to_s.humanize.downcase}", link_path, link_options
+        addendum = options[:display_name] || child.to_s.humanize.downcase
+	  		link_to t("helpers.link_to_add.#{addendum}", default: "Add #{addendum}"), link_path, link_options
 	  	end 
 	  end
 	  
