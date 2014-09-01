@@ -2,3 +2,5 @@ empty:
     helpers:
         link_to_add:
             sort order: "***"
+        remove_link: "***"
+        delete_checkbox: "***"
