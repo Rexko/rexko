@@ -1,15 +1,17 @@
 ﻿	<fieldset class="sort_order">
-		<legend><%= label_with_remove_option_for "Default sort", f %></legend>
+		<legend><%= label_with_remove_option_for t(".default_sort", default: "Default sort"), f %></legend>
 			<div class="type-text">
-				<%= f.label t("languages.sort_order.name", :default => "name") %>
+				<%= f.label :name, t(".name", :default => "Name") %>
 				<%= f.text_field :name %>
 
-				<%= f.label t("languages.sort_order.substitutions", :default => "substitutions") %>
-				<i><%= t("languages.sort_order.if_x_sorts_as_if_it_were_y_enter", :default => "If X sorts as if it were Y, enter:") %></i> <tt>X Y</tt> <i>(one rule per line)</i>
+				<%= f.label :substitutions, t(".substitutions", :default => "Substitutions") %>
+				<%= t("languages.sort_order.substitutions_hint_html", 
+                    :default => "<i>If X sorts as if it were Y, enter:</i> <tt>X Y</tt> <i>(one rule per line)</i>") %>
 				<%= f.text_area :substitutions, value: friendly_subst(f.object.substitutions) %>
 
-				<%= f.label t("languages.sort_order.orderings", :default => "orderings") %>
-				<i><%= t("languages.sort_order.if_Ý_sorts_after_y_enter", :default => "If Ý sorts after Y, enter") %></i> <tt>Y Ý</tt> <i>(one rule per line)</i>
+				<%= f.label :orderings, t("languages.sort_order.orderings", :default => "Orderings") %>
+				<%= t("languages.sort_order.orderings_hint_html", 
+                    :default => "<i>If Ý sorts after Y, enter:</i> <tt>Y Ý</tt> <i>(one rule per line)</i>") %>
 				<%= f.text_area :orderings, value: friendly_order(f.object.orderings) %>
 			</div>
 	</fieldset>
