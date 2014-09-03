@@ -1,0 +1,3 @@
+en:
+    language:
+        name_with_code: "%{name} (%{code})"

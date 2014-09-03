@@ -2,3 +2,5 @@ en:
     languages:
         edit:
             page title: "Editing language"
+        index:
+            page title: "Listing languages"

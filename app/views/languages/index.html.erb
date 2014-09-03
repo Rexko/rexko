@@ -1,15 +1,10 @@
-<h1><%= t("languages.index.listing_languages", :default => "Listing languages") %></h1>
-
 <table>
-  <tr>
-  </tr>
-
 <% for language in @languages %>
   <tr>
 		<td><%= h language %></td>
     <td><%= link_to t("languages.index.show", :default => 'Show'), language %></td>
     <td><%= link_to t("languages.index.edit", :default => 'Edit'), edit_language_path(language) %></td>
-    <td><%= link_to t("languages.index.destroy", :default => 'Destroy'), language, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to t("languages.index.destroy", :default => 'Destroy'), language, :confirm => t("languages.index.confirm_destroy", language: language, default: "Really delete '#{language}'?\nThis will not delete words or dictionaries using this language."), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -7,6 +7,13 @@ empty:
             update_button: "***"
             show: "***"
             back: "***"
+        index:
+            page title: "***"
+            show: "***"
+            edit: "***"
+            destroy: "***"
+            confirm_destroy: "***"
+            new_language: "***"
         sort_order:
             default_sort: "***"
             name: "***"
