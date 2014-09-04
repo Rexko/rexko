@@ -5,6 +5,7 @@ empty:
             name_prompt: "***"
             code_prompt: "***"
             update_button: "***"
+            success: "***"
             show: "***"
             back: "***"
         index:

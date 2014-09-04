@@ -62,7 +62,7 @@ class LanguagesController < ApplicationController
 
     respond_to do |format|
       if @language.update_attributes(params[:language])
-        flash[:notice] = 'Language was successfully updated.'
+        flash[:notice] = t('languages.edit.success', default: 'Language was successfully updated.')
         format.html { redirect_to(@language) }
         format.xml  { head :ok }
       else
