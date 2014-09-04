@@ -15,6 +15,11 @@ empty:
             destroy: "***"
             confirm_destroy: "***"
             new_language: "***"
+        new:
+            page title: "***"
+            create_button: "***"
+            success: "***"
+            back: "***"
         sort_order:
             default_sort: "***"
             name: "***"

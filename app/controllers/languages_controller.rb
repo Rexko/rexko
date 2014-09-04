@@ -45,7 +45,7 @@ class LanguagesController < ApplicationController
 
     respond_to do |format|
       if @language.save
-        flash[:notice] = 'Language was successfully created.'
+        flash[:notice] = t('languages.new.success', default: 'Language was successfully created.')
         format.html { redirect_to(@language) }
         format.xml  { render :xml => @language, :status => :created, :location => @language }
       else

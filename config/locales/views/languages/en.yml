@@ -4,3 +4,5 @@ en:
             page title: "Editing language"
         index:
             page title: "Listing languages"
+        new:
+            page title: "Creating language"
