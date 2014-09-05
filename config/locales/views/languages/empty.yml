@@ -20,6 +20,8 @@ empty:
             create_button: "***"
             success: "***"
             back: "***"
+        show:
+            page title: "***"
         sort_order:
             default_sort: "***"
             name: "***"

@@ -6,3 +6,5 @@ en:
             page title: "Listing languages"
         new:
             page title: "Creating language"
+        show:
+            page title: "Language"
