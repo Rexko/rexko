@@ -1,4 +1,8 @@
 <table>
+    <tr>
+        <th><%= t('.name', default: "Name") %></th>
+        <th colspan="3"><%= t('.actions', default: "Actions") %></th>
+    </tr>
 <% for language in @languages %>
   <tr>
 		<td><%= h language %></td>
