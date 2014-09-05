@@ -58,7 +58,7 @@ class LanguagesController < ApplicationController
   # PUT /languages/1
   # PUT /languages/1.xml
   def update
-    @language = Language.find(params[:id])
+    @language = Language.find(params[:id]).include(:sort_order)
 
     respond_to do |format|
       if @language.update_attributes(params[:language])

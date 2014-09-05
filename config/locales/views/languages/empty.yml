@@ -22,6 +22,7 @@ empty:
             back: "***"
         show:
             page title: "***"
+            name_and_code: "***"
         sort_order:
             default_sort: "***"
             name: "***"

@@ -1,5 +1,11 @@
 <h2><%= t('.name_and_code', default: "Name and code") %></h2>
 <p><%= h @language %></p>
 
+<h2><%= t('languages.sort_order.substitutions', default: 'Letters sorting together') %></h2>
+<pre><%= friendly_subst @language.sort_order.substitutions %></pre>
+    
+<h2><%= t('languages.sort_order.orderings', default: 'Custom letter orders') %></h2>
+<pre><%= friendly_order @language.sort_order.orderings %></pre>
+
 <%= link_to t("languages.show.edit", :default => 'Edit'), edit_language_path(@language) %> |
 <%= link_to t("languages.show.back", :default => 'Back'), languages_path %>
