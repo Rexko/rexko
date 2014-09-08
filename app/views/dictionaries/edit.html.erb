@@ -7,15 +7,15 @@
   </p>
 
 	<p>
-    <b><%= t('.definition_language') %></b><br />
-		<%= collection_select(:dictionary, :language_id, Language.find(:all), :id, :iso_639_code) %>
-	</p>
-  
-	<p>
     <b><%= t('.headword_language') %></b><br />
 		<%= collection_select(:dictionary, :source_language_id, Language.find(:all), :id, :iso_639_code) %>
 	</p>
 
+	<p>
+    <b><%= t('.definition_language') %></b><br />
+		<%= collection_select(:dictionary, :language_id, Language.find(:all), :id, :iso_639_code) %>
+	</p>
+  
 	<p>
     <b><%= t('.gloss_language') %></b><br />
 		<%= collection_select(:dictionary, :target_language_id, Language.find(:all), :id, :iso_639_code) %>
