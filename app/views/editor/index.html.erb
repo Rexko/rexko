@@ -1,13 +1,13 @@
 <div class="subcolumns">
     <div class="c50l"><div class="subcl">
-        <h2><%= t("editor.index.tools", :default => "Tools") %></h2>
+        <h2><%= t(".tools") %></h2>
     
         <%= form_tag({:controller => :lexemes, :action => :show_by_headword}, {:class => "yform"}) do %>
     
         <div class="subcolumns full">
             <div class="c66l"><div class="subcl type-text">
                 <label for="headword">
-                    <%= t("editor.index.find_or_create_a_lexeme", :default => "Find or create a lexeme:") %>
+                    <%= t(".find_or_create_a_lexeme") %>
                 </label> 
                 
                 <%= text_field_tag :headword, '', :size => 20 %>
@@ -15,11 +15,11 @@
 		
             <div class="c33r"><div class="subcr type-select">
                 <label for="matchtype">
-                    <%= t("editor.index.match_type", :default => "Match type") %>
+                    <%= t(".match_type") %>
                 </label>
                 
                 <%= select_tag :matchtype,
-                options_for_select(t('lexeme.search.options', :default => [["contains", "exact match"]]).zip(Lexeme::SEARCH_OPTIONS),
+                options_for_select(t('lexeme.search.options').zip(Lexeme::SEARCH_OPTIONS),
                 Lexeme::SUBSTRING) %>
             </div></div>
         </div>
@@ -28,8 +28,7 @@
         <%= form_tag({:controller => :loci, :action => :show_by_author}, {:class => "yform"}) do %>
         <div class="type-text">
             <label>
-                <%= t("editor.index.browse_loci_by_author_substring_search", 
-                :default => "Browse loci by author (substring search)") %>
+                <%= t(".browse_loci_by_author") %>
             </label>
             
             <%= text_field_tag :author, '', :size => 20 %>
@@ -38,24 +37,23 @@
 
         <ul>
             <li>
-                <%=	link_to t("editor.index.create_a_locus", :default => "Create a locus"), 
-                :controller => :loci, :action => :new %>
+                <%=	link_to t(".create"), :controller => :loci, :action => :new %>
             </li>
         </ul>
     </div></div>
 
     <div class="c50r"><div class="subcr">
-        <h2><%= t("editor.index.things_to_do", :default => "Things to do") %></h2>
+        <h2><%= t(".things_to_do") %></h2>
         
         <table width="75%">
             <tr>
                 <td valign="top" width="50%">
-                    <h3><%= t("editor.index.addlist", :default => "Addlist") %></h3>
+                    <h3><%= t(".addlist") %></h3>
 			
                     <%= ten_most_wanted %>
                 </td>
                 <td valign="top">
-                    <h3><%= t("editor.index.expandlist", :default => "Expandlist") %></h3>	
+                    <h3><%= t(".expandlist") %></h3>	
 			
                     <%= expandlist %>
                 </td>

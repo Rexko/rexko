@@ -1,7 +1,7 @@
 <table>
     <tr>
-        <th><%= t('.title', default: "Title") %></th>
-        <th colspan="3"><%= t('.actions', default: "Actions") %></th>
+        <th><%= t('.title') %></th>
+        <th colspan="3"><%= t('.actions') %></th>
     </tr>
 
     <% for dictionary in @dictionaries %>
@@ -12,17 +12,16 @@
             <em><%= t('.languages', 
                     source: dictionary.source_language.try(:name),
                     target: dictionary.target_language.try(:name),
-                    language: dictionary.language.try(:name),
-                    default: "%{source}/%{target} in %{language}"
+                    language: dictionary.language.try(:name)
                     )%></em>
         </td>
-        <td><%= link_to t('.show', default: 'Show'), dictionary %></td>
-        <td><%= link_to t('.edit', default: 'Edit'), edit_dictionary_path(dictionary) %></td>
-        <td><%= link_to t('.destroy', default: 'Destroy'), dictionary, :confirm => t('.confirm_destroy', title: dictionary.title, default: "Really delete '%{title}'?\nThis will not delete any lexemes associated with this dictionary."), :method => :delete %></td>
+        <td><%= link_to t('.show'), dictionary %></td>
+        <td><%= link_to t('.edit'), edit_dictionary_path(dictionary) %></td>
+        <td><%= link_to t('.destroy'), dictionary, :confirm => t('.confirm_destroy', title: dictionary.title), :method => :delete %></td>
     </tr>
     <% end %>
 </table>
 
 <br />
 
-<%= link_to t('.new', default: 'New dictionary'), new_dictionary_path %>
+<%= link_to t('.new'), new_dictionary_path %>

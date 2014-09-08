@@ -2,3 +2,11 @@ en:
     dictionaries:
         index:
             page title: "Listing dictionaries"
+            title: "Title"
+            actions: "Actions"
+            languages: "%{source}/%{target} in %{language}"
+            show: "Show"
+            edit: "Edit"
+            destroy: "Destroy"
+            confirm_destroy: "Really delete '%{title}'?\nThis will not delete any lexemes associated with this dictionary."
+            new: "New dictionary"

@@ -1,18 +1,18 @@
 <table>
     <tr>
-        <th><%= t('.name', default: "Name") %></th>
-        <th colspan="3"><%= t('.actions', default: "Actions") %></th>
+        <th><%= t('.name') %></th>
+        <th colspan="3"><%= t('.actions') %></th>
     </tr>
 <% for language in @languages %>
   <tr>
 		<td><%= h language %></td>
-    <td><%= link_to t("languages.index.show", :default => 'Show'), language %></td>
-    <td><%= link_to t("languages.index.edit", :default => 'Edit'), edit_language_path(language) %></td>
-    <td><%= link_to t("languages.index.destroy", :default => 'Destroy'), language, :confirm => t("languages.index.confirm_destroy", language: language, default: "Really delete '#{language}'?\nThis will not delete words or dictionaries using this language."), :method => :delete %></td>
+    <td><%= link_to t(".show"), language %></td>
+    <td><%= link_to t(".edit"), edit_language_path(language) %></td>
+    <td><%= link_to t(".destroy"), language, :confirm => t(".confirm_destroy", language: language), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to t("languages.index.new_language", :default => 'New language'), new_language_path %>
+<%= link_to t(".new_language"), new_language_path %>

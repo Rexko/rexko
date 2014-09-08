@@ -2,12 +2,13 @@ empty:
     languages:
         edit:
             page title: "***"
-            name_prompt: "***"
-            code_prompt: "***"
             update_button: "***"
             success: "***"
             show: "***"
             back: "***"
+        form:
+            name_prompt: "***"
+            code_prompt: "***"
         index:
             page title: "***"
             name: "***"

@@ -2,3 +2,23 @@ en:
   editor:
     index:
       page title: "Editor's index"
+      tools: 'Tools'
+      find_or_create_a_lexeme: "Find or create a lexeme:"
+      match_type: "Match type"
+      browse_loci_by_author: "Browse loci by author (substring search)"
+      create: "Create a locus"
+      things_to_do: "Things to do"
+      addlist: "Addlist"
+      expandlist: "Expandlist"
+  layouts:
+    1col_layout:
+      skip_to_the_navigation: "Skip to the navigation"
+      skip_to_the_content: "Skip to the content"
+      find_or_create_a_lexeme: "Find or create a lexeme"
+      home: "Home"
+      languages: "Languages"
+      dictionaries: "Dictionaries"
+      lexemes: "Lexemes"
+      loci: "Loci"
+      sources: "Sources"
+      layout_based_on_yaml_html: "Layout based on <a href='%{url}'>YAML</a>"

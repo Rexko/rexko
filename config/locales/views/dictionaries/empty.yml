@@ -8,4 +8,5 @@ empty:
             show: "***"
             edit: "***"
             destroy: "***"
+            confirm_destroy: "***"
             new: "***"

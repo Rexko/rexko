@@ -26,25 +26,21 @@
 				<div id="topnav">
 					<!-- start: skip link navigation -->
 					<a class="skip" title="skip link" href="#navigation"><%=
-						t("layouts.1col_layout.skip_to_the_navigation", 
-                            :default => "Skip to the navigation")
+						t(".skip_to_the_navigation")
 					%></a><span class="hideme">.</span>
 					<a class="skip" title="skip link" href="#content"><%=
-						t("layouts.1col_layout.skip_to_the_content", 
-                            :default => "Skip to the content")
+						t(".skip_to_the_content")
 					%></a><span class="hideme">.</span>
 					<!-- end: skip link navigation -->
 					<%= form_tag({:controller => :lexemes, :action => :show_by_headword}) do %>
                         <span class="type-text">
 					        <%= text_field_tag :headword, '', :size => 25, 
-                                :placeholder => t("layouts.1col_layout.find_or_create_a_lexeme", 
-                                    :default => "Find or create a lexeme") %>
+                                :placeholder => t(".find_or_create_a_lexeme") %>
 		                </span>
 
                         <span class="type-select">
 					        <%= select_tag :matchtype,
-                            options_for_select(t('lexeme.search.options', 
-                                :default => [["contains", "exact match"]]).zip(Lexeme::SEARCH_OPTIONS),
+                            options_for_select(t('lexeme.search.options').zip(Lexeme::SEARCH_OPTIONS),
                             Lexeme::SUBSTRING) %>
                         </span>
 					<% end unless current_page? :controller => :editor, :action => :index %>
@@ -60,24 +56,12 @@
 				<div class="hlist">
 					<!-- main navigation: horizontal list -->
 					<ul>
-						<%= navlink_unless_current t("layouts.1col_layout.home",
-                                :default => "Home"),
-							:controller => :editor %>
-						<%= navlink_unless_current t("layouts.1col_layout.languages",
-                                :default => "Languages"),
-							:controller => :languages %>
-						<%= navlink_unless_current t("layouts.1col_layout.dictionaries", 
-                                :default => "Dictionaries"),
-							:controller => :dictionaries %>
-						<%= navlink_unless_current t("layouts.1col_layout.lexemes", 
-                                :default => "Lexemes"),
-							:controller => :lexemes %>
-						<%= navlink_unless_current t("layouts.1col_layout.loci", 
-                                :default => "Loci"),
-							:controller => :loci %>
-						<%= navlink_unless_current t("layouts.1col_layout.sources", 
-                                :default => "Sources"),
-							:controller => :authorships %>
+						<%= navlink_unless_current t(".home"), :controller => :editor %>
+						<%= navlink_unless_current t(".languages"), :controller => :languages %>
+						<%= navlink_unless_current t(".dictionaries"), :controller => :dictionaries %>
+						<%= navlink_unless_current t(".lexemes"), :controller => :lexemes %>
+						<%= navlink_unless_current t(".loci"), :controller => :loci %>
+						<%= navlink_unless_current t(".sources"), :controller => :authorships %>
 					</ul>
 				</div>
 			</div>
@@ -89,9 +73,7 @@
 			</div>
 			<!-- begin: #footer -->
 			<div id="footer">
-				<%= t("layouts.1col_layout.layout_based_on_yaml_html", 
-                    :url => 'http://www.yaml.de/', 
-                    :default => "Layout based on <a href='%{url}'>YAML</a>") %>
+				<%= t(".layout_based_on_yaml_html", :url => 'http://www.yaml.de/') %>
 			</div>
 		</div>
 		<div id="border-bottom">

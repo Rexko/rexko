@@ -1,1 +1,6 @@
 en:
+    helpers:
+        link_to_add:
+            sort order: "Add sort order"
+        remove_link: "(remove)"
+        delete_checkbox: "Delete"

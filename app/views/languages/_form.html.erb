@@ -1,11 +1,11 @@
 <%= form_for @language, {:method => form[:method], :action => form[:action], :html => {:class => "yform"}} do |f| %>
 	<div class="type-text">
-		<label for="language_default_name"><%= t("languages.edit.name_prompt", :default => "Name:") %></label>
+		<label for="language_default_name"><%= t(".name_prompt") %></label>
 		<%= f.text_field :default_name %>
 	</div>
 
 	<div class="type-text">
-		<label for="language_iso_639_code"><%= t("languages.edit.code_prompt", :default => "Code:") %></label>
+		<label for="language_iso_639_code"><%= t(".code_prompt") %></label>
 		<%= f.text_field :iso_639_code %>
 	</div>
 

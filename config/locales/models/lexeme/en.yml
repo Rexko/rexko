@@ -1,3 +1,7 @@
 en:
   lexeme:
+    search:
+      options:
+        - 'contains'
+        - 'exact match'
     no_entry_linktext: "[No entry for <i>%{headword}</i> &times;%{count}]"
