@@ -10,3 +10,13 @@ empty:
             destroy: "***"
             confirm_destroy: "***"
             new: "***"
+        edit:
+            page title: "***"
+            title: "***"
+            definition_language: "***"
+            headword_language: "***"
+            gloss_language: "***"
+            external_address: "***"
+            update: "***"
+            show: "***"
+            back: "***"

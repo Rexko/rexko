@@ -1,35 +1,33 @@
-<h1>Editing dictionary</h1>
-
 <%= error_messages_for :dictionary %>
 
 <%= form_for(@dictionary) do |f| %>
   <p>
-    <b>Title</b><br />
+    <b><%= t('.title') %></b><br />
     <%= f.text_field :title %>
   </p>
 
 	<p>
-    <b>Vernacular language (of definitions)</b><br />
+    <b><%= t('.definition_language') %></b><br />
 		<%= collection_select(:dictionary, :language_id, Language.find(:all), :id, :iso_639_code) %>
 	</p>
   
 	<p>
-    <b>Source language (of headwords)</b><br />
+    <b><%= t('.headword_language') %></b><br />
 		<%= collection_select(:dictionary, :source_language_id, Language.find(:all), :id, :iso_639_code) %>
 	</p>
 
 	<p>
-    <b>Target language (of glosses)</b><br />
+    <b><%= t('.gloss_language') %></b><br />
 		<%= collection_select(:dictionary, :target_language_id, Language.find(:all), :id, :iso_639_code) %>
 	</p>
 
   <p>
-    <b>External address</b><br />
+    <b><%= t('.external_address') %></b><br />
     <%= f.text_field :external_address %>
   </p>
 
-    <%= f.submit "Update" %>
+    <%= f.submit t('.update') %>
 <% end %>
 
-<%= link_to 'Show', @dictionary %> |
-<%= link_to 'Back', dictionaries_path %>
+<%= link_to t('.show'), @dictionary %> |
+<%= link_to t('.back'), dictionaries_path %>
