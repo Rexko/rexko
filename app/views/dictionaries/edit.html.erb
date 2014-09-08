@@ -1,6 +1,6 @@
 <%= error_messages_for :dictionary %>
 
-<%= form_for(@dictionary) do |f| %>
+<%= form_for(@dictionary, html: {class:  "yform"}) do |f| %>
   <p>
     <b><%= t('.title') %></b><br />
     <%= f.text_field :title %>
@@ -26,7 +26,9 @@
     <%= f.text_field :external_address %>
   </p>
 
-    <%= f.submit t('.update') %>
+  <div class="type-button">
+      <%= f.submit t('.update') %>
+  </div>
 <% end %>
 
 <%= link_to t('.show'), @dictionary %> |
