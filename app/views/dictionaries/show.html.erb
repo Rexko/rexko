@@ -28,7 +28,7 @@
 					<% unless subentry.senses.empty? %>
 						<dl class="dictform-senses">
 							<% for sense in subentry.senses %>
-								<dd class="dictform-sense" <%= lang_for(sense) %>>
+								<dd class="dictform-sense <%= "nocount" if subentry.senses.length == 1 %>" <%= lang_for(sense) %>>
 									<%=wh sense.definition %>
 									<% unless sense.glosses.empty? %>
 										<dl class="dictform-glosses">

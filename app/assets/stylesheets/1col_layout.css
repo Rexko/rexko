@@ -42,7 +42,7 @@
 .dictform-paradigm { font-weight: bold; }
 .dictform-part-of-speech { font-style: italic; }
 .dictform-senses { display: inline; counter-reset: sense-counter; }
-.dictform-senses > .dictform-sense:before { content: counter(sense-counter); counter-increment: sense-counter; font-weight: bold; }
+.dictform-senses > .dictform-sense:not(.nocount):before { content: counter(sense-counter); counter-increment: sense-counter; font-weight: bold; }
 .dictform-senses > .dictform-sense { display: inline; }
 
 .delete_label {	font-size: 80%; }
