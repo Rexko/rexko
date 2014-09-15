@@ -9,7 +9,7 @@
 	<dl class="dictform-entry">
 		<dt class="dictform-headword" <%= lang_for(lexeme.headwords) %>><%= titleize_headwords_for lexeme %>.</dt>
 		<% for headword in lexeme.headwords %>
-			<dd class="dictform-phonetic-form" <%= lang_for(headword, :variant => 'fonipa') %>><%= h headword.phonetic_forms.compact.collect{|x| "/#{x.form}/"}.to_sentence(:two_words_connector  => ' or ', :last_word_connector => ", or ") %></dd>
+			<dd class="dictform-phonetic-form" <%= lang_for(headword, :variant => 'fonipa') %>><%= h headword.phonetic_forms.compact.collect{|x| t('.phonetic_form', form: x.form)}.to_options_sentence(@dictionary.definition_language) %></dd>
 		<% end %>
 		<% for subentry in lexeme.subentries %>
 			<dd class="dictform-subentry"  <%= lang_for(subentry) %>>

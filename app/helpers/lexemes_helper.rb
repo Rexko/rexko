@@ -47,6 +47,6 @@ module LexemesHelper
       memo.include?(swapform) ? memo : memo << form
     end
     
-    html_escape sentence_case(headwords.to_sentence(:two_words_connector  => ' or ', :last_word_connector => ", or "))
+    html_escape sentence_case(headwords.to_options_sentence(@dictionary.try(:definition_language)))
   end
 end
