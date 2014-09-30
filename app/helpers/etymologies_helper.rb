@@ -148,7 +148,7 @@ module EtymologiesHelper
         etymon = sanitize etym.etymon
 
         # gloss = html_escape('"' << etym.gloss << '"') if etym.gloss.present?
-        gloss = t('helpers.etymology.quoted_gloss', gloss: etym.gloss, default: "\"#{etym.gloss}\"") if etym.gloss.present?
+        gloss = html_escape(t('helpers.etymology.quoted_gloss', gloss: etym.gloss, default: "\"#{etym.gloss}\"")) if etym.gloss.present?
       end unless top_level
 
       # pre_note = [language, etymon, gloss].compact.join(" ") 
