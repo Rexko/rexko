@@ -18,6 +18,7 @@ class DictionariesController < ApplicationController
     @source_language = (@dictionary.source_language || Language::UNDETERMINED)
     unsorted_lexemes = @dictionary.lexemes.includes([{:dictionaries => [:source_language]}, {:headwords => [:phonetic_forms, :language]}, {:subentries => [{:senses => [{:glosses => :language}, :notes, :language]}, {:etymologies => [:notes, :original_language, {:next_etymon => [:notes, :original_language, :next_etymon] }]}, {:notes => :language}, :language]}])
     @lexemes = @source_language.sort(unsorted_lexemes, by: :primary_headword)
+    @page_title = @dictionary.title
 
     respond_to do |format|
       format.html # show.html.erb
