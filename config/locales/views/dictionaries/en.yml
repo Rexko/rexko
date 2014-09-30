@@ -12,14 +12,15 @@ en:
             new: "New dictionary"
         edit:
             page title: "Editing dictionary"
+            update: "Update"
+            show: "Show"
+            back: "Back"
+        form:
             title: "Title"
             definition_language: "Language of definitions"
             headword_language: "Language of headwords"
             gloss_language: "Language of glosses"
             external_address: "External address"
-            update: "Update"
-            show: "Show"
-            back: "Back"
         show:
             headwords: "%{headwords}."
             phonetic_form: "/%{form}/"
@@ -30,4 +31,8 @@ en:
             etymologies: "[%{etymologies}]"
             etymology_separator: " "
             edit: "Edit"
+            back: "Back"
+        new:
+            page title: "Creating dictionary"
+            create: "Create"
             back: "Back"

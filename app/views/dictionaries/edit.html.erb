@@ -1,35 +1,6 @@
 <%= error_messages_for :dictionary %>
 
-<%= form_for(@dictionary, html: {class:  "yform"}) do |f| %>
-  <p>
-    <b><%= t('.title') %></b><br />
-    <%= f.text_field :title %>
-  </p>
-
-	<p>
-    <b><%= t('.headword_language') %></b><br />
-		<%= collection_select(:dictionary, :source_language_id, Language.find(:all), :id, :iso_639_code) %>
-	</p>
-
-	<p>
-    <b><%= t('.definition_language') %></b><br />
-		<%= collection_select(:dictionary, :language_id, Language.find(:all), :id, :iso_639_code) %>
-	</p>
-  
-	<p>
-    <b><%= t('.gloss_language') %></b><br />
-		<%= collection_select(:dictionary, :target_language_id, Language.find(:all), :id, :iso_639_code) %>
-	</p>
-
-  <p>
-    <b><%= t('.external_address') %></b><br />
-    <%= f.text_field :external_address %>
-  </p>
-
-  <div class="type-button">
-      <%= f.submit t('.update') %>
-  </div>
-<% end %>
+<%=	render(:partial => "form", :object => { :label => t('.update'), :action => 'update', :method => :put, :for_url => "/#{I18n.locale}/dictionaries/#{@dictionary.id}" }) %>
 
 <%= link_to t('.show'), @dictionary %> |
 <%= link_to t('.back'), dictionaries_path %>

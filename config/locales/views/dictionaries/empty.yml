@@ -12,14 +12,15 @@ empty:
             new: "***"
         edit:
             page title: "***"
+            update: "***"
+            show: "***"
+            back: "***"
+        form:
             title: "***"
             definition_language: "***"
             headword_language: "***"
             gloss_language: "***"
             external_address: "***"
-            update: "***"
-            show: "***"
-            back: "***"
         show:
             headwords: "%{headwords}***"
             phonetic_form: "***"
@@ -30,4 +31,8 @@ empty:
             etymologies: "***%{etymologies}***"
             etymology_separator: "***"
             edit: "***"
+            back: "***"
+        new:
+            page title: "***"
+            create: "***"
             back: "***"
