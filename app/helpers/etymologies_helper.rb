@@ -30,7 +30,7 @@ module EtymologiesHelper
       
       # pre_note = ", from " if parent
       # pre_note = (pre_note || "") << each_tree.to_sentence
-      ancestors = each_tree.to_sentence(locale: @dictionary.definition_language)
+      ancestors = each_tree.to_sentence(locale: @dictionary.try(:definition_language) || I18n.locale)
       pre_note = parent ? t('helpers.etymology.from_ancestors', ancestors: ancestors) : ancestors
     # If the tree to recurse has a next_etymon
     # e.g. [ {{} => { parent_etym => { grandparent_etym => {} } }}, { next_etym => {} } ]
