@@ -28,9 +28,10 @@ module EtymologiesHelper
         wiki_format key, parent, value, use_html
       end
       
-      
-      pre_note = ", from " if parent
-      pre_note = (pre_note || "") << each_tree.to_sentence
+      # pre_note = ", from " if parent
+      # pre_note = (pre_note || "") << each_tree.to_sentence
+      ancestors = each_tree.to_sentence(locale: @dictionary.definition_language)
+      pre_note = parent ? t('helpers.etymology.from_ancestors', ancestors: ancestors) : ancestors
     # If the tree to recurse has a next_etymon
     # e.g. [ {{} => { parent_etym => { grandparent_etym => {} } }}, { next_etym => {} } ]
     # or   [ {{} => { parent_etym => { grandparent_etym => {} } }}, [{ next_etym => {} }, { third_etym => {} }] ]
@@ -44,8 +45,10 @@ module EtymologiesHelper
       parent_ancestor = parent_ancestor.keys[0]
       pre_note = ""
       add_from = true if parent
-          			pre_note = (pre_note || "") << ", from " if add_from #DEBUG
-      pre_note << wiki_format(parent_ancestor, parent, "", use_html)
+          			# pre_note = (pre_note || "") << ", from " if add_from #DEBUG
+      #pre_note << wiki_format(parent_ancestor, parent, "", use_html)
+      format_ancestor = wiki_format(parent_ancestor, parent, "", use_html)
+      pre_note = add_from ? t('helpers.etymology.from_ancestors', ancestors: format_ancestor) : format_ancestor
 
       parent_ancestor = wiki_format parent_ancestor.keys[0], parent, parent_ancestor.values[0], use_html unless (parent_ancestor.blank? || parent_ancestor.is_a?(Etymology))
       parent = orig_parent
@@ -56,7 +59,8 @@ module EtymologiesHelper
       end
 
       peers.each do |peer|
-        pre_note << " + #{peer}"
+        pre_note = t('helpers.etymology.peerX_plus_peerY', peerX: pre_note, peerY: peer, default: "%{peerX} + %{peerY}")
+#        pre_note << " + #{peer}"
       end
       
       appended_ancestor = false
@@ -70,12 +74,18 @@ module EtymologiesHelper
             wh orig_parent.etymon
           end
           
-          [language, etymon].compact.join(" ")
+          #[language, etymon].compact.join(" ")
+          if language && etymon then
+            t('helpers.etymology.language_etymon', language: language, etymon: etymon, default: "#{language} #{etymon}")
+          else
+            language || etymon
+          end
         else
           orig_parent.to_s
         end
         orig_ancestry = wiki_format(orig_ancestor.keys[0], parent, orig_ancestor.values[0], use_html) if orig_ancestor.values[0]
-        pre_note << "; where #{short_parent} is from #{orig_ancestry}" if orig_ancestry
+        # pre_note << "; where #{short_parent} is from #{orig_ancestry}" if orig_ancestry
+        pre_note = t('helpers.etymology.etym_where_word_is_from_ancestors', etyms: pre_note, word: short_parent, ancestors: orig_ancestry) if orig_ancestry
         appended_ancestor = true if orig_ancestry
       end
       etym.each do |peer_hash|
@@ -91,7 +101,12 @@ module EtymologiesHelper
               wh peer.etymon
             end
 
-            [language, etymon].compact.join(" ")
+            #[language, etymon].compact.join(" ")
+            if language && etymon then
+              t('helpers.etymology.language_etymon', language: language, etymon: etymon, default: "#{language} #{etymon}")
+            else
+              language || etymon
+            end
           else
             peer.to_s
           end
@@ -103,7 +118,10 @@ module EtymologiesHelper
           when Array
             ancestry = wiki_format ancestor, peer, (ancestor.size == 1 ? nil : ancestor[1..-1]), use_html
           end
-        pre_note << (appended_ancestor ? ", and " : "; ") << "where #{short_peer} is from #{ancestry}"
+        #pre_note << (appended_ancestor ? ", and " : "; ") << "where #{short_peer} is from #{ancestry}"
+        pre_note = appended_ancestor ? 
+          t('helpers.etymology.etym_and_where_word_is_from_ancestors', etyms: pre_note, word: short_peer, ancestors: ancestry) :
+          t('helpers.etymology.etym_where_word_is_from_ancestors', etyms: pre_note, word: short_peer, ancestors: ancestry)
         end
       end
     # When 'etym' is an etymology set pre_note to 'Language etymon "gloss"' and recurse, 
@@ -129,18 +147,28 @@ module EtymologiesHelper
 
         etymon = sanitize etym.etymon
 
-        gloss = html_escape('"' << etym.gloss << '"') if etym.gloss.present?
+        # gloss = html_escape('"' << etym.gloss << '"') if etym.gloss.present?
+        gloss = t('helpers.etymology.quoted_gloss', gloss: etym.gloss, default: "\"#{etym.gloss}\"") if etym.gloss.present?
       end unless top_level
 
-      pre_note = [language, etymon, gloss].compact.join(" ") 
+      # pre_note = [language, etymon, gloss].compact.join(" ") 
+      etym_hash = {language: language, etymon: etymon, gloss: gloss}.select{|k,v| !v.nil? }
+      pre_note = if etym_hash.length > 1 then
+        t("helpers.etymology.#{etym_hash.keys.join("_")}", language: language, etymon: etymon, gloss: gloss, default: etym_hash.values.join(" "))
+      else
+        language || etymon || gloss
+      end
 
       unless tree.blank?
         tree_note = wiki_format tree, (etym unless top_level), tree, use_html
-        pre_note = pre_note + tree_note
+        # pre_note = pre_note + tree_note
+        pre_note = t('helpers.etymology.etym_predicate', etyms: pre_note, predicate: tree_note, default: "#{pre_note}#{tree_note}")
       end
     end
     
-    pre_note = (pre_note || "") << "." if top_level
+    #pre_note = (pre_note || "") << "." if top_level
+    pre_note ||= ""
+    pre_note = t('helpers.etymology.etym_fullstop', etyms: pre_note, default: "#{pre_note}.") if top_level
     pre_note 
   end
 end

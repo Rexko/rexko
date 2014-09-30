@@ -4,3 +4,15 @@ empty:
             sort order: "***"
         remove_link: "***"
         delete_checkbox: "***"
+        etymology:
+            from_ancestors: "*%{ancestors}*"
+            peerX_plus_peerY: "*%{peerY}*%{peerX}*"
+            language_etymon_gloss: "*%{gloss}*%{etymon}*%{language}"
+            language_etymon: "*%{etymon}*%{language}*"
+            language_gloss: "*%{gloss}*%{language}*"
+            etymon_gloss: "*%{gloss}*%{etymon}*"
+            etym_where_word_is_from_ancestors: "*%{ancestors}*%{word}*%{etyms}*"
+            etym_and_where_word_is_from_ancestors: "*%{ancestors}*%{word}*%{etyms}*"
+            etym_predicate: "*%{predicate}*%{etyms}*"
+            etym_fullstop: "*%{etyms}*"
+            quoted_gloss: '*%{gloss}*'
