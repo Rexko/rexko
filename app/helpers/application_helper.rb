@@ -200,7 +200,7 @@ module ApplicationHelper
       bb, eb = ('<b>' if bold), ('</b>' if bold)
       parse = yield $~[:lexeme], index if block_given?
       parse = "" << ":"" #{parse}" if parse.present?
-      "<a href=\"/html/#{$~[:lexeme]}\" title=\"#{$~[:lexeme]}#{parse}\">#{bb}#{$~[:stem] || $~[:lexeme]}#{$~[:ending]}#{eb}</a>"
+      "<a href=\"/#{I18n.locale}/html/#{$~[:lexeme]}\" title=\"#{$~[:lexeme]}#{parse}\">#{bb}#{$~[:stem] || $~[:lexeme]}#{$~[:ending]}#{eb}</a>"
     end
     output.html_safe 
   end
