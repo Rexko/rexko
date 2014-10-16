@@ -54,4 +54,14 @@ module LociHelper
       sense.try(:definition)
     end
   end
+  
+  def cite_locus locus, counter
+    counter_link = link_to("#{greek_numeral(counter)}", locus, :name => "locus-#{locus.id}")
+    construction_links = render(:partial => "shared/note", :collection => @constructions.collect {|constr| constr if constr.loci.include?(locus)}.compact) if @lexeme
+    author = h((locus.source.nil? || locus.source.author.nil?) ? t('helpers.authorship.anonymous') : locus.source.author.name)
+    title = h((locus.source.nil? || locus.source.title.nil?) ? t('helpers.authorship.untitled') : locus.source.title.name)
+    pointer = h locus.source.pointer
+    
+    t('helpers.loci.cite_html', counter: counter_link, constructions: construction_links, author: author, title: title, pointer: pointer)
+  end
 end

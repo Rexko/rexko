@@ -8,3 +8,8 @@ en:
             from_ancestors: ", from %{ancestors}"
             etym_where_word_is_from_ancestors: "%{etyms}; where %{word} is from %{ancestors}"
             etym_and_where_word_is_from_ancestors: "%{etyms}, and where %{word} is from %{ancestors}"
+        authorship:
+            anonymous: "Anonymous"
+            untitled: "Untitled"
+        loci:
+            cite_html: "%{counter} %{constructions} %{author}, <i>%{title}</i> %{pointer}:"

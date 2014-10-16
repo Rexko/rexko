@@ -16,3 +16,8 @@ empty:
             etym_predicate: "*%{predicate}*%{etyms}*"
             etym_fullstop: "*%{etyms}*"
             quoted_gloss: '*%{gloss}*'
+        authorship:
+            anonymous: "***"
+            untitled: "***"
+        loci:
+            cite_html: "***%{counter}***%{constructions}***%{author}***<i>%{title}</i>***%{pointer}***"
