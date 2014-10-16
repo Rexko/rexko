@@ -26,3 +26,5 @@ empty:
             author_with_year: "%{author}***%{year}"
         loci:
             cite_html: "***%{counter}***%{constructions}***%{author}***<i>%{title}</i>***%{pointer}***"
+        lexemes:
+            wikititle_with_ordinal: "%{dictionary}***%{ordinal}"
