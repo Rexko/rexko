@@ -18,9 +18,9 @@ module AuthorshipsHelper
   def short_cite authorship
     return "" if authorship.nil? or authorship.new_record? 
 
-    author = [authorship.author.try(:short_name), authorship.author.try(:name), "Anonymous"].detect(&:present?)
+    author = [authorship.author.try(:short_name), authorship.author.try(:name), t('helpers.authorship.anonymous')].detect(&:present?)
     year = [authorship.year, authorship.title.try(:publication_year)].detect(&:present?)
     
-    "#{author}#{", #{year}" if year.present?}"
+    year.present? ? t('helpers.authorship.author_with_year', author: author, year: year) : author
   end
 end

@@ -15,5 +15,6 @@ en:
         authorship:
             anonymous: "Anonymous"
             untitled: "Untitled"
+            author_with_year: "%{author}, %{year}"
         loci:
             cite_html: "%{counter} %{constructions} %{author}, <i>%{title}</i> %{pointer}:"
