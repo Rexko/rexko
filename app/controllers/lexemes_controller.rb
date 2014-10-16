@@ -34,6 +34,7 @@ class LexemesController < ApplicationController
     @loci_for_sense = Hash[@lexeme.senses.collect { |sense| [sense, Locus.attesting_sense(sense)] }]
     @authors_of = Hash[@constructions.collect {|construction| [construction, construction.loci.collect(&:source).collect(&:author).uniq] }]
     @loci_by = Hash[@authors_of.collect { |construction, authors| [construction, Hash[authors.collect {|author| [author, Locus.attesting([construction, @lexeme]).find(:all, :joins => { :source => :authorship }, :conditions => { :id => construction.loci, :authorships => {:author_id => author}}, :group => "loci.id")] }]]}]
+    @page_title = view_context.titleize_headwords_for @lexeme
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,1 +1,6 @@
-* [[<%= construction.headwords.first.form %>]] &mdash; <%= spaced_render :partial => "shared/wiki/author", :collection => @authors_of[construction], :locals => { :construction => construction, :headword => headword }, :spacer => "; " %>
+* <%= t('.construction', 
+        construction_link: "[[#{construction.headwords.first.form}]]", 
+        authors: spaced_render(:partial => "shared/wiki/author", 
+                                :collection => @authors_of[construction], 
+                                :locals => { :construction => construction, :headword => headword }, 
+                                :spacer => t('shared.construction.author_spacer'))) %>

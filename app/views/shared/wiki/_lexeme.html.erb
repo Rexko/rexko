@@ -1,8 +1,8 @@
 ==<%= wiki_title_for(lexeme, headword) %>==
 <%= render :partial => "shared/wiki/subentry", :collection => lexeme.subentries, :locals => { :headwords => lexeme.headwords.where(:form => headword.form) } %><% unless lexeme.constructions.empty? %>
-===Constructions===
+===<%= t('lexemes.show.constructions')%>===
 <%= render(:partial => "shared/wiki/construction", :collection => lexeme.constructions, :locals => { :headword => headword } )%>
 <% end %><% unless lexeme.loci.empty? %>
-===Loci===
+===<%= t('lexemes.show.loci')%>===
 <%= render(:partial => "shared/wiki/locus", :collection => @loci_for[headword.form]) %>
 <% end %>

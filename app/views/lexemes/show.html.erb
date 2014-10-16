@@ -1,25 +1,27 @@
 <%= render(:partial => "shared/lexeme", :object => @lexeme)%>
 
 <% unless @constructions.empty? %>
-<h3>Constructions</h3>
+<h3><%= t('.constructions') %></h3>
 <ul>
 <%= render(:partial => "shared/construction", :collection => @constructions)%>
 </ul>
 <% end %>
 
 <% if @unattached > 0 %>
-	<i>Found <%= link_to h(pluralize(@unattached, "unattached parse")), :controller => "loci", :action => "unattached", :id => @lexeme %> pointing to a lexeme with this spelling.</i>
+	<%= link = link_to(t('.unattached_parse', count: @unattached), controller: "loci", action: "unattached", id: @lexeme)
+        t('.found_unattached_parse_html', count: @unattached, link: link)%>
 <% end %>
 
 <% for external_address in @external_addresses do %>
 <% for headword in @lexeme.initial_case_insensitive_headwords do %>
-<h3><a href="<%=h external_address %><%=h headword.form %>"><%=h headword.form %></a> - This entry</h3>
+<h3><%= link = link_to h(headword.form), "#{h external_address}#{h headword.form}"
+    t('.headword_this_entry_html', form: h(headword.form), link: link) %></h3>
 <div class="wikified-lexeme">
 <textarea cols="72" rows="10" id="textarea-lexeme-<%= headword.id %>" onClick="select_all('textarea-lexeme-<%= headword.id %>')">
 <%= render(:partial => "shared/wiki/lexeme", :object => @lexeme, :locals => {:headword => headword })%>
 </textarea>
 </div>
-<h3><a href="<%=h external_address %><%=h headword.form %>"><%=h headword.form %></a> - All entries</h3>
+<h3><%= t('.headword_all_entries_html', form: h(headword.form), link: link) %></h3>
 <div class="wikified-headword">
 <textarea cols="72" rows="10" id="textarea-headword-<%= headword.id %>" onClick="select_all('textarea-headword-<%= headword.id %>')">
 <%= render(:partial => "shared/wiki/headword", :object => headword)%>
@@ -28,8 +30,7 @@
 <% end %>
 <% end %>
 
-<%= link_to 'Edit', edit_lexeme_path(@lexeme) %> |
-<%= link_to 'Back to lexemes', lexemes_path %> 
-<% for dictionary in @lexeme.dictionaries %> |
-<%= link_to "Back to #{dictionary.title}", dictionary %>
-<% end %>
+<%= safe_join([link_to(t('.edit'), edit_lexeme_path(@lexeme)), 
+    link_to(t('.back_to_lexemes'), lexemes_path),
+    *@lexeme.dictionaries.collect {|d| link_to(t('.back_to_dictionary', dictionary: d.title), d)}],
+    t('.link_separator')) %>

@@ -1,0 +1,46 @@
+en:
+    lexemes:
+        show:
+            constructions: "Constructions"
+            loci: "Loci"
+            unattached_parse:
+                one: "one unattached parse"
+                other: "%{count} unattached parses"
+            found_unattached_parse_html: "<i>Found %{link} pointing to a lexeme with this spelling.</i>"
+            headword_this_entry_html: "%{link} — This entry"
+            headword_all_entries_html: "%{link} — All entries"
+            edit: "Edit"
+            back_to_lexemes: "Back to lexemes"
+            back_to_dictionary: "Back to %{dictionary}"
+            link_separator: " | "
+    shared:
+        headword:
+            phonetic_form: "/%{form}/"
+        subentry:
+            principal_parts: "%{paradigm}."
+            no_principal_parts: "<No principal parts>"
+            no_part_of_speech: "<No part of speech>"
+        etymology:
+            etymology: "[%{etymology}]"
+            etymology_with_cite: "[%{etymology} (%{cite})]"
+        sense:
+            notes_html: "<b>¶</b> %{notes}"
+        note:
+            construction: "[constr.]"
+        construction:
+            author_spacer: "; "
+            construction_html: "<b>%{form_link}</b> &mdash; %{authors}"
+        ref:
+            locus_link: "(%{locus})"
+            sense_and_locus_link: "[%{sense}.%{locus}]"
+        wiki:
+            construction:
+                construction: "%{construction_link} — %{authors}"
+            note:
+                construction_note: "constr."
+            author:
+                author_and_refs: "%{author} %{refs}"
+            subentry:
+                part_of_speech: "''%{part}''"
+            sense:
+                notes: "'''¶''' %{notes}"
