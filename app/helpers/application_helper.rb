@@ -161,9 +161,9 @@ module ApplicationHelper
     end
     
     sanitize(coll.to_sentence({
-      :words_connector => options[:spacer] || ", ",
-      :last_word_connector => options[:last_spacer] || options[:spacer] || ", ",
-      :two_words_connector => options[:dual_spacer] || options[:spacer] || ", "
+      :words_connector => options[:spacer] || t('helpers.spaced_render.words_connector'),
+      :last_word_connector => options[:last_spacer] || options[:spacer] || t('helpers.spaced_render.last_word_connector'),
+      :two_words_connector => options[:dual_spacer] || options[:spacer] || t('helpers.spaced_render.two_words_connector')
     }))
   end
   

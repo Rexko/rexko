@@ -4,6 +4,10 @@ empty:
             sort order: "***"
         remove_link: "***"
         delete_checkbox: "***"
+        spaced_render:
+            word_connector: "***"
+            last_word_connector: "***"
+            two_words_connector: "***"
         etymology:
             from_ancestors: "*%{ancestors}*"
             peerX_plus_peerY: "*%{peerY}*%{peerX}*"
