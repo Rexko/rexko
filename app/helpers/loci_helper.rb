@@ -60,8 +60,13 @@ module LociHelper
     construction_links = render(:partial => "shared/note", :collection => @constructions.collect {|constr| constr if constr.loci.include?(locus)}.compact) if @lexeme
     author = h((locus.source.nil? || locus.source.author.nil?) ? t('helpers.authorship.anonymous') : locus.source.author.name)
     title = h((locus.source.nil? || locus.source.title.nil?) ? t('helpers.authorship.untitled') : locus.source.title.name)
-    pointer = h locus.source.pointer
+    pointer = h(locus.source.try(:pointer)) if locus.source.present?
     
-    t('helpers.loci.cite_html', counter: counter_link, constructions: construction_links, author: author, title: title, pointer: pointer)
+    options = { counter: counter_link, constructions: construction_links, author: author, title: title, pointer: pointer }
+    if pointer.present?
+      t('helpers.loci.cite_html', options)
+    else
+      t('helpers.loci.cite_without_pointer.html', options)
+    end
   end
 end
