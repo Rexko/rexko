@@ -1,5 +1,12 @@
 empty:
     lexemes:
+        index:
+            page_title: "***"
+            show: "***"
+            edit: "***"
+            destroy: "***"
+            confirm_destroy: "***\"%{headwords}\"?"
+            new_lexeme: "***"
         show:
             constructions: "***"
             loci: "***"

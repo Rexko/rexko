@@ -1,5 +1,12 @@
 en:
     lexemes:
+        index:
+            page_title: "Listing lexemes"
+            show: "Show"
+            edit: "Edit"
+            destroy: "Destroy"
+            confirm_destroy: "Really destroy \"%{headwords}\"?"
+            new_lexeme: "New lexeme"
         show:
             constructions: "Constructions"
             loci: "Loci"

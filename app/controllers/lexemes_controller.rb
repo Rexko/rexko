@@ -4,6 +4,7 @@ class LexemesController < ApplicationController
   # GET /lexemes.xml
   def index
     @lexemes = Lexeme.sorted.includes([{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}]).paginate(:page => params[:page])
+    @page_title = t('lexemes.index.page_title')
 
     respond_to do |format|
       format.html # index.html.erb
