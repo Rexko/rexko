@@ -17,6 +17,11 @@ empty:
             page_title: "***"
             create: "***"
             back: "***"
+        form:
+            dictionary: "***"
+            add_headword: "***"
+            add_subentry: "***"
+            save_and_continue_editing: "***+***"
         show:
             constructions: "***"
             loci: "***"

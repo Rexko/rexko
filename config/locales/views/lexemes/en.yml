@@ -17,6 +17,11 @@ en:
             page_title: "Creating lexeme"
             create: "Create"
             back: "Back"
+        form:
+            dictionary: "Dictionary"
+            add_headword: "Add headword"
+            add_subentry: "Add subentry"
+            save_and_continue_editing: "Save and continue editing"
         show:
             constructions: "Constructions"
             loci: "Loci"

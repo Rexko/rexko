@@ -2,7 +2,7 @@
   <% nested_attributes_for l_form, :headwords, :subentries %>
   <!-- Dictionary -->
   <div class="type-select">
-      <label for="lexeme_dictionary_ids">Dictionary</label>
+      <label for="lexeme_dictionary_ids"><%= t('.dictionary') %></label>
       <%= collection_select(:lexeme, :dictionary_ids, Dictionary.find(:all), :id, :title, {}, { :multiple => :true }) %> 
   </div>
 
@@ -11,18 +11,18 @@
   	<%= render :partial => 'headword', :locals => { :f => hw_form } %>
   <% end %>  
 	<div class="par">
-		<%= link_to 'Add headword', '#headwords', :class => 'add' %>
+		<%= link_to t('.add_headword'), '#headwords', :class => 'add' %>
   </div>
 
   <%= l_form.fields_for :subentries do |se_form| %>
     <%= render :partial => 'subentry', :locals => { :f => se_form } %>
   <% end %>
 	<div class="par">
-	<%= link_to 'Add subentry', '#subentries', :class => 'add' %>
+	<%= link_to t('.add_subentry'), '#subentries', :class => 'add' %>
 	</div>
 
 	<div class="type-button">
 		<%= submit_tag form[:label] %> 
-		<%= submit_tag "#{form[:label]} and continue editing" %>
+		<%= submit_tag t('.save_and_continue_editing') %>
 	</div>
 <% end %>
