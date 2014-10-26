@@ -22,6 +22,9 @@ en:
             add_headword: "Add headword"
             add_subentry: "Add subentry"
             save_and_continue_editing: "Save and continue editing"
+        subentry:
+            subentry: "Subentry"
+            add_note: "Add note"
         show:
             constructions: "Constructions"
             loci: "Loci"
@@ -35,6 +38,11 @@ en:
             back_to_lexemes: "Back to lexemes"
             back_to_dictionary: "Back to %{dictionary}"
             link_separator: " | "
+    helpers:
+        label:
+            subentry:
+                paradigm: "Principal parts"
+                part_of_speech: "Part of speech"
     shared:
         headword:
             phonetic_form: "/%{form}/"

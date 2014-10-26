@@ -22,6 +22,9 @@ empty:
             add_headword: "***"
             add_subentry: "***"
             save_and_continue_editing: "***+***"
+        subentry:
+            subentry: "***"
+            add_note: "***"
         show:
             constructions: "***"
             loci: "***"
@@ -35,6 +38,11 @@ empty:
             back_to_lexemes: "***"
             back_to_dictionary: "***%{dictionary}"
             link_separator: "***"
+    helpers:
+        label:
+            subentry:
+                paradigm: "***"
+                part_of_speech: "***"
     shared:
         headword:
             phonetic_form: "***%{form}***"

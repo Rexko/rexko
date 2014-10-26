@@ -2,11 +2,11 @@
 	<% nested_attributes_for f, :senses, :etymotheses, [:notes, :subentry] %>
 	<fieldset class="subentry">
 	  <legend>
-			<%= label_with_remove_option_for "Subentry #{subentry_counter + 1  if defined? subentry_counter}", f %>
+			<%= label_with_remove_option_for t('.subentry'), f %>
 		</legend>
 		
 		<div class="type-text">
-	      <%= f.label :paradigm, "Principal parts" %>
+	      <%= f.label :paradigm %>
 	      <%= f.text_field :paradigm %>
 	      <%= f.label :part_of_speech %>
 	      <%= f.text_field :part_of_speech %>
@@ -15,7 +15,7 @@
 	    <%= render :partial => 'note', :locals => { :f => e_form } %>
 	  <% end %>
 		<div class="par">
-			<%= link_to 'Add note', '#notes', :class => 'add_nested', :rel => "[subentry][notes]" %>
+			<%= link_to t('.add_note'), '#notes', :class => 'add_nested', :rel => "[subentry][notes]" %>
 		</div>
     
 	  <!-- Sense -->
