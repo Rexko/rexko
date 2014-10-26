@@ -2,6 +2,8 @@ en:
     helpers:
         link_to_add:
             sort order: "Add sort order"
+            etymology: "Add etymology"
+            etymon: "Add etymon"
         remove_link: "(remove)"
         delete_checkbox: "Delete"
         spaced_render:

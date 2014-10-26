@@ -2,6 +2,9 @@ empty:
     helpers:
         link_to_add:
             sort order: "***"
+            etymology: "***"
+            sense: "***"
+            etymon: "***"
         remove_link: "***"
         delete_checkbox: "***"
         spaced_render:

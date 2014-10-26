@@ -25,6 +25,8 @@ empty:
         subentry:
             subentry: "***"
             add_note: "***"
+        etymothesis:
+            etymology: "***"
         show:
             constructions: "***"
             loci: "***"

@@ -25,6 +25,8 @@ en:
         subentry:
             subentry: "Subentry"
             add_note: "Add note"
+        etymothesis:
+            etymology: "Etymology"
         show:
             constructions: "Constructions"
             loci: "Loci"
