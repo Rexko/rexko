@@ -7,6 +7,16 @@ empty:
             destroy: "***"
             confirm_destroy: "***\"%{headwords}\"?"
             new_lexeme: "***"
+        edit:
+            page_title: "***%{headwords}***"
+            update: "***"
+            show: "***"
+            back: "***"
+        new:
+            page_title_with_headwords: "***%{headwords}***"
+            page_title: "***"
+            create: "***"
+            back: "***"
         show:
             constructions: "***"
             loci: "***"

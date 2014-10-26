@@ -73,6 +73,9 @@ class LexemesController < ApplicationController
     @lexeme = Lexeme.new(:dictionaries => [])
     @lexeme.headwords.build(:form => flash[:headword])
     @lexeme.subentries.build
+    @page_title = flash[:headword].present? ? 
+      t('lexemes.new.page_title_with_headwords', headwords: view_context.titleize_headwords_for(@lexeme)) : 
+      t('lexemes.new.page_title')
 
     respond_to do |format|
       format.html # new.html.erb
@@ -86,6 +89,7 @@ class LexemesController < ApplicationController
     @lexeme.headwords.build if @lexeme.headwords.empty?
     @lexeme.subentries.build if @lexeme.subentries.empty?
     @nests = {}
+    @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
   end
 
   # POST /lexemes

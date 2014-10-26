@@ -1,8 +1,6 @@
-<h1>Editing lexeme</h1>
-
 <%= error_messages_for :lexeme %>
 
-<%=	render(:partial => "form", :object => { :label => 'Update', :action => 'update', :method => :put, :for_url => "/lexemes/#{@lexeme.id}" }) %>
+<%=	render(:partial => "form", :object => { :label => t('.update'), :action => 'update', :method => :put, :for_url => "/#{I18n.locale}/lexemes/#{@lexeme.id}" }) %>
 
-<%= link_to 'Show', @lexeme %> |
-<%= link_to 'Back', lexemes_path %>
+<%= link_to t('.show'), @lexeme %> |
+<%= link_to t('.back'), lexemes_path %>

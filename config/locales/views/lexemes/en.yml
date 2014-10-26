@@ -7,6 +7,16 @@ en:
             destroy: "Destroy"
             confirm_destroy: "Really destroy \"%{headwords}\"?"
             new_lexeme: "New lexeme"
+        edit:
+            page_title: "Editing lexeme \"%{headwords}\""
+            update: "Update"
+            show: "Show"
+            back: "Back"
+        new:
+            page_title_with_headwords: "Creating lexeme \"%{headwords}\""
+            page_title: "Creating lexeme"
+            create: "Create"
+            back: "Back"
         show:
             constructions: "Constructions"
             loci: "Loci"
