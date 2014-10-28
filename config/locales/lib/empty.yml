@@ -137,7 +137,7 @@ empty:
         other: ! '%{count} errors prohibited this %{model} from being saved'
   helpers:
     select:
-      prompt: Please select
+      prompt: "***"
     submit:
       create: Create %{model}
       submit: Save %{model}
