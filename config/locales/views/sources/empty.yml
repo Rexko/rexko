@@ -1,4 +1,8 @@
 empty:
+    sources:
+        shortform:
+            source: "***"
+            search_for_author_or_title: "***"
     activerecord:
         models:
             authorship: "***"

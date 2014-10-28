@@ -1,4 +1,13 @@
 en:
+    sources:
+        shortform:
+            source: "Source"
+            search_for_author_or_title: "search for author and/or title"
+    helpers:
+        label:
+            source:
+                pointer: "Pointer"
+                part_of_speech: "Part of speech"
     activerecord:
         models:
             authorship: "Authorship"
