@@ -214,7 +214,7 @@ module ApplicationHelper
     form.fields_for child, child_obj do |child_form|
       ref = child_form.object_name
       
-      label_tag("#{ref}_search", child.to_s.titleize ) <<
+      label_tag("#{ref}_search", t("activerecord.models.#{child}")) <<
     
       if options[:custom_search]
         text_field_tag(:search, options[:custom_search], id: "#{ref}_search", placeholder: options[:prompt])
