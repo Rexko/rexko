@@ -129,7 +129,7 @@ activate_autocompletes = function(element){
         complendum = div.identify().match(/.*(?=_choices)/g)[0];
         complenda = div.readAttribute('data-plural');
         
-        new Ajax.Autocompleter(complendum+"_search", complendum+"_choices", "/<%= I18n.locale %>/"+complenda+"/matching", {
+        new Ajax.Autocompleter(complendum+"_search", complendum+"_choices", "/"+locale+"/"+complenda+"/matching", {
             paramName: "value",
             parameters: "ref="+complendum,
             minchars: 2,

@@ -11,6 +11,7 @@
 	<![endif]-->
 	<%= javascript_include_tag "application" %>
 	<%= javascript_tag do %>
+        var locale = '<%= j I18n.locale.to_s %>';
         <%= yield(:javascript) %>
 	<% end -%>
 	<%= csrf_meta_tag %>
