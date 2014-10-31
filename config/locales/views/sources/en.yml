@@ -8,6 +8,9 @@ en:
             title: "Title"
         autocomplete:
             new_title: "(New title)"
+    authors:
+        autocomplete:
+            new_author: "(New author)"
     helpers:
         label:
             source:

@@ -2,5 +2,5 @@
     <% @authors.each do |a| %>
         <li id="<%= a.id %>-<%= @ref %>"><%= a.name %></li>
     <% end %>
-        <li id="new-<%= @ref %>" class="highlight"><i>(New author)</i></li>
+        <li id="new-<%= @ref %>" class="highlight"><i><%= t('.new_author') %></i></li>
 </ul>

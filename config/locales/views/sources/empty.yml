@@ -8,6 +8,9 @@ empty:
             title: "***"
         autocomplete:
             new_title: "***"
+    authors:
+        autocomplete:
+            new_author: "***"
     helpers:
         label:
             source:
