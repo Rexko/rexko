@@ -3,6 +3,9 @@ empty:
         shortform:
             source: "***"
             search_for_author_or_title: "***"
+    titles:
+        form:
+            title: "***"
     helpers:
         label:
             source:
@@ -10,6 +13,13 @@ empty:
             authorship:
                 authorship_type_id: "***"
                 year: "***"
+            title:
+                name: "***"
+                publisher: "***"
+                publication_year: "***"
+                publication_place: "***"
+                url: "***"
+                access_date: "***"
     activerecord:
         models:
             authorship: "***"

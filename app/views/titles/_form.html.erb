@@ -1,5 +1,5 @@
 <fieldset class="title yform">
-    <legend>Title</legend>
+    <legend><%= t('.title') %></legend>
 
     <div class="type-text">
         <%= title_form.label :name %>
@@ -22,12 +22,12 @@
     </div>
 
     <div class="type-text">
-        <%= title_form.label :url, "URL" %>
+        <%= title_form.label :url %>
         <%= title_form.text_field :url %>
     </div>
 
     <div class="type-text">
-        <%= title_form.label :access_date, "URL access date" %>
+        <%= title_form.label :access_date %>
         <%= title_form.date_select :access_date, include_blank: true, start_year: 1990 %>
     </div>
 </fieldset>
