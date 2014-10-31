@@ -6,6 +6,8 @@ en:
     titles:
         form:
             title: "Title"
+        autocomplete:
+            new_title: "(New title)"
     helpers:
         label:
             source:
