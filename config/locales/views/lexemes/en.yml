@@ -42,6 +42,9 @@ en:
             back_to_lexemes: "Back to lexemes"
             back_to_dictionary: "Back to %{dictionary}"
             link_separator: " | "
+    glosses:
+        shortform:
+            gloss: "Gloss"
     helpers:
         label:
             subentry:

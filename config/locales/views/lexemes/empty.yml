@@ -42,6 +42,9 @@ empty:
             back_to_lexemes: "***"
             back_to_dictionary: "***%{dictionary}"
             link_separator: "***"
+    glosses:
+        shortform:
+            gloss: "***"
     helpers:
         label:
             sense:
