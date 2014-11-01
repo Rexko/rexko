@@ -2,5 +2,5 @@
     <% @authorships.each do |as| %>
         <li id="<%= as.id %>-<%= @ref %>"><%= cited_name as %></li>
     <% end %>
-        <li id="new-<%= @ref %>" class="highlight"><i>(New source)</i></li>
+        <li id="new-<%= @ref %>" class="highlight"><i><%= t('.new_source')%></i></li>
 </ul>

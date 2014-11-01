@@ -17,6 +17,9 @@ en:
             sort_key_hint_html: "Form of the name to sort by, if different from full name given above."
         autocomplete:
             new_author: "(New author)"
+    authorships:
+        autocomplete:
+            new_source: "(New source)"
     helpers:
         label:
             author:

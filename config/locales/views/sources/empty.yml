@@ -17,6 +17,9 @@ empty:
             sort_key_hint_html: "***"
         autocomplete:
             new_author: "***"
+    authorships:
+        autocomplete:
+            new_source: "***"
     helpers:
         label:
             author:
