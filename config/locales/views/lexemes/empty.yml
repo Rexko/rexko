@@ -22,6 +22,8 @@ empty:
             add_headword: "***"
             add_subentry: "***"
             save_and_continue_editing: "***+***"
+        sense:
+            sense: "***"
         subentry:
             subentry: "***"
             add_note: "***"
@@ -42,6 +44,8 @@ empty:
             link_separator: "***"
     helpers:
         label:
+            sense:
+                definition: "***"
             subentry:
                 paradigm: "***"
                 part_of_speech: "***"

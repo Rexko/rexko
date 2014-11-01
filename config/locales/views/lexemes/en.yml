@@ -22,6 +22,8 @@ en:
             add_headword: "Add headword"
             add_subentry: "Add subentry"
             save_and_continue_editing: "Save and continue editing"
+        sense:
+            sense: "Sense"
         subentry:
             subentry: "Subentry"
             add_note: "Add note"
