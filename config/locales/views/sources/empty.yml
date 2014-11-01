@@ -9,10 +9,21 @@ empty:
         autocomplete:
             new_title: "***"
     authors:
+        form:
+            author: "***"
+            name_hint_html: "***"
+            romanized_name_hint_html: "***"
+            short_name_hint_html: "***"
+            sort_key_hint_html: "***"
         autocomplete:
             new_author: "***"
     helpers:
         label:
+            author:
+                name: "***"
+                romanized_name: "***"
+                short_name: "***"
+                sort_key: "***"
             source:
                 pointer: "***"
             authorship:
