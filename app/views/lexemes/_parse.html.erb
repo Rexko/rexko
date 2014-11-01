@@ -1,24 +1,5 @@
-<% unless (f.object.try(:_destroy)) %>
-	<% nested_attributes_for f, [:interpretations, :parses, :etymology] %>
-	<fieldset class="parse">
-		<legend><%= label_with_remove_option_for "Parse", f %></legend>
-			<div class="type-text">
-				<%= f.label :parsed_form, nil, :style => "float:left" %>
-				<%= headword_link(f.object) unless f.object.nil? || f.object.parsed_form.blank? %>
-				<div style="clear:both"/>
-				<%= f.text_field :parsed_form, class: 'bequeathed' %>
-			</div>
-
-			<% unless @interpretations ? @interpretations[f.object.parsed_form].blank? : f.object.nil? || f.object.potential_interpretations.blank? %>
-				<% @interpretation = f.object.interpretations.empty? ? f.object.interpretations.build : f.object.interpretations %>
-				
-				<%= f.fields_for :interpretations do |i_form| %>
-				  <%= render :partial => 'interpretation', :locals => { :f => i_form } %>
-				<% end %>
-				
-				<div class="par">
-					<%= link_to 'Add interpretation', '#interpretations', :class => 'add_nested', :rel => '[etymology][parses][interpretations]'%>
-				</div>
-			<% end %>
-	</fieldset>
-<% end %>
+<%= 
+    unless (f.object.try(:_destroy)) 
+        render partial: 'parses/lexemeform', locals: {f: f}
+    end
+%>
