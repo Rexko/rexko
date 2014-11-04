@@ -1,11 +1,5 @@
-<% unless (f.object._destroy) %>
-	<div class="interpretation type-select">
-		<%= f.label :sense, label_with_remove_option_for("Sense", f) %>
-		<%= f.grouped_collection_select :sense_id, 
-																		sense_select(@interpretations ? 
-																			@interpretations[f.object.parse.parsed_form] :
-																			f.object.parse.potential_interpretations), 
-																		:last, :first, :last, :first,
-																		{:include_blank => true} if f.object.parse %> 
-	</div>
-<% end %>
+<%= 
+    unless (f.object._destroy) 
+        render partial: 'interpretations/lexemeform', locals: { f: f }
+    end
+%>

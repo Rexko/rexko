@@ -54,6 +54,9 @@ empty:
             subentry:
                 paradigm: "***"
                 part_of_speech: "***"
+    interpretations:
+        lexemeform:
+            sense: "***"                
     parses:
         lexemeform:
             parse: "***"

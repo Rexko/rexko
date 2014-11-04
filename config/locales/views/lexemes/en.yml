@@ -50,6 +50,9 @@ en:
             subentry:
                 paradigm: "Principal parts"
                 part_of_speech: "Part of speech"
+    interpretations:
+        lexemeform:
+            sense: "Sense"                
     parses:
         lexemeform:
             parse: "Parse"
