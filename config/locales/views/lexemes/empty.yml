@@ -47,11 +47,16 @@ empty:
             gloss: "***"
     helpers:
         label:
+            parse:
+                parsed_form: "***"
             sense:
                 definition: "***"
             subentry:
                 paradigm: "***"
                 part_of_speech: "***"
+    parses:
+        lexemeform:
+            parse: "***"
     shared:
         headword:
             phonetic_form: "***%{form}***"

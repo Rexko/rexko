@@ -50,6 +50,9 @@ en:
             subentry:
                 paradigm: "Principal parts"
                 part_of_speech: "Part of speech"
+    parses:
+        lexemeform:
+            parse: "Parse"
     shared:
         headword:
             phonetic_form: "/%{form}/"

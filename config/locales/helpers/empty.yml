@@ -5,6 +5,9 @@ empty:
             etymology: "***"
             sense: "***"
             etymon: "***"
+            parse: "***"
+            gloss: "***"
+            source: "***"
         remove_link: "***"
         delete_checkbox: "***"
         spaced_render:
