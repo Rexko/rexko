@@ -24,6 +24,8 @@ en:
             save_and_continue_editing: "Save and continue editing"
         sense:
             sense: "Sense"
+        show_by_headword:
+            new_lexeme_prompt_html: "There is no lexeme with <i>%{headword}</i> as headword.  You can create one below."
         subentry:
             subentry: "Subentry"
             add_note: "Add note"

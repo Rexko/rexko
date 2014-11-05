@@ -24,6 +24,8 @@ empty:
             save_and_continue_editing: "***+***"
         sense:
             sense: "***"
+        show_by_headword:
+            new_lexeme_prompt_html: "***<i>%{headword}</i>***"
         subentry:
             subentry: "***"
             add_note: "***"
