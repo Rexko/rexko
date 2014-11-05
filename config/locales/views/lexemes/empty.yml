@@ -22,6 +22,12 @@ empty:
             add_headword: "***"
             add_subentry: "***"
             save_and_continue_editing: "***+***"
+        headword:
+            headword: "***"
+            orthographic_form: "***"
+            acceptibility_html: "*** %{descriptively} *** %{prescriptively} ***"
+            parse: "***"
+            unattached_html: "*** %{link} ***"
         sense:
             sense: "***"
         show_by_headword:
@@ -49,6 +55,9 @@ empty:
             gloss: "***"
     helpers:
         label:
+            headword:
+                descriptively_ok?: "***"
+                prescriptively_ok?: "***"
             parse:
                 parsed_form: "***"
             sense:

@@ -4,6 +4,7 @@ en:
             sort order: "Add sort order"
             etymology: "Add etymology"
             etymon: "Add etymon"
+            phonetic form: "Add phonetic form"
         remove_link: "(remove)"
         delete_checkbox: "Delete"
         spaced_render:

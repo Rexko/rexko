@@ -8,6 +8,8 @@ empty:
             parse: "***"
             gloss: "***"
             source: "***"
+            phonetic form: "***"
+            note: "***"
         remove_link: "***"
         delete_checkbox: "***"
         spaced_render:

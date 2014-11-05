@@ -22,6 +22,14 @@ en:
             add_headword: "Add headword"
             add_subentry: "Add subentry"
             save_and_continue_editing: "Save and continue editing"
+        headword:
+            headword: "Headword"
+            orthographic_form: "Orthographic form"
+            acceptibility_html: "Acceptable: %{descriptively} %{prescriptively}"
+            parse:
+                one: "one parse"
+                other: "%{count} parses"
+            unattached_html: "%{link} unattached to this spelling"
         sense:
             sense: "Sense"
         show_by_headword:
@@ -49,6 +57,9 @@ en:
             gloss: "Gloss"
     helpers:
         label:
+            headword:
+                descriptively_ok?: "descriptively"
+                prescriptively_ok?: "prescriptively"
             subentry:
                 paradigm: "Principal parts"
                 part_of_speech: "Part of speech"
