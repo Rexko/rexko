@@ -74,7 +74,10 @@ en:
                 part_of_speech: "Part of speech"
     interpretations:
         lexemeform:
-            sense: "Sense"                
+            sense: "Sense"
+    notes:
+        shortform:
+            note: "Note"               
     parses:
         lexemeform:
             parse: "Parse"

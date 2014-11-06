@@ -77,6 +77,9 @@ empty:
     interpretations:
         lexemeform:
             sense: "***"                
+    notes:
+        shortform:
+            note: "***"   
     parses:
         lexemeform:
             parse: "***"
