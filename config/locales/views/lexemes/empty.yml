@@ -32,6 +32,8 @@ empty:
             acceptibility_html: "*** %{descriptively} *** %{prescriptively} ***"
             parse: "***"
             unattached_html: "*** %{link} ***"
+        phonetic_form:
+            phonetic_form: "***"
         sense:
             sense: "***"
         show_by_headword:

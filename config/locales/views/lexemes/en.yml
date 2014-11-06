@@ -34,6 +34,8 @@ en:
                 one: "one parse"
                 other: "%{count} parses"
             unattached_html: "%{link} unattached to this spelling"
+        phonetic_form:
+            phonetic_form: "Phonetic form"
         sense:
             sense: "Sense"
         show_by_headword:
