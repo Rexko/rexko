@@ -1,5 +1,9 @@
 en:
     lexemes:
+        create:
+            successful_create: "Lexeme was successfully created."
+            create_another: "Create another?"
+            create_another_prompt: "%{success} %{link}"
         index:
             page_title: "Listing lexemes"
             show: "Show"
@@ -52,6 +56,9 @@ en:
             back_to_lexemes: "Back to lexemes"
             back_to_dictionary: "Back to %{dictionary}"
             link_separator: " | "
+        update:
+            successful_update: "Lexeme was successfully updated."
+            create_new: "Create a new lexeme?"
     glosses:
         shortform:
             gloss: "Gloss"

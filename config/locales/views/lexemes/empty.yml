@@ -1,5 +1,9 @@
 empty:
     lexemes:
+        create:
+            successful_create: "***"
+            create_another: "***"
+            create_another_prompt: "%{success} *** %{link}"
         index:
             page_title: "***"
             show: "***"
@@ -50,6 +54,9 @@ empty:
             back_to_lexemes: "***"
             back_to_dictionary: "***%{dictionary}"
             link_separator: "***"
+        update:
+            successful_update: "***"
+            create_new: "***"
     glosses:
         shortform:
             gloss: "***"

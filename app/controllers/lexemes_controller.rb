@@ -96,6 +96,7 @@ class LexemesController < ApplicationController
   # POST /lexemes.xml
   def create
     @lexeme = Lexeme.new(params[:lexeme])
+    @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
 
 =begin
     params[:lexeme][:dictionary_ids].each do |d_id|
@@ -105,12 +106,12 @@ class LexemesController < ApplicationController
 
     respond_to do |format|
       if @lexeme.save
-        flash[:notice] = "Lexeme was successfully created."
+        flash[:notice] = t('lexemes.create.successful_create')
         format.html do
           case params[:commit]
-          when "Create and continue editing" then render :action => 'edit'
+          when t('lexemes.form.save_and_continue_editing') then render :action => 'edit'
           else
-            flash[:notice] += " <a href=\"#{ url_for :controller => 'lexemes', :action => 'new' }\">Create another?</a>"
+            flash[:notice] = t('lexemes.create.create_another_prompt', success: flash[:notice], link: view_context.link_to(t('lexemes.create.create_another'), controller: 'lexemes', action:'new'))
             redirect_to(@lexeme)
           end
         end
@@ -128,6 +129,7 @@ class LexemesController < ApplicationController
   def update
     @lexeme = Lexeme.find(params[:id])
     @lexeme.attributes = params[:lexeme]
+    @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
 
 =begin
     params[:lexeme][:dictionary_ids].each do |d_id|
@@ -137,12 +139,12 @@ class LexemesController < ApplicationController
 
     respond_to do |format|
       if @lexeme.save
-        flash[:notice] = "Lexeme was successfully updated."
+        flash[:notice] = t('lexemes.update.successful_update')
         format.html do
           case params[:commit]
-          when "Update and continue editing" then render :action => "edit"
+          when t('lexemes.form.save_and_continue_editing') then render :action => "edit"
           else
-            flash[:notice] += " <a href=\"#{ url_for :controller => 'lexemes', :action => 'new' }\">Create a new lexeme?</a>"
+            flash[:notice] = t('lexemes.create.create_another_prompt', success: flash[:notice], link: view_context.link_to(t('lexemes.update.create_new'), controller: 'lexemes', action:'new'))
             redirect_to(@lexeme)
           end
         end
