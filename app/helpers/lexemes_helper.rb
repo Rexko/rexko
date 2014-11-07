@@ -37,7 +37,7 @@ module LexemesHelper
   end
 
   def titleize_headwords_for lexeme    
-    headwords = lexeme.headword_forms.inject([]) do |memo, form|
+    headwords = lexeme.headword_forms.compact.inject([]) do |memo, form|
       swapform = form.dup
       swapform[0,1] = swapform[0,1].swapcase
       
