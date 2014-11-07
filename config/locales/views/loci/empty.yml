@@ -1,0 +1,14 @@
+empty:
+    loci:
+        index:
+            page title: "***"
+            show: "***"
+            edit: "***"
+            destroy: "***"
+            confirm_destroy: '***'
+            new_locus: "***"
+            no_loci: "***"
+        show:
+            page title_html: "***%{source}***"
+            edit: "***"
+            back: "***"

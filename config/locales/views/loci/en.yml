@@ -1,0 +1,14 @@
+en:
+    loci:
+        index:
+            page title: "Listing loci"
+            show: "Show"
+            edit: "Edit"
+            destroy: "Destroy"
+            confirm_destroy: 'Are you sure?'
+            new_locus: "New locus"
+            no_loci: "No loci to list"
+        show:
+            page title_html: "Showing locus from %{source}"
+            edit: "Edit"
+            back: "Back"

@@ -19,6 +19,7 @@ class LociController < ApplicationController
   # GET /loci/1.xml
   def show
     @locus = Locus.includes(:parses => {:interpretations => :sense}).find(params[:id])
+    @page_title = t('loci.show.page title_html', source: view_context.cited_name(@locus.source.authorship)).html_safe
 
     respond_to do |format|
       format.html # show.html.erb
