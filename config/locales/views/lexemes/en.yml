@@ -61,6 +61,9 @@ en:
         update:
             successful_update: "Lexeme was successfully updated."
             create_new: "Create a new lexeme?"
+    etymologies:
+        shortform:
+            etymon: "Etymon"
     glosses:
         shortform:
             gloss: "Gloss"

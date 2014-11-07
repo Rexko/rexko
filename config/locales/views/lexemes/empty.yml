@@ -59,11 +59,18 @@ empty:
         update:
             successful_update: "***"
             create_new: "***"
+    etymologies:
+        shortform:
+            etymon: "***"
     glosses:
         shortform:
             gloss: "***"
     helpers:
         label:
+            etymology:
+                source_language: "***"
+                etymon: "***"
+                gloss: "***"
             headword:
                 descriptively_ok?: "***"
                 prescriptively_ok?: "***"
