@@ -1,0 +1,5 @@
+<%= 
+    fields_for @path, @etymology, :child_index => Time.now.to_i.to_s do |f|  
+        render partial: 'shortform', locals: {f: f}
+    end 
+%>
