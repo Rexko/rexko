@@ -8,6 +8,10 @@ empty:
             confirm_destroy: '***'
             new_locus: "***"
             no_loci: "***"
+        new:
+            page title: "***"
+            create: "***"
+            back: "***"
         show:
             page title_html: "***%{source}***"
             edit: "***"

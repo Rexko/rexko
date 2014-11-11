@@ -8,6 +8,10 @@ en:
             confirm_destroy: 'Are you sure?'
             new_locus: "New locus"
             no_loci: "No loci to list"
+        new:
+            page title: "New locus"
+            create: "Create"
+            back: "Back"
         show:
             page title_html: "Showing locus from %{source}"
             edit: "Edit"
