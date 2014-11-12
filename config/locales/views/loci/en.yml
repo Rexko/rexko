@@ -1,5 +1,15 @@
 en:
     loci:
+        form:
+            source: "Source"
+            search_for_author_or_title: 'search for author and/or title'
+            example: "Example"
+            potential_constructions: "Potential constructions"
+            potential_construction_html: "%{checkbox} <b>%{words_as_in_locus}</b> - %{words_listed} appear together in:"
+            see_more: "see more..."
+            five_listed_see_more_html: "(Five results out of %{total} listed; %{see_more})"
+            no_constructions_detected: "No potential constructions detected."
+            save_and_continue_editing: "Save and continue editing"
         index:
             page title: "Listing loci"
             show: "Show"
@@ -16,3 +26,8 @@ en:
             page title_html: "Showing locus from %{source}"
             edit: "Edit"
             back: "Back"
+    helpers:
+        label:
+            locus:
+                example: "Original language"
+                example_translation: "Translation"

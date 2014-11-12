@@ -1,5 +1,15 @@
 empty:
     loci:
+        form:
+            source: "***"
+            search_for_author_or_title: '***'
+            example: "***"
+            potential_constructions: "***"
+            potential_construction_html: "*** %{checkbox} *** %{words_as_in_locus} *** %{words_listed} ***"
+            see_more: "***"
+            five_listed_see_more_html: "5/%{total} *** %{link_to_more}"
+            no_constructions_detected: "***"
+            save_and_continue_editing: "***"
         index:
             page title: "***"
             show: "***"
@@ -16,3 +26,8 @@ empty:
             page title_html: "***%{source}***"
             edit: "***"
             back: "***"
+    helpers:
+        label:
+            locus:
+                example: "***"
+                example_translation: "***"
