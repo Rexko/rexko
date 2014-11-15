@@ -37,6 +37,8 @@ en:
             page title_html: "Showing locus from %{source}"
             edit: "Edit"
             back: "Back"
+        unattached:
+            unattached_to: "Unattached to %{forms}"  
         update:
             success: 'Locus was successfully updated.'
     helpers:

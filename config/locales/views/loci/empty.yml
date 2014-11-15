@@ -37,6 +37,8 @@ empty:
             page title_html: "***%{source}***"
             edit: "***"
             back: "***"
+        unattached:
+            unattached_to: "*** %{forms}"  
     helpers:
         label:
             locus:

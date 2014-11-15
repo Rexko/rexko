@@ -166,7 +166,7 @@ class LociController < ApplicationController
  		end
 
   	@parsables = Parse.unattached_to(forms).paginate(:page => params[:page], :per_page => 5)
-  	@page_title = "Unattached to %s" % forms.to_sentence
+  	@page_title = I18n.t('loci.unattached.unattached_to', forms: forms.to_sentence)
     
     render "parsable/index"
   end
