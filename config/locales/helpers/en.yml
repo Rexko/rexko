@@ -7,10 +7,6 @@ en:
             phonetic form: "Add phonetic form"
         remove_link: "(remove)"
         delete_checkbox: "Delete"
-        spaced_render:
-            word_connector: ", "
-            last_word_connector: ", "
-            two_words_connector: ", "
         etymology:
             from_ancestors: ", from %{ancestors}"
             etym_where_word_is_from_ancestors: "%{etyms}; where %{word} is from %{ancestors}"
@@ -18,7 +14,6 @@ en:
         authorship:
             anonymous: "Anonymous"
             untitled: "Untitled"
-            author_with_year: "%{author}, %{year}"
         loci:
             cite_html: "%{counter} %{constructions} %{author}, <i>%{title}</i> %{pointer}:"
             cite_without_pointer_html: "%{counter} %{constructions} %{author}, <i>%{title}</i>:"

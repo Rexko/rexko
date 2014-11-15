@@ -21,6 +21,6 @@ module AuthorshipsHelper
     author = [authorship.author.try(:short_name), authorship.author.try(:name), t('helpers.authorship.anonymous')].detect(&:present?)
     year = [authorship.year, authorship.title.try(:publication_year)].detect(&:present?)
     
-    year.present? ? t('helpers.authorship.author_with_year', author: author, year: year) : author
+    year.present? ? t('helpers.authorship.author_with_year', author: author, year: year, default: "%{author}, %{year}") : author
   end
 end
