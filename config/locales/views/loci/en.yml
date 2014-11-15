@@ -1,4 +1,8 @@
 en:
+    attestations:
+        shortform:
+            attested_form: "Attested form"
+            attested_form_abbr: "A"
     loci:
         form:
             source: "Source"

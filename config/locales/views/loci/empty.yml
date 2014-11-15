@@ -1,4 +1,8 @@
 empty:
+    attestations:
+        shortform:
+            attested_form: "***"
+            attested_form_abbr: "*"
     loci:
         form:
             source: "***"
