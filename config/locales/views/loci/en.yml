@@ -44,6 +44,11 @@ en:
             locus:
                 example: "Original language"
                 example_translation: "Translation"
+    interpretations:
+        shortform:
+            sense: "Sense"
+            sense_abbr: "S"
+            add_new_sense: "Add new sense"
     parses:
         shortform:
             parsed_form: "Parsed form"
