@@ -2,12 +2,12 @@
 
 <%= error_messages_for :authorship %>
 
-<%= form_for @authorship do |authorship_form|  %>
+<%= form_for @authorship, html: {class: "yform"} do |authorship_form|  %>
     <%=	render partial: "form", locals: { authorship_form: authorship_form }  %>
 
-  <p>
     <%= authorship_form.submit "Create" %>
-  </p>
+  <div class="type-button">
+  </div>
 <% end %>
 
 <%= link_to 'Back', authorships_path %>
