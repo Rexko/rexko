@@ -14,8 +14,5 @@ en:
         authorship:
             anonymous: "Anonymous"
             untitled: "Untitled"
-        loci:
-            cite_html: "%{counter} %{constructions} %{author}, <i>%{title}</i> %{pointer}:"
-            cite_without_pointer_html: "%{counter} %{constructions} %{author}, <i>%{title}</i>:"
         lexemes:
             wikititle_with_ordinal: "%{dictionary} %{ordinal}."
