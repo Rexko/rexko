@@ -42,3 +42,7 @@ empty:
             locus:
                 example: "***"
                 example_translation: "***"
+    parses:
+        shortform:
+            parsed_form: "***"
+            parsed_form_abbr: "*"

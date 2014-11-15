@@ -44,3 +44,7 @@ en:
             locus:
                 example: "Original language"
                 example_translation: "Translation"
+    parses:
+        shortform:
+            parsed_form: "Parsed form"
+            parsed_form_abbr: "P"
