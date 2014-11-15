@@ -14,5 +14,3 @@ en:
         authorship:
             anonymous: "Anonymous"
             untitled: "Untitled"
-        lexemes:
-            wikititle_with_ordinal: "%{dictionary} %{ordinal}."

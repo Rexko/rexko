@@ -24,7 +24,7 @@ module LexemesHelper
     sortkey = headword.form.capitalize.delete " " # This will eventually want language- or dictionary-sensitive rules
     
     dict_sort = "{{%s|%s}}" % [dict.try(:title), sortkey]
-    count == 1 ? dict_sort : t('helpers.lexemes.wikititle_with_ordinal', dictionary: dict_sort, ordinal: "#{roman_numeral(index.next)}")
+    count == 1 ? dict_sort : t('helpers.lexemes.wikititle_with_ordinal', dictionary: dict_sort, ordinal: "#{roman_numeral(index.next)}", default: "%{dictionary} %{ordinal}.")
   end
   
   def roman_numeral(int)
