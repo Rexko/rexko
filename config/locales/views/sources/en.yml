@@ -28,6 +28,10 @@ en:
             destroy: "Destroy"
             confirm_destroy: "Really delete source \"%{name}\"?\nThis will dissociate but not delete any loci citing it."
             new_source: "New source"
+        show:
+            page title: "Sources - show"
+            edit: "Show"
+            back: "Back"
     helpers:
         label:
             author:

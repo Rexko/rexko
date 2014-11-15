@@ -28,6 +28,10 @@ empty:
             destroy: "***"
             confirm_destroy: "*** \"%{name}\"?"
             new_source: "***"
+        show:
+            page title: "***"
+            edit: "***"
+            back: "***"
     helpers:
         label:
             author:
