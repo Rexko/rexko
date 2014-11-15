@@ -20,6 +20,14 @@ empty:
     authorships:
         autocomplete:
             new_source: "***"
+        index:
+            page title: "***"
+            cited_in: "***"
+            show: "***"
+            edit: "***"
+            destroy: "***"
+            confirm_destroy: "*** \"%{name}\"?"
+            new_source: "***"
     helpers:
         label:
             author:

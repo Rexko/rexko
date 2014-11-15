@@ -1,5 +1,3 @@
-<h1>Listing authorships</h1>
-
 <table>
   <tr>
   </tr>
@@ -11,7 +9,7 @@
     <% unless authorship.sources.empty? %>
     <tr>
 		<td colspan="3">
-            Cited in: 
+            <%= t('.cited_in') %> 
 		    <% for source in authorship.sources %>
             <% for locus in source.loci %>
                 <%= link_to "(#{greek_numeral(locus.id)})", locus %>
@@ -21,15 +19,15 @@
 	</tr>
     <% end %>
   <tr>
-    <td><%= link_to 'Show', authorship %></td>
-    <td><%= link_to 'Edit', edit_authorship_path(authorship) %></td>
-    <td><%= link_to 'Destroy', authorship, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to t('.show'), authorship %></td>
+    <td><%= link_to t('.edit'), edit_authorship_path(authorship) %></td>
+    <td><%= link_to t('.destroy'), authorship, :confirm => t('.confirm_destroy', name: j(cited_name(authorship, format: :text))), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New authorship', new_authorship_path %>
+<%= link_to t('.new_source'), new_authorship_path %>
 
 <%= will_paginate @authorships %>

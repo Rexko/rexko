@@ -20,6 +20,14 @@ en:
     authorships:
         autocomplete:
             new_source: "(New source)"
+        index:
+            page title: "Listing sources"
+            cited_in: "Cited in:"
+            show: "Show"
+            edit: "Edit"
+            destroy: "Destroy"
+            confirm_destroy: "Really delete source \"%{name}\"?\nThis will dissociate but not delete any loci citing it."
+            new_source: "New source"
     helpers:
         label:
             author:
