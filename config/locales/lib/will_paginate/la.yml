@@ -1,0 +1,5 @@
+la:
+    will_paginate:
+        previous_label: "← Retrorsum"
+        next_label: "Prorsum →"
+        page_gap: "&hellip;"
