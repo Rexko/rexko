@@ -8,7 +8,7 @@ class Array
   # This is "inclusive or" - if xor is needed we'll define to_alternatives_sentence
   def to_options_sentence(locale = I18n.locale)
     connectors = {
-      words_connector:     I18n.t('support.array.options_connector', locale: locale),
+      words_connector:     I18n.t('support.array.options_connector', locale: locale, default: ", "),
       two_words_connector: I18n.t('support.array.two_options_connector', locale: locale),
       last_word_connector: I18n.t('support.array.last_option_connector', locale: locale)      
     }
