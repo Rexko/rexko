@@ -1,6 +1,0 @@
-empty:
-    support:
-        array:
-            options_connector: "***"
-            two_options_connector: "***"
-            last_option_connector: "***"
