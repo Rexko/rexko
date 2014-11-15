@@ -1,0 +1,28 @@
+la:
+    helpers:
+        link_to_add:
+            sort order: "Addere ordinem litterarum"
+            etymology: "Addere etymologiam"
+            sense: "Addere sensum"
+            etymon: "Addere etymon"
+            parse: "Addere analysin"
+            gloss: "Addere glossam"
+            source: "Addere fontem"
+            phonetic form: "Addere formam phoneticam"
+            note: "Addere annotationem"
+            interpretation: "Addere interpretationem"
+            next etymon: "Addere etymon proximum"
+            attestation: "Addere formam attestatam"
+        remove_link: "(removere)"
+        delete_checkbox: "Delere"
+        etymology:
+            from_ancestors: ", de %{ancestors}"
+            language_etymon_gloss: "%{etymon}, %{gloss} %{language}"
+            language_etymon: "%{etymon} %{language}"
+            language_gloss: "%{language}, indicante %{gloss}"
+            etymon_gloss: "%{etymon}, h.e. %{gloss}"
+            etym_where_word_is_from_ancestors: "%{etyms}; ubi %{word} de %{ancestors} derivatur"
+            etym_and_where_word_is_from_ancestors: "%{etyms}, et ubi %{word} de %{ancestors} derivatur"
+        authorship:
+            anonymous: "Anonymus"
+            untitled: "Sine titulo"
