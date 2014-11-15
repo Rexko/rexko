@@ -33,6 +33,10 @@ empty:
             destroy: "***"
             confirm_destroy: "*** \"%{name}\"?"
             new_source: "***"
+        new:
+            page title: "***"
+            create: "***"
+            back: "***"
         show:
             page title: "***"
             edit: "***"
