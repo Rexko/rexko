@@ -18,7 +18,7 @@ en:
             potential_constructions: "Potential constructions"
             potential_construction_html: "%{checkbox} <b>%{words_as_in_locus}</b> - %{words_listed} appear together in:"
             see_more: "see more..."
-            five_listed_see_more_html: "(Five results out of %{total} listed; %{see_more})"
+            five_listed_see_more_html: "(Five results out of %{total} listed; %{link_to_more})"
             no_constructions_detected: "No potential constructions detected."
             save_and_continue_editing: "Save and continue editing"
         index:
