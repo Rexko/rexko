@@ -4,6 +4,8 @@ en:
             attested_form: "Attested form"
             attested_form_abbr: "A"
     loci:
+        create:
+            success: 'Locus was successfully created.'
         edit:
             page title: "Editing locus"
             update: "Update"

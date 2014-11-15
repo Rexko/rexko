@@ -4,6 +4,8 @@ empty:
             attested_form: "***"
             attested_form_abbr: "*"
     loci:
+        create:
+            success: '***'
         edit:
             page title: "***"
             update: "***"

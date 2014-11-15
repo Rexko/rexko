@@ -90,10 +90,10 @@ class LociController < ApplicationController
 
     respond_to do |format|
       if @locus.save
-        flash[:notice] = 'Locus was successfully created.'
+        flash[:notice] = t('loci.create.success')
         format.html do
           case params[:commit]
-          when "Create and continue editing" then redirect_to :action => 'edit', :id => @locus.id, :status => 303
+          when I18n.t('loci.form.save_and_continue_editing') then redirect_to :action => 'edit', :id => @locus.id, :status => 303
           else redirect_to(@locus)
           end
         end
@@ -128,10 +128,10 @@ class LociController < ApplicationController
 
     respond_to do |format|
       if @locus.save
-        flash[:notice] = 'Locus was successfully updated.'
+        flash[:notice] = t('loci.update.success')
         format.html do
           case params[:commit]
-          when "Update and continue editing" then redirect_to :action => "edit", :status => 303
+          when I18n.t('loci.form.save_and_continue_editing') then redirect_to :action => "edit", :status => 303
           else redirect_to(@locus)
           end
         end
