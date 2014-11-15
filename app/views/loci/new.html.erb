@@ -1,6 +1,6 @@
 <%= error_messages_for :locus %>
 
-<%= render(:partial => "form", :object => { :label => t('.create'), :action => 'create', :method => :post, :for_url => '/loci' }) %>
+<%= render(:partial => "form", :object => { :label => t('.create'), :action => 'create', :method => :post, :for_url => "/#{I18n.locale}/loci" }) %>
 
 
 <%= link_to t('.back'), loci_path %>
