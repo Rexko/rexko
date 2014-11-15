@@ -4,6 +4,11 @@ en:
             attested_form: "Attested form"
             attested_form_abbr: "A"
     loci:
+        edit:
+            page title: "Editing locus"
+            update: "Update"
+            back: "Back"
+            show: "Show"
         form:
             source: "Source"
             search_for_author_or_title: 'search for author and/or title'
@@ -30,6 +35,8 @@ en:
             page title_html: "Showing locus from %{source}"
             edit: "Edit"
             back: "Back"
+        update:
+            success: 'Locus was successfully updated.'
     helpers:
         label:
             locus:

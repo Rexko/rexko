@@ -4,6 +4,11 @@ empty:
             attested_form: "***"
             attested_form_abbr: "*"
     loci:
+        edit:
+            page title: "***"
+            update: "***"
+            back: "***"
+            show: "***"
         form:
             source: "***"
             search_for_author_or_title: '***'
@@ -13,7 +18,7 @@ empty:
             see_more: "***"
             five_listed_see_more_html: "5/%{total} *** %{link_to_more}"
             no_constructions_detected: "***"
-            save_and_continue_editing: "***"
+            save_and_continue_editing: "***+***"
         index:
             page title: "***"
             show: "***"
