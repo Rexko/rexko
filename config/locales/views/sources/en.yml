@@ -20,6 +20,11 @@ en:
     authorships:
         autocomplete:
             new_source: "(New source)"
+        edit:
+            page title: "Editing source"
+            show: "Show"
+            back: "Back"
+            update: "Update"
         index:
             page title: "Listing sources"
             cited_in: "Cited in:"

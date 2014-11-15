@@ -20,6 +20,11 @@ empty:
     authorships:
         autocomplete:
             new_source: "***"
+        edit:
+            page title: "***"
+            show: "***"
+            back: "***"
+            update: "***"
         index:
             page title: "***"
             cited_in: "***"
