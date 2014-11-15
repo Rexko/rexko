@@ -34,6 +34,10 @@ en:
                 one: "one parse"
                 other: "%{count} parses"
             unattached_html: "%{link} unattached to this spelling"
+        matching:
+            results: 
+                one: "Lexemes - %{count} result for \"%{query}\""
+                other: "Lexemes - %{count} results for \"%{query}\""
         phonetic_form:
             phonetic_form: "Phonetic form"
         sense:

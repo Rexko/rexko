@@ -15,7 +15,7 @@ class LexemesController < ApplicationController
   def matching
     @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => params[:matchtype] || Lexeme::SUBSTRING)
     
-    @page_title = "Lexemes - #{@lexeme.length} results for \"#{params[:headword]}\""
+    @page_title = t('lexemes.matching.results', count: @lexeme.length, query: params[:headword])
     @lexemes = @lexeme.paginate(:page => params[:page], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}])
 
     respond_to do |format|
