@@ -1,0 +1,35 @@
+empty:
+    languages:
+        edit:
+            page title: "Recensio linguae"
+            update_button: "Servare"
+            success: 'Lingua prospere mutavisti.'
+            show: "Monstrare"
+            back: "Redire"
+        form:
+            name_prompt: "Nomen:"
+            code_prompt: "Nota linguae:"
+        index:
+            page title: "Index linguarum"
+            name: "Nomen"
+            actions: "Actiones"
+            show: "Monstrare"
+            edit: "Mutare"
+            destroy: "Delere"
+            confirm_destroy: "Vero delere '%{language}'?\nNon delebuntur lexes et lexica quibus haec lingua adhibitur."
+            new_language: "Novam linguam referre"
+        new:
+            page title: "Creare linguam"
+            create_button: "Creare"
+            success: "Lingua prospere creavisti."
+            back: "Redire"
+        show:
+            page title: "Lingua"
+            name_and_code: "Nomen notaque"
+        sort_order:
+            default_sort: "Ordo litterarum usitatus"
+            name: "Nomen"
+            substitutions: "Litterae ad unum conferendae"
+            substitutions_hint_html: "<i>Si X confertur ut fuerit Y ordine alphabetico, refer:</i>  <tt>X Y</tt> <i>(multae regulae in singulas lineas)</i>"
+            orderings: "Ordo litterarum inusitatus"
+            orderings_hint_html: "<i>Si Ý post Y confertur, refer:</i> <tt>Y Ý</tt> <i>(multae regulae in singulas lineas)</i>"
