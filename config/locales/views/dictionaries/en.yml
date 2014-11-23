@@ -22,14 +22,7 @@ en:
             gloss_language: "Language of glosses"
             external_address: "External address"
         show:
-            headwords: "%{headwords}."
-            phonetic_form: "/%{form}/"
-            principal_parts: "%{paradigm}."
             no_principal_parts: "<No principal parts>"
-            notes: "¶ %{notes}"
-            note_separator: " "
-            etymologies: "[%{etymologies}]"
-            etymology_separator: " "
             edit: "Edit"
             back: "Back"
         new:
