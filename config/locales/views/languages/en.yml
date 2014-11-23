@@ -16,7 +16,7 @@ en:
             show: 'Show'
             edit: 'Edit'
             destroy: 'Destroy'
-            confirm_destroy: "Really delete '#{language}'?\nThis will not delete words or dictionaries using this language."
+            confirm_destroy: "Really delete '%{language}'?\nThis will not delete words or dictionaries using this language."
             new_language: 'New language'
         new:
             page title: "Creating language"
