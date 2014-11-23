@@ -5,7 +5,7 @@ la:
       tools: 'Instrumenta'
       find_or_create_a_lexeme: 'Lexin quaerere aut referre:'
       match_type: 'Genus quaestionis'
-      browse_loci_by_author: 'Locos scriptoris quaerere (parte nominis)'
+      browse_loci_by_author: 'Locos scriptore quaerere (parte nominis)'
       create: 'Locum creare'
       things_to_do: 'Agenda'
       addlist: 'Addenda'
