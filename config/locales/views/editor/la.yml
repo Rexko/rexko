@@ -1,0 +1,24 @@
+la:
+  editor:
+    index:
+      page title: 'Index editoris'
+      tools: 'Instrumenta'
+      find_or_create_a_lexeme: 'Lexin quaerere aut referre:'
+      match_type: 'Genus quaestionis'
+      browse_loci_by_author: 'Locos scriptoris quaerere (parte nominis)'
+      create: 'Locum creare'
+      things_to_do: 'Agenda'
+      addlist: 'Addenda'
+      expandlist: 'Elaboranda'
+  layouts:
+    1col_layout:
+      skip_to_the_navigation: 'Ad navigationem transire'
+      skip_to_the_content: 'Ad contenta transire'
+      find_or_create_a_lexeme: 'Lexin quaerere aut referre'
+      home: 'Index'
+      languages: 'Linguae'
+      dictionaries: 'Lexica'
+      lexemes: 'Lexes'
+      loci: 'Loci'
+      sources: 'Fontes'
+      layout_based_on_yaml_html: "Designatio ex <a href='%{url}'>YAML</a> derivata"
