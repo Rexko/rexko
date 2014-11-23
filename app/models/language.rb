@@ -17,7 +17,7 @@ class Language < ActiveRecord::Base
   
   # Return the name of a language plus its ISO code if present.
   def to_s
-    iso_639_code.present? ? I18n.t('language.name_with_code', name: default_name, code: iso_639_code) : default_name
+    iso_639_code.present? ? I18n.t('language.name_with_code', name: default_name, code: iso_639_code, default: "%{name} (%{code})") : default_name
   end
   
   # Return the best short name of the language
