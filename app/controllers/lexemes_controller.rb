@@ -111,7 +111,7 @@ class LexemesController < ApplicationController
           case params[:commit]
           when t('lexemes.form.save_and_continue_editing') then render :action => 'edit'
           else
-            flash[:notice] = t('lexemes.create.create_another_prompt', success: flash[:notice], link: view_context.link_to(t('lexemes.create.create_another'), controller: 'lexemes', action:'new'))
+            flash[:notice] = t('lexemes.create.create_another_prompt', default: "%{success} %{link}", success: flash[:notice], link: view_context.link_to(t('lexemes.create.create_another'), controller: 'lexemes', action:'new'))
             redirect_to(@lexeme)
           end
         end
@@ -144,7 +144,7 @@ class LexemesController < ApplicationController
           case params[:commit]
           when t('lexemes.form.save_and_continue_editing') then render :action => "edit"
           else
-            flash[:notice] = t('lexemes.create.create_another_prompt', success: flash[:notice], link: view_context.link_to(t('lexemes.update.create_new'), controller: 'lexemes', action:'new'))
+            flash[:notice] = t('lexemes.create.create_another_prompt', default: "%{success} %{link}", success: flash[:notice], link: view_context.link_to(t('lexemes.update.create_new'), controller: 'lexemes', action:'new'))
             redirect_to(@lexeme)
           end
         end

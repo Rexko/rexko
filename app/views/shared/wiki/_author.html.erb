@@ -1,1 +1,1 @@
-<%= t('.author_and_refs', author: author.name, refs: spaced_render(:collection => @loci_by[construction][author].keep_if {|l| @loci_for[headword.form].include?(l)}, :locals => { :headword => headword }, :partial => "shared/wiki/ref") ) %>
+<%= t('.author_and_refs', author: author.name, refs: spaced_render(:collection => @loci_by[construction][author].keep_if {|l| @loci_for[headword.form].include?(l)}, :locals => { :headword => headword }, :partial => "shared/wiki/ref"), default: "%{author} %{refs}" ) %>

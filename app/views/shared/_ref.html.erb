@@ -2,7 +2,8 @@
 sense = @loci_for_sense.keep_if{|k,v| v.include?(ref)}.keys.first
 		    link_to t('.sense_and_locus_link', 
                 sense: @lexeme.senses.index(sense).next, 
-                locus: greek_numeral(@loci_for_sense[sense].index(ref).next)), :anchor => "locus-#{ref.id}"
+                locus: greek_numeral(@loci_for_sense[sense].index(ref).next),
+                default: "[%{sense}.%{locus}]"), :anchor => "locus-#{ref.id}"
 		else
-			link_to t('.locus_link', locus: greek_numeral(ref.id)), ref
+			link_to t('.locus_link', locus: greek_numeral(ref.id), default: "(%{locus})"), ref
 		end %>

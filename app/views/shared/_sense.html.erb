@@ -6,7 +6,7 @@
 		</ul>
 		<% unless sense.notes.empty? %>
 		<dl>
-			<dd><%= t('.notes_html', notes: render(:partial => "shared/comment", :collection => sense.notes)) %>
+			<dd><%= t('.notes_html', default: "<b>¶</b> %{notes}", notes: render(:partial => "shared/comment", :collection => sense.notes)) %>
 		</dl>
 		<% end %>
 	<% end %>

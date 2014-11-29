@@ -2,7 +2,7 @@
     <%= etym = sanitize html_format(etymology)
         source = etymology.sources.first
         (source.present? ? 
-            t('.etymology_with_cite', etymology: etym, cite: short_cite(source.authorship)) : 
-            t('.etymology', etymology: etym)).html_safe
+            t('.etymology_with_cite', etymology: etym, cite: short_cite(source.authorship), default: "[%{etymology} (%{cite})]") : 
+            t('.etymology', etymology: etym, default: "[%{etymology}]")).html_safe
     %>
 </div>

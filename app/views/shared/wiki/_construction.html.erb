@@ -3,4 +3,5 @@
         authors: spaced_render(:partial => "shared/wiki/author", 
                                 :collection => @authors_of[construction], 
                                 :locals => { :construction => construction, :headword => headword }, 
-                                :spacer => t('shared.construction.author_spacer'))) %>
+                                :spacer => t('shared.construction.author_spacer', default: "; ")),
+        default: "%{construction_link} — %{authors}") %>

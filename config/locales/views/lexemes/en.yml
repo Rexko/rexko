@@ -3,7 +3,6 @@ en:
         create:
             successful_create: "Lexeme was successfully created."
             create_another: "Create another?"
-            create_another_prompt: "%{success} %{link}"
         index:
             page_title: "Listing lexemes"
             show: "Show"
@@ -61,7 +60,6 @@ en:
             edit: "Edit"
             back_to_lexemes: "Back to lexemes"
             back_to_dictionary: "Back to %{dictionary}"
-            link_separator: " | "
         update:
             successful_update: "Lexeme was successfully updated."
             create_new: "Create a new lexeme?"
@@ -89,33 +87,11 @@ en:
         lexemeform:
             parse: "Parse"
     shared:
-        headword:
-            phonetic_form: "/%{form}/"
         subentry:
-            principal_parts: "%{paradigm}."
             no_principal_parts: "<No principal parts>"
             no_part_of_speech: "<No part of speech>"
-        etymology:
-            etymology: "[%{etymology}]"
-            etymology_with_cite: "[%{etymology} (%{cite})]"
-        sense:
-            notes_html: "<b>¶</b> %{notes}"
         note:
             construction: "[constr.]"
-        construction:
-            author_spacer: "; "
-            construction_html: "<b>%{form_link}</b> &mdash; %{authors}"
-        ref:
-            locus_link: "(%{locus})"
-            sense_and_locus_link: "[%{sense}.%{locus}]"
         wiki:
-            construction:
-                construction: "%{construction_link} — %{authors}"
             note:
                 construction_note: "constr."
-            author:
-                author_and_refs: "%{author} %{refs}"
-            subentry:
-                part_of_speech: "''%{part}''"
-            sense:
-                notes: "'''¶''' %{notes}"
