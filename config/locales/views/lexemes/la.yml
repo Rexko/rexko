@@ -1,0 +1,107 @@
+la:
+    lexemes:
+        create:
+            successful_create: "Lexis prospere creavisti."
+            create_another: "Visne aliam referre?"
+        index:
+            page_title: "Index lexeon"
+            show: "Monstrare"
+            edit: "Mutare"
+            destroy: "Delere"
+            confirm_destroy: "Vero delere \"%{headwords}\"?"
+            new_lexeme: "Novam lexin referre"
+        edit:
+            page_title: "Recensio lexeos \"%{headwords}\""
+            update: "Servare"
+            show: "Monstrare"
+            back: "Redire"
+        new:
+            page_title_with_headwords: "Novam lexin \"%{headwords}\" referre"
+            page_title: "Novam lexin referre"
+            create: "Condere"
+            back: "Redire"
+        form:
+            dictionary: "Lexicon"
+            add_headword: "Addere lemma"
+            add_subentry: "Addere sublemma"
+            save_and_continue_editing: "Servare et recensionem resumere"
+        headword:
+            headword: "Lemma"
+            orthographic_form: "Forma orthographica"
+            acceptibility_html: "Acceptus: %{descriptively} %{prescriptively}"
+            parse:
+                one: "una analysis"
+                other: "%{count} analyses"
+            unattached_html: 
+                one: "%{link} huic forma non conexa"
+                other: "%{link} huic forma non conexae"
+        matching:
+            results: "Lexes: - %{count} eventus \"%{query}\" quaesito"
+        phonetic_form:
+            phonetic_form: "Forma phonetica"
+        sense:
+            sense: "Sensus"
+        show_by_headword:
+            new_lexeme_prompt_html: "Nulla lexis cum lemmate \"<i>%{headword}</i>\" adest.  Infra eam referre potes."
+        subentry:
+            subentry: "Sublemma"
+            add_note: "Addere notam"
+        etymothesis:
+            etymology: "Etymologia"
+        show:
+            constructions: "Constructiones"
+            loci: "Loci"
+            unattached_parse:
+                one: "unam analysin inconexam"
+                other: "%{count} analyses inconexas"
+            found_unattached_parse_html: 
+                one: "<i>Inveni %{link} quae lexin huius formae indicat.</i>"
+                other: "<i>Inveni %{link} quae lexin huius formae indicant.</i>"
+            headword_this_entry_html: "%{link} — Hoc nomen"
+            headword_all_entries_html: "%{link} — Omnia nomina"
+            edit: "Mutare"
+            back_to_lexemes: "Ad lexes redire"
+            back_to_dictionary: "Ad lexicon \"%{dictionary}\" redire"
+        update:
+            successful_update: "Lexis prospere mutavisti."
+            create_new: "Visne aliam referre?"
+    etymologies:
+        shortform:
+            etymon: "Etymon"
+    glosses:
+        shortform:
+            gloss: "Glossa"
+    helpers:
+        label:
+            etymology:
+                source_language: "Lingua"
+                etymon: "Etymon"
+                gloss: "Notatio"
+            headword:
+                descriptively_ok?: "descriptive"
+                prescriptively_ok?: "praescriptive"
+            parse:
+                parsed_form: "Forma analyta"
+            sense:
+                definition: "Definitio"
+            subentry:
+                paradigm: "Partes principales"
+                part_of_speech: "Pars orationis"
+    interpretations:
+        lexemeform:
+            sense: "Sensus"                
+    notes:
+        shortform:
+            note: "Nota"
+    parses:
+        lexemeform:
+            parse: "Analysis"
+    shared:
+        subentry:
+            no_principal_parts: "<Partes principales absunt>"
+            no_part_of_speech: "<Pars orationis abest>"
+        note:
+            construction: "[constr.]"
+        wiki:
+            note:
+                construction_note: "constr."
