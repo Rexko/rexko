@@ -39,7 +39,7 @@ en:
             back: "Back"
         show:
             page title: "Sources - show"
-            edit: "Show"
+            edit: "Edit"
             back: "Back"
     helpers:
         label:
