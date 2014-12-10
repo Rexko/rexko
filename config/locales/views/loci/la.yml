@@ -5,7 +5,7 @@ la:
             attested_form_abbr: "At"
     loci:
         create:
-            success: 'Locus prospere creavisti.'
+            success: 'Locum prospere creavisti.'
         edit:
             page title: "Recensio loci"
             update: "Servare"

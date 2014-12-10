@@ -1,7 +1,7 @@
 la:
     lexemes:
         create:
-            successful_create: "Lexis prospere creavisti."
+            successful_create: "Lexin prospere creavisti."
             create_another: "Visne aliam referre?"
         index:
             page_title: "Index lexeon"
@@ -63,7 +63,7 @@ la:
             back_to_lexemes: "Ad lexes redire"
             back_to_dictionary: "Ad lexicon \"%{dictionary}\" redire"
         update:
-            successful_update: "Lexis prospere mutavisti."
+            successful_update: "Lexin prospere mutavisti."
             create_new: "Visne aliam referre?"
     etymologies:
         shortform:
