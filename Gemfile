@@ -46,3 +46,4 @@ group :assets do
 end
 
 gem 'prototype-rails'
+gem 'globalize', '~> 3.1.0'

@@ -44,6 +44,9 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    globalize (3.1.0)
+      activemodel (>= 3.1.0, < 4.0.0)
+      activerecord (>= 3.1.0, < 4.0.0)
     hike (1.2.1)
     i18n (0.6.1)
     json (1.7.7)
@@ -117,6 +120,7 @@ PLATFORMS
 DEPENDENCIES
   bullet
   coffee-rails (~> 3.1.0)
+  globalize (~> 3.1.0)
   missing_t (~> 0.4.1)
   prototype-rails
   rails (= 3.1.11)
