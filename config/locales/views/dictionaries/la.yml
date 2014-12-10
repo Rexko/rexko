@@ -10,6 +10,8 @@ la:
             destroy: "Delere"
             confirm_destroy: "Vero delere lexicon '%{title}'?\nHoc deleto, ipsius lexes non delebuntur."
             new: "Lexicon novum referre"
+        create:
+            success: "Lexicon prospere creavisti."
         edit:
             page title: "Recensio lexici"
             update: "Servare"
@@ -25,6 +27,8 @@ la:
             no_principal_parts: "<Partes principales absunt>"
             edit: "Mutare"
             back: "Redire"
+        update:
+            success: 'Lexicon prospere mutavisti.'
         new:
             page title: "Novum lexicon referre"
             create: "Condere"

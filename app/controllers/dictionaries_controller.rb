@@ -49,7 +49,7 @@ class DictionariesController < ApplicationController
 
     respond_to do |format|
       if @dictionary.save
-        flash[:notice] = 'Dictionary was successfully created.'
+        flash[:notice] = t('dictionaries.create.success')
         format.html { redirect_to(@dictionary) }
         format.xml  { render :xml => @dictionary, :status => :created, :location => @dictionary }
       else
@@ -66,7 +66,7 @@ class DictionariesController < ApplicationController
 
     respond_to do |format|
       if @dictionary.update_attributes(params[:dictionary])
-        flash[:notice] = 'Dictionary was successfully updated.'
+        flash[:notice] = t('dictionaries.update.success')
         format.html { redirect_to(@dictionary) }
         format.xml  { head :ok }
       else
