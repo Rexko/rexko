@@ -2,6 +2,7 @@ class Parse < ActiveRecord::Base
   has_many :interpretations
   validates_presence_of :parsed_form
   belongs_to :parsable, :polymorphic => true
+  translates :parsed_form
   
   # Returns parses without entries (determined by comparing parsed_form to headword forms).
   # Initial letter case insensitive (if the DB is smart enough)

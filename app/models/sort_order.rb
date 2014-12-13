@@ -3,6 +3,7 @@ class SortOrder < ActiveRecord::Base
   serialize :substitutions, Hash
   serialize :orderings, Hash
   validate :attrs_are_hashes
+  translates :name
   
   DEFAULT = new(substitutions: {}, orderings: {})
   

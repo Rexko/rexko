@@ -7,6 +7,7 @@ class Language < ActiveRecord::Base
   has_many :subentries
   belongs_to :sort_order # The language's default sort order
   has_many :sort_orders  # All sort orders defined for this language
+  translates :default_name
   
   accepts_nested_attributes_for :sort_order, :allow_destroy => true, :reject_if => :all_blank
   

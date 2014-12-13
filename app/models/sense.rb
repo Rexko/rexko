@@ -7,6 +7,7 @@ class Sense < ActiveRecord::Base
   has_many :parses, :through => :interpretations
   has_many :notes, :as => :annotatable
   validate :validate_sufficient_data
+  translates :definition
   
   accepts_nested_attributes_for :parses, :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :glosses, :allow_destroy => true, :reject_if => proc {|attrs| Gloss.rejectable?(attrs) }

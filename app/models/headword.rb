@@ -2,6 +2,7 @@ class Headword < ActiveRecord::Base
   has_many :orthographs
   has_many :phonetic_forms, :through => :orthographs
   has_many :notes, as: :annotatable
+  translates :form
   
   accepts_nested_attributes_for :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
