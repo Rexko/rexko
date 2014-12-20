@@ -40,7 +40,6 @@ class DictionariesController < ApplicationController
   # GET /dictionaries/1/edit
   def edit
     @dictionary = Dictionary.includes(:language).find(params[:id])
-    @language_name = @dictionary.language.name
   end
 
   # POST /dictionaries
