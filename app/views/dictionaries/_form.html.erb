@@ -1,30 +1,30 @@
 <%= form_for(@dictionary, {:method => form[:method], :action => form[:action], html: {class:  "yform"}}) do |f| %>
-  <p>
-    <b><%= t('.title') %></b><br />
-    <%= f.text_field :title %>
-  </p>
+    <div class="type-text">
+        <%= f.label :title, t('.title') %>
+        <%= f.text_field :title %>
+    </div>
 
-	<p>
-    <b><%= t('.headword_language') %></b><br />
+	<div class="type-select">
+        <%= f.label :source_language_id, t('.headword_language') %>
 		<%= collection_select(:dictionary, :source_language_id, Language.find(:all), :id, :iso_639_code) %>
-	</p>
+    </div>
 
-	<p>
-    <b><%= t('.definition_language') %></b><br />
+	<div class="type-select">
+        <%= f.label :language_id, t('.definition_language') %>
 		<%= collection_select(:dictionary, :language_id, Language.find(:all), :id, :iso_639_code) %>
-	</p>
+    </div>
   
-	<p>
-    <b><%= t('.gloss_language') %></b><br />
+	<div class="type-select">
+        <%= f.label :target_language_id, t('.gloss_language') %>
 		<%= collection_select(:dictionary, :target_language_id, Language.find(:all), :id, :iso_639_code) %>
-	</p>
+	</div>
 
-  <p>
-    <b><%= t('.external_address') %></b><br />
-    <%= f.text_field :external_address %>
-  </p>
+    <div class="type-text">
+        <%= f.label :external_address, t('.external_address') %>
+        <%= f.text_field :external_address %>
+    </div>
 
-  <div class="type-button">
-      <%= f.submit form[:label] %>
-  </div>
+    <div class="type-button">
+        <%= f.submit form[:label] %>
+    </div>
 <% end %>
