@@ -235,4 +235,16 @@ module ApplicationHelper
       end
     end
   end
+  
+  def language_tabs languages
+    content_tag(:div, class: "language-list") do
+      content_tag(:ul) do
+        [*languages].each_with_index do |lang, index|
+          concat(content_tag(:li, ({class: "selected"} if index == 0)) {
+            h lang
+          })
+        end
+      end
+    end
+  end
 end
