@@ -2,6 +2,7 @@
 	<div class="type-text">
 		<label for="language_default_name"><%= t(".name_prompt") %></label>
 		<%= f.text_field :default_name %>
+        <%= language_tabs @locale_name %>
 	</div>
 
 	<div class="type-text">

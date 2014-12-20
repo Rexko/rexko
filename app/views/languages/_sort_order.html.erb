@@ -3,6 +3,7 @@
 			<div class="type-text">
 				<%= f.label :name, t(".name") %>
 				<%= f.text_field :name %>
+                <%= language_tabs @locale_name %>
 
 				<%= f.label :substitutions, t(".substitutions") %>
 				<%= t(".substitutions_hint_html") %>

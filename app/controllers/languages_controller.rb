@@ -36,6 +36,7 @@ class LanguagesController < ApplicationController
   # GET /languages/1/edit
   def edit
     @language = Language.find(params[:id])
+    @locale_name = Language.where(iso_639_code: I18n.locale).first.name
   end
 
   # POST /languages
