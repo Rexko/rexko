@@ -236,6 +236,8 @@ module ApplicationHelper
     end
   end
   
+  # Editing multiple languages - tabs to indicate the current language being worked on.
+  # languages = an array of language names.
   def language_tabs languages
     content_tag(:div, class: "language-list") do
       content_tag(:ul) do
