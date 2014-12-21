@@ -24,10 +24,16 @@ class PhoneticFormsController < ApplicationController
   # GET /phonetic_forms/new
   # GET /phonetic_forms/new.xml
   def new
-    @phonetic_form = PhoneticForm.new
+    @phonetic_form = PhoneticForm.new(params.slice(PhoneticForm.new.attribute_names))
+    @path = params[:path].sub(/(headword.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @source_languages = Language.where(id: params[:languages])
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+        if request.xhr?
+        	render :partial => "form"
+        end
+      end
       format.xml  { render :xml => @phonetic_form }
     end
   end

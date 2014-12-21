@@ -1,5 +1,4 @@
 <% unless (f.object._destroy) %>
-	<% nested_attributes_for f, :phonetic_forms %>
 	<fieldset class="headword">
 		<legend>
 			<%= label_with_remove_option_for t('.headword'), f %>
@@ -23,13 +22,7 @@
 	  </div>
 	
 	  <!-- Phonetic form -->
-	  	<%= f.fields_for :phonetic_forms do |pf_form| %>
-		    <%= render :partial => 'phonetic_form', :locals => { :f => pf_form } %>
-		  <% end %>
-			<div class="par">
-				<%= link_to t('helpers.link_to_add.phonetic form'), '#phonetic_forms', :class => 'add_nested', :rel => "[headword][phonetic_forms]" %>
-			</div>
-		</ul>
+      <%= list_children_with_option_to_add :phonetic_form, f, remote: true, locals: { languages: @source_languages } %>
 
         <!-- Notes -->
 		<%= list_children_with_option_to_add :note, f, :remote => true %>

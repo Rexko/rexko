@@ -1,0 +1,5 @@
+<%= 
+    fields_for @path, @phonetic_form, :child_index => Time.now.to_i.to_s do |f| 
+        render partial: 'lexemes/phonetic_form', locals: {f: f}
+    end
+%>
