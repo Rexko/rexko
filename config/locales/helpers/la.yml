@@ -26,3 +26,5 @@ la:
         authorship:
             anonymous: "Anonymus"
             untitled: "Sine titulo"
+        language:
+            default: "Lingua usitata"

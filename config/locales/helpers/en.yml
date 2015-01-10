@@ -14,3 +14,5 @@ en:
         authorship:
             anonymous: "Anonymous"
             untitled: "Untitled"
+        language:
+            default: "Default language"
