@@ -157,6 +157,7 @@ activate_autocompletes = function(element){
 Event.observe(window, 'load', function(){  
 	activate_links($$('body')[0]);
     activate_autocompletes($$('body')[0]);
+    activate_language_tabs($$(".language-list li"));
 });
 
 // Simple add effect
@@ -167,6 +168,7 @@ function insert_with_effect(container, content){
     Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
     activate_links(container.previous());
     activate_autocompletes(container.previous());
+    activate_language_tabs(container.previous().select(".language-list li"));
 };
 
 // For select-all textfields
@@ -175,3 +177,28 @@ function select_all(id){
 	document.getElementById(id).select();
 };
 
+// For language tabs
+activate_language_tabs = function(elements){
+    elements.each(function(li){
+        if (li.hasClassName("selected") ) toggle_to_corresponding_content(li);
+        
+        li.observe("click", function(e){
+            e.preventDefault();
+            list = this.up(".language-list");
+            items = list.select("li");
+            items.invoke('removeClassName', 'selected');
+            this.addClassName("selected");
+            toggle_to_corresponding_content(this);
+        });
+    });
+};
+
+function toggle_to_corresponding_content(tab){
+    list = tab.up(".language-list");
+    items = list.select("li");
+    content = list.previous(".language-content");
+    idx = items.indexOf(tab);
+    corresponding = content.childElements()[idx];
+    content.childElements().invoke('hide');
+    corresponding.show()
+}
