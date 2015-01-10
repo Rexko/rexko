@@ -50,6 +50,23 @@ class Language < ActiveRecord::Base
     end || UNDETERMINED
   end
   
+  # langs_for: Returns an array of languages used in the element or array.
+  # Like lang_for, but doesn't collapse multiple languages to 'mul'.
+  def self.langs_for content, lang_attr = nil
+    [*content].collect do |item| 
+      item ? item.send(lang_attr || :language) || UNDETERMINED : NO_LINGUISTIC_CONTENT 
+    end.uniq
+  end
+  
+  # langs_hash_for: Returns a hash for multiple langs_for calls.
+  # lang_attrs can be an array of symbols (the returned hash will use those
+  # symbols as keys) or of arrays 
+  def self.langs_hash_for content, lang_attrs = {}
+    Hash[lang_attrs.collect do |lang_name, lang_method|
+      [lang_name, langs_for(content, lang_method)]
+    end]
+  end
+
   def self.code_for content, subtags = {}
     self.lang_for(content).iso_639_code.tap do |code|
       code += '-' + subtags[:variant] unless subtags[:variant].blank?
