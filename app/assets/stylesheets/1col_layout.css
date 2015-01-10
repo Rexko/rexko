@@ -151,6 +151,7 @@ div.autocomplete ul li {
   text-shadow: 0 1px #FFF;
   margin: 0 -5px;
   padding: 0 5px;
+  cursor: pointer;
 }
 
 .language-list a {
