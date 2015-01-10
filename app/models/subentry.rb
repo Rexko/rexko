@@ -6,7 +6,8 @@ class Subentry < ActiveRecord::Base
   has_many :senses
   has_many :notes, :as => :annotatable
   validates_presence_of :paradigm
-  translates :paradigm, :part_of_speech
+  translates :paradigm, :part_of_speech, :fallbacks_for_empty_translations => true
+  globalize_accessors :locales => (Language.all.collect(&:iso_639_code) | [I18n.default_locale])
   
   accepts_nested_attributes_for :senses, :notes, :etymotheses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :etymologies, :allow_destroy => true, :reject_if => proc {|attrs| Etymology.rejectable?(attrs) }

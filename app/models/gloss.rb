@@ -4,7 +4,8 @@ class Gloss < ActiveRecord::Base
   belongs_to :language
   has_many :parses, :as => :parsable, :dependent => :destroy
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
-  translates :gloss
+  translates :gloss, :fallbacks_for_empty_translations => true
+  globalize_accessors :locales => (Language.all.collect(&:iso_639_code) | [I18n.default_locale])  
   
   scope :attesting, lambda {|parsables, type|
     joins(HASH_MAP_TO_PARSE).where({ :parses => { :parsable_id => parsables, :parsable_type => type }})
