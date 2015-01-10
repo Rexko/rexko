@@ -90,6 +90,10 @@ class LexemesController < ApplicationController
     @lexeme.subentries.build if @lexeme.subentries.empty?
     @nests = {}
     @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
+
+    @dictionaries = @lexeme.dictionaries
+    @langs = Dictionary.langs_hash_for(@dictionaries)
+    puts @langs
   end
 
   # POST /lexemes

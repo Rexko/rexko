@@ -26,7 +26,8 @@ class PhoneticFormsController < ApplicationController
   def new
     @phonetic_form = PhoneticForm.new(params.slice(PhoneticForm.new.attribute_names))
     @path = params[:path].sub(/(headword.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
-    @source_languages = Language.where(id: params[:languages])
+    @dictionaries = Dictionary.where(id: params[:dictionaries])
+    @langs = Dictionary.langs_hash_for(@dictionaries)
 
     respond_to do |format|
       format.html do

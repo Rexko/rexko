@@ -7,9 +7,9 @@
 		
 		<div class="type-text">
 	      <%= f.label :paradigm %>
-	      <%= f.text_field :paradigm %>
+	      <%= translatable_tag f, :text_field, :paradigm, @langs[:source] %>
 	      <%= f.label :part_of_speech %>
-	      <%= f.text_field :part_of_speech %>
+	      <%= translatable_tag f, :text_field, :part_of_speech, @langs[:vernacular] %>
 	  </div>
 		<%= f.fields_for :notes do |e_form| %>
 	    <%= render :partial => 'note', :locals => { :f => e_form } %>
@@ -19,7 +19,7 @@
 		</div>
     
 	  <!-- Sense -->
-	  <%= list_children_with_option_to_add :sense, f, remote: true, create_blank: true %>
+	  <%= list_children_with_option_to_add :sense, f, remote: true, create_blank: true, locals: { dictionaries: @dictionaries } %>
 
 	  <!-- Etymology -->
 		<%= list_children_with_option_to_add :etymothesis, f, display_name: 'etymology' %>

@@ -6,7 +6,8 @@
 		
 		<div class="type-text">
 	    	<%= f.label :form, t('.orthographic_form') %>
-	    	<%= f.text_field :form %>
+            <%= translatable_tag(f, :text_field, :form, @langs[:source]) %>
+
             <small>
                 <%= t('.acceptibility_html', 
                         descriptively: "<span class=\"type-check\">#{f.check_box :descriptively_ok?} #{ f.label :descriptively_ok? } </span>".html_safe,
@@ -22,9 +23,9 @@
 	  </div>
 	
 	  <!-- Phonetic form -->
-      <%= list_children_with_option_to_add :phonetic_form, f, remote: true, locals: { languages: @source_languages } %>
+      <%= list_children_with_option_to_add :phonetic_form, f, remote: true, locals: { dictionaries: @dictionaries } %>
 
         <!-- Notes -->
-		<%= list_children_with_option_to_add :note, f, :remote => true %>
+		<%= list_children_with_option_to_add :note, f, :remote => true, locals: { dictionaries: @dictionaries } %>
 	</fieldset>
 <% end %>

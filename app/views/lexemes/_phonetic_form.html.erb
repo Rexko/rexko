@@ -2,7 +2,7 @@
   <div class="phonetic_form">
 		<div class="type-text">		
 	    <%= f.label :form, label_with_remove_option_for(t('.phonetic_form'), f) %>
-	    <%= f.text_field :form %>
+	    <%= translatable_tag f, :text_field, :form, @langs[:source] %>
 		</div>
   </div>
 <% end %>

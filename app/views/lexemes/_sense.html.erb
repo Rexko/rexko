@@ -6,11 +6,11 @@
 		</legend>
 		<div class="type-text">
 	      <%= f.label :definition %>
-	      <%= f.text_area :definition, :rows => 4 %>
+	      <%= translatable_tag f, :text_area, :definition, @langs[:vernacular], rows: 4 %>
     </div>
 
     <!-- Gloss -->
-		<%= list_children_with_option_to_add :gloss, f, :remote => true, :create_blank => true %>
+		<%= list_children_with_option_to_add :gloss, f, :remote => true, :create_blank => true, locals: { dictionaries: @dictionaries } %>
 
     <!-- Note -->
     <%= list_children_with_option_to_add :note, f, :remote => true %>
