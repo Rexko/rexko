@@ -255,8 +255,8 @@ module ApplicationHelper
     # we should add default if it exists and isn't listed (the fallback 
     # for legacy users whose data isn't in the right translation)
     if (form.object.send("#{attribute}_#{default_locale.underscore}").present? && !languages.collect(&:iso_639_code).include?(default_locale)) 
-      languages = [Language.new(default_name: t('helpers.language.default'), iso_639_code: default_locale)] | [*languages]
     end
+        languages = [Language::DEFAULT] | languages
     
     output = ActiveSupport::SafeBuffer.new
     
