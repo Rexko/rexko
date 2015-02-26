@@ -7,5 +7,5 @@
         <%= translatable_tag f, :text_field, :parsed_form, :target, class: 'bequeathed' %>
     </div>
 
-    <%= list_children_with_option_to_add :interpretation, f, :remote => true %>
+    <%= list_children_with_option_to_add :interpretation, f, :remote => true, :locals => { dictionaries: @dictionaries } %>
 </fieldset>
