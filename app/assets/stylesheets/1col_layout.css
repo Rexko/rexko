@@ -207,3 +207,29 @@ div.autocomplete ul li {
 .language-list li.selected:after {
   box-shadow: -2px 0px 0 #FFF;
 }
+
+.language-list li.solo {
+  border: inherit;
+  background: inherit;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  box-shadow: inherit;
+  text-shadow: inherit;
+/*  margin: 0 -5px;
+  padding: 0 5px; */
+  cursor: inherit;
+}
+
+.language-list li.solo:before  {
+/*  left: -7px; */
+  border-top-right-radius: inherit;
+  border-width: inherit;
+  box-shadow: inherit;
+}
+
+.language-list li.solo:after {
+/*  right: -7px; */
+  border-top-left-radius: inherit;
+  border-width: inherit;
+  box-shadow: inherit;
+}
