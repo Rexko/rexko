@@ -239,12 +239,14 @@ module ApplicationHelper
   # Editing multiple languages - tabs to indicate the current language being worked on.
   # languages = an array of language names.
   def language_tabs languages
+    languages = [*languages]
+    
     content_tag(:div, class: "language-list") do
       content_tag(:ul) do
-        [*languages].each_with_index do |lang, index|
-          concat(content_tag(:li, ({class: "selected"} if index == 0)) {
+        languages.each_with_index do |lang, index|
+          concat(content_tag(:li, {class: [("selected" if index == 0), ("solo" if languages.length == 1)]}) {
             h lang
-          })
+            })
         end
       end
     end
