@@ -12,7 +12,7 @@
     <!-- Gloss -->
 		<%= list_children_with_option_to_add :gloss, f, :remote => true, :create_blank => true, locals: { dictionaries: @dictionaries } %>
 
-    <!-- Note -->
-    <%= list_children_with_option_to_add :note, f, :remote => true %>
-	</fieldset>
+        <!-- Note -->
+        <%= list_children_with_option_to_add :note, f, :remote => true, locals: { dictionaries: @dictionaries } %>
+    </fieldset>
 <% end %>
