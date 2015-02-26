@@ -77,6 +77,8 @@ class LexemesController < ApplicationController
       t('lexemes.new.page_title_with_headwords', headwords: view_context.titleize_headwords_for(@lexeme)) : 
       t('lexemes.new.page_title')
 
+   @langs = Hash.new(Language::DEFAULT)
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml { render :xml => @lexeme }
