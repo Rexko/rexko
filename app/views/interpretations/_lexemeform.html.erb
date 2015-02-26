@@ -13,7 +13,7 @@
     <div class="c50r" style="vertical-align: bottom">
         <div class="subcr type-text">
             <%= f.fields_for :sense, Sense.new do |s_form| %>
-            <%= s_form.text_field :definition %>
+            <%= translatable_tag s_form, :text_field, :definition, :vernacular %>
             <% end %>
         </div>
     </div>		
