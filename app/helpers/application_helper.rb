@@ -253,24 +253,27 @@ module ApplicationHelper
   end
   
   def translatable_tag form, field, attribute, languages = [], html_options = {}
-    default_locale = I18n.default_locale.to_s
-    # we should add default if it exists and isn't listed (the fallback 
-    # for legacy users whose data isn't in the right translation)
-    if (form.object.send("#{attribute}_#{default_locale.underscore}").present? && !languages.collect(&:iso_639_code).include?(default_locale)) 
-    end
+    content_tag(:div, {class: "translatable", data: { languages: languages }}) do
+      default_locale = I18n.default_locale.to_s
       languages = [*@langs[languages]] 
+    
+      # we should add default if it exists and isn't listed (the fallback 
+      # for legacy users whose data isn't in the right translation)
+      if (form.object.send("#{attribute}_#{default_locale.underscore}").present? && !languages.collect(&:iso_639_code).include?(default_locale)) 
         languages = [Language::DEFAULT] | languages
+      end
     
-    output = ActiveSupport::SafeBuffer.new
+      output = ActiveSupport::SafeBuffer.new
     
-    output << content_tag(:div, class: "language-content") do
-      [*languages].each do |lang|
-        Globalize.with_locale(lang.iso_639_code) do
-          concat(form.send(field, "#{attribute}_#{lang.iso_639_code.underscore}", html_options))
+      output << content_tag(:div, class: "language-content") do
+        languages.each do |lang|
+          Globalize.with_locale(lang.iso_639_code) do
+            concat(form.send(field, "#{attribute}_#{lang.iso_639_code.underscore}", html_options))
+          end
         end
       end
-    end
     
-    output << language_tabs(languages)
-  end
+      output << language_tabs(languages)
+    end
+  end 
 end
