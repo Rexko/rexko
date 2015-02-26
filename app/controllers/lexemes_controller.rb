@@ -40,6 +40,18 @@ class LexemesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @lexeme }
+      format.json { 
+        case params[:data] 
+        when "langs" 
+          hsh = Dictionary.langs_hash_for(@lexeme.dictionaries)
+          hsh = hsh.collect do |categ, langs| 
+            [categ, langs.collect {|lang| { tab: lang.to_s, code: lang.iso_639_code }}]
+          end
+          
+          render json: Hash[hsh]
+        else render nothing: true, status: 403
+        end
+      }
     end
   end
 
