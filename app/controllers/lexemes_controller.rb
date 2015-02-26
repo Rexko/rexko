@@ -93,7 +93,6 @@ class LexemesController < ApplicationController
 
     @dictionaries = @lexeme.dictionaries
     @langs = Dictionary.langs_hash_for(@dictionaries)
-    puts @langs
   end
 
   # POST /lexemes
