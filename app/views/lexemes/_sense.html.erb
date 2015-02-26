@@ -6,8 +6,8 @@
 		</legend>
 		<div class="type-text">
 	      <%= f.label :definition %>
-	      <%= translatable_tag f, :text_area, :definition, @langs[:vernacular], rows: 4 %>
     </div>
+            <%= translatable_tag f, :text_area, :definition, :vernacular, rows: 4 %>
 
     <!-- Gloss -->
 		<%= list_children_with_option_to_add :gloss, f, :remote => true, :create_blank => true, locals: { dictionaries: @dictionaries } %>

@@ -6,7 +6,7 @@
 		
 		<div class="type-text">
 	    	<%= f.label :form, t('.orthographic_form') %>
-            <%= translatable_tag(f, :text_field, :form, @langs[:source]) %>
+            <%= translatable_tag(f, :text_field, :form, :source) %>
 
             <small>
                 <%= t('.acceptibility_html', 

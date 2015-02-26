@@ -256,6 +256,7 @@ module ApplicationHelper
     # for legacy users whose data isn't in the right translation)
     if (form.object.send("#{attribute}_#{default_locale.underscore}").present? && !languages.collect(&:iso_639_code).include?(default_locale)) 
     end
+      languages = [*@langs[languages]] 
         languages = [Language::DEFAULT] | languages
     
     output = ActiveSupport::SafeBuffer.new

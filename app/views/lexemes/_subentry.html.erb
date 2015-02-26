@@ -7,9 +7,9 @@
 		
 		<div class="type-text">
 	      <%= f.label :paradigm %>
-	      <%= translatable_tag f, :text_field, :paradigm, @langs[:source] %>
+	      <%= translatable_tag f, :text_field, :paradigm, :source %>
 	      <%= f.label :part_of_speech %>
-	      <%= translatable_tag f, :text_field, :part_of_speech, @langs[:vernacular] %>
+	      <%= translatable_tag f, :text_field, :part_of_speech, :vernacular %>
 	  </div>
 		<%= f.fields_for :notes do |e_form| %>
 	    <%= render :partial => 'note', :locals => { :f => e_form } %>
