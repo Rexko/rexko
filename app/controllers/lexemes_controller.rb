@@ -159,7 +159,10 @@ class LexemesController < ApplicationController
         flash[:notice] = t('lexemes.update.successful_update')
         format.html do
           case params[:commit]
-          when t('lexemes.form.save_and_continue_editing') then render :action => "edit"
+          when t('lexemes.form.save_and_continue_editing') 
+            @dictionaries = @lexeme.dictionaries
+            @langs = Dictionary.langs_hash_for(@dictionaries)
+            render :action => "edit"
           else
             flash[:notice] = t('lexemes.create.create_another_prompt', default: "%{success} %{link}", success: flash[:notice], link: view_context.link_to(t('lexemes.update.create_new'), controller: 'lexemes', action:'new'))
             redirect_to(@lexeme)
