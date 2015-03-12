@@ -3,11 +3,25 @@ class DictionariesController < ApplicationController
   # GET /dictionaries
   # GET /dictionaries.xml
   def index
-    @dictionaries = Dictionary.includes([:language, :source_language, :target_language]).all.sort_by {|d| d.title }
+    @dictionaries = (params[:dictionaries].present? \
+      ? Dictionary.where(id: params[:dictionaries])
+      : Dictionary).includes([:language, :source_language, :target_language]).all.sort_by {|d| d.title }
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @dictionaries }
+      format.json { 
+        case params[:data] 
+        when "langs" 
+          hsh = Dictionary.langs_hash_for(@dictionaries)
+          hsh = hsh.collect do |categ, langs| 
+            [categ, langs.collect {|lang| { tab: lang.to_s, code: lang.iso_639_code }}]
+          end
+          
+          render json: Hash[hsh]
+        else render nothing: true, status: 403
+        end
+      }
     end
   end
 
