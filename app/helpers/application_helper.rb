@@ -244,7 +244,7 @@ module ApplicationHelper
     content_tag(:div, class: "language-list") do
       content_tag(:ul) do
         languages.each_with_index do |lang, index|
-          concat(content_tag(:li, {class: [("selected" if index == 0), ("solo" if languages.length == 1)]}) {
+          concat(content_tag(:li, {class: [("selected" if index == 0), ("solo" if languages.length == 1), ("default" if lang == Language::DEFAULT)]}) {
             h lang
             })
         end
