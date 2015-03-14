@@ -25,6 +25,9 @@ class EtymologiesController < ApplicationController
   # GET /etymologies/new.xml
   def new
     @etymology = Etymology.new(params.slice(Etymology.new.attribute_names))
+    @dictionaries = Dictionary.where(id: params[:dictionaries]).all
+    @langs = Dictionary.langs_hash_for(@dictionaries)
+
     if params[:path].include? "next_etymon"
     	@path = params[:path]
     else
