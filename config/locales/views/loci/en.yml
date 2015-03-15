@@ -46,6 +46,8 @@ en:
             locus:
                 example: "Original language"
                 example_translation: "Translation"
+        loci:
+            new_sense: "(new definition in %{lang} under this subentry...)"
     interpretations:
         shortform:
             sense: "Sense"

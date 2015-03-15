@@ -48,6 +48,8 @@ la:
             locus:
                 example: "Ipsius lingua"
                 example_translation: "Redditum"
+        loci:
+            new_sense: "(addere sensum sub hoc sublemma, %{lang} scriptum...)"
     interpretations:
         shortform:
             sense: "Sensus"

@@ -19,7 +19,7 @@ module LociHelper
       optgroup = "#{dict}: #{paradigm} #{part}"
 
 			# need to set id or otherwise make it optionable
-			new_senses[optgroup] = [sense.subentry.senses.build(:definition => "(new sense under this subentry...)"), sense.subentry.id]
+			new_senses[optgroup] = [sense.subentry.senses.build(definition: t('helpers.loci.new_sense', lang: sense.lexeme.dictionaries.first.try(:language).try(:name))), sense.subentry.id]
 
       [optgroup, sense.definition, sense.id]
     end
