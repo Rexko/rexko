@@ -48,6 +48,7 @@ class LociController < ApplicationController
   # GET /loci/1/edit
   def edit
     @locus = Locus.where(:id => params[:id]).includes(:attestations => {:parses => :interpretations}).first
+    @locale_name = Language.where(iso_639_code: I18n.locale).first.name
     @source = @locus.source
     @authorship = @source.authorship if @source
     @nests = {}
@@ -93,7 +94,9 @@ class LociController < ApplicationController
         flash[:notice] = t('loci.create.success')
         format.html do
           case params[:commit]
-          when I18n.t('loci.form.save_and_continue_editing') then redirect_to :action => 'edit', :id => @locus.id, :status => 303
+          when I18n.t('loci.form.save_and_continue_editing') 
+            @locale_name = Language.where(iso_639_code: I18n.locale).first.name
+            redirect_to :action => 'edit', :id => @locus.id, :status => 303
           else redirect_to(@locus)
           end
         end
@@ -131,7 +134,9 @@ class LociController < ApplicationController
         flash[:notice] = t('loci.update.success')
         format.html do
           case params[:commit]
-          when I18n.t('loci.form.save_and_continue_editing') then redirect_to :action => "edit", :status => 303
+          when I18n.t('loci.form.save_and_continue_editing') 
+            @locale_name = Language.where(iso_639_code: I18n.locale).first.name
+            redirect_to :action => "edit", :status => 303
           else redirect_to(@locus)
           end
         end
