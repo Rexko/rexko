@@ -48,7 +48,7 @@ class LociController < ApplicationController
   # GET /loci/1/edit
   def edit
     @locus = Locus.where(:id => params[:id]).includes(:attestations => {:parses => :interpretations}).first
-    @locale_name = Language.where(iso_639_code: I18n.locale).first.name
+    @locale_name = Language.where(iso_639_code: I18n.locale).first.try(:name)
     @source = @locus.source
     @authorship = @source.authorship if @source
     @nests = {}
