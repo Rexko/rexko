@@ -25,13 +25,13 @@ class PhoneticFormsController < ApplicationController
   # GET /phonetic_forms/new.xml
   def new
     @phonetic_form = PhoneticForm.new(params.slice(PhoneticForm.new.attribute_names))
-    @path = params[:path].sub(/(headword.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
     @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
 
     respond_to do |format|
       format.html do
         if request.xhr?
+          @path = params[:path].sub(/(headword.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
         	render :partial => "form"
         end
       end
