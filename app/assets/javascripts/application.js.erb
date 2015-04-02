@@ -239,6 +239,11 @@ fetch_languages = function() {
 
 function update_languages(languages) {
     $('lexeme_dictionary_ids').enable();
+    $$(".pull_nested").each(function(anchor){
+        params = anchor.readAttribute('href').toQueryParams();
+        params['dictionaries[]'] = $('lexeme_dictionary_ids').getValue();
+        anchor.writeAttribute('href', anchor.pathname + '?' + Object.toQueryString(params));
+    });
     $$(".translatable").each(function(content){
         oldlangs = content.down('.language-content').childElements().invoke('identify').invoke('gsub', /.*_/, '');
         langtype = content.readAttribute("data-languages");
