@@ -159,6 +159,7 @@ Event.observe(window, 'load', function(){
     activate_autocompletes($$('body')[0]);
     activate_language_tabs($$(".language-list"));
     if ($('lexeme_dictionary_ids')) { $('lexeme_dictionary_ids').observe("change", fetch_languages); };
+    update_add_links();
 });
 
 // Simple add effect
@@ -170,6 +171,7 @@ function insert_with_effect(container, content){
     activate_links(container.previous());
     activate_autocompletes(container.previous());
     activate_language_tabs(container.previous().select(".language-list li"));
+    update_add_links();
 };
 
 // For select-all textfields
