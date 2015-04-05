@@ -158,7 +158,7 @@ Event.observe(window, 'load', function(){
 	activate_links($$('body')[0]);
     activate_autocompletes($$('body')[0]);
     activate_language_tabs($$(".language-list"));
-    if ($('lexeme_dictionary_ids')) { $('lexeme_dictionary_ids').observe("change", fetch_languages); }
+    if ($('lexeme_dictionary_ids')) { $('lexeme_dictionary_ids').observe("change", fetch_languages); };
 });
 
 // Simple add effect
@@ -239,11 +239,7 @@ fetch_languages = function() {
 
 function update_languages(languages) {
     $('lexeme_dictionary_ids').enable();
-    $$(".pull_nested").each(function(anchor){
-        params = anchor.readAttribute('href').toQueryParams();
-        params['dictionaries[]'] = $('lexeme_dictionary_ids').getValue();
-        anchor.writeAttribute('href', anchor.pathname + '?' + Object.toQueryString(params));
-    });
+    update_add_links();
     $$(".translatable").each(function(content){
         oldlangs = content.down('.language-content').childElements().invoke('identify').invoke('gsub', /.*_/, '');
         langtype = content.readAttribute("data-languages");
@@ -326,6 +322,14 @@ function update_languages(languages) {
         langtabs.setStyle({ width: content.down('input,textarea').getWidth() + "px" });
         
         content.down('.language-content').childElements().invoke('enable');
+    });
+};
+
+function update_add_links(){
+    $$(".pull_nested").each(function(anchor){
+        params = anchor.readAttribute('href').toQueryParams();
+        params['dictionaries[]'] = $('lexeme_dictionary_ids').getValue();
+        anchor.writeAttribute('href', anchor.pathname + '?' + Object.toQueryString(params));
     });
 };
 
