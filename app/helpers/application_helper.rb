@@ -255,7 +255,7 @@ module ApplicationHelper
   def translatable_tag form, field, attribute, languages = [], html_options = {}
     content_tag(:div, {class: "translatable", data: { languages: languages }}) do
       default_locale = I18n.default_locale.to_s
-      languages = [*@langs[languages]] 
+      languages = @langs ? [*@langs[languages]] : []
     
       # we should add default if it exists and isn't listed (the fallback 
       # for legacy users whose data isn't in the right translation)
