@@ -82,14 +82,14 @@ class LexemesController < ApplicationController
   # GET /lexemes/new
   # GET /lexemes/new.xml
   def new
-    @lexeme = Lexeme.new(:dictionaries => [])
-    @lexeme.headwords.build(:form => flash[:headword])
+    @lexeme = Lexeme.new(:dictionaries => [Dictionary.find(:first)])
+    @lexeme.headwords.build
     @lexeme.subentries.build
     @page_title = flash[:headword].present? ? 
       t('lexemes.new.page_title_with_headwords', headwords: view_context.titleize_headwords_for(@lexeme)) : 
       t('lexemes.new.page_title')
 
-   @langs = Hash.new(Language::DEFAULT)
+   @langs = Dictionary.langs_hash_for(@lexeme.dictionaries)
 
     respond_to do |format|
       format.html # new.html.erb
