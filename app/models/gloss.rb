@@ -26,6 +26,7 @@ class Gloss < ActiveRecord::Base
   # Determine whether we should hit reject_if when something accepts_nested_attributes_for glosses.
   def self.rejectable?(attrs)
     # attrs[:gloss].blank? # before we had i18n
+    attrs = attrs.attributes if attrs.is_a? Gloss
     attrs.select {|k,v| k.start_with?("gloss_")}.all? {|k,v| v.blank?}
   end
 end
