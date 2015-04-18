@@ -1,76 +1,86 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title><%= page_title %></title>
-  <%= stylesheet_link_tag '1col_layout' %>
-<!--[if lte IE 7]>
-<link href="css/patches/patch_my_layout.css" rel="stylesheet" type="text/css" />
-<![endif]-->
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<title><%= strip_tags page_title %></title>
+	<%= stylesheet_link_tag '1col_layout' %>
+	<!--[if lte IE 7]>
+	<link href="css/patches/patch_my_layout.css" rel="stylesheet" type="text/css" />
+	<![endif]-->
 	<%= javascript_include_tag "application" %>
 	<%= javascript_tag do %>
-		<%= yield(:javascript) %>
+        var locale = '<%= j I18n.locale.to_s %>';
+        <%= yield(:javascript) %>
 	<% end -%>
-    <%= csrf_meta_tag %>
+	<%= csrf_meta_tag %>
 </head>
 <body>
-  <div class="page_margins">
-    <div id="border-top">
-      <div id="edge-tl"></div>
-      <div id="edge-tr"></div>
-    </div>
-    <div class="page">
-      <div id="header">
-        <div id="topnav">
-          <!-- start: skip link navigation -->
-          <a class="skip" title="skip link" href="#navigation">Skip to the navigation</a><span class="hideme">.</span>
-          <a class="skip" title="skip link" href="#content">Skip to the content</a><span class="hideme">.</span>
-          <!-- end: skip link navigation -->
-     	<%= form_tag({:controller => :lexemes, :action => :show_by_headword}) do %>
-				<span class="type-text">
-						<%= text_field_tag :headword, '', :size => 25, :placeholder => 'Find or create a lexeme' %>
-				</span>
-		
-				<span class="type-select">
-						<%= select_tag :matchtype, 
-													 options_for_select(Lexeme::SEARCH_OPTIONS, Lexeme::SUBSTRING) %>
-				</span>
-			<% end unless current_page? :controller => :editor, :action => :index %>
+	<div class="page_margins">
+		<div id="border-top">
+			<div id="edge-tl"></div>
+			<div id="edge-tr"></div>
+		</div>
+		<div class="page">
+			<div id="header">
+				<div id="topnav">
+					<!-- start: skip link navigation -->
+					<a class="skip" title="skip link" href="#navigation"><%=
+						t(".skip_to_the_navigation")
+					%></a><span class="hideme">.</span>
+					<a class="skip" title="skip link" href="#content"><%=
+						t(".skip_to_the_content")
+					%></a><span class="hideme">.</span>
+					<!-- end: skip link navigation -->
+					<%= form_tag({:controller => :lexemes, :action => :show_by_headword}) do %>
+                        <span class="type-text">
+					        <%= text_field_tag :headword, '', :size => 25, 
+                                :placeholder => t(".find_or_create_a_lexeme") %>
+		                </span>
 
-					<!--<a href="#">Login</a> | <a href="#">Contact</a> | <a href="#">Imprint</a>-->
-        </div>
+                        <span class="type-select">
+					        <%= select_tag :matchtype,
+                            options_for_select(t('lexeme.search.options').zip(Lexeme::SEARCH_OPTIONS),
+                            Lexeme::SUBSTRING) %>
+                        </span>
+					<% end unless current_page? :controller => :editor, :action => :index %>
+
+					<!-- Login link will go here -->
+				</div>
 				<h1><%= page_title %></h1>
-      </div>
-      <div id="nav">
-        <!-- skiplink anchor: navigation -->
-        <a id="navigation" name="navigation"></a>
-        <div class="hlist">
-          <!-- main navigation: horizontal list -->
+
+			</div>
+			<div id="nav">
+				<!-- skiplink anchor: navigation -->
+				<a id="navigation" name="navigation"></a>
+				<div class="hlist">
+					<!-- main navigation: horizontal list -->
 					<ul>
-						<%= navlink_unless_current "Home", :controller => :editor %>
-						<%= navlink_unless_current "Languages", :controller => :languages %>
-						<%= navlink_unless_current "Dictionaries", :controller => :dictionaries %>
-						<%= navlink_unless_current "Lexemes", :controller => :lexemes %>
-						<%= navlink_unless_current "Loci", :controller => :loci %>
-						<%= navlink_unless_current "Sources", :controller => :authorships %>
-          </ul>
-        </div>
-      </div>
-      <div id="main">
-				<%= content_tag :div, sanitize(flash[:notice]), :class => "notice" if flash[:notice].present? %>
+						<%= navlink_unless_current t(".home"), :controller => :editor %>
+						<%= navlink_unless_current t(".languages"), :controller => :languages %>
+						<%= navlink_unless_current t(".dictionaries"), :controller => :dictionaries %>
+						<%= navlink_unless_current t(".lexemes"), :controller => :lexemes %>
+						<%= navlink_unless_current t(".loci"), :controller => :loci %>
+						<%= navlink_unless_current t(".sources"), :controller => :authorships %>
+					</ul>
+				</div>
+			</div>
+			<div id="main">
+				<%= content_tag :div, sanitize(flash[:notice]), 
+                    :class => "notice" if flash[:notice].present? %>
 
 				<%= yield  %>
-      </div>
-      <!-- begin: #footer -->
-      <div id="footer">Layout based on <a href="http://www.yaml.de/">YAML</a>
-      </div>
-    </div>
-    <div id="border-bottom">
-      <div id="edge-bl"></div>
-      <div id="edge-br"></div>
-    </div>
-  </div>
+			</div>
+			<!-- begin: #footer -->
+			<div id="footer">
+				<%= t(".layout_based_on_yaml_html", :url => 'http://www.yaml.de/') %>
+			</div>
+		</div>
+		<div id="border-bottom">
+			<div id="edge-bl"></div>
+			<div id="edge-br"></div>
+		</div>
+	</div>
 </body>
 </html>

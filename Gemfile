@@ -3,6 +3,8 @@
 
 source 'http://rubygems.org'
 gem 'rails', '3.1.11'
+gem 'globalize', '~> 3.1.0'
+gem 'globalize-accessors'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -33,6 +35,7 @@ group :development, :test do
   gem 'ruby-prof'
   gem 'test-unit'
   gem 'bullet'
+  gem 'missing_t', '~> 0.4.1'
 end
 
 source 'http://gemcutter.org'

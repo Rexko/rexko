@@ -1,5 +1,3 @@
-<h1>Listing loci</h1>
-
 <% if @loci %>
 <table width="100%">
 <% @loci.each_with_index do |locus, i| %>
@@ -9,18 +7,18 @@
 		</td>
 	</tr>
 	<tr>
-	  <td><%= link_to 'Show', locus %></td>
-	  <td><%= link_to 'Edit', edit_locus_path(locus) %></td>
-	  <td><%= link_to 'Destroy', locus, :confirm => 'Are you sure?', :method => :delete %></td>
+	  <td><%= link_to t('.show'), locus %></td>
+	  <td><%= link_to t('.edit'), edit_locus_path(locus) %></td>
+	  <td><%= link_to t('.destroy'), locus, :confirm => t('.confirm_destroy'), :method => :delete %></td>
 	</tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New locus', new_locus_path %>
+<%= link_to t('.new_locus'), new_locus_path %>
 
 <%= will_paginate @loci %>
 <% else %>
-<p><i>No loci to list</i></p>
+<p><i><%= t('.no_loci') %></i></p>
 <% end %>

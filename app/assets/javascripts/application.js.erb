@@ -129,7 +129,7 @@ activate_autocompletes = function(element){
         complendum = div.identify().match(/.*(?=_choices)/g)[0];
         complenda = div.readAttribute('data-plural');
         
-        new Ajax.Autocompleter(complendum+"_search", complendum+"_choices", "/"+complenda+"/matching", {
+        new Ajax.Autocompleter(complendum+"_search", complendum+"_choices", "/"+locale+"/"+complenda+"/matching", {
             paramName: "value",
             parameters: "ref="+complendum,
             minchars: 2,
@@ -157,6 +157,9 @@ activate_autocompletes = function(element){
 Event.observe(window, 'load', function(){  
 	activate_links($$('body')[0]);
     activate_autocompletes($$('body')[0]);
+    activate_language_tabs($$(".language-list"));
+    if ($('lexeme_dictionary_ids')) { $('lexeme_dictionary_ids').observe("change", fetch_languages); };
+    update_add_links();
 });
 
 // Simple add effect
@@ -167,6 +170,8 @@ function insert_with_effect(container, content){
     Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
     activate_links(container.previous());
     activate_autocompletes(container.previous());
+    activate_language_tabs(container.previous().select(".language-list li"));
+    update_add_links();
 };
 
 // For select-all textfields
@@ -175,3 +180,167 @@ function select_all(id){
 	document.getElementById(id).select();
 };
 
+// For language tabs
+activate_language_tabs = function(elements){
+    elements.each(function(list){
+        list.select('li').each(function(li){
+            if (li.hasClassName("selected") ) toggle_to_corresponding_content(li);
+        });
+
+        list.on("click", "li", function(ev, el){
+            ev.preventDefault();
+            items = list.select("li");
+            items.invoke('removeClassName', 'selected');
+            el.addClassName("selected");
+            toggle_to_corresponding_content(el);
+        });
+    });
+};
+
+function toggle_to_corresponding_content(tab){
+    list = tab.up(".language-list");
+    items = list.select("li");
+    content = list.previous(".language-content");
+    idx = items.indexOf(tab);
+    corresponding = content.childElements()[idx];
+    content.childElements().invoke('hide');
+    corresponding.show()
+}
+
+// Desired logic:
+// User changes the list of dictionaries.
+// Any translatable tags update with the new list as relevant.
+// Anything that's in "default language" should be updated to the appropriate language
+// AND! Anything in a tab that's been edited needs to be kept, maybe with a visible indicator if it isn't one of the output langs.
+// UGH.
+
+fetch_languages = function() {
+    $('lexeme_dictionary_ids').disable();
+    
+    $$(".translatable").each(function(content){
+        content.down('.language-content').childElements().invoke('disable');
+        
+        langtabs = content.down('.language-list ul');
+        langtabs.childElements().each(function(tab){ Effect.Fade(tab, {duration: 0.25})});
+        langtabs.insert({top: "<li class=\"throb\"><img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"12\" height=\"12\"></li>"});
+    });
+    
+    forms = $$(".translatable").collect(function(tag) {
+        return tag.readAttribute('data-form');
+    });
+
+    request = new Ajax.Request("/"+locale+"/dictionaries.json", {
+        method: "get",
+        parameters: { data: "langs", 'dictionaries[]': $('lexeme_dictionary_ids').getValue() },
+        onSuccess: function(response) { 
+            lang_hash = response.responseJSON;
+            update_languages(lang_hash);
+        },
+    });
+};
+
+function update_languages(languages) {
+    $('lexeme_dictionary_ids').enable();
+    update_add_links();
+    $$(".translatable").each(function(content){
+        oldlangs = content.down('.language-content').childElements().invoke('identify').invoke('gsub', /.*_/, '');
+        langtype = content.readAttribute("data-languages");
+        langtabs = content.down('.language-list ul');
+        // go through each language in the languages for the appropriate language class
+        languages[langtype].each(function(language){
+        // if an existing div is in the languages, keep it (moving it to the appropriate position); if it's not, flag it as not to be saved (if content) or remove it (if not)
+            if (oldlangs.include(language.code)) {
+                // old field and tab
+                oldfield = content.down('input[id$=_'+language.code+'],textarea[id$=_'+language.code+']');
+                oldtab_index = oldfield.up().childElements().indexOf(oldfield) + 1;  
+                oldtab = content.down('li', oldtab_index);
+
+                oldfield.enable();
+
+                // reposition tab & field
+                oldfield.up().appendChild(oldfield);
+                oldtab.up().appendChild(oldtab);
+                oldtab.removeClassName('warning');
+                Effect.Appear(oldtab, {duration: 0.25});
+            } else { 
+                // if it's in the languages and doesn't already have a field, duplicate, blanken, re-ID, and add it in its place     
+                oldfield = content.down('input,textarea');
+                oldtab = content.down('li', 1);
+                
+                newfield = oldfield.up().appendChild(oldfield.clone(true));
+                newfield.id = oldfield.identify().replace(/(.+_).+$/, "$1"+language.code);
+                newfield.name = oldfield.name.replace(/(.+_).*?\]$/, "$1"+language.code+"]");
+                newfield.clear();
+                newtab = oldtab.up().appendChild(oldtab.clone(true));
+                newtab.innerHTML = language.tab;
+                newtab.removeClassName('warning');
+                newtab.removeClassName('default');
+                Effect.Appear(newtab, {duration: 0.25});
+            }        
+        });
+        
+        dropped_languages = oldlangs.without.apply(oldlangs, languages[langtype].collect(function(lang){return lang.code}));
+        dropped_languages.each(function(language){
+            oldfield = content.down('input[id$=_'+language+'],textarea[id$=_'+language+']');
+            oldtab_index = oldfield.up().childElements().indexOf(oldfield) + 1;
+            oldtab = content.down('li', oldtab_index);
+            
+            if ($F(oldfield) == "") {
+                oldfield.remove();
+                oldtab.remove();
+            } else {
+
+                // if droppable is DEFAULT then add its content to any blank, then remove.
+                if (oldtab.hasClassName('default')) {
+                    clean_defaults(content, oldfield, oldtab);
+                    
+//                    newfields = content.select('input,textarea');
+//                    newfields.each(function(newfield) {
+//                        if (newfield.getValue() == "") { newfield.setValue($F(oldfield)); }
+//                    });
+//                    oldfield.remove();
+//                    oldtab.remove();
+                    
+                } else {
+                oldfield.enable();
+                oldtab.addClassName('warning');
+            
+                oldfield.up().appendChild(oldfield);
+                oldtab.up().appendChild(oldtab);
+                Effect.Appear(oldtab, {duration: 0.25});
+                }
+            }
+        });
+        
+        // deselect all tabs
+        langtabs.select('li').invoke('removeClassName', 'selected');
+        langtabs.select('li').invoke('removeClassName', 'solo');
+        langtabs.select('.throb').invoke('remove');
+        
+        // toggle to first
+        langtabs.down('li').addClassName('selected');
+        if (langtabs.select('li').length == 1) { langtabs.down('li').addClassName('solo') };
+        toggle_to_corresponding_content(langtabs.down('li'));
+        langtabs.setStyle({ width: content.down('input,textarea').getWidth() + "px" });
+        
+        content.down('.language-content').childElements().invoke('enable');
+    });
+};
+
+function update_add_links(){
+    $$(".pull_nested").each(function(anchor){
+        params = anchor.readAttribute('href').toQueryParams();
+        params['dictionaries[]'] = $('lexeme_dictionary_ids').getValue();
+        anchor.writeAttribute('href', anchor.pathname + '?' + Object.toQueryString(params));
+    });
+};
+
+// if a language is DEFAULT (old db style, or new lexeme) then add its content to any blank, then remove.
+function clean_defaults(content, oldfield, oldtab){  
+    newfields = content.select('input,textarea');
+    newfields.each(function(newfield) {
+        if (newfield.getValue() == "") { newfield.setValue($F(oldfield)); }
+    });
+    oldfield.remove();
+    oldtab.remove();
+}

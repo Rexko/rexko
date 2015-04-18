@@ -1,0 +1,59 @@
+en:
+    attestations:
+        shortform:
+            attested_form: "Attested form"
+            attested_form_abbr: "A"
+    loci:
+        create:
+            success: 'Locus was successfully created.'
+        edit:
+            page title: "Editing locus"
+            update: "Update"
+            back: "Back"
+            show: "Show"
+        form:
+            source: "Source"
+            search_for_author_or_title: 'search for author and/or title'
+            example: "Example"
+            potential_constructions: "Potential constructions"
+            potential_construction_html: "%{checkbox} <b>%{words_as_in_locus}</b> - %{words_listed} appear together in:"
+            see_more: "see more..."
+            five_listed_see_more_html: "(Five results out of %{total} listed; %{link_to_more})"
+            no_constructions_detected: "No potential constructions detected."
+            save_and_continue_editing: "Save and continue editing"
+        index:
+            page title: "Listing loci"
+            show: "Show"
+            edit: "Edit"
+            destroy: "Destroy"
+            confirm_destroy: 'Are you sure?'
+            new_locus: "New locus"
+            no_loci: "No loci to list"
+        new:
+            page title: "New locus"
+            create: "Create"
+            back: "Back"
+        show:
+            page title_html: "Showing locus from %{source}"
+            edit: "Edit"
+            back: "Back"
+        unattached:
+            unattached_to: "Unattached to %{forms}"  
+        update:
+            success: 'Locus was successfully updated.'
+    helpers:
+        label:
+            locus:
+                example: "Original language"
+                example_translation: "Translation"
+        loci:
+            new_sense: "(new definition in %{lang} under this subentry...)"
+    interpretations:
+        shortform:
+            sense: "Sense"
+            sense_abbr: "S"
+            add_new_sense: "Add new sense"
+    parses:
+        shortform:
+            parsed_form: "Parsed form"
+            parsed_form_abbr: "P"

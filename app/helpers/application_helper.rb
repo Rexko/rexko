@@ -2,7 +2,6 @@ module ApplicationHelper
   include ERB::Util
   
 	HW_LINK = "<span class='hw-link%s'>%s</span>"
-	NO_ENTRY_TEXT = "[No entry for <i>%s</i> &times;%d]"
 
   # lang_for: Builds a string with lang= and xml:lang= attributes usable in an 
   # XHTML element.  Takes as argument an element or an array.
@@ -40,7 +39,7 @@ module ApplicationHelper
   # times that headword is attested in the loci
   def new_headword_link (parse, is_wanted = false)
   	count = parse.respond_to?(:count_all) ? parse.count_all : parse.count
-  	no_entry = NO_ENTRY_TEXT % [html_escape(parse.parsed_form), count]
+  	no_entry = t('lexeme.no_entry_linktext', headword: html_escape(parse.parsed_form), count: count)
   
     link_to((HW_LINK % [(" wanted" if is_wanted), no_entry]).html_safe, 
     	exact_lexeme_path(:headword => parse.parsed_form))
@@ -83,9 +82,9 @@ module ApplicationHelper
   
   def remove_link_unless_new_record(form_builder)  
     unless form_builder.object.try(:new_record?)
-      "<span class=\"type-check\">#{form_builder.check_box(:_destroy)} #{form_builder.label(:_destroy, 'Delete', :class => 'delete_label')}</span>"
+      "<span class=\"type-check\">#{form_builder.check_box(:_destroy)} #{form_builder.label(:_destroy, t("helpers.delete_checkbox"), :class => 'delete_label')}</span>"
     else
-      "#{form_builder.hidden_field(:_destroy)} #{link_to("(remove)", "##{form_builder.object.class.name.underscore}", :class => 'remove delete_label')}"
+      "#{form_builder.hidden_field(:_destroy)} #{link_to(t("helpers.remove_link"), "##{form_builder.object.class.name.underscore}", :class => 'remove delete_label')}"
     end
   end
   
@@ -136,7 +135,8 @@ module ApplicationHelper
 		
 		unless options[:limit_one] && printed_child.present? 
 	  	output << content_tag(:div, :class => "par") do
-	  		link_to "Add #{options[:display_name] || child.to_s.humanize.downcase}", link_path, link_options
+        addendum = options[:display_name] || child.to_s.humanize.downcase
+	  		link_to t("helpers.link_to_add.#{addendum}", default: "Add #{addendum}"), link_path, link_options
 	  	end 
 	  end
 	  
@@ -161,9 +161,9 @@ module ApplicationHelper
     end
     
     sanitize(coll.to_sentence({
-      :words_connector => options[:spacer] || ", ",
-      :last_word_connector => options[:last_spacer] || options[:spacer] || ", ",
-      :two_words_connector => options[:dual_spacer] || options[:spacer] || ", "
+      :words_connector => options[:spacer] || t('helpers.spaced_render.words_connector', default: ", "),
+      :last_word_connector => options[:last_spacer] || options[:spacer] || t('helpers.spaced_render.last_word_connector', default: ", "),
+      :two_words_connector => options[:dual_spacer] || options[:spacer] || t('helpers.spaced_render.two_words_connector', default: ", ")
     }))
   end
   
@@ -187,7 +187,7 @@ module ApplicationHelper
   
   # Return @page_title, or a default of "Controller -  action".
   def page_title
-    html_escape (@page_title || [params[:controller].camelize, params[:action]].join(" - "))
+    html_escape (@page_title || I18n.t("#{params[:controller]}.#{params[:action]}.page title"))
   end
   
   # Translate a string in wiki format into HTML
@@ -200,7 +200,7 @@ module ApplicationHelper
       bb, eb = ('<b>' if bold), ('</b>' if bold)
       parse = yield $~[:lexeme], index if block_given?
       parse = "" << ":"" #{parse}" if parse.present?
-      "<a href=\"/html/#{$~[:lexeme]}\" title=\"#{$~[:lexeme]}#{parse}\">#{bb}#{$~[:stem] || $~[:lexeme]}#{$~[:ending]}#{eb}</a>"
+      "<a href=\"/#{I18n.locale}/html/#{$~[:lexeme]}\" title=\"#{$~[:lexeme]}#{parse}\">#{bb}#{$~[:stem] || $~[:lexeme]}#{$~[:ending]}#{eb}</a>"
     end
     output.html_safe 
   end
@@ -214,7 +214,7 @@ module ApplicationHelper
     form.fields_for child, child_obj do |child_form|
       ref = child_form.object_name
       
-      label_tag("#{ref}_search", child.to_s.titleize ) <<
+      label_tag("#{ref}_search", t("activerecord.models.#{child}")) <<
     
       if options[:custom_search]
         text_field_tag(:search, options[:custom_search], id: "#{ref}_search", placeholder: options[:prompt])
@@ -235,4 +235,45 @@ module ApplicationHelper
       end
     end
   end
+  
+  # Editing multiple languages - tabs to indicate the current language being worked on.
+  # languages = an array of language names.
+  def language_tabs languages
+    languages = [*languages]
+    
+    content_tag(:div, class: "language-list") do
+      content_tag(:ul) do
+        languages.each_with_index do |lang, index|
+          concat(content_tag(:li, {class: [("selected" if index == 0), ("solo" if languages.length == 1), ("default" if lang == Language::DEFAULT)]}) {
+            h lang
+            })
+        end
+      end
+    end
+  end
+  
+  def translatable_tag form, field, attribute, languages = [], html_options = {}
+    content_tag(:div, {class: "translatable", data: { languages: languages }}) do
+      default_locale = I18n.default_locale.to_s
+      languages = @langs ? [*@langs[languages]] : []
+    
+      # we should add default if it exists and isn't listed (the fallback 
+      # for legacy users whose data isn't in the right translation)
+      if (form.object.send("#{attribute}_#{default_locale.underscore}").present? && !languages.collect(&:iso_639_code).include?(default_locale)) 
+        languages = [Language::DEFAULT] | languages
+      end
+    
+      output = ActiveSupport::SafeBuffer.new
+    
+      output << content_tag(:div, class: "language-content") do
+        languages.each do |lang|
+          Globalize.with_locale(lang.iso_639_code) do
+            concat(form.send(field, "#{attribute}_#{lang.iso_639_code.underscore}", html_options))
+          end
+        end
+      end
+    
+      output << language_tabs(languages)
+    end
+  end 
 end

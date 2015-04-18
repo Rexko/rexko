@@ -1,3 +1,8 @@
 <div class="lexform-etymology" <%= lang_for(etymology) %>>
-		[<%= sanitize html_format(etymology) %><%= " (#{short_cite etymology.sources.first.authorship})" if etymology.sources.first.present?  %>]
+    <%= etym = sanitize html_format(etymology)
+        source = etymology.sources.first
+        (source.present? ? 
+            t('.etymology_with_cite', etymology: etym, cite: short_cite(source.authorship), default: "[%{etymology} (%{cite})]") : 
+            t('.etymology', etymology: etym, default: "[%{etymology}]")).html_safe
+    %>
 </div>

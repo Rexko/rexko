@@ -1,37 +1,31 @@
 <% unless (f.object._destroy) %>
-	<% nested_attributes_for f, :phonetic_forms %>
 	<fieldset class="headword">
 		<legend>
-			<%= label_with_remove_option_for "Headword #{headword_counter + 1 if defined? headword_counter}", f %>
+			<%= label_with_remove_option_for t('.headword'), f %>
 		</legend>
 		
 		<div class="type-text">
-	    	<%= f.label :form, "Orthographic form" %>
-	    	<%= f.text_field :form %>
+	    	<%= f.label :form, t('.orthographic_form') %>
+            <%= translatable_tag(f, :text_field, :form, :source) %>
+
             <small>
-                Acceptable: 
-                <span class="type-check"><%= f.check_box :descriptively_ok? %> <%= f.label :descriptively_ok?, 'descriptively' %> </span>
-                <span class="type-check"><%= f.check_box :prescriptively_ok? %> <%= f.label :prescriptively_ok?, 'prescriptively' %></span>
+                <%= t('.acceptibility_html', 
+                        descriptively: "<span class=\"type-check\">#{f.check_box :descriptively_ok?} #{ f.label :descriptively_ok? } </span>".html_safe,
+                        prescriptively: "<span class=\"type-check\">#{f.check_box :prescriptively_ok?} #{ f.label :prescriptively_ok? } </span>".html_safe) %>
             </small>
 	    	<% unattached = Parse.count_unattached_to(f.object.form)
 	    		 if unattached > 0 %>
 	    	<br/><small>
-					<i><%= link_to h(pluralize(unattached, "parse")), :controller => "loci", :action => "unattached", :forms => f.object.form %> unattached to this spelling</i>
+					<i><%= t('.unattached_html', count: unattached, link: (link_to t('.parse', count: unattached), :controller => "loci", :action => "unattached", :forms => f.object.form) ) %></i>
 				</small>
 				<% end %>
 
 	  </div>
 	
 	  <!-- Phonetic form -->
-	  	<%= f.fields_for :phonetic_forms do |pf_form| %>
-		    <%= render :partial => 'phonetic_form', :locals => { :f => pf_form } %>
-		  <% end %>
-			<div class="par">
-				<%= link_to 'Add phonetic form', '#phonetic_forms', :class => 'add_nested', :rel => "[headword][phonetic_forms]" %>
-			</div>
-		</ul>
+      <%= list_children_with_option_to_add :phonetic_form, f, remote: true, locals: { dictionaries: @dictionaries } %>
 
         <!-- Notes -->
-		<%= list_children_with_option_to_add :note, f, :remote => true %>
+		<%= list_children_with_option_to_add :note, f, :remote => true, locals: { dictionaries: @dictionaries } %>
 	</fieldset>
 <% end %>

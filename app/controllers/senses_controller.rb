@@ -26,6 +26,8 @@ class SensesController < ApplicationController
   def new
     @sense = Sense.new(params.slice(Sense.new.attribute_names))
     @path = params[:path].try(:sub, /(sense.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @dictionaries = Dictionary.where(id: params[:dictionaries]).all
+    @langs = Dictionary.langs_hash_for(@dictionaries)
     
     respond_to do |format|
       format.html do

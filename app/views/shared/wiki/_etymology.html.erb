@@ -1,1 +1,8 @@
-[<%= wiki_format etymology %><%= " (#{short_cite etymology.sources.first.authorship})" if etymology.sources.first.present?  %>]
+<%= etym = wiki_format etymology
+    cite = short_cite etymology.sources.first.authorship if etymology.sources.first.present?
+    if cite 
+        t('shared.etymology.etymology_with_cite', etymology: etym, cite: cite, default: "[%{etymology} (%{cite})]") 
+    else
+        t('shared.etymology.etymology', etymology: etym, default: "[%{etymology}]") 
+    end
+%>

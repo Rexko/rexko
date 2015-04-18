@@ -23,11 +23,8 @@ module LexemesHelper
     index = homographs.try(:index, lexeme) || 0
     sortkey = headword.form.capitalize.delete " " # This will eventually want language- or dictionary-sensitive rules
     
-    "{{%s|%s}}%s" % [
-      dict.try(:title),
-      sortkey,
-      (" #{roman_numeral(index.next)}." unless count == 1)
-    ]
+    dict_sort = "{{%s|%s}}" % [dict.try(:title), sortkey]
+    count == 1 ? dict_sort : t('helpers.lexemes.wikititle_with_ordinal', dictionary: dict_sort, ordinal: "#{roman_numeral(index.next)}", default: "%{dictionary} %{ordinal}.")
   end
   
   def roman_numeral(int)
@@ -40,13 +37,13 @@ module LexemesHelper
   end
 
   def titleize_headwords_for lexeme    
-    headwords = lexeme.headword_forms.inject([]) do |memo, form|
+    headwords = lexeme.headword_forms.compact.inject([]) do |memo, form|
       swapform = form.dup
       swapform[0,1] = swapform[0,1].swapcase
       
       memo.include?(swapform) ? memo : memo << form
     end
     
-    html_escape sentence_case(headwords.to_sentence(:two_words_connector  => ' or ', :last_word_connector => ", or "))
+    html_escape sentence_case(headwords.to_options_sentence(@dictionary.try(:definition_language)))
   end
 end

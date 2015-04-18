@@ -1,0 +1,18 @@
+en:
+    helpers:
+        link_to_add:
+            sort order: "Add sort order"
+            etymology: "Add etymology"
+            etymon: "Add etymon"
+            phonetic form: "Add phonetic form"
+        remove_link: "(remove)"
+        delete_checkbox: "Delete"
+        etymology:
+            from_ancestors: ", from %{ancestors}"
+            etym_where_word_is_from_ancestors: "%{etyms}; where %{word} is from %{ancestors}"
+            etym_and_where_word_is_from_ancestors: "%{etyms}, and where %{word} is from %{ancestors}"
+        authorship:
+            anonymous: "Anonymous"
+            untitled: "Untitled"
+        language:
+            default: "Default language"

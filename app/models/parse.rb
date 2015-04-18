@@ -1,7 +1,9 @@
 class Parse < ActiveRecord::Base
   has_many :interpretations
-  validates_presence_of :parsed_form
   belongs_to :parsable, :polymorphic => true
+  translates :parsed_form, :fallbacks_for_empty_translations => true
+  globalize_accessors :locales => (Language.all.collect(&:iso_639_code) | [I18n.default_locale])  
+  
   
   # Returns parses without entries (determined by comparing parsed_form to headword forms).
   # Initial letter case insensitive (if the DB is smart enough)
@@ -87,4 +89,8 @@ class Parse < ActiveRecord::Base
   def self.rejectable?(attributes)
     attributes[:parsed_form].blank?
   end
+end
+
+Parse::Translation.class_eval do
+  validates :parsed_form, presence: true
 end

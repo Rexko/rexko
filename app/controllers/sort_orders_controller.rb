@@ -2,6 +2,7 @@ class SortOrdersController < ApplicationController
   def new
     @sort_order = SortOrder.new(params.slice(SortOrder.new.attribute_names))
     @path = params[:path].try(:sub, /(sort_order.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @locale_name = Language.where(iso_639_code: I18n.locale).first.name
     
     respond_to do |format|
       format.html do

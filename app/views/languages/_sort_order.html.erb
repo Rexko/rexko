@@ -1,15 +1,16 @@
 ﻿	<fieldset class="sort_order">
-		<legend><%= label_with_remove_option_for "Default sort", f %></legend>
+		<legend><%= label_with_remove_option_for t(".default_sort"), f %></legend>
 			<div class="type-text">
-				<%= f.label :name %>
+				<%= f.label :name, t(".name") %>
 				<%= f.text_field :name %>
+                <%= language_tabs @locale_name %>
 
-				<%= f.label :substitutions %>
-				<i>If X sorts as if it were Y, enter:</i> <tt>X Y</tt> <i>(one rule per line)</i>
+				<%= f.label :substitutions, t(".substitutions") %>
+				<%= t(".substitutions_hint_html") %>
 				<%= f.text_area :substitutions, value: friendly_subst(f.object.substitutions) %>
 
-				<%= f.label :orderings %>
-				<i>If Ý sorts after Y, enter</i> <tt>Y Ý</tt> <i>(one rule per line)</i>
+				<%= f.label :orderings, t(".orderings") %>
+				<%= t(".orderings_hint_html") %>
 				<%= f.text_area :orderings, value: friendly_order(f.object.orderings) %>
 			</div>
 	</fieldset>

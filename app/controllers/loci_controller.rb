@@ -19,6 +19,7 @@ class LociController < ApplicationController
   # GET /loci/1.xml
   def show
     @locus = Locus.includes(:parses => {:interpretations => :sense}).find(params[:id])
+    @page_title = t('loci.show.page title_html', source: view_context.cited_name(@locus.source.authorship)).html_safe
 
     respond_to do |format|
       format.html # show.html.erb
@@ -47,6 +48,7 @@ class LociController < ApplicationController
   # GET /loci/1/edit
   def edit
     @locus = Locus.where(:id => params[:id]).includes(:attestations => {:parses => :interpretations}).first
+    @locale_name = Language.where(iso_639_code: I18n.locale).first.try(:name)
     @source = @locus.source
     @authorship = @source.authorship if @source
     @nests = {}
@@ -89,10 +91,12 @@ class LociController < ApplicationController
 
     respond_to do |format|
       if @locus.save
-        flash[:notice] = 'Locus was successfully created.'
+        flash[:notice] = t('loci.create.success')
         format.html do
           case params[:commit]
-          when "Create and continue editing" then redirect_to :action => 'edit', :id => @locus.id, :status => 303
+          when I18n.t('loci.form.save_and_continue_editing') 
+            @locale_name = Language.where(iso_639_code: I18n.locale).first.name
+            redirect_to :action => 'edit', :id => @locus.id, :status => 303
           else redirect_to(@locus)
           end
         end
@@ -127,10 +131,12 @@ class LociController < ApplicationController
 
     respond_to do |format|
       if @locus.save
-        flash[:notice] = 'Locus was successfully updated.'
+        flash[:notice] = t('loci.update.success')
         format.html do
           case params[:commit]
-          when "Update and continue editing" then redirect_to :action => "edit", :status => 303
+          when I18n.t('loci.form.save_and_continue_editing') 
+            @locale_name = Language.where(iso_639_code: I18n.locale).first.name
+            redirect_to :action => "edit", :status => 303
           else redirect_to(@locus)
           end
         end
@@ -165,7 +171,7 @@ class LociController < ApplicationController
  		end
 
   	@parsables = Parse.unattached_to(forms).paginate(:page => params[:page], :per_page => 5)
-  	@page_title = "Unattached to %s" % forms.to_sentence
+  	@page_title = I18n.t('loci.unattached.unattached_to', forms: forms.to_sentence)
     
     render "parsable/index"
   end

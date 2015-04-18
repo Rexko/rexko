@@ -1,8 +1,8 @@
 <% unless (f.object._destroy) %>
   <div class="phonetic_form">
 		<div class="type-text">		
-	    <%= f.label :form, label_with_remove_option_for("Phonetic Form", f) %>
-	    <%= f.text_field :form %>
+	    <%= f.label :form, label_with_remove_option_for(t('.phonetic_form'), f) %>
+	    <%= translatable_tag f, :text_field, :form, :source %>
 		</div>
   </div>
 <% end %>

@@ -1,0 +1,61 @@
+la:
+    attestations:
+        shortform:
+            attested_form: "Forma attestata"
+            attested_form_abbr: "At"
+    loci:
+        create:
+            success: 'Locum prospere creavisti.'
+        edit:
+            page title: "Recensio loci"
+            update: "Servare"
+            back: "Redire"
+            show: "Monstrare"
+        form:
+            source: "Fons"
+            search_for_author_or_title: 'quaerere scriptorem aut titulum'
+            example: "Exemplum"
+            potential_constructions: "Fortasse constructiones"
+            potential_construction_html: "%{checkbox} <b>%{words_as_in_locus}</b> - %{words_listed} hic cunctim videntur:"
+            see_more: "plus videre..."
+            five_listed_see_more_html: "(5 ex %{total} dantur; %{link_to_more})"
+            no_constructions_detected: "Nil quae potest constructio esse inveni."
+            save_and_continue_editing: "Servare et recensionem resumere"
+        index:
+            page title: "Index locorum"
+            show: "Monstrare"
+            edit: "Mutare"
+            destroy: "Delere"
+            confirm_destroy: 'Vero hunc locum delere?'
+            new_locus: "Novum locum referre"
+            no_loci: "Nulli loci inventi"
+        new:
+            page title: "Novum locum referre"
+            create: "Condere"
+            back: "Redire"
+        show:
+            page title_html: "Locum ex \"%{source}\" monstrans"
+            edit: "Mutare"
+            back: "Redire"
+        unattached:
+            unattached_to: 
+                one: "Ad \"%{forms}\" inconexus"
+                other: "Ad \"%{forms}\" inconexi"
+        update:
+            success: 'Locum prospere mutavisti.'
+    helpers:
+        label:
+            locus:
+                example: "Ipsius lingua"
+                example_translation: "Redditum"
+        loci:
+            new_sense: "(addere sensum sub hoc sublemma, %{lang} scriptum...)"
+    interpretations:
+        shortform:
+            sense: "Sensus"
+            sense_abbr: "Se"
+            add_new_sense: "Addere sensum"
+    parses:
+        shortform:
+            parsed_form: "Analysis"
+            parsed_form_abbr: "An"

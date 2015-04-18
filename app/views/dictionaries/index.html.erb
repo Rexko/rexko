@@ -1,23 +1,27 @@
-<h1>Listing dictionaries</h1>
-
 <table>
-  <tr>
-    <th>Title</th>
-  </tr>
+    <tr>
+        <th><%= t('.title') %></th>
+        <th colspan="3"><%= t('.actions') %></th>
+    </tr>
 
-<% for dictionary in @dictionaries %>
-  <tr>
-    <td>
-			<span class="dictform-title" <%= lang_for (dictionary) %>><%=h dictionary.title %></span> 
-	 		(<%=h "#{dictionary.source_language.try(:name)}/#{dictionary.target_language.try(:name)} " %><%=h "in #{dictionary.language.try(:name)}" %>)
-		</td>
-    <td><%= link_to 'Show', dictionary %></td>
-    <td><%= link_to 'Edit', edit_dictionary_path(dictionary) %></td>
-    <td><%= link_to 'Destroy', dictionary, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+    <% for dictionary in @dictionaries %>
+    <tr>
+        <td>
+            <span class="dictform-title" <%= lang_for (dictionary) %>><%=h dictionary.title %></span>
+            <br> 
+            <em><%= t('.languages', 
+                    source: dictionary.source_language.try(:name),
+                    target: dictionary.target_language.try(:name),
+                    language: dictionary.language.try(:name)
+                    )%></em>
+        </td>
+        <td><%= link_to t('.show'), dictionary %></td>
+        <td><%= link_to t('.edit'), edit_dictionary_path(dictionary) %></td>
+        <td><%= link_to t('.destroy'), dictionary, :confirm => t('.confirm_destroy', title: dictionary.title), :method => :delete %></td>
+    </tr>
+    <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New dictionary', new_dictionary_path %>
+<%= link_to t('.new'), new_dictionary_path %>

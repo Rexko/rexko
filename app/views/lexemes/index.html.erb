@@ -1,5 +1,3 @@
-<h1>Listing lexemes</h1>
-
 <table>
   <tr>
   </tr>
@@ -11,15 +9,15 @@
 		</td>
 	</tr>
   <tr>
-    <td><%= link_to 'Show', lexeme %></td>
-    <td><%= link_to 'Edit', edit_lexeme_path(lexeme) %></td>
-    <td><%= link_to 'Destroy', lexeme, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to t('.show'), lexeme %></td>
+    <td><%= link_to t('.edit'), edit_lexeme_path(lexeme) %></td>
+    <td><%= link_to t('.destroy'), lexeme, :confirm => t('.confirm_destroy', headwords: titleize_headwords_for(lexeme)), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New lexeme', new_lexeme_path %>
+<%= link_to t('.new_lexeme'), new_lexeme_path %>
 
 <%= will_paginate @lexemes %>

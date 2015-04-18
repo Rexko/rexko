@@ -7,9 +7,11 @@ class Sense < ActiveRecord::Base
   has_many :parses, :through => :interpretations
   has_many :notes, :as => :annotatable
   validate :validate_sufficient_data
+  translates :definition, :fallbacks_for_empty_translations => true
+  globalize_accessors :locales => (Language.all.collect(&:iso_639_code) | [I18n.default_locale])
   
   accepts_nested_attributes_for :parses, :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
-  accepts_nested_attributes_for :glosses, :allow_destroy => true, :reject_if => proc {|attrs| Gloss.rejectable?(attrs) }
+  accepts_nested_attributes_for :glosses, :allow_destroy => true, :reject_if => proc {|attrs| Gloss.new(attrs).invalid? }
   
   HASH_MAP_TO_PARSE = { :interpretations => Interpretation::HASH_MAP_TO_PARSE }
   

@@ -1,9 +1,11 @@
 class Gloss < ActiveRecord::Base
   belongs_to :sense
-  validates_presence_of :gloss
+  validate :any_gloss_present?
   belongs_to :language
   has_many :parses, :as => :parsable, :dependent => :destroy
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+  translates :gloss, :fallbacks_for_empty_translations => true
+  globalize_accessors :locales => (Language.all.collect(&:iso_639_code) | [I18n.default_locale])  
   
   scope :attesting, lambda {|parsables, type|
     joins(HASH_MAP_TO_PARSE).where({ :parses => { :parsable_id => parsables, :parsable_type => type }})
@@ -22,7 +24,12 @@ class Gloss < ActiveRecord::Base
   end
   
   # Determine whether we should hit reject_if when something accepts_nested_attributes_for glosses.
-  def self.rejectable?(attrs)
-    attrs[:gloss].blank?
+protected
+  def any_gloss_present?
+    # attrs[:gloss].blank? # before we had i18n
+    # attrs = attrs.attributes if attrs.is_a? Gloss
+    unless attributes.select {|k,v| k.start_with?("gloss")}.any? {|k,v| v.present? }
+      errors.add(:gloss, I18n.t('errors.messages.blank'))
+    end
   end
 end

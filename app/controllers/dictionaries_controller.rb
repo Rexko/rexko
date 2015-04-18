@@ -3,11 +3,25 @@ class DictionariesController < ApplicationController
   # GET /dictionaries
   # GET /dictionaries.xml
   def index
-    @dictionaries = Dictionary.includes([:language, :source_language, :target_language]).all
+    @dictionaries = (params[:dictionaries].present? \
+      ? Dictionary.where(id: params[:dictionaries])
+      : Dictionary).includes([:language, :source_language, :target_language]).all.sort_by {|d| d.title }
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @dictionaries }
+      format.json { 
+        case params[:data] 
+        when "langs" 
+          hsh = Dictionary.langs_hash_for(@dictionaries)
+          hsh = hsh.collect do |categ, langs| 
+            [categ, langs.collect {|lang| { tab: lang.to_s, code: lang.iso_639_code }}]
+          end
+          
+          render json: Hash[hsh]
+        else render nothing: true, status: 403
+        end
+      }
     end
   end
 
@@ -18,6 +32,7 @@ class DictionariesController < ApplicationController
     @source_language = (@dictionary.source_language || Language::UNDETERMINED)
     unsorted_lexemes = @dictionary.lexemes.includes([{:dictionaries => [:source_language]}, {:headwords => [:phonetic_forms, :language]}, {:subentries => [{:senses => [{:glosses => :language}, :notes, :language]}, {:etymologies => [:notes, :original_language, {:next_etymon => [:notes, :original_language, :next_etymon] }]}, {:notes => :language}, :language]}])
     @lexemes = @source_language.sort(unsorted_lexemes, by: :primary_headword)
+    @page_title = @dictionary.title
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,7 +53,7 @@ class DictionariesController < ApplicationController
 
   # GET /dictionaries/1/edit
   def edit
-    @dictionary = Dictionary.find(params[:id])
+    @dictionary = Dictionary.includes(:language).find(params[:id])
   end
 
   # POST /dictionaries
@@ -48,7 +63,7 @@ class DictionariesController < ApplicationController
 
     respond_to do |format|
       if @dictionary.save
-        flash[:notice] = 'Dictionary was successfully created.'
+        flash[:notice] = t('dictionaries.create.success')
         format.html { redirect_to(@dictionary) }
         format.xml  { render :xml => @dictionary, :status => :created, :location => @dictionary }
       else
@@ -65,7 +80,7 @@ class DictionariesController < ApplicationController
 
     respond_to do |format|
       if @dictionary.update_attributes(params[:dictionary])
-        flash[:notice] = 'Dictionary was successfully updated.'
+        flash[:notice] = t('dictionaries.update.success')
         format.html { redirect_to(@dictionary) }
         format.xml  { head :ok }
       else

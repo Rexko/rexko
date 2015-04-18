@@ -1,9 +1,7 @@
-<h1>New language</h1>
-
 <%= error_messages_for :language %>
 
 <%= # @action = "Create"
-		render(:partial => "form", :object => { :label => 'Create', :action => 'create', :method => :post, :for_url => '/languages' }) 
+		render(:partial => "form", :object => { :label => t('.create_button'), :action => 'create', :method => :post, :for_url => "/#{I18n.locale}/languages" }) 
 		%>
 
-<%= link_to 'Back', languages_path %>
+<%= link_to t(".back"), languages_path %>

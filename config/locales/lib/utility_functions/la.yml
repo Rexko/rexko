@@ -1,0 +1,6 @@
+la:
+    support:
+        array:
+            options_connector: ", "
+            two_options_connector: " vel "
+            last_option_connector: ", vel "

@@ -1,0 +1,7 @@
+la:
+  lexeme:
+    search:
+      options:
+        - 'partim'
+        - 'in toto'
+    no_entry_linktext: '[Lemma <i>%{headword}</i> abest &times;%{count}]'

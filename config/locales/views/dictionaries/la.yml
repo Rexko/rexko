@@ -1,0 +1,35 @@
+la:
+    dictionaries:
+        index:
+            page title: "Index lexicorum"
+            title: "Titulus"
+            actions: "Actiones"
+            languages: "%{source}/%{target}, %{language} scriptum"
+            show: "Monstrare"
+            edit: "Mutare"
+            destroy: "Delere"
+            confirm_destroy: "Vero delere lexicon '%{title}'?\nHoc deleto, ipsius lexes non delebuntur."
+            new: "Lexicon novum referre"
+        create:
+            success: "Lexicon prospere creavisti."
+        edit:
+            page title: "Recensio lexici"
+            update: "Servare"
+            show: "Monstrare"
+            back: "Redire"
+        form:
+            title: "Titulus"
+            definition_language: "Lingua definitionum"
+            headword_language: "Lingua lemmatum"
+            gloss_language: "Lingua glossarum"
+            external_address: "Nexus externus"
+        show:
+            no_principal_parts: "<Partes principales absunt>"
+            edit: "Mutare"
+            back: "Redire"
+        update:
+            success: 'Lexicon prospere mutavisti.'
+        new:
+            page title: "Novum lexicon referre"
+            create: "Condere"
+            back: "Redire"

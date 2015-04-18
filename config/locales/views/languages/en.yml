@@ -1,0 +1,35 @@
+en:
+    languages:
+        edit:
+            page title: "Editing language"
+            update_button: 'Update'
+            success: 'Language was successfully updated.'
+            show: 'Show'
+            back: 'Back'
+        form:
+            name_prompt: "Name:"
+            code_prompt: "Code:"
+        index:
+            page title: "Listing languages"
+            name: "Name"
+            actions: "Actions"
+            show: 'Show'
+            edit: 'Edit'
+            destroy: 'Destroy'
+            confirm_destroy: "Really delete '%{language}'?\nThis will not delete words or dictionaries using this language."
+            new_language: 'New language'
+        new:
+            page title: "Creating language"
+            create_button: 'Create'
+            success: 'Language was successfully created.'
+            back: 'Back'
+        show:
+            page title: "Language"
+            name_and_code: "Name and code"
+        sort_order:
+            default_sort: "Default sort"
+            name: "Name"
+            substitutions: 'Letters sorting together'
+            substitutions_hint_html: "<i>If X sorts as if it were Y, enter:</i> <tt>X Y</tt> <i>(one rule per line)</i>"
+            orderings: 'Custom letter orders'
+            orderings_hint_html: "<i>If Ý sorts after Y, enter:</i> <tt>Y Ý</tt> <i>(one rule per line)</i>"

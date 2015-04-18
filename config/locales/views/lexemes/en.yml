@@ -1,0 +1,97 @@
+en:
+    lexemes:
+        create:
+            successful_create: "Lexeme was successfully created."
+            create_another: "Create another?"
+        index:
+            page_title: "Listing lexemes"
+            show: "Show"
+            edit: "Edit"
+            destroy: "Destroy"
+            confirm_destroy: "Really destroy \"%{headwords}\"?"
+            new_lexeme: "New lexeme"
+        edit:
+            page_title: "Editing lexeme \"%{headwords}\""
+            update: "Update"
+            show: "Show"
+            back: "Back"
+        new:
+            page_title_with_headwords: "Creating lexeme \"%{headwords}\""
+            page_title: "Creating lexeme"
+            create: "Create"
+            back: "Back"
+        form:
+            dictionary: "Dictionary"
+            add_headword: "Add headword"
+            add_subentry: "Add subentry"
+            save_and_continue_editing: "Save and continue editing"
+        headword:
+            headword: "Headword"
+            orthographic_form: "Orthographic form"
+            acceptibility_html: "Acceptable: %{descriptively} %{prescriptively}"
+            parse:
+                one: "one parse"
+                other: "%{count} parses"
+            unattached_html: "%{link} unattached to this spelling"
+        matching:
+            results: 
+                one: "Lexemes - %{count} result for \"%{query}\""
+                other: "Lexemes - %{count} results for \"%{query}\""
+        phonetic_form:
+            phonetic_form: "Phonetic form"
+        sense:
+            sense: "Sense"
+        show_by_headword:
+            new_lexeme_prompt_html: "There is no lexeme with <i>%{headword}</i> as headword.  You can create one below."
+        subentry:
+            subentry: "Subentry"
+            add_note: "Add note"
+        etymothesis:
+            etymology: "Etymology"
+        show:
+            constructions: "Constructions"
+            loci: "Loci"
+            unattached_parse:
+                one: "one unattached parse"
+                other: "%{count} unattached parses"
+            found_unattached_parse_html: "<i>Found %{link} pointing to a lexeme with this spelling.</i>"
+            headword_this_entry_html: "%{link} — This entry"
+            headword_all_entries_html: "%{link} — All entries"
+            edit: "Edit"
+            back_to_lexemes: "Back to lexemes"
+            back_to_dictionary: "Back to %{dictionary}"
+        update:
+            successful_update: "Lexeme was successfully updated."
+            create_new: "Create a new lexeme?"
+    etymologies:
+        shortform:
+            etymon: "Etymon"
+    glosses:
+        shortform:
+            gloss: "Gloss"
+    helpers:
+        label:
+            headword:
+                descriptively_ok?: "descriptively"
+                prescriptively_ok?: "prescriptively"
+            subentry:
+                paradigm: "Principal parts"
+                part_of_speech: "Part of speech"
+    interpretations:
+        lexemeform:
+            sense: "Sense"
+    notes:
+        shortform:
+            note: "Note"               
+    parses:
+        lexemeform:
+            parse: "Parse"
+    shared:
+        subentry:
+            no_principal_parts: "<No principal parts>"
+            no_part_of_speech: "<No part of speech>"
+        note:
+            construction: "[constr.]"
+        wiki:
+            note:
+                construction_note: "constr."

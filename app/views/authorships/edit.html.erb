@@ -1,14 +1,12 @@
-<h1>Editing authorship</h1>
-
 <%= error_messages_for :authorship %>
 
-<%= form_for @authorship do |authorship_form|  %>
+<%= form_for @authorship, html: {class: "yform"} do |authorship_form|  %>
     <%=	render partial: "form", locals: { authorship_form: authorship_form }  %>
 
-  <p>
-    <%= authorship_form.submit "Update" %>
-  </p>
+  <div class="type-button">
+    <%= authorship_form.submit t(".update") %>
+  </div>
 <% end %>
 
-<%= link_to 'Show', @authorship %> |
-<%= link_to 'Back', authorships_path %>
+<%= link_to t('.show'), @authorship %> |
+<%= link_to t('.back'), authorships_path %>

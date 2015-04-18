@@ -6,7 +6,7 @@ class SenseTest < ActiveSupport::TestCase
     assert_no_difference 'Gloss.count' do
       Sense.find_each do |sen|
         guro = sen.glosses.build(gloss: "")
-        assert Gloss.rejectable?(guro), "#{sen.id}: attributes #{guro.attributes}"
+        assert guro.invalid?, "#{sen.id}: attributes #{guro.attributes}"
       end
     end
   end

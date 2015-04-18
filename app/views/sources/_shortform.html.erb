@@ -1,0 +1,12 @@
+<fieldset class="source">
+    <legend><%= label_with_remove_option_for t('.source'), f %></legend>
+    <div class="type-text">
+        <%= autocomplete :authorship, f, 
+            custom_search: cited_name(f.object.authorship, format: :text), 
+            prompt: t('.search_for_author_or_title') %>
+    </div>
+	<div class="type-text">
+	  <%= f.label :pointer %>
+	  <%= f.text_field :pointer %>
+	</div>
+</fieldset>

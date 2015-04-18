@@ -11,3 +11,15 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+class ActionView::TestCase
+  setup :controller_with_default_locale
+  
+  def controller_with_default_locale
+    @controller = TestController.new
+    
+    def @controller.default_url_options(options = {})
+      { locale: 'en' }
+    end
+  end
+end

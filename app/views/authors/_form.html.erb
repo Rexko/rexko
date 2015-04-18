@@ -1,35 +1,35 @@
 <fieldset class="author yform">
-    <legend>Author</legend>
+    <legend><%= t('.author') %></legend>
     
     <div class="type-text">
-        <%= author_form.label :name, "Full Name" %>
+        <%= author_form.label :name %>
         <%= author_form.text_field :name %>
         <small>
-            Full name as it would appear in a list, e.g. <i>Smith, John</i> or <i>Zhang Wei</i>.
+            <%= t('.name_hint_html') %>
         </small>
     </div>
 
     <div class="type-text">
-        <%= author_form.label :romanized_name, "Transliteration" %>
+        <%= author_form.label :romanized_name %>
         <%= author_form.text_field :romanized_name %>
         <small>
-            If applicable.
+            <%= t('.romanized_name_hint_html')%>
         </small>
     </div>
 
     <div class="type-text">
-        <%= author_form.label :short_name, "Short form name" %>
+        <%= author_form.label :short_name %>
         <%= author_form.text_field :short_name %>
         <small>
-            Name to use in short citations of the type (<i>Smith</i>, 1963).
+            <%= t('.short_name_hint_html')%>
         </small>
     </div>
 
     <div class="type-text">
-        <%= author_form.label :sort_key, "Sort key" %>
+        <%= author_form.label :sort_key %>
         <%= author_form.text_field :sort_key %>
         <small>
-            Form of the name to sort by, if different from full name given above.  
+            <%= t('.sort_key_hint_html')%>
         </small>
     </div>
 </fieldset>

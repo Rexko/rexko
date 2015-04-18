@@ -6,6 +6,7 @@ class Source < ActiveRecord::Base
   # => would be nice:
   # has_one :title, "through" => :authorship
   # has_one :author, "through" => :authorship  
+  translates :pointer
   
   accepts_nested_attributes_for :authorship, :allow_destroy => false, reject_if: :all_blank
   

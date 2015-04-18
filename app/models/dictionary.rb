@@ -23,4 +23,8 @@ class Dictionary < ActiveRecord::Base
   def definition_language
     language.try(:iso_639_code) || "und"
   end
+  
+  def self.langs_hash_for(dicts)
+    Language.langs_hash_for(dicts, vernacular: :language, source: :source_language, target: :target_language)
+  end
 end

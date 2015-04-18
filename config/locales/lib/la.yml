@@ -1,0 +1,204 @@
+la:
+  date:
+    abbr_day_names:
+    - Sol
+    - Lun
+    - Mar
+    - Mer
+    - Iov
+    - Ven
+    - Sat
+    abbr_month_names:
+    -
+    - Ian
+    - Feb
+    - Mar
+    - Apr
+    - Mai
+    - Iun
+    - Iul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day_names:
+    - dies Solis
+    - dies Lunae
+    - dies Martis
+    - dies Mercurii
+    - dies Iovis
+    - dies Veneris
+    - dies Saturni
+    formats:
+      default: ! '%Y-%m-%d'
+      long: ! '%B %d, %Y'
+      short: ! '%b %d'
+    month_names:
+    -
+    - 'Ianuarius'
+    - 'Februarius'
+    - 'Martius'
+    - 'Aprilis'
+    - 'Maius'
+    - 'Iunius'
+    - 'Iulius'
+    - 'Augustus'
+    - 'September'
+    - 'October'
+    - 'November'
+    - 'December'
+    order:
+    - :year
+    - :month
+    - :day
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: circiter horam
+        other: horas circiter %{count}
+      about_x_months:
+        one: circiter mensem
+        other: menses circiter %{count}
+      about_x_years:
+        one: circiter annum
+        other: annos circiter %{count}
+      almost_x_years:
+        one: fere annum
+        other: annos fere %{count}
+      half_a_minute: dimidium minuti
+      less_than_x_minutes:
+        one: minus quam minutum unum
+        other: minus quam minuta %{count}
+      less_than_x_seconds:
+        one: minus quam secundum unum
+        other: minus quam secunda %{count}
+      over_x_years:
+        one: plus quam annum unum
+        other: plus quam annos %{count}
+      x_days:
+        one: dies unus
+        other: ! 'dies %{count}'
+      x_minutes:
+        one: minutum unum
+        other: ! 'minuta %{count}'
+      x_months:
+        one: mensis unus
+        other: ! 'menses %{count}'
+      x_seconds:
+        one: secundum unum
+        other: ! 'secunda %{count}'
+    prompts:
+      day: Dies
+      hour: Hora
+      minute: Minutum
+      month: Mensis
+      second: Secunda
+      year: Annus
+  errors:
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: recipendum est
+      blank: oportet non esse inanis
+      present: oportet esse inanis
+      confirmation: ! "cum %{attribute} non constat"
+      empty: oportet non esse vanus
+      equal_to: aequandum est %{count}
+      even: oportet esse par
+      exclusion: reservatus est
+      greater_than: oportet plus quam %{count} esse
+      greater_than_or_equal_to: oportet esse plus quam %{count} aut aequus 
+      inclusion: in hoc numero non includitur
+      invalid: irritus est
+      less_than: oportet minus quam %{count} esse
+      less_than_or_equal_to: oportet esse minus quam %{count} aut aequus
+      not_a_number: numerus non est
+      not_an_integer: oportet esse integer
+      odd: oportet esse impar
+      record_invalid: ! 'Inspectio errores invenit: %{errors}'
+      restrict_dependent_destroy:
+        one: "Nequis hoc delere quia %{record} dependens iam est"
+        many: "Nequis hoc delere quia %{record} dependentes %{record} iam sunt"
+      taken: iam adhibetur
+      too_long:
+        one: nimis longus est (oportet habere dumtaxat unum characterem)
+        other: nimis longus est (oportet habere dumtaxat %{count} characteres)
+      too_short:
+        one: nimis brevis est (oportet habere dumtaxat unum characterem)
+        other: nimis brevis est (oportet habere dumtaxat %{count} characteres)
+      wrong_length:
+        one: longitudine prava est (oportet habere unum characterem)
+        other: longitudine prava est (oportet habere %{count} characteres)
+      other_than: "differendum est a %{count}"
+    template:
+      body: ! 'Quaeso, corrige hos errores:'
+      header:
+        one: Ob unum errorem hic %{model} non potuit servari
+        other: ! 'Ob %{count} errores hic %{model} non potuit servari.'
+  helpers:
+    select:
+      prompt: "Quaeso, elige"
+    submit:
+      create: Creare %{model}
+      submit: Condere %{model}
+      update: Mutare %{model}
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%u%n'
+        precision: 2
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: $
+    format:
+      delimiter: ! ','
+      precision: 3
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: Miliardum
+          million: Milio
+          quadrillion: Biliardum
+          thousand: Mille
+          trillion: Bilio
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Octetus
+            other: Octeti
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ! ', et '
+      two_words_connector: ! ' et '
+      words_connector: ! ', '
+  time:
+    am: am
+    formats:
+      default: ! '%a, %d %b %Y %H:%M:%S %z'
+      long: ! '%B %d, %Y %H:%M'
+      short: ! '%d %b %H:%M'
+    pm: pm

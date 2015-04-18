@@ -1,1 +1,5 @@
-<li><b><%= link_to construction.headwords.first.form, construction, { :name => "construction-#{construction.id}"} %></b> &mdash; <%= spaced_render :partial => "shared/author", :collection => @authors_of[construction], :locals => { :construction => construction, :spacer => "; "} %>
+<li><%=
+    form_link = link_to(construction.headwords.first.form, construction, { :name => "construction-#{construction.id}"})
+    authors = spaced_render(partial: "shared/author", collection: @authors_of[construction], locals: { construction: construction, spacer: t('.author_spacer', default: "; ")})
+    t('.construction_html', form_link: form_link, authors: authors, default: "<b>%{form_link}</b> &mdash; %{authors}")
+    %>

@@ -1,0 +1,6 @@
+en:
+    support:
+        array:
+            options_connector: ", "
+            two_options_connector: " or "
+            last_option_connector: ", or "

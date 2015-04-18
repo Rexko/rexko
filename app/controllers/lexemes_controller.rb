@@ -4,6 +4,7 @@ class LexemesController < ApplicationController
   # GET /lexemes.xml
   def index
     @lexemes = Lexeme.sorted.includes([{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}]).paginate(:page => params[:page])
+    @page_title = t('lexemes.index.page_title')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +15,7 @@ class LexemesController < ApplicationController
   def matching
     @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => params[:matchtype] || Lexeme::SUBSTRING)
     
-    @page_title = "Lexemes - #{@lexeme.length} results for \"#{params[:headword]}\""
+    @page_title = t('lexemes.matching.results', count: @lexeme.length, query: params[:headword])
     @lexemes = @lexeme.paginate(:page => params[:page], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}])
 
     respond_to do |format|
@@ -34,10 +35,23 @@ class LexemesController < ApplicationController
     @loci_for_sense = Hash[@lexeme.senses.collect { |sense| [sense, Locus.attesting_sense(sense)] }]
     @authors_of = Hash[@constructions.collect {|construction| [construction, construction.loci.collect(&:source).collect(&:author).uniq] }]
     @loci_by = Hash[@authors_of.collect { |construction, authors| [construction, Hash[authors.collect {|author| [author, Locus.attesting([construction, @lexeme]).find(:all, :joins => { :source => :authorship }, :conditions => { :id => construction.loci, :authorships => {:author_id => author}}, :group => "loci.id")] }]]}]
+    @page_title = view_context.titleize_headwords_for @lexeme
 
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @lexeme }
+      format.json { 
+        case params[:data] 
+        when "langs" 
+          hsh = Dictionary.langs_hash_for(@lexeme.dictionaries)
+          hsh = hsh.collect do |categ, langs| 
+            [categ, langs.collect {|lang| { tab: lang.to_s, code: lang.iso_639_code }}]
+          end
+          
+          render json: Hash[hsh]
+        else render nothing: true, status: 403
+        end
+      }
     end
   end
 
@@ -46,7 +60,7 @@ class LexemesController < ApplicationController
     
     case @lexeme.length
     when 0
-      flash[:notice] = "There is no lexeme with <i>#{params[:headword]}</i> as headword.  You can create one below."
+      flash[:notice] = t('lexemes.show_by_headword.new_lexeme_prompt_html', headword: params[:headword])
       flash[:headword] = params[:headword]
       respond_to do |format|
         format.html { redirect_to :action => 'new' }
@@ -68,9 +82,14 @@ class LexemesController < ApplicationController
   # GET /lexemes/new
   # GET /lexemes/new.xml
   def new
-    @lexeme = Lexeme.new(:dictionaries => [])
-    @lexeme.headwords.build(:form => flash[:headword])
+    @lexeme = Lexeme.new(:dictionaries => [Dictionary.find(:first)])
+    @lexeme.headwords.build
     @lexeme.subentries.build
+    @page_title = flash[:headword].present? ? 
+      t('lexemes.new.page_title_with_headwords', headwords: view_context.titleize_headwords_for(@lexeme)) : 
+      t('lexemes.new.page_title')
+
+   @langs = Dictionary.langs_hash_for(@lexeme.dictionaries)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -84,12 +103,17 @@ class LexemesController < ApplicationController
     @lexeme.headwords.build if @lexeme.headwords.empty?
     @lexeme.subentries.build if @lexeme.subentries.empty?
     @nests = {}
+    @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
+
+    @dictionaries = @lexeme.dictionaries
+    @langs = Dictionary.langs_hash_for(@dictionaries)
   end
 
   # POST /lexemes
   # POST /lexemes.xml
   def create
     @lexeme = Lexeme.new(params[:lexeme])
+    @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
 
 =begin
     params[:lexeme][:dictionary_ids].each do |d_id|
@@ -99,12 +123,12 @@ class LexemesController < ApplicationController
 
     respond_to do |format|
       if @lexeme.save
-        flash[:notice] = "Lexeme was successfully created."
+        flash[:notice] = t('lexemes.create.successful_create')
         format.html do
           case params[:commit]
-          when "Create and continue editing" then render :action => 'edit'
+          when t('lexemes.form.save_and_continue_editing') then render :action => 'edit'
           else
-            flash[:notice] += " <a href=\"#{ url_for :controller => 'lexemes', :action => 'new' }\">Create another?</a>"
+            flash[:notice] = t('lexemes.create.create_another_prompt', default: "%{success} %{link}", success: flash[:notice], link: view_context.link_to(t('lexemes.create.create_another'), controller: 'lexemes', action:'new'))
             redirect_to(@lexeme)
           end
         end
@@ -122,6 +146,7 @@ class LexemesController < ApplicationController
   def update
     @lexeme = Lexeme.find(params[:id])
     @lexeme.attributes = params[:lexeme]
+    @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
 
 =begin
     params[:lexeme][:dictionary_ids].each do |d_id|
@@ -131,12 +156,15 @@ class LexemesController < ApplicationController
 
     respond_to do |format|
       if @lexeme.save
-        flash[:notice] = "Lexeme was successfully updated."
+        flash[:notice] = t('lexemes.update.successful_update')
         format.html do
           case params[:commit]
-          when "Update and continue editing" then render :action => "edit"
+          when t('lexemes.form.save_and_continue_editing') 
+            @dictionaries = @lexeme.dictionaries
+            @langs = Dictionary.langs_hash_for(@dictionaries)
+            render :action => "edit"
           else
-            flash[:notice] += " <a href=\"#{ url_for :controller => 'lexemes', :action => 'new' }\">Create a new lexeme?</a>"
+            flash[:notice] = t('lexemes.create.create_another_prompt', default: "%{success} %{link}", success: flash[:notice], link: view_context.link_to(t('lexemes.update.create_new'), controller: 'lexemes', action:'new'))
             redirect_to(@lexeme)
           end
         end

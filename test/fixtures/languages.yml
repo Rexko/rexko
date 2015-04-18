@@ -35,3 +35,8 @@ without_default_name_or_code:
   id: 21
   default_name: ""
   iso_639_code: ""
+
+und:
+    id: 30
+    default_name: "Undetermined"
+    iso_639_code: "und"

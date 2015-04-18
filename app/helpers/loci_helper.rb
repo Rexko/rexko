@@ -19,7 +19,7 @@ module LociHelper
       optgroup = "#{dict}: #{paradigm} #{part}"
 
 			# need to set id or otherwise make it optionable
-			new_senses[optgroup] = [sense.subentry.senses.build(:definition => "(new sense under this subentry...)"), sense.subentry.id]
+			new_senses[optgroup] = [sense.subentry.senses.build(definition: t('helpers.loci.new_sense', lang: sense.lexeme.dictionaries.first.try(:language).try(:name))), sense.subentry.id]
 
       [optgroup, sense.definition, sense.id]
     end
@@ -52,6 +52,21 @@ module LociHelper
       all_matching = locus.parses.find_all {|p| parse == (p.parsed_form) }
       sense = all_matching[nth_parse].try(:interpretations).try(:first).try(:sense)
       sense.try(:definition)
+    end
+  end
+  
+  def cite_locus locus, counter
+    counter_link = link_to("#{greek_numeral(counter)}", locus, :name => "locus-#{locus.id}")
+    construction_links = render(:partial => "shared/note", :collection => @constructions.collect {|constr| constr if constr.loci.include?(locus)}.compact) if @lexeme
+    author = h((locus.source.nil? || locus.source.author.nil?) ? t('helpers.authorship.anonymous') : locus.source.author.name)
+    title = h((locus.source.nil? || locus.source.title.nil?) ? t('helpers.authorship.untitled') : locus.source.title.name)
+    pointer = h(locus.source.try(:pointer)) if locus.source.present?
+    
+    options = { counter: counter_link, constructions: construction_links, author: author, title: title, pointer: pointer }
+    if pointer.present?
+      t('helpers.loci.cite_html', options.merge(default: "%{counter} %{constructions} %{author}, <i>%{title}</i> %{pointer}:"))
+    else
+      t('helpers.loci.cite_without_pointer.html', options.merge(default: "%{counter} %{constructions} %{author}, <i>%{title}</i>:"))
     end
   end
 end

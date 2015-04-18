@@ -1,4 +1,13 @@
+<h2><%= t('.name_and_code') %></h2>
 <p><%= h @language %></p>
 
-<%= link_to 'Edit', edit_language_path(@language) %> |
-<%= link_to 'Back', languages_path %>
+<% if @language.sort_order %>
+    <h2><%= t('languages.sort_order.substitutions') %></h2>
+    <pre><%= friendly_subst @language.sort_order.substitutions %></pre>
+    
+    <h2><%= t('languages.sort_order.orderings') %></h2>
+    <pre><%= friendly_order @language.sort_order.orderings %></pre>
+<% end %>
+
+<%= link_to t(".edit", :default => 'Edit'), edit_language_path(@language) %> |
+<%= link_to t(".back", :default => 'Back'), languages_path %>

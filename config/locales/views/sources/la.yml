@@ -1,0 +1,67 @@
+la:
+    sources:
+        shortform:
+            source: "Fons"
+            search_for_author_or_title: "quaere scriptorem vel titulum"
+    titles:
+        form:
+            title: "Titulus"
+        autocomplete:
+            new_title: "(titulum novum referre)"
+    authors:
+        form:
+            author: "Scriptor"
+            name_hint_html: "Nomen completum ut in indicibus detur; e.c. <i>Smith, John</i> vel <i>Zhang Wei</i>."
+            romanized_name_hint_html: "Si pertinet."
+            short_name_hint_html: "Nomen quod in citationibus brevibus adhibetur, ut (<i>Smith</i>, 1963)."
+            sort_key_hint_html: "Forma nominis adhibenda in ordine alphabetico, si a nomine completo supra datum differt."
+        autocomplete:
+            new_author: "(scriptorem novum referre)"
+    authorships:
+        autocomplete:
+            new_source: "(fontem novum referre)"
+        edit:
+            page title: "Recensio fontis"
+            show: "Monstrare"
+            back: "Redire"
+            update: "Servare"
+        index:
+            page title: "Index fontium"
+            cited_in: "Hic citatur:"
+            show: "Monstrare"
+            edit: "Mutare"
+            destroy: "Delere"
+            confirm_destroy: "Vero delere fontem \"%{name}\"?\nSi qui loci eum citent, dissociabuntur neque delebuntur."
+            new_source: "Novum fontem referre"
+        new:
+            page title: "Creatio fontis"
+            create: "Condere"
+            back: "Redire"
+        show:
+            page title: "Monstrans fontem"
+            edit: "Mutare"
+            back: "Redire"
+    helpers:
+        label:
+            author:
+                name: "Nomen completum"
+                romanized_name: "Translitteratio"
+                short_name: "Brevis forma nominis"
+                sort_key: "Clavis collationis"
+            source:
+                pointer: "Locus citatus"
+            authorship:
+                authorship_type_id: "Genus auctoritatis"
+                year: "Annus"
+            title:
+                name: "Titulus"
+                publisher: "Editor"
+                publication_year: "Annus editionis"
+                publication_place: "Locus editionis"
+                url: "URL"
+                access_date: "Dies accessus"
+    activerecord:
+        models:
+            authorship: "Auctoritas"
+            author: "Scriptor"
+            title: "Titulus"

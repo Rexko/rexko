@@ -3,7 +3,7 @@ class LanguagesController < ApplicationController
   # GET /languages
   # GET /languages.xml
   def index
-    @languages = Language.all
+    @languages = Language.all.sort_by{|l| l.to_s}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,6 +26,7 @@ class LanguagesController < ApplicationController
   # GET /languages/new.xml
   def new
     @language = Language.new
+    @locale_name = Language.where(iso_639_code: I18n.locale).first.name
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,6 +37,7 @@ class LanguagesController < ApplicationController
   # GET /languages/1/edit
   def edit
     @language = Language.find(params[:id])
+    @locale_name = Language.where(iso_639_code: I18n.locale).first.name
   end
 
   # POST /languages
@@ -45,7 +47,7 @@ class LanguagesController < ApplicationController
 
     respond_to do |format|
       if @language.save
-        flash[:notice] = 'Language was successfully created.'
+        flash[:notice] = t('languages.new.success')
         format.html { redirect_to(@language) }
         format.xml  { render :xml => @language, :status => :created, :location => @language }
       else
@@ -58,11 +60,11 @@ class LanguagesController < ApplicationController
   # PUT /languages/1
   # PUT /languages/1.xml
   def update
-    @language = Language.find(params[:id])
+    @language = Language.includes(:sort_order).find(params[:id])
 
     respond_to do |format|
       if @language.update_attributes(params[:language])
-        flash[:notice] = 'Language was successfully updated.'
+        flash[:notice] = t('languages.edit.success')
         format.html { redirect_to(@language) }
         format.xml  { head :ok }
       else

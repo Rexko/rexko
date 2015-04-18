@@ -1,3 +1,3 @@
 # <%=h sense.definition %>
-<% unless sense.glosses.empty? %><%= render :partial => "shared/wiki/gloss", :collection => sense.glosses %><% end %><% unless sense.notes.empty? %>#*:'''¶''' <%= render :partial => "shared/wiki/comment", :collection => sense.notes %>
+<% unless sense.glosses.empty? %><%= render :partial => "shared/wiki/gloss", :collection => sense.glosses %><% end %><% unless sense.notes.empty? %>#*:<%= t('.notes', notes: render(:partial => "shared/wiki/comment", :collection => sense.notes), default: "'''¶''' %{notes}" ) %>
 <% end %>

@@ -1,0 +1,59 @@
+en:
+    sources:
+        shortform:
+            source: "Source"
+            search_for_author_or_title: "search for author and/or title"
+    titles:
+        form:
+            title: "Title"
+        autocomplete:
+            new_title: "(New title)"
+    authors:
+        form:
+            author: "Author"
+            name_hint_html: "Full name as it would appear in a list, e.g. <i>Smith, John</i> or <i>Zhang Wei</i>."
+            romanized_name_hint_html: "If applicable."
+            short_name_hint_html: "Name to use in short citations of the type (<i>Smith</i>, 1963)."
+            sort_key_hint_html: "Form of the name to sort by, if different from full name given above."
+        autocomplete:
+            new_author: "(New author)"
+    authorships:
+        autocomplete:
+            new_source: "(New source)"
+        edit:
+            page title: "Editing source"
+            show: "Show"
+            back: "Back"
+            update: "Update"
+        index:
+            page title: "Listing sources"
+            cited_in: "Cited in:"
+            show: "Show"
+            edit: "Edit"
+            destroy: "Destroy"
+            confirm_destroy: "Really delete source \"%{name}\"?\nThis will dissociate but not delete any loci citing it."
+            new_source: "New source"
+        new:
+            page title: "New source"
+            create: "Create"
+            back: "Back"
+        show:
+            page title: "Sources - show"
+            edit: "Edit"
+            back: "Back"
+    helpers:
+        label:
+            author:
+                name: "Full name"
+                romanized_name: "Transliteration"
+                short_name: "Short form name"
+                sort_key: "Sort key"
+            source:
+                pointer: "Pointer"
+                part_of_speech: "Part of speech"
+            title:
+                url: "URL"
+                access_date: "URL access date"
+    activerecord:
+        models:
+            authorship: "Authorship"

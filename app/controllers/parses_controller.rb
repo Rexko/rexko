@@ -26,6 +26,8 @@ class ParsesController < ApplicationController
   def new
     @parse = Parse.new(params.slice(Parse.new.attribute_names))
     @path = params[:path].try(:sub, /(parse.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @dictionaries = Dictionary.where(id: params[:dictionaries]).all
+    @langs = Dictionary.langs_hash_for @dictionaries
     
     respond_to do |format|
       format.html do

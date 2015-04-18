@@ -1,56 +1,63 @@
 <div class="subcolumns">
-	<div class="c50l">
-		<div class="subcl">
-			<h2>Tools</h2>
-			<%= form_tag({:controller => :lexemes, :action => :show_by_headword}, {:class => "yform"}) do %>
-			<div class="subcolumns full">
-				<div class="c66l">
-					<div class="subcl type-text">
-						<label for="headword">Find or create a lexeme:</label> 
-						<%= text_field_tag :headword, '', :size => 20 %>
-					</div>
-				</div>
+    <div class="c50l"><div class="subcl">
+        <h2><%= t(".tools") %></h2>
+    
+        <%= form_tag({:controller => :lexemes, :action => :show_by_headword}, {:class => "yform"}) do %>
+    
+        <div class="subcolumns full">
+            <div class="c66l"><div class="subcl type-text">
+                <label for="headword">
+                    <%= t(".find_or_create_a_lexeme") %>
+                </label> 
+                
+                <%= text_field_tag :headword, '', :size => 20 %>
+            </div></div>
 		
-				<div class="c33r">
-					<div class="subcr type-select">
-						<label for="matchtype">Match type</label>
-						<%= select_tag :matchtype, 
-													 options_for_select(Lexeme::SEARCH_OPTIONS, Lexeme::SUBSTRING) %>
-					</div>
-				</div>
-			</div>
-			<% end %>
+            <div class="c33r"><div class="subcr type-select">
+                <label for="matchtype">
+                    <%= t(".match_type") %>
+                </label>
+                
+                <%= select_tag :matchtype,
+                options_for_select(t('lexeme.search.options').zip(Lexeme::SEARCH_OPTIONS),
+                Lexeme::SUBSTRING) %>
+            </div></div>
+        </div>
+        <% end %>
 
-			<%= form_tag({:controller => :loci, :action => :show_by_author}, {:class => "yform"}) do %>
-			<div class="type-text">
-				<label>Browse loci by author (substring search)</label>
-				<%= text_field_tag :author, '', :size => 20 %>
-			</div>
-			<% end %>
+        <%= form_tag({:controller => :loci, :action => :show_by_author}, {:class => "yform"}) do %>
+        <div class="type-text">
+            <label>
+                <%= t(".browse_loci_by_author") %>
+            </label>
+            
+            <%= text_field_tag :author, '', :size => 20 %>
+        </div>
+        <% end %>
 
-			<ul>
-				<li><%=	link_to "Create a locus", :controller => :loci, :action => :new %></li>
-			</ul>
-		</div>
-	</div>
+        <ul>
+            <li>
+                <%=	link_to t(".create"), :controller => :loci, :action => :new %>
+            </li>
+        </ul>
+    </div></div>
 
-	<div class="c50r">
-		<div class="subcr">
-			<h2>Things to do</h2>
-			<table width="75%">
-				<tr>
-					<td valign="top" width="50%">
-						<h3>Addlist</h3>
+    <div class="c50r"><div class="subcr">
+        <h2><%= t(".things_to_do") %></h2>
+        
+        <table width="75%">
+            <tr>
+                <td valign="top" width="50%">
+                    <h3><%= t(".addlist") %></h3>
 			
-						<%= ten_most_wanted %>
-					</td>
-					<td valign="top">
-						<h3>Expandlist</h3>	
+                    <%= ten_most_wanted %>
+                </td>
+                <td valign="top">
+                    <h3><%= t(".expandlist") %></h3>	
 			
-						<%= expandlist %>
-					</td>
-				</tr>
-			</table>
-		</div>
-	</div>
+                    <%= expandlist %>
+                </td>
+            </tr>
+        </table>
+    </div></div>
 </div>

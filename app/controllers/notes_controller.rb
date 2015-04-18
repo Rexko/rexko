@@ -2,6 +2,8 @@ class NotesController < ApplicationController
   def new
     @note = Note.new(params.slice(Note.new.attribute_names))
     @path = params[:path].sub(/(attestation.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @dictionaries = Dictionary.where(id: params[:dictionaries])
+    @langs = Dictionary.langs_hash_for(@dictionaries)
     
     respond_to do |format|
       format.html do

@@ -2,35 +2,35 @@
 <% nested_attributes_for l_form, :attestations %>
 <fieldset>
     <%= l_form.fields_for :source do |source_form| %>
-    <legend>Source</legend>
+    <legend><%= t('.source') %></legend>
     <div class="type-text">
         <%= autocomplete :authorship, source_form, 
             custom_search: cited_name(source_form.object.authorship, format: :text), 
-            prompt: 'search for author and/or title' %>
+            prompt: t('.search_for_author_or_title') %>
     </div>
 	<div class="type-text">
-	  <label for="source">Pointer</label>
+	  <%= source_form.label :pointer %>
 	  <%= source_form.text_field :pointer %>
 	</div>
     <% end %>
 </fieldset>
 
 <fieldset>
-	<legend>Example</legend>
-	<div class="subcolumns full">
-		<div class="c50l">
-		  <div class="subcl type-text">
-		    <label for="example">Original language</label>
-	      <%= l_form.text_area :example %>
-			</div>
-		</div>
-		<div class="c50r">
-			<div class="subcr type-text">
-	    	<label for="example_translation">Translation</label>
-	      <%= l_form.text_area :example_translation %>
-	    </div>
-	  </div>
-	</div>
+    <legend><%= t('.example') %></legend>
+    <div class="subcolumns full">
+        <div class="c50l">
+            <div class="subcl type-text">
+                <%= l_form.label :example %>
+                <%= l_form.text_area :example %>
+            </div>
+        </div>
+        <div class="c50r">
+            <div class="subcr type-text">
+                <%= l_form.label :example_translation %>
+                <%= l_form.text_area :example_translation %>
+            </div>
+        </div>
+    </div>
 </fieldset>
 
 <div class="attestation interlinear">
@@ -41,26 +41,31 @@
 
   <% unless @locus.new_record? %>
     <% potcon = @potential_constructions || @locus.potential_constructions %>
-    <fieldset style="height: <%= [50, (potcon.size+1)*10].min %>em; overflow: scroll">
-      <legend>Potential constructions</legend>
+    <fieldset>
+      <legend><%= t('.potential_constructions') %></legend>
       <% potcon.each do |words, data| %>
         <%= l_form.fields_for :attestations, @locus.attestations.build(:attested_form => data[:phrase].to_sentence) do |a_form| %>
         <%= a_form.hidden_field :attested_form %>
-        <b><%= a_form.check_box '_destroy', {}, "0", "1" %> <%= data[:phrase].to_sentence %></b> - <%= words.to_sentence %> appear together in: 
+        <%= t('.potential_construction_html', 
+                    checkbox: a_form.check_box('_destroy', {}, "0", "1"),
+                    words_as_in_locus: data[:phrase].to_sentence,
+                    words_listed: words.to_sentence ) %>
         <div style="font-size:90%">
           <%= render :partial => 'shared/locus', :collection => data[:loci].take(5), :locals => { :emphasis => words } %>
           <% if data[:loci].size > 5 %>
-            (Five results out of <%= data[:loci].size %> listed; <%= link_to "see more...", :controller => "loci", :action => "index", :loci => data[:loci] %>)
+            <%= t('.five_listed_see_more_html',
+                    total: data[:loci].size,
+                    link_to_more: link_to(t('.see_more'), controller: "loci", action: "index", loci:  data[:loci])) %>
           <% end %>
           <%= list_children_with_option_to_add :parse, a_form, :remote => true %>
         </div>
         <% end %>
       <% end unless potcon.blank? %>
-      <%= "No potential constructions detected." if potcon.blank? %>
+      <%= t('.no_constructions_detected') if potcon.blank? %>
     </fieldset>
   <% end %>
 
   <div class="type-button">
-		<%= submit_tag form[:label] %> <%= submit_tag "#{form[:label]} and continue editing" %>
+		<%= submit_tag form[:label] %> <%= submit_tag t('.save_and_continue_editing') %>
 	</div>
 <% end %>
