@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(:version => 20141216001828) do
     t.string   "locale",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "etymon"
     t.string   "gloss"
   end
 
@@ -205,18 +204,6 @@ ActiveRecord::Schema.define(:version => 20141216001828) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "locus_translations", :force => true do |t|
-    t.integer  "locus_id"
-    t.string   "locale",              :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "example"
-    t.text     "example_translation"
-  end
-
-  add_index "locus_translations", ["locale"], :name => "index_locus_translations_on_locale"
-  add_index "locus_translations", ["locus_id"], :name => "index_locus_translations_on_locus_id"
 
   create_table "note_translations", :force => true do |t|
     t.integer  "note_id"
