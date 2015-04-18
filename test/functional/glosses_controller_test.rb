@@ -31,7 +31,7 @@ class GlossesControllerTest < ActionController::TestCase
   end
 
   def test_should_update_gloss
-    put :update, :id => glosses(:one).id, :gloss => { }
+    put :update, :id => glosses(:one).id, :gloss => { gloss_en: "test" }
     assert_redirected_to gloss_path(assigns(:gloss))
   end
 
