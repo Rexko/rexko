@@ -307,14 +307,14 @@ function update_languages(languages) {
 //                    oldfield.remove();
 //                    oldtab.remove();
                     
-                } else {
-                oldfield.enable();
-                oldtab.addClassName('warning');
+                } 
+                
+            oldfield.enable();
+            oldtab.addClassName('warning');
             
-                oldfield.up().appendChild(oldfield);
-                oldtab.up().appendChild(oldtab);
-                Effect.Appear(oldtab, {duration: 0.25});
-                }
+            oldfield.up().appendChild(oldfield);
+            oldtab.up().appendChild(oldtab);
+            Effect.Appear(oldtab, {duration: 0.25});
             }
         });
         
@@ -341,12 +341,13 @@ function update_add_links(){
     });
 };
 
-// if a language is DEFAULT (old db style, or new lexeme) then add its content to any blank, then remove.
+// if a language is DEFAULT (old db style, or new lexeme) then add its content to any blank.
 function clean_defaults(content, oldfield, oldtab){  
     newfields = content.select('input,textarea');
     newfields.each(function(newfield) {
         if (newfield.getValue() == "") { newfield.setValue($F(oldfield)); }
     });
-    oldfield.remove();
-    oldtab.remove();
+    oldfield.setValue("");
+    //oldfield.remove();
+    //oldtab.remove();
 }
