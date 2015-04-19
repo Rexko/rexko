@@ -152,7 +152,7 @@ activate_autocompletes = function(element){
             }
         });
     });
-} 
+};
 
 Event.observe(window, 'load', function(){  
 	activate_links($$('body')[0]);
@@ -243,15 +243,15 @@ function update_languages(languages) {
     $('lexeme_dictionary_ids').enable();
     update_add_links();
     $$(".translatable").each(function(content){
-        oldlangs = content.down('.language-content').childElements().invoke('identify').invoke('gsub', /.*_/, '');
+        oldlangs = content.down('.language-content').childElements().invoke('readAttribute', 'data-language');
         langtype = content.readAttribute("data-languages");
         langtabs = content.down('.language-list ul');
         // go through each language in the languages for the appropriate language class
         languages[langtype].each(function(language){
         // if an existing div is in the languages, keep it (moving it to the appropriate position); if it's not, flag it as not to be saved (if content) or remove it (if not)
-            if (oldlangs.include(language.code)) {
+            if (oldlangs.include(language.underscore_code)) {
                 // old field and tab
-                oldfield = content.down('input[id$=_'+language.code+'],textarea[id$=_'+language.code+']');
+                oldfield = content.down('[data-language='+language.underscore_code+']');
                 oldtab_index = oldfield.up().childElements().indexOf(oldfield) + 1;  
                 oldtab = content.down('li', oldtab_index);
 
@@ -266,33 +266,34 @@ function update_languages(languages) {
                 // if it's in the languages and doesn't already have a field, duplicate, blanken, re-ID, and add it in its place     
                 oldfield = content.down('input,textarea');
                 oldtab = content.down('li', 1);
+                oldlang = oldfield.readAttribute('data-language');
                 
                 newfield = oldfield.up().appendChild(oldfield.clone(true));
-                newfield.id = oldfield.identify().replace(/(.+_).+$/, "$1"+language.code);
-                newfield.name = oldfield.name.replace(/(.+_).*?\]$/, "$1"+language.code+"]");
+                    posindex = oldfield.identify().lastIndexOf(oldlang);
+                newfield.id = oldfield.identify().substring(0, posindex) + language.underscore_code + oldfield.identify().substring(0, posindex + oldlang.length)
+//                newfield.id = oldfield.identify().replace(/(.+_).+$/, "$1"+language.underscore_code);
+                    posindex = oldfield.name.lastIndexOf(oldlang);
+                newfield.name = oldfield.name.substring(0, posindex) + language.underscore_code + oldfield.name.substring(0, posindex + oldlang.length)
+//                newfield.name = oldfield.name.replace(/(.+_).*?\]$/, "$1"+language.underscore_code+"]");
                 newfield.clear();
                 newtab = oldtab.up().appendChild(oldtab.clone(true));
                 newtab.innerHTML = language.tab;
                 newtab.removeClassName('warning');
                 newtab.removeClassName('default');
+                newfield.writeAttribute('data-language', language.underscore_code);
                 Effect.Appear(newtab, {duration: 0.25});
             }        
         });
         
-        dropped_languages = oldlangs.without.apply(oldlangs, languages[langtype].collect(function(lang){return lang.code}));
+        dropped_languages = oldlangs.without.apply(oldlangs, languages[langtype].collect(function(lang){return lang.underscore_code}));
         dropped_languages.each(function(language){
-            oldfield = content.down('input[id$=_'+language+'],textarea[id$=_'+language+']');
+            oldfield = content.down('[data-language='+language+']');
             oldtab_index = oldfield.up().childElements().indexOf(oldfield) + 1;
             oldtab = content.down('li', oldtab_index);
             
-            if ($F(oldfield) == "") {
-                oldfield.remove();
-                oldtab.remove();
-            } else {
-
                 // if droppable is DEFAULT then add its content to any blank, then remove.
-                if (oldtab.hasClassName('default')) {
-                    clean_defaults(content, oldfield, oldtab);
+            if (oldtab.hasClassName('default')) {
+                clean_defaults(content, oldfield, oldtab);
                     
 //                    newfields = content.select('input,textarea');
 //                    newfields.each(function(newfield) {
@@ -301,15 +302,14 @@ function update_languages(languages) {
 //                    oldfield.remove();
 //                    oldtab.remove();
                     
-                } else {
-                oldfield.enable();
-                oldtab.addClassName('warning');
+            } 
+                
+            oldfield.enable();
+            oldtab.addClassName('warning');
             
-                oldfield.up().appendChild(oldfield);
-                oldtab.up().appendChild(oldtab);
-                Effect.Appear(oldtab, {duration: 0.25});
-                }
-            }
+            oldfield.up().appendChild(oldfield);
+            oldtab.up().appendChild(oldtab);
+            Effect.Appear(oldtab, {duration: 0.25});
         });
         
         // deselect all tabs
@@ -335,12 +335,13 @@ function update_add_links(){
     });
 };
 
-// if a language is DEFAULT (old db style, or new lexeme) then add its content to any blank, then remove.
+// if a language is DEFAULT (old db style, or new lexeme) then add its content to any blank.
 function clean_defaults(content, oldfield, oldtab){  
     newfields = content.select('input,textarea');
     newfields.each(function(newfield) {
         if (newfield.getValue() == "") { newfield.setValue($F(oldfield)); }
     });
-    oldfield.remove();
-    oldtab.remove();
+    oldfield.setValue("");
+    //oldfield.remove();
+    //oldtab.remove();
 }

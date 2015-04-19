@@ -1,7 +1,7 @@
 class TranslateEtymologies < ActiveRecord::Migration
   def up
     Etymology.create_translation_table!({
-      etymon:              :string,
+#      etymon:              :string,
       gloss:               :string
     }, { migrate_data: true })
   end

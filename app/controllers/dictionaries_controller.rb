@@ -15,7 +15,7 @@ class DictionariesController < ApplicationController
         when "langs" 
           hsh = Dictionary.langs_hash_for(@dictionaries)
           hsh = hsh.collect do |categ, langs| 
-            [categ, langs.collect {|lang| { tab: lang.to_s, code: lang.iso_639_code }}]
+            [categ, langs.collect {|lang| { tab: lang.to_s, code: lang.iso_639_code, underscore_code: lang.iso_639_code.underscore }}]
           end
           
           render json: Hash[hsh]

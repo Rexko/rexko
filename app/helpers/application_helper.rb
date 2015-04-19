@@ -267,8 +267,10 @@ module ApplicationHelper
     
       output << content_tag(:div, class: "language-content") do
         languages.each do |lang|
-          Globalize.with_locale(lang.iso_639_code) do
-            concat(form.send(field, "#{attribute}_#{lang.iso_639_code.underscore}", html_options))
+          code = lang.iso_639_code
+          html_options[:data] = (html_options[:data] || {}).merge(language: code.underscore)
+          Globalize.with_locale(code) do
+            concat(form.send(field, "#{attribute}_#{code.underscore}", html_options))
           end
         end
       end

@@ -11,7 +11,7 @@ class Sense < ActiveRecord::Base
   globalize_accessors :locales => (Language.all.collect(&:iso_639_code) | [I18n.default_locale])
   
   accepts_nested_attributes_for :parses, :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
-  accepts_nested_attributes_for :glosses, :allow_destroy => true, :reject_if => proc {|attrs| Gloss.new(attrs).invalid? }
+  accepts_nested_attributes_for :glosses, :allow_destroy => true, :reject_if => proc {|attrs| Gloss.new(attrs.slice(Gloss.new.attribute_names)).invalid? }
   
   HASH_MAP_TO_PARSE = { :interpretations => Interpretation::HASH_MAP_TO_PARSE }
   
