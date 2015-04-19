@@ -291,14 +291,9 @@ function update_languages(languages) {
             oldtab_index = oldfield.up().childElements().indexOf(oldfield) + 1;
             oldtab = content.down('li', oldtab_index);
             
-            if ($F(oldfield) == "") {
-                oldfield.remove();
-                oldtab.remove();
-            } else {
-
                 // if droppable is DEFAULT then add its content to any blank, then remove.
-                if (oldtab.hasClassName('default')) {
-                    clean_defaults(content, oldfield, oldtab);
+            if (oldtab.hasClassName('default')) {
+                clean_defaults(content, oldfield, oldtab);
                     
 //                    newfields = content.select('input,textarea');
 //                    newfields.each(function(newfield) {
@@ -307,7 +302,7 @@ function update_languages(languages) {
 //                    oldfield.remove();
 //                    oldtab.remove();
                     
-                } 
+            } 
                 
             oldfield.enable();
             oldtab.addClassName('warning');
@@ -315,7 +310,6 @@ function update_languages(languages) {
             oldfield.up().appendChild(oldfield);
             oldtab.up().appendChild(oldtab);
             Effect.Appear(oldtab, {duration: 0.25});
-            }
         });
         
         // deselect all tabs
