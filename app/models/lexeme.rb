@@ -26,7 +26,7 @@ class Lexeme < ActiveRecord::Base
   end
   
   def primary_headword
-    headwords.order('acceptance DESC').first.try(:form)
+    Globalize.with_locale(language.iso_639_code) { headwords.order('acceptance DESC').first.try(:form) }
   end
   
   def loci(options = {})
