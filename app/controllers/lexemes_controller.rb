@@ -134,6 +134,9 @@ class LexemesController < ApplicationController
         end
         format.xml { render :xml => @lexeme, :status => :created, :location => @lexeme }
       else
+        @dictionaries = @lexeme.dictionaries
+        @langs = Dictionary.langs_hash_for(@dictionaries)
+        
         format.html { render :action => "new" }
         format.xml { render :xml => @lexeme.errors, :status => :unprocessable_entity }
       end
@@ -170,6 +173,8 @@ class LexemesController < ApplicationController
         end
         format.xml { head :ok }
       else
+        @dictionaries = @lexeme.dictionaries
+        @langs = Dictionary.langs_hash_for(@dictionaries)
         format.html { render :action => "edit" }
         format.xml { render :xml => @lexeme.errors, :status => :unprocessable_entity }
       end
