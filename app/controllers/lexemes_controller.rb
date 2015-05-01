@@ -87,7 +87,7 @@ class LexemesController < ApplicationController
     @lexeme.headwords.build
     @lexeme.subentries.build
     @page_title = flash[:headword].present? ? 
-      t('lexemes.new.page_title_with_headwords', headwords: view_context.titleize_headwords_for(@lexeme)) : 
+      t('lexemes.new.page_title_with_headwords', headwords: flash[:headword]) :
       t('lexemes.new.page_title')
 
    @langs = Dictionary.langs_hash_for(@lexeme.dictionaries)
