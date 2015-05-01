@@ -278,4 +278,10 @@ module ApplicationHelper
       output << language_tabs(languages)
     end
   end 
+  
+  def source &block
+    Globalize.with_locale(@langs[:source].first.iso_639_code) do
+      yield
+    end
+  end
 end
