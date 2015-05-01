@@ -39,7 +39,7 @@ class Lexeme < ActiveRecord::Base
   # dictionary.  Otherwise, fetch all results with any of the lexeme's headwords in its paradigm
   # that are linked wiki-style (e.g. [[foo]] or [[foo|bar]]).
   def constructions (from_dictionary = nil)
-    heads = headword_forms.collect{|form| ["%[[" + form + "|%", "%[[" + form + "]]%"]}.flatten
+    heads = headword_forms.compact.collect{|form| ["%[[" + form + "|%", "%[[" + form + "]]%"]}.flatten
     return {} if heads.empty?
     headlike = "(subentries.paradigm LIKE ?" + " OR subentries.paradigm LIKE ?" * (heads.length - 1) + ")"
     
