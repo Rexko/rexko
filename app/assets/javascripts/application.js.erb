@@ -221,7 +221,7 @@ fetch_languages = function() {
         content.down('.language-content').childElements().invoke('disable');
         
         langtabs = content.down('.language-list ul');
-        langtabs.childElements().each(function(tab){ Effect.Fade(tab, {duration: 0.25})});
+//        langtabs.childElements().each(function(tab){ Effect.Fade(tab, {duration: 0.25})});
         langtabs.insert({top: "<li class=\"throb\"><img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"12\" height=\"12\"></li>"});
     });
     
@@ -270,10 +270,10 @@ function update_languages(languages) {
                 
                 newfield = oldfield.up().appendChild(oldfield.clone(true));
                     posindex = oldfield.identify().lastIndexOf(oldlang);
-                newfield.id = oldfield.identify().substring(0, posindex) + language.underscore_code + oldfield.identify().substring(0, posindex + oldlang.length)
+                newfield.id = oldfield.identify().substring(0, posindex) + language.underscore_code + oldfield.identify().substring(posindex + oldlang.length)
 //                newfield.id = oldfield.identify().replace(/(.+_).+$/, "$1"+language.underscore_code);
                     posindex = oldfield.name.lastIndexOf(oldlang);
-                newfield.name = oldfield.name.substring(0, posindex) + language.underscore_code + oldfield.name.substring(0, posindex + oldlang.length)
+                newfield.name = oldfield.name.substring(0, posindex) + language.underscore_code + oldfield.name.substring(posindex + oldlang.length)
 //                newfield.name = oldfield.name.replace(/(.+_).*?\]$/, "$1"+language.underscore_code+"]");
                 newfield.clear();
                 newtab = oldtab.up().appendChild(oldtab.clone(true));

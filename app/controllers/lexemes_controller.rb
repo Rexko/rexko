@@ -36,6 +36,7 @@ class LexemesController < ApplicationController
     @authors_of = Hash[@constructions.collect {|construction| [construction, construction.loci.collect(&:source).collect(&:author).uniq] }]
     @loci_by = Hash[@authors_of.collect { |construction, authors| [construction, Hash[authors.collect {|author| [author, Locus.attesting([construction, @lexeme]).find(:all, :joins => { :source => :authorship }, :conditions => { :id => construction.loci, :authorships => {:author_id => author}}, :group => "loci.id")] }]]}]
     @page_title = view_context.titleize_headwords_for @lexeme
+    @langs = Dictionary.langs_hash_for(@lexeme.dictionaries)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -86,7 +87,7 @@ class LexemesController < ApplicationController
     @lexeme.headwords.build
     @lexeme.subentries.build
     @page_title = flash[:headword].present? ? 
-      t('lexemes.new.page_title_with_headwords', headwords: view_context.titleize_headwords_for(@lexeme)) : 
+      t('lexemes.new.page_title_with_headwords', headwords: flash[:headword]) :
       t('lexemes.new.page_title')
 
    @langs = Dictionary.langs_hash_for(@lexeme.dictionaries)
@@ -134,6 +135,9 @@ class LexemesController < ApplicationController
         end
         format.xml { render :xml => @lexeme, :status => :created, :location => @lexeme }
       else
+        @dictionaries = @lexeme.dictionaries
+        @langs = Dictionary.langs_hash_for(@dictionaries)
+        
         format.html { render :action => "new" }
         format.xml { render :xml => @lexeme.errors, :status => :unprocessable_entity }
       end
@@ -170,6 +174,8 @@ class LexemesController < ApplicationController
         end
         format.xml { head :ok }
       else
+        @dictionaries = @lexeme.dictionaries
+        @langs = Dictionary.langs_hash_for(@dictionaries)
         format.html { render :action => "edit" }
         format.xml { render :xml => @lexeme.errors, :status => :unprocessable_entity }
       end

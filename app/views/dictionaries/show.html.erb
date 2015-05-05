@@ -1,17 +1,17 @@
 <%  I18n.locale = @dictionary.definition_language
     for lexeme in @lexemes %>
 	<dl class="dictform-entry">
-		<dt class="dictform-headword" <%= lang_for(lexeme.headwords) %>><%= t('.headwords', headwords: titleize_headwords_for(lexeme), default: "%{headwords}.") %></dt>
+		<dt class="dictform-headword" <%= lang_for(lexeme.headwords) %>><%= link_to source{t('.headwords', headwords: titleize_headwords_for(lexeme), default: "%{headwords}.")}, lexeme %></dt>
 		<% for headword in lexeme.headwords %>
-			<dd class="dictform-phonetic-form" <%= lang_for(headword, :variant => 'fonipa') %>><%= h headword.phonetic_forms.compact.collect{|x| t('.phonetic_form', form: x.form, default: "/%{form}/")}.to_options_sentence(@dictionary.definition_language) %></dd>
+			<dd class="dictform-phonetic-form" <%= lang_for(headword, :variant => 'fonipa') %>><%= source{h headword.phonetic_forms.compact.collect{|x| t('.phonetic_form', form: x.form, default: "/%{form}/")}.to_options_sentence(@dictionary.definition_language)} %></dd>
 		<% end %>
 		<% for subentry in lexeme.subentries %>
 			<dd class="dictform-subentry"  <%= lang_for(subentry) %>>
 				<dl class="dictform-subentry-senses">
 					<dt class="dictform-paradigm">
-						<%=wh subentry.paradigm ? 
+						<%=source{wh subentry.paradigm ? 
                                 t('.principal_parts', paradigm: subentry.paradigm, default: "%{paradigm}.") : 
-                                t('.no_principal_parts') %>
+                                t('.no_principal_parts')} %>
 					</dt>
 					<dd class="dictform-part-of-speech">
 						<%=h subentry.part_of_speech || t('.no_part_of_speech') %>

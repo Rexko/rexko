@@ -1,64 +1,66 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  headword_id: 1
+  locale: zxx
   form: MyString
-  id: 1
 
 two:
+  headword_id: 2
+  locale: zxx
   form: MyString
-  id: 2
 
 liter: 
+  headword_id: 3
+  locale: zxx
   form: liter
-  lexeme_id: 1
-  id: 3
 
 litre: 
+  headword_id: 4
+  locale: zxx
   form: litre
-  lexeme_id: 1
-  id: 4
 
 spring_a:
+  headword_id: 5
+  locale: zxx
   form: spring
-  lexeme_id: 4
-  id: 5
 
 spring_b:
+  headword_id: 6
+  locale: zxx
   form: spring
-  lexeme_id: 5
-  id: 6
 
 literal:
+  headword_id: 7
+  locale: zxx
   form: literal
-  lexeme_id: 6
-  id: 7
 
 headword_without_dictionary:
+  headword_id: 8
+  locale: zxx
   form: -----
-  lexeme_id: 10
-  id: 8
 
 case_caps:
+  headword_id: 9
+  locale: zxx
   form: Case
-  lexeme_id: 20
-  id: 9
 
 case_nocaps:
+  headword_id: 10
+  locale: zxx
   form: case
-  lexeme_id: 20
-  id: 10
 
 appearing_in_construction_a:
+  headword_id: 11
+  locale: zxx
   form: blue
-  lexeme_id: 30
-  id: 11
 
 appearing_in_construction_b:
+  headword_id: 12
+  locale: zxx
   form: jay
-  lexeme_id: 31
-  id: 12
 
 with_construction:
+  headword_id: 13
+  locale: zxx
   form: blue jay
-  lexeme_id: 32
-  id: 13

@@ -26,7 +26,7 @@ class Lexeme < ActiveRecord::Base
   end
   
   def primary_headword
-    headwords.order('acceptance DESC').first.try(:form)
+    Globalize.with_locale(language.iso_639_code) { headwords.order('acceptance DESC').first.try(:form) }
   end
   
   def loci(options = {})
@@ -39,7 +39,7 @@ class Lexeme < ActiveRecord::Base
   # dictionary.  Otherwise, fetch all results with any of the lexeme's headwords in its paradigm
   # that are linked wiki-style (e.g. [[foo]] or [[foo|bar]]).
   def constructions (from_dictionary = nil)
-    heads = headword_forms.collect{|form| ["%[[" + form + "|%", "%[[" + form + "]]%"]}.flatten
+    heads = headword_forms.compact.collect{|form| ["%[[" + form + "|%", "%[[" + form + "]]%"]}.flatten
     return {} if heads.empty?
     headlike = "(subentries.paradigm LIKE ?" + " OR subentries.paradigm LIKE ?" * (heads.length - 1) + ")"
     
@@ -67,11 +67,11 @@ class Lexeme < ActiveRecord::Base
     
     case options[:matchtype] ||= EXACT
     when SUBSTRING
-      headwords_like = "(headwords.form LIKE ?" + " OR headwords.form LIKE ?" * (forms.length - 1) + ")"
+      headwords_like = "(headword_translations.form LIKE ?" + " OR headword_translations.form LIKE ?" * (forms.length - 1) + ")"
       wildcarded_forms = forms.collect {|form| "%#{form}%"}
-      Lexeme.joins(:headwords).where([headwords_like, *wildcarded_forms]).includes(options[:include]).group(:lexeme_id)
+      Lexeme.joins(:headwords => [:translations]).where([headwords_like, *wildcarded_forms]).includes(options[:include]).group(:lexeme_id)
     when EXACT
-      Lexeme.joins(:headwords).where(["headwords.form IN (?)", forms]).includes(options[:include])
+      Lexeme.joins(:headwords => [:translations]).where(["headword_translations.form IN (?)", forms]).includes(options[:include])
     end
   end
   

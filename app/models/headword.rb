@@ -13,7 +13,7 @@ class Headword < ActiveRecord::Base
   belongs_to :lexeme
   delegate :senses, :to => '(lexeme or return nil)'
   belongs_to :language
-  validates_presence_of :form
+  validate :any_form_present?
   
   before_save :set_defaults
   
@@ -57,5 +57,12 @@ class Headword < ActiveRecord::Base
   # Given 1 (true) or 0 (false), set the headword's prescriptively-correct status
   def prescriptively_ok=(status)
     self.acceptance = (acceptance & DESCRIPTIVE) | (status.to_i * PRESCRIPTIVE) 
+  end
+  
+  protected
+  def any_form_present?
+    if globalize_attribute_names.select {|k,v| k.to_s.start_with?("form")}.all? {|v| v.blank? }
+      errors.add(:form, I18n.t('errors.messages.blank'))
+    end
   end
 end

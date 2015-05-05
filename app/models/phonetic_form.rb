@@ -5,5 +5,12 @@ class PhoneticForm < ActiveRecord::Base
   translates :form, :fallbacks_for_empty_translations => true
   globalize_accessors :locales => (Language.all.collect(&:iso_639_code) | [I18n.default_locale])
  
-  validates_presence_of :form
+  validate :any_form_present?
+  
+  protected
+  def any_form_present?
+    if globalize_attribute_names.select {|k,v| k.to_s.start_with?("form")}.all? {|v| v.blank? }
+      errors.add(:form, I18n.t('errors.messages.blank'))
+    end
+  end
 end

@@ -5,7 +5,7 @@ class Subentry < ActiveRecord::Base
   belongs_to :language
   has_many :senses
   has_many :notes, :as => :annotatable
-  validates_presence_of :paradigm
+  validate :any_paradigm_present?
   translates :paradigm, :part_of_speech, :fallbacks_for_empty_translations => true
   globalize_accessors :locales => (Language.all.collect(&:iso_639_code) | [I18n.default_locale])
   
@@ -28,4 +28,11 @@ class Subentry < ActiveRecord::Base
  
   	self.language ||= default_language
 	end
+  
+  protected
+  def any_paradigm_present?
+    if globalize_attribute_names.select {|k,v| k.to_s.start_with?("paradigm")}.all? {|v| v.blank? }
+      errors.add(:paradigm, I18n.t('errors.messages.blank'))
+    end
+  end
 end
