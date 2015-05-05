@@ -67,11 +67,11 @@ class Lexeme < ActiveRecord::Base
     
     case options[:matchtype] ||= EXACT
     when SUBSTRING
-      headwords_like = "(headwords.form LIKE ?" + " OR headwords.form LIKE ?" * (forms.length - 1) + ")"
+      headwords_like = "(headword_translations.form LIKE ?" + " OR headword_translations.form LIKE ?" * (forms.length - 1) + ")"
       wildcarded_forms = forms.collect {|form| "%#{form}%"}
-      Lexeme.joins(:headwords).where([headwords_like, *wildcarded_forms]).includes(options[:include]).group(:lexeme_id)
+      Lexeme.joins(:headwords => [:translations]).where([headwords_like, *wildcarded_forms]).includes(options[:include]).group(:lexeme_id)
     when EXACT
-      Lexeme.joins(:headwords).where(["headwords.form IN (?)", forms]).includes(options[:include])
+      Lexeme.joins(:headwords => [:translations]).where(["headword_translations.form IN (?)", forms]).includes(options[:include])
     end
   end
   
