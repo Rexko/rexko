@@ -221,7 +221,7 @@ fetch_languages = function() {
         content.down('.language-content').childElements().invoke('disable');
         
         langtabs = content.down('.language-list ul');
-        langtabs.childElements().each(function(tab){ Effect.Fade(tab, {duration: 0.25})});
+//        langtabs.childElements().each(function(tab){ Effect.Fade(tab, {duration: 0.25})});
         langtabs.insert({top: "<li class=\"throb\"><img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"12\" height=\"12\"></li>"});
     });
     
