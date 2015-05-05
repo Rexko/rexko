@@ -1,1 +1,1 @@
-<span class="lexform-phonetic-form" <%= lang_for(headword, :variant => 'fonipa') %>><%= source { puts @langs[:source]; h sentence_case(headword.phonetic_forms.compact.collect{|x| t('.phonetic_form', form: x.form, default: "/%{form}/")}.to_options_sentence) } %></span>
+<span class="lexform-phonetic-form" <%= lang_for(headword, :variant => 'fonipa') %>><%= source(lexeme.language){ h sentence_case(headword.phonetic_forms.compact.collect{|x| t('.phonetic_form', form: x.form, default: "/%{form}/")}.to_options_sentence) } %></span>
