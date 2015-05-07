@@ -104,10 +104,10 @@ class LexemesController < ApplicationController
     @lexeme.headwords.build if @lexeme.headwords.empty?
     @lexeme.subentries.build if @lexeme.subentries.empty?
     @nests = {}
-    @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
 
     @dictionaries = @lexeme.dictionaries
     @langs = Dictionary.langs_hash_for(@dictionaries)
+    @page_title = t('lexemes.edit.page_title', headwords: Globalize.with_locale(@langs[:source].first.iso_639_code){view_context.titleize_headwords_for(@lexeme)})
   end
 
   # POST /lexemes
