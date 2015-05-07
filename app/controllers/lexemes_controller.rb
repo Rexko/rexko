@@ -107,7 +107,7 @@ class LexemesController < ApplicationController
 
     @dictionaries = @lexeme.dictionaries
     @langs = Dictionary.langs_hash_for(@dictionaries)
-    @page_title = t('lexemes.edit.page_title', headwords: Globalize.with_locale(@langs[:source].first.iso_639_code){view_context.titleize_headwords_for(@lexeme)})
+    @page_title = t('lexemes.edit.page_title', headwords: Globalize.with_locale(@langs[:source].first.try(:iso_639_code)){view_context.titleize_headwords_for(@lexeme)})
   end
 
   # POST /lexemes
