@@ -22,6 +22,6 @@
 	  <%= list_children_with_option_to_add :sense, f, remote: true, create_blank: true, locals: { dictionaries: @dictionaries } %>
 
 	  <!-- Etymology -->
-		<%= list_children_with_option_to_add :etymothesis, f, display_name: 'etymology', locals: { dictionaries: @dictionaries } %>
+		<%= list_children_with_option_to_add :etymothesis, f, display_name: 'etymology', create_blank: f.object.new_record?, locals: { dictionaries: @dictionaries } %>
 	</fieldset>
 <% end %>
