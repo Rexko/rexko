@@ -1,5 +1,4 @@
 <% unless (f.object._destroy) %>
-	<% nested_attributes_for f, [:glosses, :senses, :subentry], [:notes, :senses, :subentry] %>
     <fieldset class="sense">
         <legend>
             <%= label_with_remove_option_for t('.sense'), f %>

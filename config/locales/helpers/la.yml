@@ -14,6 +14,7 @@ la:
             next etymon: "Addere etymon proximum"
             attestation: "Addere formam attestatam"
             headword: "Addere lemma"
+            subentry: "Addere sublemma"
         remove_link: "(removere)"
         delete_checkbox: "Delere"
         etymology:
