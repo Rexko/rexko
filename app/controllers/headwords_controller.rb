@@ -24,10 +24,17 @@ class HeadwordsController < ApplicationController
   # GET /headwords/new
   # GET /headwords/new.xml
   def new
-    @headword = Headword.new
-
+    @headword = Headword.new(params.slice(Headword.new.attribute_names))
+    @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @dictionaries = Dictionary.where(id: params[:dictionaries])
+    @langs = Dictionary.langs_hash_for(@dictionaries)
+    
     respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+      	if request.xhr?
+      		render :partial => "form"
+      	end
+      end
       format.xml  { render :xml => @headword }
     end
   end

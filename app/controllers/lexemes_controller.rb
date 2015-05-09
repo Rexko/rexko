@@ -104,10 +104,10 @@ class LexemesController < ApplicationController
     @lexeme.headwords.build if @lexeme.headwords.empty?
     @lexeme.subentries.build if @lexeme.subentries.empty?
     @nests = {}
-    @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
 
     @dictionaries = @lexeme.dictionaries
     @langs = Dictionary.langs_hash_for(@dictionaries)
+    @page_title = t('lexemes.edit.page_title', headwords: Globalize.with_locale(@langs[:source].first.try(:iso_639_code)){view_context.titleize_headwords_for(@lexeme)})
   end
 
   # POST /lexemes
@@ -127,7 +127,10 @@ class LexemesController < ApplicationController
         flash[:notice] = t('lexemes.create.successful_create')
         format.html do
           case params[:commit]
-          when t('lexemes.form.save_and_continue_editing') then render :action => 'edit'
+          when t('lexemes.form.save_and_continue_editing') 
+            @dictionaries = @lexeme.dictionaries
+            @langs = Dictionary.langs_hash_for(@dictionaries)
+            render :action => 'edit'
           else
             flash[:notice] = t('lexemes.create.create_another_prompt', default: "%{success} %{link}", success: flash[:notice], link: view_context.link_to(t('lexemes.create.create_another'), controller: 'lexemes', action:'new'))
             redirect_to(@lexeme)

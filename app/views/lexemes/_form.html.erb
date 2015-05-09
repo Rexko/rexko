@@ -1,5 +1,5 @@
 <%= form_for @lexeme, {:method => form[:method], :action => form[:action], :html => {:class => "yform"}} do |l_form| %>
-  <% nested_attributes_for l_form, :headwords, :subentries %>
+  <% nested_attributes_for l_form, :subentries %>
   <!-- Dictionary -->
   <div class="type-select">
       <label for="lexeme_dictionary_ids"><%= t('.dictionary') %></label>
@@ -7,19 +7,9 @@
   </div>
 
   <!-- Headword -->
-	<%= l_form.fields_for :headwords do |hw_form| %>
-  	<%= render :partial => 'headword', :locals => { :f => hw_form } %>
-  <% end %>  
-	<div class="par">
-		<%= link_to t('.add_headword'), '#headwords', :class => 'add' %>
-  </div>
+  <%= list_children_with_option_to_add :headword, l_form, remote: true, create_blank: l_form.object.new_record?, locals: { dictionaries: @dictionaries } %>
 
-  <%= l_form.fields_for :subentries do |se_form| %>
-    <%= render :partial => 'subentry', :locals => { :f => se_form } %>
-  <% end %>
-	<div class="par">
-	<%= link_to t('.add_subentry'), '#subentries', :class => 'add' %>
-	</div>
+  <%= list_children_with_option_to_add :subentry, l_form, remote: true, create_blank: l_form.object.new_record?, locals: { dictionaries: @dictionaries } %>
 
 	<div class="type-button">
 		<%= submit_tag form[:label] %> 

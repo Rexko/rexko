@@ -1,31 +1,5 @@
-<% unless (f.object._destroy) %>
-	<fieldset class="headword">
-		<legend>
-			<%= label_with_remove_option_for t('.headword'), f %>
-		</legend>
-		
-		<div class="type-text">
-	    	<%= f.label :form, t('.orthographic_form') %>
-            <%= translatable_tag(f, :text_field, :form, :source) %>
-
-            <small>
-                <%= t('.acceptibility_html', 
-                        descriptively: "<span class=\"type-check\">#{f.check_box :descriptively_ok?} #{ f.label :descriptively_ok? } </span>".html_safe,
-                        prescriptively: "<span class=\"type-check\">#{f.check_box :prescriptively_ok?} #{ f.label :prescriptively_ok? } </span>".html_safe) %>
-            </small>
-	    	<% unattached = Parse.count_unattached_to(f.object.form)
-	    		 if unattached > 0 %>
-	    	<br/><small>
-					<i><%= t('.unattached_html', count: unattached, link: (link_to t('.parse', count: unattached), :controller => "loci", :action => "unattached", :forms => f.object.form) ) %></i>
-				</small>
-				<% end %>
-
-	  </div>
-	
-	  <!-- Phonetic form -->
-      <%= list_children_with_option_to_add :phonetic_form, f, remote: true, locals: { dictionaries: @dictionaries } %>
-
-        <!-- Notes -->
-		<%= list_children_with_option_to_add :note, f, :remote => true, locals: { dictionaries: @dictionaries } %>
-	</fieldset>
-<% end %>
+<%= 
+    unless (f.object.try(:_destroy))
+        render partial: "headwords/shortform", locals: {f: f}
+    end 
+%>

@@ -24,10 +24,17 @@ class SubentriesController < ApplicationController
   # GET /subentries/new
   # GET /subentries/new.xml
   def new
-    @subentry = Subentry.new
-
+    @subentry = Subentry.new(params.slice(Subentry.new.attribute_names))
+    @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @dictionaries = Dictionary.where(id: params[:dictionaries]).all
+    @langs = Dictionary.langs_hash_for(@dictionaries)
+    
     respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+      	if request.xhr?
+      		render :partial => "form"
+      	end
+      end
       format.xml  { render :xml => @subentry }
     end
   end
