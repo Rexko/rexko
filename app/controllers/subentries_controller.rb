@@ -25,7 +25,7 @@ class SubentriesController < ApplicationController
   # GET /subentries/new.xml
   def new
     @subentry = Subentry.new(params.slice(Subentry.new.attribute_names))
-    @path = params[:path].sub(/(lexeme.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
     @dictionaries = Dictionary.where(id: params[:dictionaries]).all
     @langs = Dictionary.langs_hash_for(@dictionaries)
     

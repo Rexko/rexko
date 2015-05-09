@@ -25,7 +25,7 @@ class HeadwordsController < ApplicationController
   # GET /headwords/new.xml
   def new
     @headword = Headword.new(params.slice(Headword.new.attribute_names))
-    @path = params[:path].sub(/(lexeme.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
     @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
     
