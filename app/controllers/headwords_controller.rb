@@ -26,7 +26,7 @@ class HeadwordsController < ApplicationController
   def new
     @headword = Headword.new(params.slice(Headword.new.attribute_names))
     @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
-    @dictionaries = Dictionary.where(id: params[:dictionaries])
+    @dictionaries = Dictionary.where(id: params[:dictionaries]).all
     @langs = Dictionary.langs_hash_for(@dictionaries)
     
     respond_to do |format|
