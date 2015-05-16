@@ -36,6 +36,8 @@ group :development, :test do
   gem 'test-unit'
   gem 'bullet'
   gem 'missing_t', '~> 0.4.1'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
 end
 
 source 'http://gemcutter.org'
@@ -48,3 +50,4 @@ group :assets do
 end
 
 gem 'prototype-rails'
+gem 'multi_json'
