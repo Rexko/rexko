@@ -56,3 +56,13 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+Capybara.javascript_driver = :webkit
+
+Capybara.run_server = true
+Capybara.server_port = 7787
+
+ApplicationController.class_eval do
+  def default_url_options(options = {})
+    { locale: I18n.locale, host: "127.0.0.1", port: 7787 }
+  end
+end

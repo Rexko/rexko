@@ -56,22 +56,18 @@ class LexemesController < ApplicationController
     end
   end
 
+  # Find lexemes matching a given headword
+  # If :matchtype is Lexeme::CREATE or there are no results, return the new entry form.
+  # Otherwise, list any/all matching lexemes.
   def show_by_headword
     @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => params[:matchtype])
     
-    case @lexeme.length
-    when 0
+    if params[:matchtype] == Lexeme::CREATE || @lexeme.blank?
       flash[:notice] = t('lexemes.show_by_headword.new_lexeme_prompt_html', headword: params[:headword])
       flash[:headword] = params[:headword]
       respond_to do |format|
         format.html { redirect_to :action => 'new' }
         format.xml { render :nothing => true, :status => '404 Not Found' }
-      end
-    when 1
-      respond_to do |format|
-        format.html { redirect_to @lexeme.first }
-        format.xml { render :xml => @lexeme.first }
-        # lexeme display in XML is currently useless, btw
       end
     else
       respond_to do |format|

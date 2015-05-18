@@ -32,5 +32,6 @@
 
 <%= safe_join([link_to(t('.edit'), edit_lexeme_path(@lexeme)), 
     link_to(t('.back_to_lexemes'), lexemes_path),
-    *@lexeme.dictionaries.collect {|d| link_to(t('.back_to_dictionary', dictionary: d.title), d)}],
+    *@lexeme.dictionaries.collect {|d| link_to(t('.back_to_dictionary', dictionary: d.title), d)},
+    link_to(t('lexemes.index.new_lexeme'), new_lexeme_path)],
     t('.link_separator', default: " | ")) %>
