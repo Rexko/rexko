@@ -1,3 +1,6 @@
+==Since 0.4.0==
+* [#78] New lexeme link always to be available on lexeme show and search pages
+
 ==Since 0.3.6==
 * [#142] Fixed failure of will_paginate on Locus search
 * [#141] Fixed issue where interpretations and loci wouldn't save
