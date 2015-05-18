@@ -37,6 +37,7 @@ group :development, :test do
   gem 'bullet'
   gem 'missing_t', '~> 0.4.1'
   gem 'cucumber-rails', :require => false
+  gem 'capybara-webkit'
   gem 'database_cleaner'
 end
 
