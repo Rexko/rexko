@@ -96,6 +96,11 @@ class Lexeme < ActiveRecord::Base
 #    Lexeme.find(:all, :joins => HASH_MAP_TO_PARSE, :conditions => { :parses => { :parsable_id => parsables, :parsable_type => type }})
 #  end
 
+  # Return all lexemes described by etym
+  def self.with_etymology(etym)
+    joins(subentries: :etymologies).where(etymologies: {id: etym})
+  end
+
 	# Returns a list of headwords minus those that differ only in the casing
 	# of the first letter.  
 	def initial_case_insensitive_headwords
