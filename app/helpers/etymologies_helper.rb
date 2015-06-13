@@ -127,12 +127,13 @@ module EtymologiesHelper
     # When 'etym' is an etymology set pre_note to 'Language etymon "gloss"' and recurse, 
     # using 'tree' as both the etymon and the tree, and using the etymon as the parent.
    when Etymology
+     initial_etymon_same_language = Language.lang_for(Lexeme.with_etymology(etym)) == etym.original_language unless parent
+
       if use_html
         language = content_tag :span, :class => "lexform-source-language" do
           html_escape etym.original_language.name
         end if etym.original_language unless
-          parent && parent.original_language == etym.original_language
-
+          (parent && parent.original_language == etym.original_language) || initial_etymon_same_language       
         etymon = content_tag :span, :class => "lexform-etymon" do
           wh etym.etymon
         end
@@ -143,7 +144,7 @@ module EtymologiesHelper
       else
         language = html_escape(etym.original_language.name) if 
           etym.original_language unless
-          parent && parent.original_language == etym.original_language
+          (parent && parent.original_language == etym.original_language) || initial_etymon_same_language
 
         etymon = sanitize etym.etymon
 
