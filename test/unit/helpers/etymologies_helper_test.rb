@@ -91,4 +91,10 @@ class EtymologiesHelperTest < ActionView::TestCase
 		assert_equal html_escape("abdo, from ab + do; where ab is from apo, and where do is from dh3."),
 			wiki_format(subentries[:abdomen].etymologies.first)
 	end
+  
+  test "issue #85 - language shouldn't be named on first etymon if same as lexeme" do
+    # etymologies(:one) is 'Testwegian (zxx)' in the fixtures, as is the associated subentry
+    assert_equal etymologies(:one).original_language, etymologies(:one).subentries.first.try(:lexeme).try(:language)
+    assert_equal "#{ETYMON % "MyString"} #{GLOSS % "MyString"}.", html_format(etymologies(:one))
+  end
 end
