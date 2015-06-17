@@ -87,7 +87,7 @@ class Parse < ActiveRecord::Base
   
   # Determine whether we should hit reject_if when something accepts_nested_attributes_for parses.
   def self.rejectable?(attributes)
-    attributes[:parsed_form].blank?
+    attributes.select {|k, v| k.start_with? "parsed_form"}.all? {|k, v| v.blank?}
   end
 end
 
