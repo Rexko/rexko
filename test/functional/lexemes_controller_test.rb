@@ -146,4 +146,21 @@ class LexemesControllerTest < ActionController::TestCase
     assert Rails.application.assets.find_asset('button_yellow.png'), "Yellow button is missing"
     assert Rails.application.assets.find_asset('button_gray.png'), "Gray button is missing"
   end
+  
+  # 161b: Nested attributes are not working to create parses
+  test "should be able to create new parses by nested attributes" do
+	  assert_difference('Parse.count') do
+      put :update, id: lexemes(:one).id, 
+        lexeme:
+          { subentries_attributes: { 0 =>
+            { etymotheses_attributes: { 0 =>
+              { etymology_attributes:
+                { etymon: "tested",
+                  parses_attributes: { 0 =>
+                  { parsed_form_en: "test",
+                    interpretations_attributes: { 0 =>
+                      { sense_id: "1",
+                        sense_attributes: { definition_en: "" }}}}}}}}}}}
+    end
+  end
 end

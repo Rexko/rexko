@@ -1,6 +1,7 @@
 ==Since 0.4.0==
 * [#78] New lexeme link always to be available on lexeme show and search pages
 * [#85] Language of the first etymon in an etymology shouldn't be listed if it's the same as the lexeme's
+* [#161] Fixed some issues where new subitems weren't being created
 
 ==Since 0.3.6==
 * [#142] Fixed failure of will_paginate on Locus search

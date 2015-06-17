@@ -65,4 +65,21 @@ class LociControllerTest < ActionController::TestCase
     
     assert_response :success
   end
+  
+  # 161: Nested attributes are not working to create interpretations
+  test "should be able to create new interpretations by nested attributes" do
+	  assert_difference('Interpretation.count') do
+      put :update, id: loci(:one).id, 
+        locus: 
+        { attestations_attributes: { 0 => 
+          { attested_form: "tested", 
+            parses_attributes: { 0 => 
+            { parsed_form: "test",
+              interpretations_attributes: { 0 => 
+              { sense_id: "new-1", 
+                sense_attributes: { definition: "Test." }}}}}}}}
+	  end
+    
+    assert_not_nil Sense.last.subentry_id
+  end
 end

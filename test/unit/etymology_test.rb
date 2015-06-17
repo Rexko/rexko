@@ -65,7 +65,7 @@ class EtymologyTest < ActiveSupport::TestCase
     assert_no_difference 'Parse.count' do
       Etymology.find_each do |echi|
         paa = echi.parses.build(parsed_form: "")
-        assert Parse.rejectable?(paa), "#{echi.id}: attributes #{paa.attributes}"
+        assert Parse.rejectable?(paa.attributes), "#{echi.id}: attributes #{paa.attributes}"
       end
     end
   end
