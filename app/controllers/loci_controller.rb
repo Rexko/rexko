@@ -113,6 +113,8 @@ class LociController < ApplicationController
   def update
     @locus = Locus.find(params[:id])
 
+    # FIXME Because of the way a new sense is added under an existing subentry,
+    # we have to tweak params so that it is appropriately associated.
 		atesute = params[:locus][:attestations_attributes]
 		atesute.each {|att_k, att_v|
 			paasu = att_v[:parses_attributes]
