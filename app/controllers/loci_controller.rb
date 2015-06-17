@@ -121,7 +121,6 @@ class LociController < ApplicationController
 				intah.each {|int_k, int_v|
 					if int_v[:sense_id].try(:slice, "new")
 						int_v[:sense_attributes][:subentry_id] = int_v[:sense_id].split('-')[1]
-						int_v.delete(:sense_id)
 					end
 				} if intah
 			} if paasu
