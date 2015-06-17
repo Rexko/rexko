@@ -146,4 +146,69 @@ class LexemesControllerTest < ActionController::TestCase
     assert Rails.application.assets.find_asset('button_yellow.png'), "Yellow button is missing"
     assert Rails.application.assets.find_asset('button_gray.png'), "Gray button is missing"
   end
+  
+  # 161b: Nested attributes are not working to create parses
+  test "should be able to create new parses by nested attributes" do
+	  assert_difference('Parse.count') do
+      put :update, :id => lexemes(:one).id,
+      "lexeme"=>
+        { "dictionary_ids"=>["1"],
+          "headwords_attributes"=>
+          { "0"=>
+            { "_destroy"=>"false",
+              "form_la"=>"test parse",
+              "form_en"=>"",
+              "descriptively_ok"=>"1",
+              "prescriptively_ok"=>"1"
+            }
+          },
+          "subentries_attributes"=>
+          { "0"=>
+            { "_destroy"=>"false",
+              "paradigm_la"=>"test parse",
+              "paradigm_en"=>"",
+              "part_of_speech_en"=>"",
+              "senses_attributes"=>
+              { "0"=>
+                { "_destroy"=>"false",
+                  "definition_en"=>"test parse",
+                  "glosses_attributes"=>
+                  { "0"=>
+                    { "_destroy"=>"false",
+                      "gloss_en"=>"",
+                      "gloss_la"=>""
+                    }
+                  }
+                }
+              },
+              "etymotheses_attributes"=>
+              { "1434564882"=>
+                { "etymology_attributes"=>
+                  { "_destroy"=>"false",
+                    "original_language_id"=>"",
+                    "etymon"=>"test parse",
+                    "gloss"=>"",
+                    "parses_attributes"=>
+                    { "1434564892"=>
+                      { "_destroy"=>"false",
+                        "parsed_form_en"=>"test",
+                        "interpretations_attributes"=>
+                        { "1434564895"=>
+                          { "_destroy"=>"false",
+                            "sense_id"=>"4166",
+                            "sense_attributes"=>
+                            { "definition_en"=>""
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    end
+  end
 end
