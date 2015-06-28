@@ -62,4 +62,17 @@ class ParseTest < ActiveSupport::TestCase
       end
     end
   end
+  
+  # 143: Some unattached parses were being found by most_wanted but not 
+  # count_unattached_to.  We determined that we were only searching for
+  # interpretations unattached to parses, not those unattached to senses
+  test "#count_unattached_to's results should find those not attached to senses, too" do
+    TEST_STRING = "#143parse"
+    
+    parse = Parse.create(parsed_form: TEST_STRING)
+    terp = parse.interpretations.create
+
+    assert terp.sense.nil? 
+    assert_equal 1, Parse.count_unattached_to(TEST_STRING)
+  end
 end
