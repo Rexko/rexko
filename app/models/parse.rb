@@ -11,7 +11,8 @@ class Parse < ActiveRecord::Base
     where('NOT EXISTS (SELECT "form" FROM "headwords" WHERE "headwords"."form" IN (LOWER(SUBSTR(parsed_form, 1, 1)) || SUBSTR(parsed_form, 2), UPPER(SUBSTR(parsed_form, 1, 1)) || SUBSTR(parsed_form, 2)))')
   }
   
-  scope :uninterpreted, :include => :interpretations, :conditions => { "interpretations.parse_id" => nil }
+  # Returns Parses not linked to a Sense by an Interpretation.
+  scope :uninterpreted, :include => :interpretations, :conditions => Interpretation::NOT_INTERPRETING
 
   # Returns the most commonly appearing parses without entries.
   # count = number of results to return (defaults to 1)
