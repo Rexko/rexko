@@ -18,7 +18,7 @@
             <li><%= link_to t('loci.index.edit'), edit_locus_path(locus) %></li>
             <% if defined? sense %>
             <li><%= link_to t('interpretations.index.unlink'), 
-                    sense.interpretations.where(parse_id: locus.parse_ids).first, 
+                    Interpretation.where(parse_id: locus.parse_ids, sense_id: sense.id).first,
                     confirm: t('interpretations.index.confirm_destroy', locus: greek_numeral(locus_counter + 1), lexeme: @lexeme.primary_headword), 
                     method: :delete 
             %></li>
