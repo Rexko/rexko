@@ -54,7 +54,7 @@ Then(/^there should be a link to edit the locus$/) do
 end
 
 Then(/^there should be a link to unlink the locus from the lexeme$/) do
-  assert page.has_link?(I18n.t('interpretations.index.destroy'), href: url_for(
+  assert page.has_link?(I18n.t('interpretations.index.unlink'), href: url_for(
     controller: :interpretations,
     action: :destroy,
     id: @terp, 
@@ -73,22 +73,34 @@ Then(/^there should be a link to delete the locus$/) do
   ))
 end
 
-Then(/^I should be prompted before deleting the (\w+)$/) do |item|
-  items = item.pluralize
-  
+Then(/^I should be prompted before deleting the locus$/) do 
   prompt = accept_confirm do
-      page.click_link(I18n.t("#{items}.index.destroy"), href: url_for(
-      controller: items,
+    page.click_link(I18n.t("loci.index.destroy"), href: url_for(
+      controller: :loci,
       action: :destroy,
-      id: case items
-          when "loci" then @locus
-          when "interpretations" then @terp
-          end, 
+      id: @locus, 
       locale: I18n.default_locale, 
       only_path: true
     ))
   end
   
-  assert_equal prompt, I18n.t("#{items}.index.confirm_destroy")
+  assert_equal I18n.t("loci.index.confirm_destroy"), prompt
+end
+     
+Then(/^I should be prompted before deleting the interpretation$/) do 
+  prompt = accept_confirm do
+    page.click_link(I18n.t("interpretations.index.unlink"), href: url_for(
+      controller: :interpretations,
+      action: :destroy,
+      id: @terp, 
+      locale: I18n.default_locale, 
+      only_path: true
+    ))
+  end
+  
+  assert_equal I18n.t("interpretations.index.confirm_destroy", 
+    locus: "\u03B1\u0374", # alpha, keraia 
+    lexeme: @lex.primary_headword
+  ), prompt 
 end
      
