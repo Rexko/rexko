@@ -6,11 +6,6 @@
 			<%= render(:partial => "shared/locus", :object => locus, :locals => { :locus_counter => locus.id - 1 })%>
 		</td>
 	</tr>
-	<tr>
-	  <td><%= link_to t('.show'), locus %></td>
-	  <td><%= link_to t('.edit'), edit_locus_path(locus) %></td>
-	  <td><%= link_to t('.destroy'), locus, :confirm => t('.confirm_destroy'), :method => :delete %></td>
-	</tr>
 <% end %>
 </table>
 

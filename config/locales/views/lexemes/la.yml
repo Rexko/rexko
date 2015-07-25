@@ -89,7 +89,10 @@ la:
                 part_of_speech: "Pars orationis"
     interpretations:
         lexemeform:
-            sense: "Sensus"                
+            sense: "Sensus" 
+        index:
+            unlink: "Disconectare"
+            confirm_destroy: "Vero disconectare \"%{locus}\" ab hoc sensu lexeos \"%{lexeme}\"?"
     notes:
         shortform:
             note: "Nota"

@@ -80,6 +80,9 @@ en:
     interpretations:
         lexemeform:
             sense: "Sense"
+        index:
+            unlink: "Unlink"
+            confirm_destroy: "Really unlink %{locus} from %{lexeme}?"
     notes:
         shortform:
             note: "Note"               
