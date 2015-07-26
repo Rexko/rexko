@@ -94,7 +94,7 @@ class InterpretationsController < ApplicationController
     @interpretation.destroy
 
     respond_to do |format|
-      format.html { redirect_to(interpretations_url) }
+      format.html { redirect_to(params[:back] || request.referer || interpretations_url) }
       format.xml  { head :ok }
     end
   end
