@@ -1,14 +1,34 @@
 <%= cite_locus(locus, locus_counter + 1) %>
 
 <div class="subcolumns">
-	<div class="c50l" style="border-right:3px double gray">
+	<div class="c40l" style="border-right:3px double gray">
 		<div class="subcl" style="padding-left:35px">
 			<%=wh_parsed locus, locus.example, emphasis ||= [] %>
 		</div>
 	</div>
-	<div class="c50r">
-		<div class="subcr">
+	<div class="c40l">
+		<div class="subcl" style="padding-left:15px">
 			<i><%=wh locus.example_translation%></i>
 		</div>
 	</div>
+    <div class="c20r">
+        <div class="subcr">
+            <ul>
+            <li><%= link_to_unless_current t('loci.index.show'), locus %></li>
+            <li><%= link_to t('loci.index.edit'), edit_locus_path(locus) %></li>
+            <% if defined? sense %>
+            <li><%= link_to t('interpretations.index.unlink'), 
+                    Interpretation.where(parse_id: locus.parse_ids, sense_id: sense.id).first,
+                    confirm: t('interpretations.index.confirm_destroy', locus: greek_numeral(locus_counter + 1), lexeme: @lexeme.primary_headword), 
+                    method: :delete, back: request.path
+            %></li>
+            <% end %>
+            <li><%= link_to t('loci.index.destroy'), 
+                    locus, 
+                    confirm: t('loci.index.confirm_destroy'), 
+                    method: :delete, back: request.path
+            %></li>
+            </ul>
+        </div>
+    </div>
 </div>

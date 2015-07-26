@@ -157,7 +157,7 @@ class LociController < ApplicationController
     @locus.destroy
 
     respond_to do |format|
-      format.html { redirect_to(loci_url) }
+      format.html { redirect_to(params[:back] || loci_url) }
       format.xml  { head :ok }
     end
   end
