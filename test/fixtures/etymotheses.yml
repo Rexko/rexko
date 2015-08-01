@@ -19,3 +19,7 @@ for_chain_B2:
 for_chain_B3:
   subentry_id: 42
   etymology_id: 55
+
+unattached:
+    subentry_id: 1
+    etymology_id: 70

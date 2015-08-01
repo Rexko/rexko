@@ -93,3 +93,8 @@ for_chainB2:
   parsable_id: 53
   parsable_type: Etymology
   parsed_form: test2
+
+unattached:
+    parsable_type: Etymology
+    parsed_form: unattached
+    parsable_id: 70
