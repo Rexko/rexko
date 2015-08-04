@@ -1,5 +1,5 @@
 <div class="lexform-entry">
 	<div class="lexform-headword" <%= lang_for(lexeme.headwords) %>><%= source(lexeme.language){ titleize_headwords_for lexeme } %></div>
 	<%= render :partial => "shared/headword", :collection => lexeme.headwords, :locals => {lexeme: lexeme} %>
-	<%= render :partial => "shared/subentry", :collection => lexeme.subentries, :locals => {lexeme: lexeme} %>
+	<%= render :partial => "shared/subentry", :collection => lexeme.subentries %>
 </div>
