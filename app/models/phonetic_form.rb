@@ -3,7 +3,7 @@ class PhoneticForm < ActiveRecord::Base
   has_many :orthographs
   has_many :headwords, :through => :orthographs
   translates :form, :fallbacks_for_empty_translations => true
-  globalize_accessors :locales => (Language.all.collect(&:iso_639_code) | [I18n.default_locale])
+  globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])
  
   validate :any_form_present?
   
