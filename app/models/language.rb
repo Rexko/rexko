@@ -106,4 +106,9 @@ class Language < ActiveRecord::Base
   def language
     self
   end
+  
+  # Return an array of the language codes defined in the system.
+  def self.defined_language_codes
+    @defined_language_codes ||= all.collect(&:iso_639_code)
+  end
 end
