@@ -24,7 +24,7 @@ class Lexeme < ActiveRecord::Base
  
   # Returns an array containing the forms of each headword.
   def headword_forms
-    headwords.collect(&:form)
+    headwords.collect(&:form).compact
   end
   
   def primary_headword
