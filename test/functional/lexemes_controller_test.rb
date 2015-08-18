@@ -170,9 +170,11 @@ class LexemesControllerTest < ActionController::TestCase
     Capybara.current_driver = :webkit
     
     visit new_lexeme_path
+
+    field_count = page.all('input[type="text"],textarea').count
     click_link I18n.t('lexemes.form.add_subentry')
    
-    page.all('input[type="text"],textarea').each do |elem|
+    page.all('input[type="text"],textarea', minimum: field_count + 1).each do |elem|
       elem.set "test"
     end
 
