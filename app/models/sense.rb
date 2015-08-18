@@ -33,8 +33,8 @@ class Sense < ActiveRecord::Base
   
 protected
   def validate_sufficient_data
-    if definition.blank? && glosses.empty?
-      errors.add_to_base("Definition or gloss must be supplied for a sense") 
+    if globalize_attribute_names.select {|k,v| k.to_s.start_with?("definition")}.all? {|v| v.blank? } && glosses.empty?
+      errors[:base] << "Definition or gloss must be supplied for a sense"
     end
   end
 end
