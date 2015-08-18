@@ -163,4 +163,21 @@ class LexemesControllerTest < ActionController::TestCase
                         sense_attributes: { definition_en: "" }}}}}}}}}}}
     end
   end
+  
+  # 177: The add subentry link wasn't correctly making a sense under 
+  # the subentry
+  test "should be able to create new subentries from the lexeme form" do
+    Capybara.current_driver = :webkit
+    
+    visit new_lexeme_path
+    click_link I18n.t('lexemes.form.add_subentry')
+   
+    page.all('input[type="text"],textarea').each do |elem|
+      elem.set "test"
+    end
+
+    click_button I18n.t('lexemes.new.create')
+    
+    assert page.has_content?(I18n.t('lexemes.create.successful_create'))
+  end
 end
