@@ -24,7 +24,9 @@ class Lexeme < ActiveRecord::Base
  
   # Returns an array containing the forms of each headword.
   def headword_forms
-    headwords.collect(&:form)
+    headwords.inject([]) do |memo, obj|
+      memo | obj.orthographic_forms
+    end
   end
   
   def primary_headword

@@ -59,6 +59,13 @@ class Headword < ActiveRecord::Base
     self.acceptance = (acceptance & DESCRIPTIVE) | (status.to_i * PRESCRIPTIVE) 
   end
   
+  # Return an array of all defined orthographic forms
+  def orthographic_forms
+    translations.inject([]) do |memo, obj|
+      obj.form? ? memo | [obj.form] : memo
+    end
+  end
+  
   protected
   def any_form_present?
     if globalize_attribute_names.select {|k,v| k.to_s.start_with?("form")}.all? {|v| v.blank? }

@@ -7,7 +7,6 @@ class ParsableControllerTest < ActionController::TestCase
   end
   
   # 176: Loci#unattached is failing when the unattached is an etymology
-  # TODO: Test is not failing
   test "should get unattached when it's an etymology" do
     get :index, forms: ["unattached"]
 

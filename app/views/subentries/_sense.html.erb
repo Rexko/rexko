@@ -1,18 +1,1 @@
-<%= fields_for @path, @sense, :child_index => Time.now.to_i.to_s do |f|  %>
-	<fieldset class="sense">
-        <legend>
-            <%= label_with_remove_option_for t('.sense'), f %>
-        </legend>
-        <div class="type-text">
-            <%= f.label :definition %>
-            <%= translatable_tag f, :text_area, :definition, :vernacular, rows: 4 %>
-        </div>
-
-
-    <!-- Gloss -->
-		<%= list_children_with_option_to_add :gloss, f, :remote => true, locals: { dictionaries: @dictionaries } %>
-
-    <!-- Note -->
-    <%= list_children_with_option_to_add :note, f, :remote => true, locals: { dictionaries: @dictionaries } %>
-	</fieldset>
-<% end %>
+<%= render partial: "senses/shortform", locals: {f: f} %>

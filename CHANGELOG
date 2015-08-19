@@ -5,6 +5,7 @@
 * [#143] Fixed an issue where unattached parses were being underreported
 * [#88] Added options to work with loci on the lexeme show page
 * [#176] Fixed an issue that prevented showing etymologies under unattached parses
+* [#177] Fixed an issue with creating subentries from the lexeme form
 
 ==Since 0.3.6==
 * [#142] Fixed failure of will_paginate on Locus search
