@@ -58,3 +58,8 @@ for_chainB2:
   lexeme_id: 42
   paradigm: "2ary A"
   part_of_speech: ""
+
+179_in_multiple_language_dictionaries:
+    id: 50
+    lexeme: 179_in_multiple_language_dictionaries
+    part_of_speech: "v."

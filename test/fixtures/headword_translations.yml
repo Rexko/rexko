@@ -64,3 +64,13 @@ with_construction:
   headword_id: 13
   locale: zxx
   form: blue jay
+
+179_es:
+    headword_id: 40
+    locale: es
+    form: tener
+
+179_la:
+    headword_id: 40
+    locale: la
+    form: teneo

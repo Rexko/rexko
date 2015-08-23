@@ -11,3 +11,11 @@ two:
 three:
   dictionary_id: 3
   lexeme_id: 6
+
+179_in_la:
+    dictionary: la
+    lexeme: 179_in_multiple_language_dictionaries
+
+179_in_es:
+    dictionary: es
+    lexeme: 179_in_multiple_language_dictionaries

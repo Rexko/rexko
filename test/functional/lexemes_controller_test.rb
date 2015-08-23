@@ -182,4 +182,14 @@ class LexemesControllerTest < ActionController::TestCase
     
     assert page.has_content?(I18n.t('lexemes.create.successful_create'))
   end
+  
+  # 179: Errors when adding a lexeme to multiple dictionaries
+  # Behavior on show when a lexeme is in multiple language dictionaries
+  # was not defined.  It was showing nothing; should probably show each
+  test "should display correctly if lexeme is in multiple language dictionaries" do
+    get :show, id: lexemes(:"179_in_multiple_language_dictionaries").id
+    
+    assert_select ".lexform-paradigm", /teneo/
+    assert_select ".lexform-paradigm", /tenere/
+  end
 end

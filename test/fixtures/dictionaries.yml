@@ -12,3 +12,11 @@ three:
   id: 3
   title: Test dictionary
   source_language_id: 1
+
+la_dict:
+    title: Latin dictionary
+    source_language_id: 2
+
+es_dict:
+    title: Spanish dictionary
+    source_language_id: 3
