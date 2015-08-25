@@ -40,3 +40,7 @@ und:
     id: 30
     default_name: "Undetermined"
     iso_639_code: "und"
+    
+english:
+    default_name: "English"
+    iso_639_code: "en"

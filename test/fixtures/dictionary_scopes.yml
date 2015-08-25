@@ -13,9 +13,9 @@ three:
   lexeme_id: 6
 
 179_in_la:
-    dictionary: la
+    dictionary: la_dict
     lexeme: 179_in_multiple_language_dictionaries
 
 179_in_es:
-    dictionary: es
+    dictionary: es_dict
     lexeme: 179_in_multiple_language_dictionaries
