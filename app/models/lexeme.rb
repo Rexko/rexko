@@ -89,10 +89,12 @@ class Lexeme < ActiveRecord::Base
   end
   
   # Return the language of the lexeme, based on the dictionaries it's in.   
+  # If multiple, will probably return Language::MULTIPLE_LANGUAGES.
   def language
 		Language.lang_for(dictionaries, :source_language)
   end
   
+  # Return an array of the languages of the lexeme.
   def languages
     Language.langs_for(dictionaries, :source_language)
   end
