@@ -93,6 +93,10 @@ class Lexeme < ActiveRecord::Base
 		Language.lang_for(dictionaries, :source_language)
   end
   
+  def languages
+    Language.langs_for(dictionaries, :source_language)
+  end
+  
   # Return all lexemes the parsables attest.
 #  def Lexeme.attested_by parsables, type
 #    Lexeme.find(:all, :joins => HASH_MAP_TO_PARSE, :conditions => { :parses => { :parsable_id => parsables, :parsable_type => type }})
