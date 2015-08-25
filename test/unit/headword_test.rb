@@ -19,6 +19,6 @@ class HeadwordTest < ActiveSupport::TestCase
   # Needed to define a way to do this.  This MAY return nil if
   # there's no appropriate form.
   test "#form should be able to take a language as an argument" do
-    assert_equal headwords(:"179_multilocale").form(:la), "teneo"
+    assert_equal "teneo", headwords(:"179_multilocale").form(:la)
   end
 end
