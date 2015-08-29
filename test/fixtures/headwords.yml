@@ -62,3 +62,7 @@ with_construction:
   form: blue jay
   lexeme_id: 32
   id: 13
+
+179_multilocale:
+    id: 40 
+    lexeme: 179_in_multiple_language_dictionaries

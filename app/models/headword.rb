@@ -59,6 +59,17 @@ class Headword < ActiveRecord::Base
     self.acceptance = (acceptance & DESCRIPTIVE) | (status.to_i * PRESCRIPTIVE) 
   end
   
+  # Return the orthographic form appropriate to the given locale. 
+  # If no locale is given, return the default (current) locale, or the 
+  # first translation given. 
+  def form loc = nil 
+    if loc
+      form_translations[loc]
+    else
+      self[:form] || form_translations.detect(->{[]}) {|k, v| v.present? }[1]
+    end
+  end
+  
   # Return an array of all defined orthographic forms
   def orthographic_forms
     translations.inject([]) do |memo, obj|

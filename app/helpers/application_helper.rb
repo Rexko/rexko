@@ -279,8 +279,10 @@ module ApplicationHelper
     end
   end 
   
+  # Given a Language and a block, return the contents of that block globalized 
+  # appropriately for the Language.
   def source lang = (@langs[:source].first if @langs), &block
-    Globalize.with_locale(lang.iso_639_code) do
+    Globalize.with_locale(lang.try(:iso_639_code)) do
       yield
     end
   end

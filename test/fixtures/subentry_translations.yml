@@ -1,0 +1,9 @@
+179_es:
+    subentry_id: 50
+    locale: es
+    paradigm: tener
+
+179_la:
+    subentry_id: 50
+    locale: la
+    paradigm: "teneo, -ere, -ui, tentum"

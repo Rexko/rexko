@@ -1,6 +1,6 @@
 <div class="lexform-subentry"  <%= lang_for(subentry) %>>
 	<span class="lexform-paradigm">
-	  <%=wh source(Language.lang_for(subentry.lexeme)){t('.principal_parts', paradigm: subentry.paradigm, default: "%{paradigm}.") || t('.no_principal_parts')} %>
+	  <%=wh source {t('.principal_parts', paradigm: subentry.paradigm, default: "%{paradigm}.") || t('.no_principal_parts')} %>
 	</span>
 	<!-- phonetic form was here, now in shared/headword -->
 	<span class="lexform-part-of-speech">
