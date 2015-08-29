@@ -62,12 +62,11 @@ class Headword < ActiveRecord::Base
   # Return the orthographic form appropriate to the given locale. 
   # If no locale is given, return the default (current) locale, or the 
   # first translation given. 
-  # This is a little ugly.
   def form loc = nil 
     if loc
-      translations.where(locale: loc).first.try(:[], :form)
+      form_translations[loc]
     else
-      self[:form] || translations.where(Headword::Translation.arel_table[:form].not_eq(nil)).first.try(:[], :form)
+      self[:form] || form_translations.detect(->{[]}) {|k, v| v.present? }[1]
     end
   end
   
