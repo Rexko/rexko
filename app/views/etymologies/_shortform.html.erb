@@ -1,20 +1,21 @@
+<dl>
 <fieldset class="etymology">
     <legend><%= label_with_remove_option_for t(".etymon"), f %></legend>
-    <div class="type-text">
+    <dt class="type-text">
         <%= f.label :source_language %>
         <%= f.collection_select :original_language_id, Language.all, :id, :to_s, { :include_blank => true } %>
 
         <%= f.label :etymon %> 
-        <%= f.text_field :etymon %>
+        <%= f.text_field :etymon, size: width %>
 
         <%= f.label :gloss %>
-        <%= translatable_tag f, :text_field, :gloss, :vernacular %>
-    </div>
+        <%= translatable_tag f, :text_field, :gloss, :vernacular, size: width %>
+    </dt>
 
     <%= list_children_with_option_to_add :parse, f, :remote => true, locals: { dictionaries: @dictionaries } %>
 			
     <%= list_children_with_option_to_add :note, f, :remote => true, locals: { dictionaries: @dictionaries } %>
-
+</dl>
     <%= list_children_with_option_to_add :next_etymon, f, 
             :class_name => :etymology, 
             :limit_one => true, 

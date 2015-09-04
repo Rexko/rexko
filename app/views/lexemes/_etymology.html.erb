@@ -1,5 +1,6 @@
 <%= 
     unless (f.object.try(:_destroy)) 
-        render partial: 'etymologies/shortform', locals: {f: f}
+        width = (f.object.etymon.try(:size) || 25) * 1.2 
+        render partial: 'etymologies/shortform', locals: {f: f, width: width}
     end 
 %>
