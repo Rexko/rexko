@@ -15,6 +15,7 @@
     <%= list_children_with_option_to_add :parse, f, :remote => true, locals: { dictionaries: @dictionaries } %>
 			
     <%= list_children_with_option_to_add :note, f, :remote => true, locals: { dictionaries: @dictionaries } %>
+    </fieldset>
 </dl>
     <%= list_children_with_option_to_add :next_etymon, f, 
             :class_name => :etymology, 
@@ -22,6 +23,6 @@
             :remote => true,
             :create_blank => (f.object && !f.object.new_record?),
             :list_if => (f.object && !f.object.new_record?),
-            :locals => { dictionaries: @dictionaries }
+            :locals => { dictionaries: @dictionaries, width: width }
     %>
-</fieldset>
+
