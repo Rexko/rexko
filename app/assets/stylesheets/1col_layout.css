@@ -107,7 +107,9 @@ div.autocomplete ul li {
 .interlinear .etymology dt,
 .interlinear .etymology dd { display: table; width:100%; }
 .interlinear .attestation dt label, 
-.interlinear .attestation dd label { display: table-cell; }
+.interlinear .attestation dd label,
+.interlinear .etymology dt label, 
+.interlinear .etymology dd label { display: table-cell; }
 .interlinear .attestation dt input, 
 .interlinear .attestation dd input,
 .interlinear .attestation .dd select,

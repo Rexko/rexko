@@ -1,5 +1,9 @@
 <%= 
     unless (f.object.try(:_destroy)) 
-        render partial: 'parses/lexemeform', locals: {f: f}
+        if form.present? && form == :interlinear
+            render partial: 'parses/shortform', locals: {f: f}
+        else
+            render partial: 'parses/lexemeform', locals: {f: f}
+        end
     end
 %>
