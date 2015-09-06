@@ -25,31 +25,34 @@ activate_links = function(element){
 			link.observe('click', NestedAttributesJs.add_nested);  
 	});
 	element.getElementsBySelector('.pull_nested').each(function(link){  
-		link.observe('click', function(e) {
-			this.insert({after: "<img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"16\" height=\"16\">"})
-		});
-		link.observe('ajax:before', function(e) {
-			live_value = this.up('fieldset').select('.bequeathed').last().value;
-			query = e.target.search.toQueryParams()
-			query['live_value'] = live_value
-			e.target.search = '?'+Object.toQueryString(query); 
-		});
+		link.observe('click', NestedAttributesJs.start_throbber);
+		link.observe('ajax:before', NestedAttributesJs.add_live_value_to_query);
 		link.observe('ajax:success', NestedAttributesJs.pull_nested);
 	});
 
     element.getElementsBySelector('.combobox').each(function(e){
-       e.observe('change', function(e2){
+       e.observe('change', NestedAttributesJs.toggle_comboform_input.bindAsEventListener(this, e));
+    });
+}
+
+var NestedAttributesJs = {  
+    start_throbber : function(e) {
+	    this.insert({after: "<img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"16\" height=\"16\">"})
+	},
+    add_live_value_to_query : function(e) {
+			live_value = this.up('fieldset').select('.bequeathed').last().value;
+			query = e.target.search.toQueryParams()
+			query['live_value'] = live_value
+			e.target.search = '?'+Object.toQueryString(query); 
+	},
+    toggle_comboform_input : function(e2, e){
          combotext = e.up().next('.comboform');
          if (e.options[e.selectedIndex].value.indexOf("new-") == 0) {
              if (combotext) Effect.BlindDown(combotext, {duration: 0.25});
          } else {
              if (combotext) Effect.BlindUp(combotext, {duration: 0.25});
          };
-       });
-    });
-}
-
-var NestedAttributesJs = {  
+    },
 	remove : function(e) {
 		el = Event.findElement(e);
 		target = el.href.replace(/.*#/, '.');
@@ -168,7 +171,7 @@ function insert_with_effect(container, content){
         before: '<div style="display:none;">'+content+'</div>'
     });
     Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
-    activate_links(container.previous());
+    activate_links($$('body')[0]);
     activate_autocompletes(container.previous());
     activate_language_tabs(container.previous().select(".language-list li"));
     update_add_links();

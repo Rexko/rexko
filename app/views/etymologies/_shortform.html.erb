@@ -1,26 +1,28 @@
-<fieldset class="etymology">
+</div>
+<dl>
+    <fieldset class="etymology parsable">
     <legend><%= label_with_remove_option_for t(".etymon"), f %></legend>
-    <div class="type-text">
         <%= f.label :source_language %>
-        <%= f.collection_select :original_language_id, Language.all, :id, :to_s, { :include_blank => true } %>
-
+        <%= f.collection_select :original_language_id, Language.includes([:translations]).all, :id, :to_s, { :include_blank => true } %>
+    <dt>
         <%= f.label :etymon %> 
-        <%= f.text_field :etymon %>
-
+        <%= f.text_field :etymon, size: width %>
+    </dt>
+    <dd>
         <%= f.label :gloss %>
-        <%= translatable_tag f, :text_field, :gloss, :vernacular %>
-    </div>
+        <%= translatable_tag f, :text_field, :gloss, :vernacular, size: width %>
+    </dd>
 
-    <%= list_children_with_option_to_add :parse, f, :remote => true, locals: { dictionaries: @dictionaries } %>
+    <%= list_children_with_option_to_add :parse, f, :remote => true, locals: { dictionaries: @dictionaries, form: :interlinear } %>
 			
     <%= list_children_with_option_to_add :note, f, :remote => true, locals: { dictionaries: @dictionaries } %>
-
-    <%= list_children_with_option_to_add :next_etymon, f, 
-            :class_name => :etymology, 
-            :limit_one => true, 
-            :remote => true,
-            :create_blank => (f.object && !f.object.new_record?),
-            :list_if => (f.object && !f.object.new_record?),
-            :locals => { dictionaries: @dictionaries }
-    %>
-</fieldset>
+    </fieldset>
+</dl>
+<%= list_children_with_option_to_add :next_etymon, f, 
+        :class_name => :etymology, 
+        :limit_one => true, 
+        :remote => true,
+        :create_blank => false, #(f.object && !f.object.new_record?),
+        :list_if => (f.object && !f.object.new_record?),
+        :locals => { dictionaries: @dictionaries }
+%>

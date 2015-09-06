@@ -37,7 +37,7 @@ class InterpretationsController < ApplicationController
     respond_to do |format|
       format.html do
       	if request.xhr?
-          if params[:path].include? "locus"
+          if params[:path] =~ /locus|etymo/
             render :partial => "interlinear_form"
           else
             render :partial => "form"
