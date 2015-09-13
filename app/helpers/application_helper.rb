@@ -211,7 +211,7 @@ module ApplicationHelper
   # +options[:as]+            - class, if differs from attribute name
   def autocomplete child, form, options = {}
     child_obj = form.object.send(child).present? ? form.object.send(child) : form.object.send("build_#{child}")
-    klass = options[:as] || child
+    klass = (options[:as] || child).to_s
     
     form.fields_for child, child_obj do |child_form|
       ref = child_form.object_name
@@ -230,10 +230,10 @@ module ApplicationHelper
 
       child_form.hidden_field(:id, id: "#{ref}_id") <<
       
-      content_tag(:div, nil, id: "#{ref}_choices", class: 'autocomplete', data: { ref: ref, plural: klass.to_s.pluralize }) <<
+      content_tag(:div, nil, id: "#{ref}_choices", class: 'autocomplete', data: { ref: ref, plural: klass.pluralize }) <<
 
       content_tag(:div, id: "#{ref}_new", style: "display: none") do
-        render partial: "#{klass.to_s.pluralize}/form", locals: { "#{klass}_form".to_sym => child_form } 
+        render partial: "#{klass.pluralize}/form", locals: { "#{klass}_form".to_sym => child_form } 
       end
     end
   end
