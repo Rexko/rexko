@@ -1,0 +1,6 @@
+<ul>
+    <% @languages.each do |lang| %>
+        <li id="<%= lang.id %>-<%= @ref %>"><%= lang %></li>
+    <% end %>
+        <li id="new-<%= @ref %>" class="highlight"><i><%= t('.new_language')%></i></li>
+</ul>

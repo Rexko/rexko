@@ -33,3 +33,7 @@ en:
             substitutions_hint_html: "<i>If X sorts as if it were Y, enter:</i> <tt>X Y</tt> <i>(one rule per line)</i>"
             orderings: 'Custom letter orders'
             orderings_hint_html: "<i>If Ý sorts after Y, enter:</i> <tt>Y Ý</tt> <i>(one rule per line)</i>"
+    helpers:
+        label:
+            etymology:
+                source_language: "Source language"

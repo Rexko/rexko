@@ -2,8 +2,11 @@
 <dl>
     <fieldset class="etymology parsable">
     <legend><%= label_with_remove_option_for t(".etymon"), f %></legend>
-        <%= f.label :source_language %>
-        <%= f.collection_select :original_language_id, Language.includes([:translations]).all, :id, :to_s, { :include_blank => true } %>
+    <div class="type-text">
+        <%= autocomplete :original_language, f, 
+            prompt: t('helpers.label.etymology.source_language'),
+            as: :language %>
+    </div>
     <dt>
         <%= f.label :etymon %> 
         <%= f.text_field :etymon, size: width %>
