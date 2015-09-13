@@ -68,6 +68,7 @@ la:
     etymologies:
         shortform:
             etymon: "Etymon"
+            language_name_or_code: "Linguae nomen aut nota"
     glosses:
         shortform:
             gloss: "Glossa"
