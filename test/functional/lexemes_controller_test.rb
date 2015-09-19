@@ -192,4 +192,13 @@ class LexemesControllerTest < ActionController::TestCase
     
     assert_select ".lexform-paradigm", /tene/
   end
+  
+  # 93: 
+  # The lexeme edit form should include an autocomplete for the source language.
+  # (It was formerly listing the languages in creation order.)
+  test "should display language autocomplete" do
+    get :edit, id: lexemes(:literal).id
+    
+    assert_select 'span[id$=search-indicator]'
+  end
 end

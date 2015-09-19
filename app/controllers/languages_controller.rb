@@ -85,4 +85,13 @@ class LanguagesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def matching
+    @languages = Language.matching(params[:value]).sort_by {|lang| lang.to_s }
+    @ref = params[:ref]
+    
+    respond_to do |format|
+      format.js { render :partial => "autocomplete" }
+    end
+  end
 end

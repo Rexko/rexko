@@ -26,7 +26,7 @@ class Language < ActiveRecord::Base
   def name
     (default_name if default_name.present?) || 
     (iso_639_code if iso_639_code.present?) || 
-    UNKNOWN_LANGUAGE % id
+    (id ? UNKNOWN_LANGUAGE % id : "")
   end
 
   # Return the best sort order for the language
@@ -110,5 +110,19 @@ class Language < ActiveRecord::Base
   # Return an array of the language codes defined in the system.
   def self.defined_language_codes
     @defined_language_codes ||= all.collect(&:iso_639_code)
+  end
+  
+  # Given a string +query+, 
+  # return all languages where each word in +query+ appears as a substring 
+  # of either the name or the language code (or both) 
+  def self.matching query
+    terms = query.split.inject(true) {|sumquery, term|
+      [:default_name, :iso_639_code].
+        collect {|attrib| Language.arel_table[attrib].matches("%#{term.chomp ','}%")}.
+        inject(:or).
+        and(sumquery)
+    }
+
+    Language.includes([:translations]).where(terms)
   end
 end

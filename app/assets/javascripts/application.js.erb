@@ -166,13 +166,14 @@ Event.observe(window, 'load', function(){
 });
 
 // Simple add effect
+// and updating various observers
 function insert_with_effect(container, content){
     container.insert({
         before: '<div style="display:none;">'+content+'</div>'
     });
     Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
     activate_links($$('body')[0]);
-    activate_autocompletes(container.previous());
+    activate_autocompletes($$('body')[0]);
     activate_language_tabs(container.previous().select(".language-list li"));
     update_add_links();
 };
