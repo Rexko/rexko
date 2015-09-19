@@ -4,6 +4,7 @@
     <legend><%= label_with_remove_option_for t(".etymon"), f %></legend>
     <div class="type-text">
         <%= autocomplete :original_language, f, 
+            custom_search: f.object.original_language,
             prompt: t('.language_name_or_code'),
             as: :language %>
     </div>

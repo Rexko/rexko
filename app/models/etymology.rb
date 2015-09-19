@@ -11,6 +11,7 @@ class Etymology < ActiveRecord::Base
   translates :gloss
   globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])
   
+  accepts_nested_attributes_for :original_language, reject_if: proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :notes, {:allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }}
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc {|attrs| Parse.rejectable?(attrs) }
   accepts_nested_attributes_for :next_etymon, :allow_destroy => true, :reject_if => proc {|attrs| Etymology.rejectable?(attrs) }
