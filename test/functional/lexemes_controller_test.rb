@@ -199,6 +199,6 @@ class LexemesControllerTest < ActionController::TestCase
   test "should display language autocomplete" do
     get :edit, id: lexemes(:literal).id
     
-    assert_select ".parsable [autocomplete]"
+    assert_select 'span[id$=search-indicator]'
   end
 end
