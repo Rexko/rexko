@@ -1,5 +1,7 @@
 ==Since 0.4.1==
 * [#89] Lexeme form now arranges etymology horizontally instead of by nesting
+* [#93] Changed language chooser for etymologies from a dropdown to an autocomplete
+* [#92] Should be able to create a new language from the etymology form
 
 ==Since 0.4.0==
 * [#78] New lexeme link always to be available on lexeme show and search pages
