@@ -254,6 +254,7 @@ module ApplicationHelper
     end
   end
   
+  # Format of data entry fields for items appearing in multiple languages.
   def translatable_tag form, field, attribute, languages = [], html_options = {}
     content_tag(:div, {class: "translatable", data: { languages: languages }}) do
       default_locale = I18n.default_locale.to_s
