@@ -5,6 +5,7 @@ en:
             etymology: "Add etymology"
             etymon: "Add etymon"
             phonetic form: "Add phonetic form"
+            note: "Add note"
         remove_link: "(remove)"
         delete_checkbox: "Delete"
         etymology:

@@ -12,7 +12,7 @@ Given "I am on the lexeme edit form" do
     port: 7787
   )
   
-  @note_link_count = page.all(I18n.t("helpers.link_to_add.note")).size
+  @note_link_count = page.all('a', text: I18n.t("helpers.link_to_add.note")).size
 end
 
 When "I have added a phonetic form" do 
@@ -20,6 +20,6 @@ When "I have added a phonetic form" do
 end
 
 Then "I should see a link to add a note" do
-  assert page.has_text(I18n.t("helpers.link_to_add.note"), count: @note_link_count + 1)
+  page.all('a', text: I18n.t("helpers.link_to_add.note"), minimum: @note_link_count + 1)
 end
   
