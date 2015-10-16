@@ -254,6 +254,7 @@ module ApplicationHelper
     end
   end
   
+  # Format of data entry fields for items appearing in multiple languages.
   def translatable_tag form, field, attribute, languages = [], html_options = {}
     content_tag(:div, {class: "translatable", data: { languages: languages }}) do
       default_locale = I18n.default_locale.to_s
@@ -270,9 +271,12 @@ module ApplicationHelper
       output << content_tag(:div, class: "language-content") do
         languages.each do |lang|
           code = lang.iso_639_code
-          html_options[:data] = (html_options[:data] || {}).merge(language: code.underscore)
-          Globalize.with_locale(code) do
-            concat(form.send(field, "#{attribute}_#{code.underscore}", html_options))
+            
+          if form.object.respond_to? "#{attribute}_#{code.underscore}"
+            html_options[:data] = (html_options[:data] || {}).merge(language: code.underscore)
+            Globalize.with_locale(code) do
+              concat(form.send(field, "#{attribute}_#{code.underscore}", html_options))
+            end 
           end
         end
       end
