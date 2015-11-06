@@ -225,3 +225,12 @@ div.autocomplete ul li {
   border-width: inherit;
   box-shadow: inherit;
 }
+
+fieldset fieldset {
+    /* !important !important !important because apparently this gets defined before the more basic files?
+       Opened #196 to rectify this later */
+    border: none !important;
+    margin-top: 1em !important;
+    margin-left: 1em !important;
+}
+
