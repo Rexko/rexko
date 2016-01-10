@@ -63,3 +63,7 @@ for_chainB2:
     id: 50
     lexeme: 179_in_multiple_language_dictionaries
     part_of_speech: "v."
+    
+159_with_etymology_source:
+    lexeme: 159_with_etymology_source
+    part_of_speech: "word"

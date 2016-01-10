@@ -23,3 +23,8 @@ for_chain_B3:
 unattached:
     subentry_id: 1
     etymology_id: 70
+    
+159_with_etymology_source: 
+    subentry: 159_with_etymology_source
+    etymology: 159_with_etymology_source
+    source_id: 1
