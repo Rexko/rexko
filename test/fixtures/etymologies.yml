@@ -78,3 +78,6 @@ second_etym:
 unattached:
     id: 70
     etymon: unattached
+    
+159_with_etymology_source:
+    etymon: word
