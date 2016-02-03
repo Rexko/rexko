@@ -215,7 +215,6 @@ class LexemesControllerTest < ActionController::TestCase
     # Make sure the section is shown
     assert_select '.source'
     
-    p etymothesis.inspect
     # Make sure that it doesn't actually delete the source
 	  assert_no_difference('Source.count') do
       put :update, id: lexeme.id, 
@@ -223,18 +222,14 @@ class LexemesControllerTest < ActionController::TestCase
           { subentries_attributes: { subentry.id =>
             { etymotheses_attributes: { etymothesis.id =>
               { source_attributes:
-                { id: source.id,
+                { authorship_attributes:
+                  { id: source.authorship_id
+                  },
                   pointer: source.pointer,
-                  authorship_id: source.authorship_id,
                   _destroy: 1 }}}}}}
-
-                  p etymothesis.inspect
-#          get :edit, id: lexeme.id
-#          puts @response.body
 
       # Make sure it's no longer associated with the lexeme
       assert_select '.source', 0
-      assert_nil etymothesis.source_id 
     end
   end
 end
