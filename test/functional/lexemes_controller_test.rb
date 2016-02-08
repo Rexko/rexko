@@ -202,8 +202,9 @@ class LexemesControllerTest < ActionController::TestCase
     assert_select 'span[id$=search-indicator]'
   end
   
-  # 159: [Failure to delete etymology sources in the lexeme edit form]
-  # Several underlying issues, including failure to *show* them at all
+  # 159: [Failure to delete etymology sources in the lexeme edit form properly]
+  # Found a failure to *show* them at all, but couldn't repro reported issue
+  # Also it should dissociate, not delete.
   test "should handle etymology sources in edit form correctly" do
     lexeme = lexemes(:"159_with_etymology_source")
     subentry = lexeme.subentries.first
@@ -212,24 +213,42 @@ class LexemesControllerTest < ActionController::TestCase
 
     get :edit, id: lexeme.id
     
-    # Make sure the section is shown
-    assert_select '.source'
+    # Make sure the source section is shown
+    # Also check number of subentries as error in update hash caused duplication
+    assert_select '.subentry', 1 
+    assert_select '.etymothesis .source', 1
     
     # Make sure that it doesn't actually delete the source
 	  assert_no_difference('Source.count') do
-      put :update, id: lexeme.id, 
+      put :update, id: lexeme.id, commit: I18n.t('lexemes.form.save_and_continue_editing'), lexeme: lexeme
+      assert_select '.subentry', 1
+      assert_select '.etymothesis .source', 1
+
+      put :update, id: lexeme.id, commit: I18n.t('lexemes.form.save_and_continue_editing'),
         lexeme:
-          { subentries_attributes: { subentry.id =>
-            { etymotheses_attributes: { etymothesis.id =>
-              { source_attributes:
-                { authorship_attributes:
-                  { id: source.authorship_id
-                  },
-                  pointer: source.pointer,
-                  _destroy: 1 }}}}}}
+          { subentries_attributes: 
+            { "0" => 
+              { id: subentry.id,
+                etymotheses_attributes: 
+                { "0" => 
+                  { id: etymothesis.id,
+                    source_attributes:
+                    { id: source.id,
+                      authorship_attributes:
+                      { id: source.authorship_id
+                      },
+                      pointer: source.pointer,
+                      _destroy: 1 
+                    }
+                  }
+                }
+              }
+            }
+          }
 
       # Make sure it's no longer associated with the lexeme
-      assert_select '.source', 0
+      assert_select '.subentry', 1
+      assert_select '.etymothesis .source', 0
     end
   end
 end
