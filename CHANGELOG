@@ -3,6 +3,7 @@
 * [#93] Changed language chooser for etymologies from a dropdown to an autocomplete
 * [#92] Should be able to create a new language from the etymology form
 * [#100] Should be able to add note to a phonetic form
+* [#152] Replaced some borders on the lexeme edit form with whitespace to reduce nestiness
 * [#159] Fixed an issue that prevented etymology sources from being edited or removed
 
 ==Since 0.4.0==
