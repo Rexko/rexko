@@ -208,21 +208,23 @@ class LexemesControllerTest < ActionController::TestCase
   test "should handle etymology sources in edit form correctly" do
     lexeme = lexemes(:"159_with_etymology_source")
     subentry = lexeme.subentries.first
+    subentry_count = lexeme.subentries.count
     etymothesis = subentry.etymotheses.first
+    etymo_count = subentry.etymotheses.count
     source = etymothesis.source
 
     get :edit, id: lexeme.id
     
     # Make sure the source section is shown
     # Also check number of subentries as error in update hash caused duplication
-    assert_select '.subentry', 1 
-    assert_select '.etymothesis .source', 1
+    assert_select '.subentry', subentry_count
+    assert_select '.etymothesis .source', etymo_count
     
     # Make sure that it doesn't actually delete the source
 	  assert_no_difference('Source.count') do
       put :update, id: lexeme.id, commit: I18n.t('lexemes.form.save_and_continue_editing'), lexeme: lexeme
-      assert_select '.subentry', 1
-      assert_select '.etymothesis .source', 1
+      assert_select '.subentry', subentry_count
+      assert_select '.etymothesis .source', etymo_count
 
       put :update, id: lexeme.id, commit: I18n.t('lexemes.form.save_and_continue_editing'),
         lexeme:
@@ -247,8 +249,8 @@ class LexemesControllerTest < ActionController::TestCase
           }
 
       # Make sure it's no longer associated with the lexeme
-      assert_select '.subentry', 1
-      assert_select '.etymothesis .source', 0
+      assert_select '.subentry', subentry_count
+      assert_select '.etymothesis .source', etymo_count.pred
     end
   end
 end
