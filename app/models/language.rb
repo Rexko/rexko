@@ -11,11 +11,13 @@ class Language < ActiveRecord::Base
   
   accepts_nested_attributes_for :sort_order, :allow_destroy => true, :reject_if => :all_blank
   
-  DEFAULT = new(default_name: I18n.t('helpers.language.default'), iso_639_code: I18n.default_locale.to_s)
-  MULTIPLE_LANGUAGES = new(:default_name => 'Multiple languages', :iso_639_code => 'mul')
-  UNDETERMINED = new(:default_name => 'Undetermined', :iso_639_code => 'und')
-  NO_LINGUISTIC_CONTENT = new(:default_name => 'No linguistic content', :iso_639_code => 'zxx')
-  UNKNOWN_LANGUAGE = "Unknown language %d"
+  if Language.table_exists?
+    DEFAULT = new(default_name: I18n.t('helpers.language.default'), iso_639_code: I18n.default_locale.to_s)
+    MULTIPLE_LANGUAGES = new(:default_name => 'Multiple languages', :iso_639_code => 'mul')
+    UNDETERMINED = new(:default_name => 'Undetermined', :iso_639_code => 'und')
+    NO_LINGUISTIC_CONTENT = new(:default_name => 'No linguistic content', :iso_639_code => 'zxx')
+    UNKNOWN_LANGUAGE = "Unknown language %d"
+  end
   
   # Return the name of a language plus its ISO code if present.
   def to_s
