@@ -5,6 +5,7 @@
 * [#100] Should be able to add note to a phonetic form
 * [#152] Replaced some borders on the lexeme edit form with whitespace to reduce nestiness
 * [#159] Fixed an issue that prevented etymology sources from being edited or removed
+* [#192] Fixed an issue with adding multiple notes to an item
 
 ==Since 0.4.0==
 * [#78] New lexeme link always to be available on lexeme show and search pages

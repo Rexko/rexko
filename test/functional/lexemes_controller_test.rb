@@ -253,4 +253,27 @@ class LexemesControllerTest < ActionController::TestCase
       assert_select '.etymothesis .source', etymo_count.pred
     end
   end
+  
+  # 192: Issue where more than one note couldn't be added.
+  test "should be able to add more than one note to an item" do
+       Capybara.current_driver = :webkit
+    
+       visit new_lexeme_path
+       note_count = page.all('.note').count
+
+       first('.headword').click_link(I18n.t('helpers.link_to_add.note'))
+       assert_selector('.note', count: note_count + 1)
+       
+       first('.headword').click_link(I18n.t('helpers.link_to_add.note'))
+       assert_selector('.note', count: note_count + 2)
+          
+       page.all('input[type="text"],textarea').each_with_index do |elem, i|
+         elem.set "test #{i}"
+       end
+
+       click_button I18n.t('lexemes.form.save_and_continue_editing')
+    
+       assert_text I18n.t('lexemes.create.successful_create')
+       assert_selector('.note', count: note_count + 2)
+  end
 end
