@@ -276,4 +276,20 @@ class LexemesControllerTest < ActionController::TestCase
        assert_text I18n.t('lexemes.create.successful_create')
        assert_selector('.note', count: note_count + 2)
   end
+  
+  # 188: Show all languages for which there is data on edit form
+  test "Lexeme edit should show all languages with data" do
+    # control
+    get :edit, id: lexemes(:"179_in_multiple_language_dictionaries").id
+    assert_select '.headword .language-list li', /la/
+    
+    # change a headword locale
+    languages(:latin).iso_639_code = "xxx"
+    languages(:latin).save
+    
+    # should still show the 'la' headword, as well as the 'xxx' prompt
+    get :edit, id: lexemes(:"179_in_multiple_language_dictionaries").id
+    assert_select '.headword .language-list li', /la/
+    assert_select '.headword .language-list li', /xxx/
+  end
 end
