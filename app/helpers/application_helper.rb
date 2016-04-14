@@ -254,20 +254,27 @@ module ApplicationHelper
     end
   end
   
-  # Format of data entry fields for items appearing in multiple languages.
+  # Produce data entry fields to edit items appearing in multiple languages.
+  # +form+         - the relevant form
+  # +field+        - the form element, e.g. +:text_field+
+  # +attribute+    - name of the attribute
+  # +languages+    - ??? 
+  # +html_options+ - as would be given for other form elements
   def translatable_tag form, field, attribute, languages = [], html_options = {}
     content_tag(:div, {class: "translatable", data: { languages: languages }}) do
       default_locale = I18n.default_locale.to_s
       languages = @langs ? [*@langs[languages]] : []
     
-      # we should add default if it exists and isn't listed (the fallback 
-      # for legacy users whose data isn't in the right translation)
-      if (form.object.send("#{attribute}_#{default_locale.underscore}").present? && !languages.collect(&:iso_639_code).include?(default_locale)) 
-        languages = [Language::DEFAULT] | languages
-      end
-    
+      # we should add any language if it exists and isn't listed in @langs
+      # (such as old data still using default locale, or if the dictionary 
+      # has changed to one with a different language code)
+      languages |= form.object.translations.collect do |xlat|
+        Language.find_or_initialize_by_iso_639_code(xlat.locale.to_s)
+      end  
+          
       output = ActiveSupport::SafeBuffer.new
     
+      # Form elements (text fields or whatever +field+ is)
       output << content_tag(:div, class: "language-content") do
         languages.each do |lang|
           code = lang.iso_639_code
@@ -281,6 +288,7 @@ module ApplicationHelper
         end
       end
     
+      # Language tabs
       output << language_tabs(languages)
     end
   end 
