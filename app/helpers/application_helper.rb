@@ -268,9 +268,7 @@ module ApplicationHelper
       # we should add any language if it exists and isn't listed in @langs
       # (such as old data still using default locale, or if the dictionary 
       # has changed to one with a different language code)
-      languages |= form.object.translations.collect do |xlat|
-        Language.find_or_initialize_by_iso_639_code(xlat.locale.to_s)
-      end  
+      languages |= Language.of_translations_of(form.object)
           
       output = ActiveSupport::SafeBuffer.new
     

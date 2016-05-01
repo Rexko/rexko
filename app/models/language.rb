@@ -125,4 +125,12 @@ class Language < ActiveRecord::Base
 
     Language.includes([:translations]).where(terms)
   end
+  
+  # Return all Languages given in an object's translations.
+  # Initializes new Language objects if none exists for a particular locale. 
+  def self.of_translations_of obj
+    return nil unless obj.respond_to? :translations
+    
+    obj.translations.collect {|xlat| find_or_initialize_by_iso_639_code(xlat.locale.to_s) }
+  end
 end
