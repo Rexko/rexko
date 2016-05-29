@@ -24,7 +24,7 @@ class Sense < ActiveRecord::Base
   end
   
   def self.lookup_all_by_parses_of(locus)
-    Sense.select('DISTINCT "senses".*, "headword_translations"."form" AS hw_form').joins(['INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id INNER JOIN "headword_translations" ON "headword_translations"."headword_id" = "headwords".id INNER JOIN "parses" ON "parses"."parsed_form" = "headword_translations"."form" INNER JOIN "attestations" ON ("parses"."parsable_id" = "attestations"."id" AND "parses"."parsable_type" = \'Attestation\')']).where(['"attestations"."locus_id" = ?', locus.id]).includes(:subentry => {:lexeme => :dictionaries})
+    Sense.select('DISTINCT "senses".*, "headword_translations"."form" AS hw_form').joins(['INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id INNER JOIN "headword_translations" ON "headword_translations"."headword_id" = "headwords".id INNER JOIN "parses" ON "parses"."parsed_form" = "headword_translations"."form" INNER JOIN "attestations" ON ("parses"."parsable_id" = "attestations"."id" AND "parses"."parsable_type" = \'Attestation\')']).where(['"attestations"."locus_id" = ?', locus.id]).includes({:subentry => [{:lexeme => :dictionaries}, :translations]}, :translations)
   end
   
   before_save :set_defaults
