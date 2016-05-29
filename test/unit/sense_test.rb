@@ -15,7 +15,7 @@ class SenseTest < ActiveSupport::TestCase
   test "lookup all by headword should return appropriate results" do
     lex = Lexeme.create
     I18n.with_locale(:es) do
-      hw = lex.headwords.create(form: "205_prueba")
+      lex.headwords.create(form: "205_prueba")
     end
     subentry = lex.subentries.create
     sense = subentry.senses.create(definition_en: "Testing.")
