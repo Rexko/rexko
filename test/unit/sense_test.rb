@@ -14,7 +14,7 @@ class SenseTest < ActiveSupport::TestCase
   # 205: lookup_all_by_headword was not working with translations
   test "lookup all by headword should return appropriate results" do
     lex = Lexeme.create
-    I18n.with_locale(:la) do
+    I18n.with_locale(:es) do
       hw = lex.headwords.create(form: "205_prueba")
     end
     subentry = lex.subentries.create
