@@ -19,7 +19,7 @@ class Sense < ActiveRecord::Base
     swapform = form.dup
     swapform[0,1] = swapform[0,1].swapcase
     
-    Sense.find(:all, :joins => [{ :subentry => { :lexeme => :headwords} } ], :conditions => ["headwords.form = ? OR headwords.form = ?", form, swapform])
+    Sense.find(:all, :joins => [{ :subentry => { :lexeme => { :headwords => [:translations] }}} ], :conditions => ["headword_translations.form = ? OR headword_translations.form = ?", form, swapform])
   end
   
   before_save :set_defaults
