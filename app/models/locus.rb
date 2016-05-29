@@ -58,7 +58,7 @@ class Locus < ActiveRecord::Base
       memo
 	  end
 
-    raw_construes = Locus.possibly_construing_with(parses.collect{|f| f[1]}).includes({:source => {:authorship => [:author, :title]}}).where(Locus.arel_table[:id].not_eq(self.id))
+    raw_construes = Locus.possibly_construing_with(parses.collect{|f| f[1]}).includes({:source => [{:authorship => [{:author => :translations}, {:title => :translations}]}, :translations], :parses => [:translations, {:interpretations => {:sense => :translations}}]}).where(Locus.arel_table[:id].not_eq(self.id))
     grouped_construes = raw_construes.group_by {|l| l.parsed_form}
 
 

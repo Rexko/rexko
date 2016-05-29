@@ -47,14 +47,14 @@ class LociController < ApplicationController
 
   # GET /loci/1/edit
   def edit
-    @locus = Locus.where(:id => params[:id]).includes(:attestations => {:parses => :interpretations}).first
+    @locus = Locus.where(:id => params[:id]).includes(:attestations => {:parses => :interpretations}, :parses => :translations).first
     @locale_name = Language.where(iso_639_code: I18n.locale).first.try(:name)
     @source = @locus.source
     @authorship = @source.authorship if @source
     @nests = {}
 
     # Find all lexemes with headwords corresponding to this locus' parses
-    all_headwords = Lexeme.lookup_all_by_headwords(Parse.forms_of(@locus.parses), :include => :headwords)
+    all_headwords = Lexeme.lookup_all_by_headwords(Parse.forms_of(@locus.parses), :include => {:headwords => :translations})
     
     @headwords = @locus.parses.inject({}) do |memo, parse|
       swapform = parse.parsed_form.dup
@@ -66,7 +66,7 @@ class LociController < ApplicationController
     end
 
     # Find all potential interpretations of this locus' parses
-    all_interpretations = Sense.select('DISTINCT "senses".*, "headwords"."form" AS hw_form').joins(['INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id INNER JOIN "parses" ON "parses"."parsed_form" = "headwords"."form" INNER JOIN "attestations" ON ("parses"."parsable_id" = "attestations"."id" AND "parses"."parsable_type" = \'Attestation\')']).where(['"attestations"."locus_id" = ?', @locus.id]).includes(:subentry => {:lexeme => :dictionaries})
+    all_interpretations = Sense.lookup_all_by_parses_of @locus
     @interpretations = {}
     @locus.parses.each do |parse|
         @interpretations[parse.parsed_form] = all_interpretations.select{|ip| ip.hw_form == parse.parsed_form}
