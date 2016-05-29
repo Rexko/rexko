@@ -15,6 +15,7 @@ class Sense < ActiveRecord::Base
   
   HASH_MAP_TO_PARSE = { :interpretations => Interpretation::HASH_MAP_TO_PARSE }
   
+  # Returns all senses for lexemes with a headword matching +form+, insensitive to the case of the first letter.
   def self.lookup_all_by_headword(form)
     swapform = form.dup
     swapform[0,1] = swapform[0,1].swapcase
