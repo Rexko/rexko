@@ -54,7 +54,7 @@ class LociController < ApplicationController
     @nests = {}
 
     # Find all lexemes with headwords corresponding to this locus' parses
-    all_headwords = Lexeme.lookup_all_by_headwords(Parse.forms_of(@locus.parses), :include => :headwords)
+    all_headwords = Lexeme.lookup_all_by_headwords(Parse.forms_of(@locus.parses), :include => {:headwords => :translations})
     
     @headwords = @locus.parses.inject({}) do |memo, parse|
       swapform = parse.parsed_form.dup
