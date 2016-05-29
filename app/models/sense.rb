@@ -23,6 +23,10 @@ class Sense < ActiveRecord::Base
     Sense.find(:all, :joins => [{ :subentry => { :lexeme => { :headwords => [:translations] }}} ], :conditions => ["headword_translations.form = ? OR headword_translations.form = ?", form, swapform])
   end
   
+  def self.lookup_all_by_parses_of(locus)
+    Sense.select('DISTINCT "senses".*, "headword_translations"."form" AS hw_form').joins(['INNER JOIN "subentries" ON "subentries".id = "senses".subentry_id INNER JOIN "lexemes" ON "lexemes".id = "subentries".lexeme_id INNER JOIN "headwords" ON "headwords".lexeme_id = "lexemes".id INNER JOIN "headword_translations" ON "headword_translations"."headword_id" = "headwords".id INNER JOIN "parses" ON "parses"."parsed_form" = "headword_translations"."form" INNER JOIN "attestations" ON ("parses"."parsable_id" = "attestations"."id" AND "parses"."parsable_type" = \'Attestation\')']).where(['"attestations"."locus_id" = ?', locus.id]).includes(:subentry => {:lexeme => :dictionaries})
+  end
+  
   before_save :set_defaults
   
   # Default to lexeme's language if language not defined.
