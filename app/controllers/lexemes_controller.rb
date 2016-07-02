@@ -12,6 +12,9 @@ class LexemesController < ApplicationController
     end
   end
 
+  # Lexemes whose headwords match the string in params[:headword].
+  # params[:matchtype] should be either Lexeme::SUBSTRING or Lexeme::EXACT; defaults to the former.
+  # (#190: This shouldn't exist; it should either belong to index action or possibly a search controller)
   def matching
     @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => params[:matchtype] || Lexeme::SUBSTRING)
     
