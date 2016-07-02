@@ -18,6 +18,10 @@ class LexemesController < ApplicationController
     @page_title = t('lexemes.matching.results', count: @lexeme.length, query: params[:headword])
     @lexemes = @lexeme.paginate(:page => params[:page], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}])
 
+    @langs = Dictionary.langs_hash_for(@lexeme.collect {|lex|
+      lex.dictionaries.includes([:language, :source_language, :target_language])
+    }.flatten)
+
     respond_to do |format|
       format.html { render :index, :layout => '1col_layout' }
     end
