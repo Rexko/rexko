@@ -42,7 +42,7 @@ group :development, :test do
 end
 
 source 'http://gemcutter.org'
-gem 'will_paginate', '~> 3.0.pre2'
+gem 'will_paginate', '~> 3.0.0'
 
 group :assets do
   gem 'sass-rails', "~> 3.1.0"
