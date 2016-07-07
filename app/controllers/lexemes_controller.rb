@@ -19,7 +19,7 @@ class LexemesController < ApplicationController
     @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => params[:matchtype] || Lexeme::SUBSTRING)
     
     @page_title = t('lexemes.matching.results', count: @lexeme.length, query: params[:headword])
-    @lexemes = @lexeme.paginate(:page => params[:page], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}])
+    @lexemes = @lexeme.paginate(:page => params[:page], :include => [:dictionaries, {:headwords => [{:phonetic_forms => :translations}, :language, :translations]}, {:subentries => [:language, :translations, {:senses => [:glosses, :notes, :language, :translations]}, {:etymologies => :notes}, :notes]}])
 
     @langs = Dictionary.langs_hash_for(@lexemes.collect(&:dictionaries).flatten)
 
