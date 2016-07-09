@@ -12,11 +12,16 @@ class LexemesController < ApplicationController
     end
   end
 
+  # Lexemes whose headwords match the string in params[:headword].
+  # params[:matchtype] should be either Lexeme::SUBSTRING or Lexeme::EXACT; defaults to the former.
+  # (#190: This shouldn't exist; it should either belong to index action or possibly a search controller)
   def matching
     @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => params[:matchtype] || Lexeme::SUBSTRING)
     
     @page_title = t('lexemes.matching.results', count: @lexeme.length, query: params[:headword])
-    @lexemes = @lexeme.paginate(:page => params[:page], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}])
+    @lexemes = @lexeme.paginate(:page => params[:page], :include => [:dictionaries, {:headwords => [{:phonetic_forms => :translations}, :language, :translations]}, {:subentries => [:language, :translations, {:senses => [:glosses, :notes, :language, :translations]}, {:etymologies => :notes}, :notes]}])
+
+    @langs = Dictionary.langs_hash_for(@lexemes.collect(&:dictionaries).flatten)
 
     respond_to do |format|
       format.html { render :index, :layout => '1col_layout' }
@@ -36,7 +41,7 @@ class LexemesController < ApplicationController
     @authors_of = Hash[@constructions.collect {|construction| [construction, construction.loci.collect(&:source).collect(&:author).uniq] }]
     @loci_by = Hash[@authors_of.collect { |construction, authors| [construction, Hash[authors.collect {|author| [author, Locus.attesting([construction, @lexeme]).find(:all, :joins => { :source => :authorship }, :conditions => { :id => construction.loci, :authorships => {:author_id => author}}, :group => "loci.id")] }]]}]
     @page_title = view_context.titleize_headwords_for @lexeme
-    @langs = Dictionary.langs_hash_for(@lexeme.dictionaries.includes([:language, :source_language, :target_language]))
+    @langs = Dictionary.langs_hash_for(@lexeme.dictionaries)
 
     respond_to do |format|
       format.html # show.html.erb

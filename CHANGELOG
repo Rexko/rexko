@@ -8,6 +8,7 @@
 * [#188] The lexeme edit form now shows all its existing data, not just associated dictionaries
 * [#192] Fixed an issue with adding multiple notes to an item
 * [#205] Fixed an issue with lexemes not showing in parse dropdowns
+* [#187] Fixed an issue where principal parts and pronunciation were missing from search results
 
 ==Since 0.4.0==
 * [#78] New lexeme link always to be available on lexeme show and search pages

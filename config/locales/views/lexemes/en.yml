@@ -90,6 +90,9 @@ en:
     parses:
         lexemeform:
             parse: "Parse"
+    senses:
+        shortform:
+            sense: "Sense"
     shared:
         subentry:
             no_principal_parts: "<No principal parts>"

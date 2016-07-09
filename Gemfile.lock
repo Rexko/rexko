@@ -171,4 +171,7 @@ DEPENDENCIES
   sqlite3
   test-unit
   uglifier
-  will_paginate (~> 3.0.pre2)
+  will_paginate (~> 3.0.0)
+
+BUNDLED WITH
+   1.12.5

@@ -292,4 +292,18 @@ class LexemesControllerTest < ActionController::TestCase
     assert_select '.headword .language-list li', /la/
     assert_select '.headword .language-list li', /xxx/
   end
+  
+  # 187. Pronunciations and parts of speech not displaying in lexemes/matching.
+  test "lexemes/matching should show pronunciation and parts of speech" do
+    lex = Lexeme.create
+    lex.dictionaries << dictionaries(:es_dict)
+    I18n.with_locale(:es) do
+      hw = lex.headwords.create form: "187_test"
+      hw.phonetic_forms.create form: "187_tEst"
+    end
+    
+    get :matching, headword: "187_test"
+    
+    assert_select ".lexform-phonetic-form", /187_tEst/
+  end
 end
