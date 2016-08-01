@@ -3,8 +3,6 @@ class Parse < ActiveRecord::Base
   belongs_to :parsable, :polymorphic => true
   translates :parsed_form, :fallbacks_for_empty_translations => true
   globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])  
-
-  default_scope { includes(:translations) }  
   
   # Returns parses without entries (determined by comparing parsed_form to headword forms).
   # Initial letter case insensitive (if the DB is smart enough)
