@@ -298,4 +298,8 @@ module ApplicationHelper
       yield
     end
   end
+  
+  def target lang = (@langs[:target].first if @langs), &block
+    source lang, &block
+  end
 end
