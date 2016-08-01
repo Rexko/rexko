@@ -28,7 +28,7 @@ protected
   def any_gloss_present?
     # attrs[:gloss].blank? # before we had i18n
     # attrs = attrs.attributes if attrs.is_a? Gloss
-    unless attributes.select {|k,v| k.start_with?("gloss")}.any? {|k,v| v.present? }
+    unless translations.any? {|xlat| xlat.gloss.present? }
       errors.add(:gloss, I18n.t('errors.messages.blank'))
     end
   end
