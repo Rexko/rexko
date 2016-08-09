@@ -23,4 +23,11 @@ class SenseTest < ActiveSupport::TestCase
     result = Sense.lookup_all_by_headword("205_prueba")
     assert result.include?(sense), "#{result} doesn't include #{sense.inspect}"
   end
+  
+  # 206: Unable to add glosses
+  test "accept nested attributes for gloss" do
+    assert_difference 'Gloss.count' do
+      Sense.create(definition_en: "test", glosses_attributes: { 0 => { _destroy: false, gloss_en: "attempt" } })
+    end
+  end
 end
