@@ -7,6 +7,8 @@ class Gloss < ActiveRecord::Base
   translates :gloss, :fallbacks_for_empty_translations => true
   globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])  
   
+  default_scope { includes(:translations) }
+  
   scope :attesting, lambda {|parsables, type|
     joins(HASH_MAP_TO_PARSE).where({ :parses => { :parsable_id => parsables, :parsable_type => type }})
   }
@@ -28,7 +30,7 @@ protected
   def any_gloss_present?
     # attrs[:gloss].blank? # before we had i18n
     # attrs = attrs.attributes if attrs.is_a? Gloss
-    unless attributes.select {|k,v| k.start_with?("gloss")}.any? {|k,v| v.present? }
+    unless translations.any? {|xlat| xlat.gloss.present? }
       errors.add(:gloss, I18n.t('errors.messages.blank'))
     end
   end

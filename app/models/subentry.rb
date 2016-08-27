@@ -12,6 +12,8 @@ class Subentry < ActiveRecord::Base
   accepts_nested_attributes_for :senses, :notes, :etymotheses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :etymologies, :allow_destroy => true, :reject_if => proc {|attrs| Etymology.rejectable?(attrs) }
   
+  default_scope { includes(:translations) }  
+  
   scope :attesting, lambda {|parsables, type|
     { :joins => HASH_MAP_TO_PARSE, 
       :conditions => { :parses => { :parsable_id => parsables, :parsable_type => type }}

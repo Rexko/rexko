@@ -9,6 +9,7 @@
 * [#192] Fixed an issue with adding multiple notes to an item
 * [#205] Fixed an issue with lexemes not showing in parse dropdowns
 * [#187] Fixed an issue where principal parts and pronunciation were missing from search results
+* [#206] Fixed an issue where glosses couldn't be added to lexeme edit
 * [#215] Fixed an issue where specifying the language of an etymon would fail on save
 
 ==Since 0.4.0==
