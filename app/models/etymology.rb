@@ -68,6 +68,16 @@ class Etymology < ActiveRecord::Base
 		# Default response
 		[]
 	end 
+
+  # Assign original language from lexeme form.  Use existing language
+  # if 'id' is present, otherwise create a new language with attributes
+  def original_language_attributes=(attributes)
+    if attributes['id'].present?
+      self.original_language = Language.find(attributes['id'])
+    else
+      assign_nested_attributes_for_one_to_one_association(:original_language, attributes)
+    end
+  end
   
 protected 
   def validate_sufficient_data
