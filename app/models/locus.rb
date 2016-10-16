@@ -2,6 +2,7 @@ class Locus < ActiveRecord::Base
   belongs_to :source
   has_many :attestations, :dependent => :destroy
   has_many :parses, :through => :attestations
+  delegate :author, to: :source, allow_nil: true
   # Not till we have a sensible UI for this:
   # translates :example, :example_translation
 
@@ -87,4 +88,11 @@ class Locus < ActiveRecord::Base
 
     potentials.delete_if {|k,v| v[:loci].blank?}
   end
+  
+  def self.authors(*loci)
+    loci.collect do |l|
+      l.first.author
+    end
+  end
+  
 end
