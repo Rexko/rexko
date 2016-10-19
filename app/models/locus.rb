@@ -89,12 +89,15 @@ class Locus < ActiveRecord::Base
     potentials.delete_if {|k,v| v[:loci].blank?}
   end
   
+  # given a set of loci, return authors of those loci
   def self.authors(*loci)
     loci.collect do |l|
       l.first.author
-    end
+    end.uniq
   end
   
+  # Returns a hash of {author => loci authored by author attesting construction}
+  # This appears to be an ugly hack and the need for it should be eliminated
   def self.loci_by_authors_hash(construction, *authors)
     Hash[authors.collect {|author| 
       [author, 
