@@ -11,6 +11,7 @@
 * [#187] Fixed an issue where principal parts and pronunciation were missing from search results
 * [#206] Fixed an issue where glosses couldn't be added to lexeme edit
 * [#215] Fixed an issue where specifying the language of an etymon would fail on save
+* [#209] Fixed an error when viewing a lexeme with a homograph in wiki format 
 
 ==Since 0.4.0==
 * [#78] New lexeme link always to be available on lexeme show and search pages
