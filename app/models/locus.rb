@@ -95,4 +95,11 @@ class Locus < ActiveRecord::Base
     end
   end
   
+  def self.loci_by_authors_hash(construction, *authors)
+    Hash[authors.collect {|author| 
+      [author, 
+        Locus.where(:id => construction.loci).attesting(construction).authored_by(author)
+      ] 
+    }]
+  end
 end
