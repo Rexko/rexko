@@ -2,6 +2,7 @@ class Locus < ActiveRecord::Base
   belongs_to :source
   has_many :attestations, :dependent => :destroy
   has_many :parses, :through => :attestations
+  delegate :author, to: :source, allow_nil: true
   # Not till we have a sensible UI for this:
   # translates :example, :example_translation
 
@@ -86,5 +87,22 @@ class Locus < ActiveRecord::Base
     end 
 
     potentials.delete_if {|k,v| v[:loci].blank?}
+  end
+  
+  # given a set of loci, return authors of those loci
+  def self.authors(*loci)
+    loci.collect do |l|
+      l.first.author
+    end.uniq
+  end
+  
+  # Returns a hash of {author => loci authored by author attesting construction}
+  # This appears to be an ugly hack and the need for it should be eliminated
+  def self.loci_by_authors_hash(construction, *authors)
+    Hash[authors.collect {|author| 
+      [author, 
+        Locus.where(:id => construction.loci).attesting(construction).authored_by(author)
+      ] 
+    }]
   end
 end

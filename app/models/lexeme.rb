@@ -123,4 +123,17 @@ class Lexeme < ActiveRecord::Base
 			!hw_forms.include? hw.form
 		end
 	end
+  
+  # Given constructions, hash of construction => authors
+  def self.authors_hash(constrs)
+    Hash[constrs.collect {|construction| 
+      [construction, construction.authors.uniq] #construction.loci.collect(&:source).collect(&:author).uniq] 
+      }
+    ]
+  end
+  
+  # List authors using this word
+  def authors
+    Locus.authors(loci)
+  end
 end
