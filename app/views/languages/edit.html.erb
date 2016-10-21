@@ -2,10 +2,10 @@
 
 <%= form_for @language, { method: :put, action: 'update', html: {class: "yform"}} do |f| %>
 
-<%=	render(:partial => "form", :object => { :label => t('.update_button'), :action => 'update', :method => :put, :for_url => "/#{I18n.locale}/languages/#{@language.id}" }, locals: {language_form: f})) %>
+<%=	render(:partial => "longform", :object => { :label => t('.update_button'), :action => 'update', :method => :put, :for_url => "/#{I18n.locale}/languages/#{@language.id}" }, locals: {language_form: f}) %>
 
   <div class="type-button">
-    <%= f.submit t('.update') %>
+    <%= f.submit t('.update_button') %>
   </div>
 <% end %>
 

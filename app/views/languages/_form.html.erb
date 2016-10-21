@@ -9,6 +9,3 @@
 		<label for="language_iso_639_code"><%= t(".code_prompt") %></label>
 		<%= language_form.text_field :iso_639_code %>
 	</div>
-
-  <%= list_children_with_option_to_add :sort_order, language_form, remote: true, limit_one: true %>
-
