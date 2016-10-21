@@ -2,7 +2,7 @@
 
 <%= form_for @language, { method: :post, action: 'create', html: {:class => "yform"}} do |f| %>
 <%= # @action = "Create"
-		render(:partial => "form", :for_url => "/#{I18n.locale}/languages", locals: {language_form: f} }) 
+		render(:partial => "longform", :for_url => "/#{I18n.locale}/languages", locals: {language_form: f} }) 
 		%>
 
 
