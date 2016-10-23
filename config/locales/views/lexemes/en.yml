@@ -60,6 +60,8 @@ en:
             edit: "Edit"
             back_to_lexemes: "Back to lexemes"
             back_to_dictionary: "Back to %{dictionary}"
+            destroy: "Delete"
+            confirm_destroy: "Really delete this lexeme?"
         update:
             successful_update: "Lexeme was successfully updated."
             create_new: "Create a new lexeme?"
