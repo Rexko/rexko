@@ -62,6 +62,8 @@ la:
             edit: "Mutare"
             back_to_lexemes: "Ad lexes redire"
             back_to_dictionary: "Ad lexicon \"%{dictionary}\" redire"
+            destroy: "Delere"
+            confirm_destroy: "Vero hanc lexin delere?" 
         update:
             successful_update: "Lexin prospere mutavisti."
             create_new: "Visne aliam referre?"
