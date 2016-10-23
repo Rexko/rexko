@@ -1,7 +1,7 @@
-==Since 0.4.2==
+## Since 0.4.2
 * [#94] Added delete link to Lexeme show page
 
-==Since 0.4.1==
+## Since 0.4.1
 * [#89] Lexeme form now arranges etymology horizontally instead of by nesting
 * [#93] Changed language chooser for etymologies from a dropdown to an autocomplete
 * [#92] Should be able to create a new language from the etymology form
@@ -17,7 +17,7 @@
 * [#209] Fixed an error when viewing a lexeme with a homograph in wiki format 
 * [#219] Fixed an error with the edit form for languages/sort orders
 
-==Since 0.4.0==
+## Since 0.4.0
 * [#78] New lexeme link always to be available on lexeme show and search pages
 * [#85] Language of the first etymon in an etymology shouldn't be listed if it's the same as the lexeme's
 * [#161] Fixed some issues where new subitems weren't being created
@@ -27,7 +27,7 @@
 * [#177] Fixed an issue with creating subentries from the lexeme form
 * [#179] Fixed an error when viewing a dictionary whose lexemes are in multiple dictionaries
 
-==Since 0.3.6==
+## Since 0.3.6
 * [#142] Fixed failure of will_paginate on Locus search
 * [#141] Fixed issue where interpretations and loci wouldn't save
 * [#74, #119] Fixed issue where "most wanted parse" was not initial-case-insensitive.
@@ -46,7 +46,7 @@
 * [#147] Releasing under MIT license
 * [#5] Rudiments of internationalization and globalization
 
-==Since 0.3.5==
+## Since 0.3.5
 * Updated code for Rails 3.1 
 * [#137] Prevent blank interpretations from being saved (was breaking 'unattached' counts)
 * [#136] URLs with certain Unicode characters should no longer fail
@@ -55,7 +55,7 @@
 * [#60] Locus edit now autosuggests possible constructions based on existing loci.
 * [#55] Phonetic forms should now appear only with the appopriate lexemes in the wiki format
 
-==Since 0.3.4==
+## Since 0.3.4
 * [#77] Headwords differing only by initial case should not be listed separately in wikiform.
 * [#123] Add search box to every page
 * [#129] Display message when no results found on unattached page
@@ -66,7 +66,7 @@
 * [#81] Added AJAX to edit views to lower the necessity of using "Create/Update and continue editing"
 * [#122] Fixed issue where notes were being added to the wrong etymologies when using 'next etymon'
 
-==Since 0.3.3==
+## Since 0.3.3
 * [#124] Locus search by author should not be limited to one author
 * [#117, #126] Rewrote etymology text generator
 * [#86] Removed stray quotes in wiki format when part of speech absent
@@ -75,7 +75,7 @@
 * [#59] Loci browse and search are now sorted by Author, Title, and Pointer.
 * [#131] Fixed issue where only the first page of loci search results were accessible
 
-==Since 0.3.2==
+## Since 0.3.2
 * [#69] Locus#attesting should not return duplicate loci
 * [#118] Fixed crash of etymology formatter when a compound has 3+ components
 * [#120] Fixed issue with creating note-only etymologies
@@ -84,13 +84,13 @@
 * [#116] Deleting attestation/parse from locus should lower count in addlist
 * [#56] 'language' attribute of data now reports dictionary default instead of 'und' when unset
 
-==Since 0.3.1==
+## Since 0.3.1
 * Updated code for Rails 3
 * [#102] Auto-select-all in lexeme show should now select the correct box when multiple
 * [#98] Use simple sortkey in wiki heading ({{dict|Titlewords}} instead of just {{dict}})
 * [#73] 'Unattached loci' in lexeme show corrected to read 'unattached parses' (see also #105)
 
-==Since 0.3==
+## Since 0.3
 * Fix several issues with handling missing data
 * [#87] Fixed issue with /unattached crashing due to reference to removed column
 * [#84] Formatting of errors and flash notices in main layout
@@ -98,64 +98,64 @@
 * [#26 (51)] Etymology in lexeme show now refers to the etymon's etymology, and so forth
 * [#90] Fixed display of loci attesting a construction but not the main lexeme
 
-==Since 0.2.6==
+## Since 0.2.6
 * For [#26 (51)] Upgraded handling of etymologies.
 * [#4 (25)] Etymologies now refer to Language objects instead of just storing the name 
 
-==Since 0.2.5==
+## Since 0.2.5
 * [#51] Locus edit form now better identifies what subentry the interpretation will point to
 * [#75] Lexeme search now uses a fixed URL when there are multiple results.
 * [#63] Fixed bugs with constructions not being listed correctly in lexeme views
 * For [#44] Wikilink format now sets title attribute to the headword being linked to
 * [#74] Fixed some issues with casing for headwords differing only by initial letter
 
-==Since 0.2.4==
+## Since 0.2.4
 * Revamped layout based on YAML.  
 * For [#40] Text areas in the Lexeme view now select all on focus.
 * [#22 (47)] Wikilinks, wikibold, and wikiitalic display in lexemes and loci
 * [#55] In wiki layout, loci now only appear on pages for the spellings they attest.
 * For [#36 (60)] Headwords can now be searched by substring.
 
-==Since 0.2.3==
+## Since 0.2.3
 * For [#70] DB query cleanup to make the locus edit page go faster.
 * For [#63] fixed a bug where lexemes would associate with constructions not containing them.
 * [#65] Ask for confirmation before removing fields from edit forms
 * Randomize the expandlist on the front page (this is ugly)
 * [#72] Fixed a bug where the 'most wanted parse' highlight was highlighting the wrong item.
 
-==Since 0.2.2==
+## Since 0.2.2
 * [#64] Fixed where loci in "all entries" under lexeme view didn't match the lexeme
 * For [#36 (60)] added locus search by author to front page.
 * [#18 (36)] added automated to-do lists (addlist and expandlist).
 * Fixed a bug that made lexemes inaccessible if etymology items were deleted.
 * [#71] Fixed a bug that made some lists of unattached loci inaccessible. 
 
-==Since 0.2.1==
+## Since 0.2.1
 * Fixed Yet Another bug where etymologies were causing saves to fail.
 * [#45] Process for adding a new subitem should be fully functional now.
 * Rewrote locus edit form for previous issue (visual change for the worse; needs better styling)
 * [#33] Added count of uninterpreted loci to lexeme view, and a way to view them
 * [#66] Fixed blank pipe link so [[foo|]] and [[bar (baz)|]] work as expected
 
-==Since 0.2==
+## Since 0.2
 * [#50] Remove links should now be functional
 * Rewrote lexeme edit form
 * [#62] Fixed a bug where senses were appearing multiple times in the locus edit form
 * For [#13] implemented notes for senses and subentries
 * Fixed a bug where the lexeme edit form wasn't appropriately ignoring blank etymologies
 
-==Since 0.1.6==
+## Since 0.1.6
 * For [#13] Added notes column to DB and implemented notes for etymologies.
 * [#54] Fix for most-wanted headword not being highlighted on "and continue editing".
 
-==Since 0.1.5==
+## Since 0.1.5
 * Corrected link to locus in locus partial 
 * [#55] Wiki formats should play with multiple headwords a little better
 * Assorted improvements on db performance including [#41] the lexeme list
 * [#27 (52)] Wiki form now enumerates homographs with Roman numerals
 * Links to non-existent headwords now have that headword filled in
 
-==Since 0.1.4==
+## Since 0.1.4
 * For [#31] 'All entries' under Lexeme/show is case-insensitive on the first letter
 * For [#31] Potential interpretations are first-letter insensitive to parsed forms
 * [#57] Corrected HTML escaping in uses of ApplicationHelper#lang_for 
@@ -163,14 +163,14 @@
 * [#38 (62)] The locus partial now contains a link to the individual locus
 * [#21 (46)] Locus edit form now sorts authors and titles
 
-==Since 0.1.3==
+## Since 0.1.3
 * [#29 (54)] Improved automatic unbolding around pipes in wiki markup for citation forms
 * [#24 (49)] Rudimentary portal/dashboard in place with a couple of links to common tasks.
 * Cleaned up the sort_latin nonsense some
 * Rewrote ApplicationHelper#lang_for for efficiency and better behaviour
 * [#47] Better parsing of wikilinks ([[abc]]def and [[abc|def|ghi]] should work correctly now)
 
-==0.1.2 to 0.1.3==
+## Since 0.1.2
 * Views were calling delegate.js which was never actually in use
 * Modified locus form so it doesn't autobuild a form for an attestation
 * [#1 (2)] Implemented paging with will_paginate
@@ -178,18 +178,16 @@
 * Fixed a bug in #sentence_case helper that prevented 'all entries with headword' working correctly.
 * [#23 (48)] Highlighted the most-wanted parse needing an entry. Also fixed a regression where the indicator of how often a lexeme was linked to had been pulled from the view.
 
-==0.1.1 to 0.1.2==
+## Since 0.1.1
 * Several changes thanks to Rails upgrade
 * [#2 (11)], [#32 (55)], [#34 (57)]  Rewrote forms to use the new nested attributes features.
 * [#25 (50)] Implemented JavaScript to allow entry of multiple items in both lexeme and locus edit form
 * Removed the globalize plugin
 * Miscellaneous changes
 
-==0.1 to 0.1.1==
+## Since 0.1
 * [#8 (30)] Fixed deletion of items in lexeme edit view
 * [#30] Implemented a URL format to look up lexemes by headword
 * [#15 (40)] Added 'create another lexeme' message to lexeme show page.
-* Removed misplaced error_messages_for line that was throwing errors 
-  when editing some lexemes.
-* [#7 (28)] Corrected a bug where single-word terms were showing up as
-  constructions.
+* Removed misplaced error_messages_for line that was throwing errors when editing some lexemes.
+* [#7 (28)] Corrected a bug where single-word terms were showing up as constructions.
