@@ -41,7 +41,7 @@ class ParseTest < ActiveSupport::TestCase
     100.times { Parse.create(parsed_form: "Blue") }
     most_wanted = Parse.most_wanted 1
     
-    assert_not_equal "Blue", most_wanted.first.parsed_form
+    assert_not_equal "Blue", most_wanted.first.try(:parsed_form)
   end
 
   # 119: Locus#most_wanted_parse is doing a lot of work that Parse

@@ -5,9 +5,8 @@ class Parse < ActiveRecord::Base
   globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])  
   
   # Returns parses without entries (determined by comparing parsed_form to headword forms).
-  # Initial letter case insensitive (if the DB is smart enough)
-  scope :without_entries, -> {
-    where('NOT EXISTS (SELECT "form" FROM "headwords" WHERE "headwords"."form" IN (LOWER(SUBSTR(parsed_form, 1, 1)) || SUBSTR(parsed_form, 2), UPPER(SUBSTR(parsed_form, 1, 1)) || SUBSTR(parsed_form, 2)))')
+  scope :without_entries, -> { 
+    joins([:translations]).joins("LEFT OUTER JOIN 'headword_translations' ON 'headword_translations'.'form' IN (LOWER(SUBSTR('parse_translations'.'parsed_form', 1, 1)) || SUBSTR('parse_translations'.'parsed_form', 2), UPPER(SUBSTR('parse_translations'.'parsed_form', 1, 1)) || SUBSTR('parse_translations'.'parsed_form', 2))").where({:headword_translations => {:form => nil}})
   }
   
   # Returns Parses not linked to a Sense by an Interpretation.
@@ -16,9 +15,9 @@ class Parse < ActiveRecord::Base
   # Returns the most commonly appearing parses without entries.
   # count = number of results to return (defaults to 1)
   scope :most_wanted, ->(count = 1) { 
-    select([:parsed_form, arel_table[:parsed_form].count.as('count_all')]).
+    select(['"parse_translations"."parsed_form"', Parse::Translation.arel_table[:parsed_form].count.as('count_all')]).
     without_entries.
-    group(:parsed_form).
+    group('"parse_translations"."parsed_form"').
     order('count_all DESC').
     limit(count) 
   }
