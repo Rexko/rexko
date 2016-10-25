@@ -1,5 +1,6 @@
 ## Since 0.4.2
 * [#94] Added delete link to Lexeme show page
+* [#204] Fixed an issue where most wanted wasn't updating
 
 ## Since 0.4.1
 * [#89] Lexeme form now arranges etymology horizontally instead of by nesting

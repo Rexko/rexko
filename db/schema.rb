@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141216001828) do
+ActiveRecord::Schema.define(:version => 20161025020333) do
 
   create_table "attestations", :force => true do |t|
     t.integer  "locus_id"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20141216001828) do
     t.string   "form"
   end
 
+  add_index "headword_translations", ["form"], :name => "index_headword_translations_on_form"
   add_index "headword_translations", ["headword_id"], :name => "index_headword_translations_on_headword_id"
   add_index "headword_translations", ["locale"], :name => "index_headword_translations_on_locale"
 
@@ -242,6 +243,7 @@ ActiveRecord::Schema.define(:version => 20141216001828) do
 
   add_index "parse_translations", ["locale"], :name => "index_parse_translations_on_locale"
   add_index "parse_translations", ["parse_id"], :name => "index_parse_translations_on_parse_id"
+  add_index "parse_translations", ["parsed_form"], :name => "index_parse_translations_on_parsed_form"
 
   create_table "parses", :force => true do |t|
     t.integer  "parsable_id"
