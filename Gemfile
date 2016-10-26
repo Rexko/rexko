@@ -52,3 +52,4 @@ end
 
 gem 'prototype-rails'
 gem 'multi_json'
+gem 'strip_attributes'
