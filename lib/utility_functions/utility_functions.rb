@@ -16,3 +16,9 @@ class Array
     to_sentence(connectors)
   end
 end
+
+# Strip_attributes gem will strip leading/trailing whitespace from 
+# translated attributes.
+Globalize::ActiveRecord::Translation.class_eval do
+  strip_attributes
+end
