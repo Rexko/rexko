@@ -3,6 +3,7 @@
   </tr>
 
 <% for lexeme in @lexemes %>
+<% @langs = @all_langs[lexeme] %>
 	<tr>
 		<td colspan="3">
 			<%= render(:partial => "shared/lexeme", :object => lexeme)%>
