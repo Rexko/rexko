@@ -3,8 +3,11 @@ class LexemesController < ApplicationController
   # GET /lexemes
   # GET /lexemes.xml
   def index
-    @lexemes = Lexeme.sorted.includes([{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}]).paginate(:page => params[:page])
+    @lexemes = Lexeme.sorted.includes(Lexeme::INCLUDE_TREE[:lexemes]).paginate(:page => params[:page])
     @page_title = t('lexemes.index.page_title')
+    @all_langs = Hash[@lexemes.collect do |lex|
+      [lex, Dictionary.langs_hash_for(lex.dictionaries)]
+    end]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,9 +22,11 @@ class LexemesController < ApplicationController
     @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => params[:matchtype] || Lexeme::SUBSTRING)
     
     @page_title = t('lexemes.matching.results', count: @lexeme.length, query: params[:headword])
-    @lexemes = @lexeme.paginate(:page => params[:page], :include => [:dictionaries, {:headwords => [{:phonetic_forms => :translations}, :language, :translations]}, {:subentries => [:language, :translations, {:senses => [:glosses, :notes, :language, :translations]}, {:etymologies => :notes}, :notes]}])
+    @lexemes = @lexeme.paginate(:page => params[:page], :include => Lexeme::INCLUDE_TREE[:lexemes])
 
-    @langs = Dictionary.langs_hash_for(@lexemes.collect(&:dictionaries).flatten)
+    @all_langs = Hash[@lexemes.collect do |lex|
+      [lex, Dictionary.langs_hash_for(lex.dictionaries)]
+    end]
 
     respond_to do |format|
       format.html { render :index, :layout => '1col_layout' }

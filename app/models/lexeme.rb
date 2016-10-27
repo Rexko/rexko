@@ -6,7 +6,7 @@ class Lexeme < ActiveRecord::Base
   has_many :headwords
   has_many :phonetic_forms, :through => :headwords
   
-  scope :sorted, order(Headword.arel_table[:form].asc)
+  scope :sorted, includes(headwords: :translations).order(Headword::Translation.arel_table[:form].asc)
   
   scope :attested_by, lambda {|parsables, type|
     joins(HASH_MAP_TO_PARSE).where({ :parses => { :parsable_id => parsables, :parsable_type => type }})
@@ -21,6 +21,7 @@ class Lexeme < ActiveRecord::Base
   SEARCH_OPTIONS = [CREATE, SUBSTRING, EXACT]
 
   HASH_MAP_TO_PARSE = { :subentries => Subentry::HASH_MAP_TO_PARSE }
+  INCLUDE_TREE = { :lexemes => [:dictionaries, Headword::INCLUDE_TREE, Subentry::INCLUDE_TREE] }
  
   # Returns an array containing the forms of each headword.
   def headword_forms

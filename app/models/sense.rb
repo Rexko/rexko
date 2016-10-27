@@ -10,12 +10,11 @@ class Sense < ActiveRecord::Base
   translates :definition, :fallbacks_for_empty_translations => true
   globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])
 
-  default_scope { includes(:translations) }  
-  
   accepts_nested_attributes_for :parses, :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :glosses, :allow_destroy => true, :reject_if => proc { |attributes| !attributes.select {|k,v| k.start_with?("gloss")}.any? {|k,v| v.present? }}
   
   HASH_MAP_TO_PARSE = { :interpretations => Interpretation::HASH_MAP_TO_PARSE }
+  INCLUDE_TREE = {:senses => [:glosses, :notes, :language, :translations]}
   
   # Returns all senses for lexemes with a headword matching +form+, insensitive to the case of the first letter.
   def self.lookup_all_by_headword(form)
