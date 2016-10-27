@@ -9,8 +9,6 @@ class LexemesController < ApplicationController
       [lex, Dictionary.langs_hash_for(lex.dictionaries)]
     end]
 
-    @lexemes.each {|lex| p lex.headwords }
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @lexemes }
