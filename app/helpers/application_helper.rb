@@ -258,7 +258,7 @@ module ApplicationHelper
   # +form+         - the relevant form
   # +field+        - the form element, e.g. +:text_field+
   # +attribute+    - name of the attribute
-  # +languages+    - ??? 
+  # +languages+    - :source, :target, or :vernacular 
   # +html_options+ - as would be given for other form elements
   def translatable_tag form, field, attribute, languages = [], html_options = {}
     content_tag(:div, {class: "translatable", data: { languages: languages }}) do
