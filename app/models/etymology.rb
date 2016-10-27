@@ -16,6 +16,8 @@ class Etymology < ActiveRecord::Base
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc {|attrs| Parse.rejectable?(attrs) }
   accepts_nested_attributes_for :next_etymon, :allow_destroy => true, :reject_if => proc {|attrs| Etymology.rejectable?(attrs) }
   
+  INCLUDE_TREE = {:etymologies => [:notes, :translations]}
+  
   def to_s
     [original_language.try(:name), etymon].compact.join " "
   end

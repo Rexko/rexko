@@ -9,6 +9,8 @@ class PhoneticForm < ActiveRecord::Base
  
   validate :any_form_present?
   
+  INCLUDE_TREE = { :phonetic_forms => :translations }
+  
   protected
   def any_form_present?
     if globalize_attribute_names.select {|k,v| k.to_s.start_with?("form")}.all? {|v| v.blank? }

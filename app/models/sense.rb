@@ -14,6 +14,7 @@ class Sense < ActiveRecord::Base
   accepts_nested_attributes_for :glosses, :allow_destroy => true, :reject_if => proc { |attributes| !attributes.select {|k,v| k.start_with?("gloss")}.any? {|k,v| v.present? }}
   
   HASH_MAP_TO_PARSE = { :interpretations => Interpretation::HASH_MAP_TO_PARSE }
+  INCLUDE_TREE = {:senses => [:glosses, :notes, :language, :translations]}
   
   # Returns all senses for lexemes with a headword matching +form+, insensitive to the case of the first letter.
   def self.lookup_all_by_headword(form)

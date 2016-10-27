@@ -19,6 +19,7 @@ class Headword < ActiveRecord::Base
   
   DESCRIPTIVE = 1
   PRESCRIPTIVE = 2
+  INCLUDE_TREE = { :headwords => [PhoneticForm::INCLUDE_TREE, :language, :translations] }
 
   after_initialize do |hw|
     # Most likely default: assume the most acceptable forms are being entered.

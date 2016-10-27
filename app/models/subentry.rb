@@ -19,6 +19,7 @@ class Subentry < ActiveRecord::Base
   }
   
   HASH_MAP_TO_PARSE = { :senses => Sense::HASH_MAP_TO_PARSE }
+  INCLUDE_TREE = {:subentries => [:translations, Sense::INCLUDE_TREE,  Etymology::INCLUDE_TREE, :notes, :language]}
   
   before_save :set_defaults
   

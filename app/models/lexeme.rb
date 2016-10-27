@@ -21,6 +21,7 @@ class Lexeme < ActiveRecord::Base
   SEARCH_OPTIONS = [CREATE, SUBSTRING, EXACT]
 
   HASH_MAP_TO_PARSE = { :subentries => Subentry::HASH_MAP_TO_PARSE }
+  INCLUDE_TREE = { :lexemes => [:dictionaries, Headword::INCLUDE_TREE, Subentry::INCLUDE_TREE] }
  
   # Returns an array containing the forms of each headword.
   def headword_forms
