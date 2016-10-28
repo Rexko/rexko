@@ -197,9 +197,15 @@ class LexemesController < ApplicationController
   def destroy
     @lexeme = Lexeme.find(params[:id])
     @lexeme.destroy
-
+    
+    # Redirect to referer if there is one and if it's not the lexeme link
+    # Otherwise send to main lexemes_url
+    redirect_target = request.env["HTTP_REFERER"].blank? || 
+      request.env["HTTP_REFERER"] == request.env["REQUEST_URI"] ? 
+      lexemes_url : request.env["HTTP_REFERER"]
+    
     respond_to do |format|
-      format.html { redirect_to(lexemes_url) }
+      format.html { redirect_to(redirect_target) }
       format.xml  { head :ok }
     end
   end
