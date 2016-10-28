@@ -3,6 +3,7 @@
 * [#204] Fixed an issue where most wanted wasn't updating
 * [#175] Will now strip leading and trailing whitespace
 * [#212] Fixed an issue where principal parts and pronunciation were missing from lexeme index
+* [#95] Deleting a lexeme should now return you to the page you were on, when practicable
 
 ## Since 0.4.1
 * [#89] Lexeme form now arranges etymology horizontally instead of by nesting
