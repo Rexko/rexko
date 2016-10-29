@@ -36,13 +36,13 @@ class LexemesController < ApplicationController
   # GET /lexemes/1
   # GET /lexemes/1.xml
   def show
-    @lexeme = Lexeme.find(params[:id], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}, :dictionaries])
+    @lexeme = Lexeme.find(params[:id], :include => Lexeme::INCLUDE_TREE[:lexemes])
     @loci = @lexeme.loci(:include => {:source => {:authorship => [:author, :title]}})
     @constructions = @lexeme.constructions
     @unattached = Parse.count_unattached_to @lexeme.headword_forms
-    @loci_for = Hash[@lexeme.headword_forms.collect { |headword| [headword, @loci.find_all { |locus| locus.attests? headword }] }]
+    @loci_for = @lexeme.headword_forms.inject({}) {|hsh, headword| hsh.merge headword => @loci.attesting(headword) }
     @external_addresses = @lexeme.dictionaries.collect(&:external_address).uniq.delete_if {|addy| addy.blank? }
-    @loci_for_sense = Hash[@lexeme.senses.collect { |sense| [sense, Locus.attesting_sense(sense)] }]
+    @loci_for_sense = Hash[@lexeme.senses.collect { |sense| [sense, Locus.attesting(sense)] }]
     @authors_of = Lexeme.authors_hash(@constructions) 
     @loci_by = Hash[@authors_of.collect { |construction, authors| [construction, Hash[authors.collect {|author| [author, Locus.where(:id => construction.loci).attesting([construction, @lexeme]).authored_by(author)] }]]}]
     @page_title = view_context.titleize_headwords_for @lexeme

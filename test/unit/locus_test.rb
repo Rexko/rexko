@@ -25,9 +25,9 @@ class LocusTest < ActiveSupport::TestCase
   	assert_equal loci.uniq, loci
   end
   
-  test "attesting_sense" do
+  test "attesting sense" do
     Sense.find_each do |sense|
-      attesting_sense_loci = Locus.attesting_sense(sense)
+      attesting_sense_loci = Locus.attesting(sense)
       queried_loci = Locus.joins({:attestations => { :parses => :interpretations }}).where({:interpretations => {:sense_id => sense.id}}).uniq
       assert (attesting_sense_loci - queried_loci).blank?
     end

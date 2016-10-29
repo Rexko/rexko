@@ -11,18 +11,22 @@ class Locus < ActiveRecord::Base
 	# Given an Author or array of Authors, return all loci authored by them.
   scope :authored_by, ->(author_array) { joins( :source => :authorship ).where( :authorships => { :author_id => author_array }).uniq }
 
-  # Takes a lexeme and returns 
-  scope :attesting, lambda { |lexeme|
-    { :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}},
-    :conditions => { :subentries => { :lexeme_id => [*lexeme].collect(&:id) }},
-    :group => 'loci.id' }
-  }
-  
-  # Takes a sense or array of senses and returns all loci attesting them.
-  scope :attesting_sense, lambda {|sense|
-    { :joins => { :attestations => { :parses => :interpretations }},
-    :conditions => { :interpretations => { :sense_id => [*sense].collect(&:id) }},
-    :group => 'loci.id' }
+  # Takes a lexeme, sense, string, or an array of each, and returns the loci that attest the input
+  scope :attesting, lambda { |obj|
+    case [*obj].first
+    when Lexeme
+      { :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}},
+      :conditions => { :subentries => { :lexeme_id => [*obj].collect(&:id) }},
+      :group => 'loci.id' }
+    when String
+      includes(:parses => :translations).
+      where(Attestation.arel_table[:attested_form].eq(obj).
+      or(Parse::Translation.arel_table[:parsed_form].eq(obj)))
+    when Sense
+      { :joins => { :attestations => { :parses => :interpretations }},
+      :conditions => { :interpretations => { :sense_id => [*obj].collect(&:id) }},
+      :group => 'loci.id' }      
+    end
   }
   
   scope :unattached, lambda {|lexeme|
