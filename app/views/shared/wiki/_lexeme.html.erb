@@ -4,5 +4,5 @@
 <%= render(:partial => "shared/wiki/construction", :collection => lexeme.constructions, :locals => { :headword => headword } )%>
 <% end %><% unless lexeme.loci.empty? %>
 ===<%= t('lexemes.show.loci')%>===
-<%= render(:partial => "shared/wiki/locus", :collection => @loci_for[headword.form]) %>
+<%= render(:partial => "shared/wiki/locus", :collection => lexeme == @lexeme ? @loci_for[headword.form] :  lexeme.loci.attesting(headword.form)) %>
 <% end %>
