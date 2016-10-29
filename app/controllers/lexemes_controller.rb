@@ -40,7 +40,7 @@ class LexemesController < ApplicationController
     @loci = @lexeme.loci(:include => {:source => {:authorship => [:author, :title]}})
     @constructions = @lexeme.constructions
     @unattached = Parse.count_unattached_to @lexeme.headword_forms
-    @loci_for = Hash[@lexeme.headword_forms.collect { |headword| [headword, @loci.find_all { |locus| locus.attests? headword }] }]
+    @loci_for = @lexeme.headword_forms.inject({}) {|hsh, headword| hsh.merge headword => @loci.attesting(headword) }
     @external_addresses = @lexeme.dictionaries.collect(&:external_address).uniq.delete_if {|addy| addy.blank? }
     @loci_for_sense = Hash[@lexeme.senses.collect { |sense| [sense, Locus.attesting(sense)] }]
     @authors_of = Lexeme.authors_hash(@constructions) 
