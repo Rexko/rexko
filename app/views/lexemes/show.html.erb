@@ -15,13 +15,14 @@
 <% for external_address in @external_addresses do %>
 <% for headword in @lexeme.initial_case_insensitive_headwords do %>
 <h3><%= link = link_to h(headword.form), "#{h external_address}#{h headword.form}"
-    t('.headword_this_entry_html', form: h(headword.form), link: link) %></h3>
+    t('.headword_this_entry_html', link: link) %></h3>
 <div class="wikified-lexeme">
 <textarea cols="72" rows="10" id="textarea-lexeme-<%= headword.id %>" onClick="select_all('textarea-lexeme-<%= headword.id %>')">
 <%= render(:partial => "shared/wiki/lexeme", :object => @lexeme, :locals => {:headword => headword })%>
 </textarea>
 </div>
-<h3><%= t('.headword_all_entries_html', form: h(headword.form), link: link) %></h3>
+<h3><%= 
+	t('.headword_all_entries_html', link: link, all_entries_link: link_to(t('.all_entries'), controller: "lexemes", action: "matching", headword: headword.form)) %></h3>
 <div class="wikified-headword">
 <textarea cols="72" rows="10" id="textarea-headword-<%= headword.id %>" onClick="select_all('textarea-headword-<%= headword.id %>')">
 <%= render(:partial => "shared/wiki/headword", :object => headword)%>
