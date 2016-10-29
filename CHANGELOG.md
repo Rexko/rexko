@@ -4,6 +4,7 @@
 * [#175] Will now strip leading and trailing whitespace
 * [#212] Fixed an issue where principal parts and pronunciation were missing from lexeme index
 * [#95] Deleting a lexeme should now return you to the page you were on, when practicable
+* [#96, #222] Fixed an issue where loci of homographs might not be listed in wiki show
 
 ## Since 0.4.1
 * [#89] Lexeme form now arranges etymology horizontally instead of by nesting
