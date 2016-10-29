@@ -58,7 +58,8 @@ la:
                 one: "<i>Inveni %{link} quae lexin huius formae indicat.</i>"
                 other: "<i>Inveni %{link} quae lexin huius formae indicant.</i>"
             headword_this_entry_html: "%{link} — Hoc nomen"
-            headword_all_entries_html: "%{link} — Omnia nomina"
+            all_entries: Omnia lemmata
+            headword_all_entries_html: "%{link} — %{all_entries_link}"
             edit: "Mutare"
             back_to_lexemes: "Ad lexes redire"
             back_to_dictionary: "Ad lexicon \"%{dictionary}\" redire"
