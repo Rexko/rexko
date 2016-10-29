@@ -36,7 +36,7 @@ class LexemesController < ApplicationController
   # GET /lexemes/1
   # GET /lexemes/1.xml
   def show
-    @lexeme = Lexeme.find(params[:id], :include => [{:headwords => :phonetic_forms}, {:subentries => [{:senses => [:glosses, :notes]}, {:etymologies => :notes}, :notes]}, :dictionaries])
+    @lexeme = Lexeme.find(params[:id], :include => Lexeme::INCLUDE_TREE[:lexemes])
     @loci = @lexeme.loci(:include => {:source => {:authorship => [:author, :title]}})
     @constructions = @lexeme.constructions
     @unattached = Parse.count_unattached_to @lexeme.headword_forms
