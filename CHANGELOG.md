@@ -7,6 +7,7 @@
 * [#96, #222] Fixed an issue where loci of homographs might not be listed in wiki show
 * [#97] Added a link to homographs when wiki show lists them (click "All entries")
 * [#211] Fixed an issue where a lexeme's paradigm wasn't given in wiki show
+* [#202] Fixed an issue with adding to the lexeme form when assigned to multiple dictionaries
 
 ## Since 0.4.1
 * [#89] Lexeme form now arranges etymology horizontally instead of by nesting
