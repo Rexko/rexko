@@ -174,7 +174,7 @@ function insert_with_effect(container, content){
     Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
     activate_links($$('body')[0]);
     activate_autocompletes($$('body')[0]);
-    activate_language_tabs(container.previous().select(".language-list li"));
+    activate_language_tabs(container.previous().select(".language-list"));
     update_add_links();
 };
 
