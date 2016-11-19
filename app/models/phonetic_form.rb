@@ -11,6 +11,13 @@ class PhoneticForm < ActiveRecord::Base
   
   INCLUDE_TREE = { :phonetic_forms => :translations }
   
+  # Return an array of all defined phonetic forms
+  def phonetic_forms
+    translations.inject([]) do |memo, obj|
+      obj.form? ? memo | [obj.form] : memo
+    end
+  end
+  
   protected
   def any_form_present?
     if globalize_attribute_names.select {|k,v| k.to_s.start_with?("form")}.all? {|v| v.blank? }

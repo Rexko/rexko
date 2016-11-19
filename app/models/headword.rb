@@ -78,6 +78,28 @@ class Headword < ActiveRecord::Base
     end
   end
   
+  # Returns an array containing the forms of the most acceptable headwords
+  def self.best_headword_forms(headwords)
+    return [] if headwords.empty?
+
+    most_accepted = headwords.max_by {|hw2| hw2.acceptance }.acceptance
+    
+    forms = headwords.select {|hw| hw.acceptance == most_accepted}.inject([]) do |memo, obj|
+      memo | obj.orthographic_forms
+    end
+  end
+  
+  # Returns an array containing the phonetic forms of the most acceptable headwords
+  def self.best_phonetic_forms(headwords)
+    return [] if headwords.empty?
+    
+    most_accepted = headwords.max_by {|hw2| hw2.acceptance }.acceptance
+    
+    forms = headwords.select {|hw| hw.acceptance == most_accepted}.inject([]) do |memo, obj|
+      memo | obj.phonetic_forms.collect(&:phonetic_forms).flatten
+    end
+  end
+  
   protected
   def any_form_present?
     if globalize_attribute_names.select {|k,v| k.to_s.start_with?("form")}.all? {|v| v.blank? }

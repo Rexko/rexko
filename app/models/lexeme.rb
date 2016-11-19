@@ -30,6 +30,17 @@ class Lexeme < ActiveRecord::Base
     end
   end
   
+  # Returns an array containing the forms of the most acceptable headwords
+  def best_headword_forms
+    Headword.best_headword_forms(headwords)
+  end
+
+  # Returns an array containing the phonetic forms of the most acceptable headwords
+  def best_phonetic_forms
+    Headword.best_phonetic_forms(headwords)  
+  end
+  
+  # Return the first most acceptable headword
   def primary_headword
     Globalize.with_locale(language.iso_639_code) { headwords.order('acceptance DESC').first.try(:form) }
   end

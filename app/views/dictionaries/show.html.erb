@@ -2,8 +2,8 @@
     for lexeme in @lexemes %>
 	<dl class="dictform-entry">
 		<dt class="dictform-headword" <%= lang_for(lexeme.headwords) %>><%= link_to source{t('.headwords', headwords: titleize_headwords_for(lexeme), default: "%{headwords}.")}, lexeme %></dt>
-		<% for headword in lexeme.headwords %>
-			<dd class="dictform-phonetic-form" <%= lang_for(headword, :variant => 'fonipa') %>><%= source{h headword.phonetic_forms.compact.collect{|x| t('.phonetic_form', form: x.form, default: "/%{form}/")}.to_options_sentence(@dictionary.definition_language)} %></dd>
+		<% for phonetic_form in lexeme.best_phonetic_forms %>
+			<dd class="dictform-phonetic-form" <%= lang_for(lexeme.headwords, :variant => 'fonipa') %>><%= source{t('.phonetic_form', form: phonetic_form, default: "/%{form}/")} %></dd>
 		<% end %>
 		<% for subentry in lexeme.subentries %>
 			<dd class="dictform-subentry"  <%= lang_for(subentry) %>>
