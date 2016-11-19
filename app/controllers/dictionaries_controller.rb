@@ -30,7 +30,7 @@ class DictionariesController < ApplicationController
   def show
     @dictionary = Dictionary.find(params[:id])
     @source_language = (@dictionary.source_language || Language::UNDETERMINED)
-    unsorted_lexemes = @dictionary.lexemes.includes([{:dictionaries => [:source_language]}, {:headwords => [:phonetic_forms, :language]}, {:subentries => [{:senses => [{:glosses => :language}, :notes, :language]}, {:etymologies => [:notes, :original_language, {:next_etymon => [:notes, :original_language, :next_etymon] }]}, {:notes => :language}, :language]}])
+    unsorted_lexemes = @dictionary.lexemes.includes(Lexeme::INCLUDE_TREE[:lexemes])
     @lexemes = @source_language.sort(unsorted_lexemes, by: :primary_headword)
     @page_title = @dictionary.title
     @langs = Dictionary.langs_hash_for(@dictionary)
