@@ -7,7 +7,7 @@ class LociController < ApplicationController
       @loci = Locus.where(:id => params[:loci].collect(&:to_i))
     else
       @loci = Locus.sorted
-    end.includes([{:source => {:authorship => [:author, :title]}}, :parses => {:interpretations => :sense}]).paginate(:page => params[:page])
+    end.includes([{:source => [:translations, {:authorship => [{:author => :translations}, {:title => :translations}]}]}, :parses => [:translations, {:interpretations => {:sense => :translations}}]]).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
