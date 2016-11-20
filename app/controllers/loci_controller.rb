@@ -4,7 +4,7 @@ class LociController < ApplicationController
   # GET /loci.xml
   def index
     @loci = if params[:loci]
-      @loci = Locus.where(:id => params[:loci].split('/').collect(&:to_i))
+      @loci = Locus.where(:id => params[:loci].collect(&:to_i))
     else
       @loci = Locus.sorted
     end.includes([{:source => {:authorship => [:author, :title]}}, :parses => {:interpretations => :sense}]).paginate(:page => params[:page])
