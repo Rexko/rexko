@@ -9,6 +9,7 @@
 * [#211] Fixed an issue where a lexeme's paradigm wasn't given in wiki show
 * [#202] Fixed an issue with adding to the lexeme form when assigned to multiple dictionaries
 * [#169] Short lists now only show the most acceptable headwords
+* [#234] Fixed an issue with listing additional loci for potential constructions
 
 ## Since 0.4.1
 * [#89] Lexeme form now arranges etymology horizontally instead of by nesting
