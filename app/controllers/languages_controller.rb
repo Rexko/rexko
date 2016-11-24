@@ -47,6 +47,11 @@ class LanguagesController < ApplicationController
 
     respond_to do |format|
       if @language.save
+        ActiveRecord::Base.descendants.each do |c|
+          # Update accessors for models that have accessors defined
+          c.globalize_accessors(locales: Language.defined_language_codes) if c.respond_to?(:globalize_locales)
+        end
+        
         flash[:notice] = t('languages.new.success')
         format.html { redirect_to(@language) }
         format.xml  { render :xml => @language, :status => :created, :location => @language }
@@ -64,6 +69,11 @@ class LanguagesController < ApplicationController
 
     respond_to do |format|
       if @language.update_attributes(params[:language])
+        ActiveRecord::Base.descendants.each do |c|
+          # Update accessors for models that have accessors defined
+          c.globalize_accessors(locales: Language.defined_language_codes) if c.respond_to?(:globalize_locales)
+        end
+        
         flash[:notice] = t('languages.edit.success')
         format.html { redirect_to(@language) }
         format.xml  { head :ok }
