@@ -100,9 +100,10 @@ class LanguagesController < ApplicationController
   end
   
   private
+
+  # Update accessors for models that have accessors defined
   def update_accessors
     ActiveRecord::Base.descendants.each do |c|
-      # Update accessors for models that have accessors defined
       c.globalize_accessors(locales: Language.defined_language_codes) if c.respond_to?(:globalize_locales)
     end
   end
