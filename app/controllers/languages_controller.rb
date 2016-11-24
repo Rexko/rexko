@@ -47,6 +47,8 @@ class LanguagesController < ApplicationController
 
     respond_to do |format|
       if @language.save
+        update_accessors
+        
         flash[:notice] = t('languages.new.success')
         format.html { redirect_to(@language) }
         format.xml  { render :xml => @language, :status => :created, :location => @language }
@@ -64,6 +66,8 @@ class LanguagesController < ApplicationController
 
     respond_to do |format|
       if @language.update_attributes(params[:language])
+        update_accessors
+        
         flash[:notice] = t('languages.edit.success')
         format.html { redirect_to(@language) }
         format.xml  { head :ok }
@@ -92,6 +96,15 @@ class LanguagesController < ApplicationController
     
     respond_to do |format|
       format.js { render :partial => "autocomplete" }
+    end
+  end
+  
+  private
+
+  # Update accessors for models that have accessors defined
+  def update_accessors
+    ActiveRecord::Base.descendants.each do |c|
+      c.globalize_accessors(locales: Language.defined_language_codes) if c.respond_to?(:globalize_locales)
     end
   end
 end
