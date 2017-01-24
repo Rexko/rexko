@@ -26,7 +26,7 @@ class LanguagesController < ApplicationController
   # GET /languages/new.xml
   def new
     @language = Language.new
-    @locale_name = Language.where(iso_639_code: I18n.locale).first.name
+    @locale_name = (Language.where(iso_639_code: I18n.locale).first || Language::DEFAULT).name
 
     respond_to do |format|
       format.html # new.html.erb
