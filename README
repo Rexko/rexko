@@ -2,6 +2,7 @@
 ## Let's make dictionaries!
 
 ## Getting started
+Assuming you have Ruby (1.9), gem, & bundler installed.
 
 1. Clone or [download](https://github.com/Rexko/rexko/archive/master.zip) and unzip where you like.
 2. In your Rexko folder do:
@@ -15,4 +16,4 @@
 
 Now you can start adding lexemes (dictionary entries) or loci (attestations).
 
-More documentation will be coming Real Soon Now.
+More detailed documentation will be coming Real Soon Now.
