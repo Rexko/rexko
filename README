@@ -5,6 +5,7 @@
 
 1. Clone or [download](https://github.com/Rexko/rexko/archive/master.zip) and unzip where you like.
 2. In your Rexko folder do:
+    bundle
     rake db:schema:load RAILS_ENV=production
     rake assets:precompile
     rails server -e production
