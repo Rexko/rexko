@@ -32,9 +32,7 @@ class AttestationsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        if request.xhr?
-          render partial: 'form'
-        end
+        render partial: 'form' if request.xhr?
       end
       format.xml { render xml: @attestation }
     end
