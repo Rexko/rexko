@@ -24,8 +24,11 @@ class AttestationsController < ApplicationController
   # GET /attestations/new
   # GET /attestations/new.xml
   def new
-    @attestation = Attestation.new(params.slice(Attestation.new.attribute_names))
-    @path = params[:path].try(:sub, /(attestation.*)\[\d*\]/, '\1[' + Time.now.to_i.to_s + ']')
+    @attestation = Attestation.new(
+      params.slice(Attestation.new.attribute_names)
+    )
+    @path = params[:path].try(:sub, /(attestation.*)\[\d*\]/,
+                              '\1[' + Time.now.to_i.to_s + ']')
 
     respond_to do |format|
       format.html do
@@ -51,10 +54,14 @@ class AttestationsController < ApplicationController
       if @attestation.save
         flash[:notice] = 'Attestation was successfully created.'
         format.html { redirect_to(@attestation) }
-        format.xml  { render xml: @attestation, status: :created, location: @attestation }
+        format.xml do
+          render xml: @attestation, status: :created, location: @attestation
+        end
       else
         format.html { render action: 'new' }
-        format.xml  { render xml: @attestation.errors, status: :unprocessable_entity }
+        format.xml do
+          render xml: @attestation.errors, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -71,7 +78,9 @@ class AttestationsController < ApplicationController
         format.xml  { head :ok }
       else
         format.html { render action: 'edit' }
-        format.xml  { render xml: @attestation.errors, status: :unprocessable_entity }
+        format.xml do
+          render xml: @attestation.errors, status: :unprocessable_entity
+        end
       end
     end
   end
