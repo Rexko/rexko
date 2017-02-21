@@ -24,7 +24,7 @@ class SourcesController < ApplicationController
   # GET /sources/new
   # GET /sources/new.xml
   def new
-    @source = Source.new(params.slice(Source.new.attribute_names))
+    @source = Source.build_from_only_valid(params)
     @source.build_authorship
     @path = params[:path]
 

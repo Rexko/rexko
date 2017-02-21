@@ -24,7 +24,7 @@ class SensesController < ApplicationController
   # GET /senses/new
   # GET /senses/new.xml
   def new
-    @sense = Sense.new(params.slice(Sense.new.attribute_names))
+    @sense = Sense.build_from_only_valid(params)
     @path = params[:path].try(:sub, /(sense.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
     @dictionaries = Dictionary.where(id: params[:dictionaries]).all
     @langs = Dictionary.langs_hash_for(@dictionaries)

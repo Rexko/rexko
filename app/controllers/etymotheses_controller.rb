@@ -24,7 +24,7 @@ class EtymothesesController < ApplicationController
   # GET /etymotheses/new
   # GET /etymotheses/new.xml
   def new
-    @etymothesis = Etymothesis.new(params.slice(Etymothesis.new.attribute_names))
+    @etymothesis = Etymothesis.build_from_only_valid(params)
     @etymothesis.build_etymology
     @path = params[:path].try(:sub, /(subentr.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
     @dictionaries = Dictionary.where(id: params[:dictionaries]).all

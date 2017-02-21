@@ -24,7 +24,7 @@ class ParsesController < ApplicationController
   # GET /parses/new
   # GET /parses/new.xml
   def new
-    @parse = Parse.new(params.slice(Parse.new.attribute_names))
+    @parse = Parse.build_from_only_valid(params)
     @path = params[:path].try(:sub, /(parse.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
     @dictionaries = Dictionary.where(id: params[:dictionaries]).all
     @langs = Dictionary.langs_hash_for @dictionaries
