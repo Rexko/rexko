@@ -25,15 +25,15 @@ class AttestationsController < ApplicationController
   # GET /attestations/new.xml
   def new
     @attestation = Attestation.new(params.slice(Attestation.new.attribute_names))
-    @path = params[:path].try(:sub, /(attestation.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @path = params[:path].try(:sub, /(attestation.*)\[\d*\]/, '\1[' + Time.now.to_i.to_s + ']')
 
     respond_to do |format|
       format.html do
         if request.xhr?
-          render partial: "form"
+          render partial: 'form'
         end
       end
-      format.xml  { render xml: @attestation }
+      format.xml { render xml: @attestation }
     end
   end
 
@@ -53,8 +53,8 @@ class AttestationsController < ApplicationController
         format.html { redirect_to(@attestation) }
         format.xml  { render xml: @attestation, status: :created, location: @attestation }
       else
-        format.html { render action: "new" }
-        format.xml  { render xml: @attestation.errors, status:  :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @attestation.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -70,7 +70,7 @@ class AttestationsController < ApplicationController
         format.html { redirect_to(@attestation) }
         format.xml  { head :ok }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.xml  { render xml: @attestation.errors, status: :unprocessable_entity }
       end
     end
