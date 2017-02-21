@@ -24,7 +24,7 @@ class GlossesController < ApplicationController
   # GET /glosses/new
   # GET /glosses/new.xml
   def new
-    @gloss = Gloss.new(params.slice(Gloss.new.attribute_names))
+    @gloss = Gloss.build_from_only_valid(params)
     @path = params[:path].try(:sub, /(gloss.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
     @dictionaries = Dictionary.where(id: params[:dictionaries]).all
     @langs = Dictionary.langs_hash_for(@dictionaries)

@@ -6,7 +6,7 @@ class AttestationsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @attestations }
+      format.xml  { render xml: @attestations }
     end
   end
 
@@ -17,23 +17,22 @@ class AttestationsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @attestation }
+      format.xml  { render xml: @attestation }
     end
   end
 
   # GET /attestations/new
   # GET /attestations/new.xml
   def new
-    @attestation = Attestation.new(params.slice(Attestation.new.attribute_names))
-    @path = params[:path].try(:sub, /(attestation.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
-    
+    @attestation = Attestation.build_from_only_valid(params)
+    @path = params.fetch(:path, '').sub(/(attestation.*)\[\d*\]/,
+                                        "\\1[#{Time.now.to_i}]")
+
     respond_to do |format|
       format.html do
-      	if request.xhr?
-      		render :partial => "form"
-      	end
+        render partial: 'form' if request.xhr?
       end
-      format.xml  { render :xml => @attestation }
+      format.xml { render xml: @attestation }
     end
   end
 
@@ -51,10 +50,14 @@ class AttestationsController < ApplicationController
       if @attestation.save
         flash[:notice] = 'Attestation was successfully created.'
         format.html { redirect_to(@attestation) }
-        format.xml  { render :xml => @attestation, :status => :created, :location => @attestation }
+        format.xml do
+          render xml: @attestation, status: :created, location: @attestation
+        end
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @attestation.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml do
+          render xml: @attestation.errors, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -70,8 +73,10 @@ class AttestationsController < ApplicationController
         format.html { redirect_to(@attestation) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @attestation.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml do
+          render xml: @attestation.errors, status: :unprocessable_entity
+        end
       end
     end
   end

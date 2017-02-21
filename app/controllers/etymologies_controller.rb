@@ -24,7 +24,7 @@ class EtymologiesController < ApplicationController
   # GET /etymologies/new
   # GET /etymologies/new.xml
   def new
-    @etymology = Etymology.new(params.slice(Etymology.new.attribute_names))
+    @etymology = Etymology.build_from_only_valid(params)
     @dictionaries = Dictionary.where(id: params[:dictionaries]).all
     @langs = Dictionary.langs_hash_for(@dictionaries)
 

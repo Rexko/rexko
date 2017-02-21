@@ -24,7 +24,7 @@ class PhoneticFormsController < ApplicationController
   # GET /phonetic_forms/new
   # GET /phonetic_forms/new.xml
   def new
-    @phonetic_form = PhoneticForm.new(params.slice(PhoneticForm.new.attribute_names))
+    @phonetic_form = PhoneticForm.build_from_only_valid(params)
     @dictionaries = Dictionary.where(id: params[:dictionaries]).all
     @langs = Dictionary.langs_hash_for(@dictionaries)
 

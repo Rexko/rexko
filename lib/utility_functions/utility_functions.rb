@@ -1,3 +1,5 @@
+require 'active_support/concern'
+
 class Array
   # Localized to_sentence, but for sentences with "or" instead of "and".
   # If a locale is not supplied, it will use I18n.locale. 
@@ -22,3 +24,16 @@ end
 Globalize::ActiveRecord::Translation.class_eval do
   strip_attributes
 end
+
+# Pass a whole params hash but only build from valid attributes
+module BuildOnlyFromValid
+  extend ActiveSupport::Concern
+
+  module ClassMethods
+    def build_from_only_valid(attrs = {})
+      new(attrs.slice(attribute_names))
+    end
+  end
+end
+
+ActiveRecord::Base.send(:include, BuildOnlyFromValid)
