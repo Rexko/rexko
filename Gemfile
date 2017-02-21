@@ -3,6 +3,7 @@
 
 source 'http://rubygems.org'
 gem 'rails', '3.1.11'
+
 gem 'globalize', '~> 3.1.0'
 gem 'globalize-accessors'
 
@@ -31,25 +32,24 @@ gem 'sqlite3'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-#   gem 'webrat'
+  # gem 'webrat'
+  gem 'bullet'
+  gem 'capybara-webkit'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'missing_t', '~> 0.4.1'
   gem 'ruby-prof'
   gem 'test-unit'
-  gem 'bullet'
-  gem 'missing_t', '~> 0.4.1'
-  gem 'cucumber-rails', :require => false
-  gem 'capybara-webkit'
-  gem 'database_cleaner'
 end
 
-source 'http://gemcutter.org'
-gem 'will_paginate', '~> 3.0.0'
-
 group :assets do
-  gem 'sass-rails', "~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
+  gem 'coffee-rails', '~> 3.1.0'
+  gem 'sass-rails', '~> 3.1.0'
   gem 'uglifier'
 end
 
-gem 'prototype-rails'
 gem 'multi_json'
+gem 'prototype-rails'
 gem 'strip_attributes'
+gem 'will_paginate', '~> 3.0.0'
+
