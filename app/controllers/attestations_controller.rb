@@ -26,12 +26,12 @@ class AttestationsController < ApplicationController
   def new
     @attestation = Attestation.new(params.slice(Attestation.new.attribute_names))
     @path = params[:path].try(:sub, /(attestation.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
-    
+
     respond_to do |format|
       format.html do
-      	if request.xhr?
-      		render :partial => "form"
-      	end
+        if request.xhr?
+          render :partial => "form"
+        end
       end
       format.xml  { render :xml => @attestation }
     end
