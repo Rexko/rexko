@@ -1,3 +1,6 @@
+## Since 0.4.3
+* [#239] Fixed an issue where glosses might not appear in wiki show
+
 ## Since 0.4.2
 * [#94] Added delete link to Lexeme show page
 * [#204] Fixed an issue where most wanted wasn't updating

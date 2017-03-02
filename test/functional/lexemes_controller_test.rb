@@ -306,4 +306,23 @@ class LexemesControllerTest < ActionController::TestCase
     
     assert_select ".lexform-phonetic-form", /187_tEst/
   end
+  
+  # 239. Glosses not displaying in lexeme/show wiki format
+  test "wiki format should display glosses in lexeme/show" do
+    lex = Lexeme.create
+    lex.dictionaries << dictionaries(:one)
+    dictionaries(:one).target_language = languages(:spanish)
+    dictionaries(:one).save!
+    
+    lex.headwords.create form: "Test"
+    
+    subentry = lex.subentries.create
+    sense = subentry.senses.create definition: "Test def."
+    sense.glosses.create gloss_es: "sought"
+    
+    get :show, id: lex.id
+    
+    assert_select ".wikified-headword textarea", /#\* sought/
+    assert_select ".wikified-lexeme textarea", /#\* sought/
+  end
 end
