@@ -117,7 +117,7 @@ class LexemesControllerTest < ActionController::TestCase
     
     get :show_by_headword, :headword => "liter", :matchtype => Lexeme::SUBSTRING
     
-    assert_redirected_to "/en/lexemes/matching/liter"
+    assert_redirected_to "/en/lexemes/matching/contains/liter"
   end
   
   test "don't fail if locus contains a construction that does not reference it" do
