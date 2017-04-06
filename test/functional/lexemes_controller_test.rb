@@ -326,8 +326,8 @@ class LexemesControllerTest < ActionController::TestCase
     assert_select ".wikified-lexeme textarea", /#\* sought/
   end
   
-  # 253. Headwords in URLs should be able to contain periods
-  test "periods should be possible in headwords in URLs" do
+  # 253. Headwords in URLs should be able to contain special characters
+  test "special characters should be possible in headwords in URLs" do
     # normal
     assert_recognizes({ controller: 'lexemes', action: 'matching', 
                         headword: 'word', matchtype: Lexeme::SUBSTRING }, 
