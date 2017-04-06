@@ -4,10 +4,10 @@ class LociController < ApplicationController
   # GET /loci.xml
   def index
     @loci = if params[:loci]
-      @loci = Locus.where(:id => params[:loci].collect(&:to_i))
-    else
-      @loci = Locus.sorted
-    end.includes([{:source => [:translations, {:authorship => [{:author => :translations}, {:title => :translations}]}]}, :parses => [:translations, {:interpretations => {:sense => :translations}}]]).paginate(:page => params[:page])
+              @loci = Locus.where(:id => params[:loci].collect(&:to_i))
+            else
+              @loci = Locus.sorted
+            end.includes([{:source => [:translations, {:authorship => [{:author => :translations}, {:title => :translations}]}]}, :parses => [:translations, {:interpretations => {:sense => :translations}}]]).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -69,8 +69,8 @@ class LociController < ApplicationController
     all_interpretations = Sense.lookup_all_by_parses_of @locus
     @interpretations = {}
     @locus.parses.each do |parse|
-        @interpretations[parse.parsed_form] = all_interpretations.select{|ip| ip.hw_form == parse.parsed_form}
-      end
+      @interpretations[parse.parsed_form] = all_interpretations.select{|ip| ip.hw_form == parse.parsed_form}
+    end
     
     @wantedparse = @locus.most_wanted_parse
     @potential_constructions = @locus.potential_constructions
@@ -116,11 +116,11 @@ class LociController < ApplicationController
     # FIXME Because of the way a new sense is added under an existing subentry,
     # we have to tweak params so that it is appropriately associated.
 		atesute = params[:locus][:attestations_attributes]
-		atesute.each {|att_k, att_v|
+		atesute.each_value {|att_v|
 			paasu = att_v[:parses_attributes]
-			paasu.each {|par_k, par_v|
+			paasu.each_value {|par_v|
 				intah = par_v[:interpretations_attributes]
-				intah.each {|int_k, int_v|
+				intah.each_value {|int_v|
 					if int_v[:sense_id].try(:slice, "new")
 						int_v[:sense_attributes][:subentry_id] = int_v[:sense_id].split('-')[1]
 					end
