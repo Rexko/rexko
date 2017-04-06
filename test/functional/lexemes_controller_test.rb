@@ -328,19 +328,12 @@ class LexemesControllerTest < ActionController::TestCase
   
   # 253. Headwords in URLs should be able to contain special characters
   test "special characters should be possible in headwords in URLs" do
-    # normal
-    assert_recognizes({ controller: 'lexemes', action: 'matching', 
-                        headword: 'word', matchtype: Lexeme::SUBSTRING }, 
-                        'lexemes/matching/contains/word')
+    examples = ['word', '.ubu.', 'either/or']
     
-    # periods
-    assert_recognizes({ controller: 'lexemes', action: 'matching', 
-                        headword: '.ubu.', matchtype: Lexeme::SUBSTRING }, 
-                        'lexemes/matching/.ubu.')
-
-    # slashes
-    assert_recognizes({ controller: 'lexemes', action: 'matching', 
-                        headword: 'either/or', matchtype: Lexeme::SUBSTRING },
-                        'lexemes/matching/either/or')
+    examples.each do |word|
+      assert_recognizes({ controller: 'lexemes', action: 'matching',
+                          headword: word, matchtype: Lexeme::SUBSTRING },
+                          "lexemes/matching/contains/#{word}")
+    end
   end
 end
