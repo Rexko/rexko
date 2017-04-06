@@ -342,6 +342,5 @@ class LexemesControllerTest < ActionController::TestCase
     assert_recognizes({ controller: 'lexemes', action: 'matching', 
                         headword: 'either/or', matchtype: Lexeme::SUBSTRING },
                         'lexemes/matching/either/or')
-
   end
 end
