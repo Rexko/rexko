@@ -117,7 +117,7 @@ class LexemesControllerTest < ActionController::TestCase
     
     get :show_by_headword, :headword => "liter", :matchtype => Lexeme::SUBSTRING
     
-    assert_redirected_to "/en/lexemes/matching/liter"
+    assert_redirected_to "/en/lexemes/matching/contains/liter"
   end
   
   test "don't fail if locus contains a construction that does not reference it" do
@@ -324,5 +324,16 @@ class LexemesControllerTest < ActionController::TestCase
     
     assert_select ".wikified-headword textarea", /#\* sought/
     assert_select ".wikified-lexeme textarea", /#\* sought/
+  end
+  
+  # 253. Headwords in URLs should be able to contain special characters
+  test "special characters should be possible in headwords in URLs" do
+    examples = ['word', '.ubu.', 'either/or']
+    
+    examples.each do |word|
+      assert_recognizes({ controller: 'lexemes', action: 'matching',
+                          headword: word, matchtype: Lexeme::SUBSTRING },
+                          "lexemes/matching/contains/#{word}")
+    end
   end
 end

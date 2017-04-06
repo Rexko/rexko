@@ -48,7 +48,15 @@ Lexicon::Application.routes.draw do
 
 	scope "/(:locale)" do
     get "parsable/index" => 'parsable#index'
-    match 'lexemes/matching(/:matchtype)/:headword', :to => 'lexemes#matching', :as => :matching, :defaults => { :matchtype => 'contains' }
+    match 'lexemes/matching/:matchtype/*headword', 
+      to: 'lexemes#matching', 
+      defaults: { matchtype: 'contains' }, 
+      constraints: { headword: /.+/, matchtype: /contains|exact_match/ }
+    match 'lexemes/matching/*headword', 
+      to: 'lexemes#matching', 
+      as: :matching, 
+      defaults: { matchtype: 'contains' }, 
+      constraints: { headword: /.+/ }
     match 'author(/:author(/:page))' => 'loci#matching'
     match 'loci/show_by_author(/:author)' => 'loci#show_by_author'
     match 'unattached/matching/:forms' => 'loci#unattached'

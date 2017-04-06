@@ -1,5 +1,6 @@
 ## Since 0.4.3
 * [#239] Fixed an issue where glosses might not appear in wiki show
+* [#253] Fixed an issue with some special characters in URLs
 
 ## Since 0.4.2
 * [#94] Added delete link to Lexeme show page

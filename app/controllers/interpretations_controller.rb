@@ -26,10 +26,10 @@ class InterpretationsController < ApplicationController
   def new
     @interpretation = Interpretation.new
     if params[:live_value].present? 
-	    @interpretation.build_parse(:parsed_form => params[:live_value])
-	  elsif params[:parse].present?
-			@interpretation.parse = Parse.find(params[:parse])
-		end
+      @interpretation.build_parse(:parsed_form => params[:live_value])
+    elsif params[:parse].present?
+      @interpretation.parse = Parse.find(params[:parse])
+    end
     @path = params[:path].try(:sub, /(interpretation.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
     @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
