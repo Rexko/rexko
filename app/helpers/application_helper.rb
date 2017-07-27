@@ -218,7 +218,7 @@ module ApplicationHelper
       
       label_tag("#{ref}_search", t("activerecord.models.#{child}")) <<
     
-      if options[:custom_search]
+      if options.has_key? :custom_search
         text_field_tag(:search, options[:custom_search], id: "#{ref}_search", placeholder: options[:prompt])
       else
         child_form.text_field(:name, id: "#{ref}_search", placeholder: options[:prompt]) 
