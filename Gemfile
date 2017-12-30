@@ -2,7 +2,7 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 
 source 'http://rubygems.org'
-gem 'rails', '3.1.11'
+gem 'rails', '3.2.21'
 
 gem 'globalize', '~> 3.1.0'
 gem 'globalize-accessors'
@@ -43,9 +43,9 @@ group :development, :test do
 end
 
 group :assets do
-  gem 'coffee-rails', '~> 3.1.0'
-  gem 'sass-rails', '~> 3.1.0'
-  gem 'uglifier'
+  gem 'coffee-rails', '~> 3.2.2'
+  gem 'sass-rails', '~> 3.2.6'
+  gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'multi_json'
