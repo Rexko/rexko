@@ -52,4 +52,4 @@ gem 'multi_json'
 gem 'prototype-rails'
 gem 'strip_attributes'
 gem 'will_paginate', '~> 3.0.0'
-
+gem 'dynamic_form'
