@@ -33,7 +33,7 @@ GEM
     arel (3.0.3)
     backports (3.11.0)
     builder (3.0.4)
-    bullet (5.7.0)
+    bullet (5.4.3)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
     capybara (2.13.0)
@@ -177,7 +177,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  bullet
+  bullet (~> 5.4.0)
   capybara-webkit
   coffee-rails (~> 3.2.2)
   cucumber-rails

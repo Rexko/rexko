@@ -33,7 +33,7 @@ gem 'sqlite3'
 # and rake tasks are available in development mode:
 group :development, :test do
   # gem 'webrat'
-  gem 'bullet'
+  gem 'bullet', '~> 5.4.0'
   gem 'capybara-webkit'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
