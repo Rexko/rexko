@@ -5,7 +5,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.21'
 
 gem 'globalize', '~> 3.1.0'
-gem 'globalize-accessors'
+gem 'globalize-accessors', '~> 0.1.4'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

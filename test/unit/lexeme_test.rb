@@ -14,7 +14,7 @@ class LexemeTest < ActiveSupport::TestCase
     assert results.any? {|lexeme| lexeme.headword_forms.count {|form| form =~ /lit/ } > 1 }, 
       "For this test there needs to be a lexeme with multiple headwords matching the pattern"
 
-    assert_equal results, results.uniq,
+    assert_equal results.collect(&:id), results.uniq.collect(&:id),
       "lookup_all_by_headword should remove duplicates in substring search"
   end
   
