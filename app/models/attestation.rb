@@ -3,6 +3,8 @@ class Attestation < ActiveRecord::Base
   has_many :parses, :as => :parsable, :dependent => :destroy
   validates_presence_of :attested_form
   
+  attr_accessible :attested_form, :parses_attributes
+  
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
   # In doing update_attributes on an attestation from the Loci form, we 

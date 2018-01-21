@@ -4,6 +4,8 @@ class Parse < ActiveRecord::Base
   translates :parsed_form, :fallbacks_for_empty_translations => true
   globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])  
   
+  attr_accessible :parsed_form, :interpretations_attributes, *Parse.globalize_attribute_names
+  
   # Returns parses without entries (determined by comparing parsed_form to headword forms).
   scope :without_entries, -> { 
     joins([:translations]).joins("LEFT OUTER JOIN 'headword_translations' ON 'headword_translations'.'form' IN (LOWER(SUBSTR('parse_translations'.'parsed_form', 1, 1)) || SUBSTR('parse_translations'.'parsed_form', 2), UPPER(SUBSTR('parse_translations'.'parsed_form', 1, 1)) || SUBSTR('parse_translations'.'parsed_form', 2))").where({:headword_translations => {:form => nil}})

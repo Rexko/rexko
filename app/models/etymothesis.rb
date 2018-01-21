@@ -5,6 +5,8 @@ class Etymothesis < ActiveRecord::Base
   
   accepts_nested_attributes_for :etymology, allow_destroy: true, reject_if: proc {|attrs| Etymology.rejectable?(attrs) }
   accepts_nested_attributes_for :source, allow_destroy: false, reject_if: :all_blank
+  
+  attr_accessible :etymology_attributes, :source_attributes
 
   # Dissociate the source 
   # when hitting 'delete' from an etymology form

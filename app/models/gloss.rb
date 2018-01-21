@@ -9,6 +9,8 @@ class Gloss < ActiveRecord::Base
   
   default_scope { includes(:translations) }
   
+  attr_accessible :gloss, *Gloss.globalize_attribute_names
+  
   scope :attesting, lambda {|parsables, type|
     joins(HASH_MAP_TO_PARSE).where({ :parses => { :parsable_id => parsables, :parsable_type => type }})
   }

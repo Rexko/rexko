@@ -5,6 +5,8 @@ class Locus < ActiveRecord::Base
   delegate :author, to: :source, allow_nil: true
   # Not till we have a sensible UI for this:
   # translates :example, :example_translation
+  
+  attr_accessible :example, :attestations_attributes
 
 	scope :sorted, order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).order(Source.arel_table[:pointer].asc)
 

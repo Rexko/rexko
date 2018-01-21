@@ -14,6 +14,8 @@ class Lexeme < ActiveRecord::Base
   
   accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
+  attr_accessible :subentries_attributes, :dictionaries, :dictionary_ids, :headwords_attributes
+  
   # Options for search field
   CREATE = 'create_new'
   SUBSTRING = 'contains'

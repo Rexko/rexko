@@ -5,6 +5,8 @@ class SortOrder < ActiveRecord::Base
   validate :attrs_are_hashes
   translates :name
   
+  attr_accessible :substitutions, :orderings
+  
   DEFAULT = new(substitutions: {}, orderings: {})
   
   def substitutions

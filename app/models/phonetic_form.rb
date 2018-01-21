@@ -7,6 +7,8 @@ class PhoneticForm < ActiveRecord::Base
   globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])
   accepts_nested_attributes_for :notes, allow_destroy: true, reject_if: :all_blank
  
+  attr_accessible :form
+ 
   validate :any_form_present?
   
   INCLUDE_TREE = { :phonetic_forms => :translations }

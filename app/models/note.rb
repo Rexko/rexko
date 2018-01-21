@@ -4,4 +4,5 @@ class Note < ActiveRecord::Base
   translates :content, :fallbacks_for_empty_translations => true
   globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])
   
+  attr_accessible *Note.globalize_attribute_names
 end

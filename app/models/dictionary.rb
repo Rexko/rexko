@@ -8,6 +8,8 @@ class Dictionary < ActiveRecord::Base
   belongs_to :target_language, :class_name => "Language" # language of glosses
   belongs_to :sort_order
   
+  attr_accessible :title
+  
   default_scope { includes([:language, :source_language, :target_language]) }
   
   def homographs_of (form)

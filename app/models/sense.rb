@@ -13,6 +13,8 @@ class Sense < ActiveRecord::Base
   accepts_nested_attributes_for :parses, :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :glosses, :allow_destroy => true, :reject_if => proc { |attributes| !attributes.select {|k,v| k.start_with?("gloss")}.any? {|k,v| v.present? }}
   
+  attr_accessible :definition, :subentry_id, :glosses_attributes, *Sense.globalize_attribute_names
+  
   HASH_MAP_TO_PARSE = { :interpretations => Interpretation::HASH_MAP_TO_PARSE }
   INCLUDE_TREE = {:senses => [:glosses, :notes, :language, :translations]}
   
