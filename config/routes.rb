@@ -52,7 +52,7 @@ Lexicon::Application.routes.draw do
       to: 'lexemes#matching', 
       defaults: { matchtype: 'contains' }, 
       constraints: { headword: /.+/, matchtype: /contains|exact_match/ }
-    match 'lexemes/matching/*headword', 
+    match 'lexemes/matching(/:matchtype)/*headword', 
       to: 'lexemes#matching', 
       as: :matching, 
       defaults: { matchtype: 'contains' }, 
