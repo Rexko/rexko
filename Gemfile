@@ -2,10 +2,10 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 
 source 'http://rubygems.org'
-gem 'rails', '3.2.21'
+gem 'rails', '4.0.13'
 
-gem 'globalize', '~> 3.1.0'
-gem 'globalize-accessors', '~> 0.1.4'
+gem 'globalize', '~> 4.0.3'
+gem 'globalize-accessors'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -40,12 +40,6 @@ group :development, :test do
   gem 'missing_t', '~> 0.4.1'
   gem 'ruby-prof'
   gem 'test-unit'
-end
-
-group :assets do
-  gem 'coffee-rails', '~> 3.2.2'
-  gem 'sass-rails', '~> 3.2.6'
-  gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'multi_json'
