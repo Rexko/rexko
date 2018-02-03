@@ -12,7 +12,9 @@ class Subentry < ActiveRecord::Base
   accepts_nested_attributes_for :senses, :notes, :etymotheses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :etymologies, :allow_destroy => true, :reject_if => proc {|attrs| Etymology.rejectable?(attrs) }
   
-  attr_accessible :paradigm, :etymotheses_attributes, :senses_attributes, *Subentry.globalize_attribute_names
+  def self.safe_params
+    [:paradigm, :etymotheses_attributes, :senses_attributes, *Subentry.globalize_attribute_names]
+  end
   
   scope :attesting, lambda {|parsables, type|
     { :joins => HASH_MAP_TO_PARSE, 

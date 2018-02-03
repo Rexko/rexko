@@ -3,8 +3,6 @@ class Attestation < ActiveRecord::Base
   has_many :parses, :as => :parsable, :dependent => :destroy
   validates_presence_of :attested_form
   
-  attr_accessible :attested_form, :parses_attributes
-  
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
   # In doing update_attributes on an attestation from the Loci form, we 
@@ -14,6 +12,10 @@ class Attestation < ActiveRecord::Base
   # There is almost certainly a better way to do this.
   # I am also entirely certain the parses.delete will a) not work and b) 
   # never be called anyway.
+
+  def self.safe_params
+    [:attested_form, :parses_attributes => Parse.safe_params]
+  end
 
   def parse=(parse_params)
     parse_params.each do |id, attributes|

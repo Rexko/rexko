@@ -6,9 +6,7 @@ class Locus < ActiveRecord::Base
   # Not till we have a sensible UI for this:
   # translates :example, :example_translation
   
-  attr_accessible :example, :attestations_attributes
-
-	scope :sorted, order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).order(Source.arel_table[:pointer].asc)
+  scope :sorted, order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).order(Source.arel_table[:pointer].asc)
 
 	# Given an Author or array of Authors, return all loci authored by them.
   scope :authored_by, ->(author_array) { joins( :source => :authorship ).where( :authorships => { :author_id => author_array }).uniq }
@@ -43,6 +41,10 @@ class Locus < ActiveRecord::Base
   
   accepts_nested_attributes_for :attestations, :source, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
 
+  def self.safe_params
+    [:example, :attestations_attributes]
+  end
+  
   # Returns the parse with the most attestations that doesn't have an entry yet. 
   def most_wanted_parse
     Parse.most_wanted_in(self).first

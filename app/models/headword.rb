@@ -8,8 +8,6 @@ class Headword < ActiveRecord::Base
   accepts_nested_attributes_for :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :notes, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
-  attr_accessible :form, :descriptively_ok, :prescriptively_ok, :notes_attributes, *Headword.globalize_attribute_names
-  
   scope :unattested, joins(['LEFT OUTER JOIN "parses" ON "parses"."parsed_form" = "form"']).where({:parses => {:parsed_form => nil}})
 
   belongs_to :lexeme
@@ -28,6 +26,10 @@ class Headword < ActiveRecord::Base
     self.acceptance ||= DESCRIPTIVE | PRESCRIPTIVE
   end
 
+  def self.safe_params
+    [:form, :descriptively_ok, :prescriptively_ok, :notes_attributes, *Headword.globalize_attribute_names]
+  end
+  
   def set_defaults
   	default_language = lexeme.try(:language) || Language.new
  
