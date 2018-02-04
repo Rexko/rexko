@@ -64,8 +64,8 @@ class Etymology < ActiveRecord::Base
   # This is ugly.
   def subentries
 		# If we have our own subentries, use them.
-		own_subentries = Subentry.joins(:etymotheses).where(:etymotheses => {:etymology_id => id}).all
-		return own_subentries if own_subentries.present?
+		own_subentries = Subentry.joins(:etymotheses).where(:etymotheses => {:etymology_id => id})
+		return own_subentries if own_subentries.exists?
 		
 		# If we are next etymon of anything else, use that etymon's subentries.
 		prev_etymon = Etymology.where(:next_etymon_id => id).first

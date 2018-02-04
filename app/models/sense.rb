@@ -25,7 +25,7 @@ class Sense < ActiveRecord::Base
     swapform = form.dup
     swapform[0,1] = swapform[0,1].swapcase
     
-    Sense.find(:all, :joins => [{ :subentry => { :lexeme => { :headwords => [:translations] }}} ], :conditions => ["headword_translations.form = ? OR headword_translations.form = ?", form, swapform])
+    Sense.joins([{ :subentry => { :lexeme => { :headwords => [:translations] }}} ]).where(["headword_translations.form = ? OR headword_translations.form = ?", form, swapform])
   end
   
   def self.lookup_all_by_parses_of(locus)

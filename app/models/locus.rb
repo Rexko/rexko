@@ -6,7 +6,7 @@ class Locus < ActiveRecord::Base
   # Not till we have a sensible UI for this:
   # translates :example, :example_translation
   
-  scope :sorted, order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).order(Source.arel_table[:pointer].asc)
+  scope :sorted, -> { order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).order(Source.arel_table[:pointer].asc) }
 
 	# Given an Author or array of Authors, return all loci authored by them.
   scope :authored_by, ->(author_array) { joins( :source => :authorship ).where( :authorships => { :author_id => author_array }).uniq }
@@ -15,24 +15,23 @@ class Locus < ActiveRecord::Base
   scope :attesting, lambda { |obj|
     case [*obj].first
     when Lexeme
-      { :joins => { :attestations => { :parses => { :interpretations => { :sense => :subentry }}}},
-      :conditions => { :subentries => { :lexeme_id => [*obj].collect(&:id) }},
-      :group => 'loci.id' }
+      joins(:attestations => { :parses => { :interpretations => { :sense => :subentry }}}) \
+      .where(:subentries => { :lexeme_id => [*obj].collect(&:id) }) \
+      .group('loci.id')
     when String
       includes(:parses => :translations).
       where(Attestation.arel_table[:attested_form].eq(obj).
       or(Parse::Translation.arel_table[:parsed_form].eq(obj)))
     when Sense
-      { :joins => { :attestations => { :parses => :interpretations }},
-      :conditions => { :interpretations => { :sense_id => [*obj].collect(&:id) }},
-      :group => 'loci.id' }      
+      joins(:attestations => { :parses => :interpretations }) \
+      .where(:interpretations => { :sense_id => [*obj].collect(&:id) }) \
+      .group('loci.id')
     end
   }
   
   scope :unattached, lambda {|lexeme|
-    { :joins => "INNER JOIN attestations ON attestations.locus_id = loci.id INNER JOIN parses ON (parses.parsable_id = attestations.id AND parses.parsable_type = 'Attestation') LEFT OUTER JOIN interpretations ON interpretations.parse_id = parses.id",
-     :conditions => { "interpretations.parse_id" => nil, "parses.parsed_form" => [*lexeme].collect(&:headword_forms) }
-    }
+    joins("INNER JOIN attestations ON attestations.locus_id = loci.id INNER JOIN parses ON (parses.parsable_id = attestations.id AND parses.parsable_type = 'Attestation') LEFT OUTER JOIN interpretations ON interpretations.parse_id = parses.id") \
+    .where( "interpretations.parse_id" => nil, "parses.parsed_form" => [*lexeme].collect(&:headword_forms))
   }
 
   scope :possibly_construing_with, lambda {|attested_forms|

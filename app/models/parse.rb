@@ -10,7 +10,7 @@ class Parse < ActiveRecord::Base
   }
   
   # Returns Parses not linked to a Sense by an Interpretation.
-  scope :uninterpreted, :include => :interpretations, :conditions => Interpretation::NOT_INTERPRETING
+  scope :uninterpreted, -> { includes(:interpretations).where(Interpretation::NOT_INTERPRETING).references(:interpretations) }
 
   # Returns the most commonly appearing parses without entries.
   # count = number of results to return (defaults to 1)
@@ -61,7 +61,7 @@ class Parse < ActiveRecord::Base
   end
   
   def count
-    Parse.count(:conditions => {:parsed_form => parsed_form})
+    Parse.where(parsed_form: parsed_form).count
   end
 
   # Return an array of all the parsed_forms in the supplied array of parses
@@ -72,7 +72,7 @@ class Parse < ActiveRecord::Base
   
   # Return a count of all uninterpreted parses whose parsed form matches the given headwords
   def self.count_unattached_to *headwords
-    uninterpreted.count(:id, :conditions => ["parsed_form IN (?)", *headwords])
+    uninterpreted.where(:parsed_form => headwords).count(:id)
   end
   
   # Return all uninterpreted parses whose parsed form matches the given headwords
@@ -85,7 +85,7 @@ class Parse < ActiveRecord::Base
   end
   
   def self.popularity_between low_bound, high_bound
-    Parse.find(:all, :select => '"parses"."parsed_form", COUNT("parsed_form") AS count_all', :group => '"parses"."parsed_form"', :order => 'count_all DESC', :having => ['"count_all" <= ? AND count_all >= ?', high_bound, low_bound])
+    Parse.select('"parses"."parsed_form", COUNT("parsed_form") AS count_all').group('"parses"."parsed_form"').order('count_all DESC').having(['"count_all" <= ? AND count_all >= ?', high_bound, low_bound])
   end
   
   # Determine whether we should hit reject_if when something accepts_nested_attributes_for parses.

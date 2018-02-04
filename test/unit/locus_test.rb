@@ -20,7 +20,7 @@ class LocusTest < ActiveSupport::TestCase
   end
   
   test "attesting should not return dups" do
-  	loci = Locus.attesting(lexemes(:literal)).all
+  	loci = Locus.attesting(lexemes(:literal))
   	
   	assert_equal loci.uniq, loci
   end

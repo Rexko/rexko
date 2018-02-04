@@ -17,9 +17,7 @@ class Subentry < ActiveRecord::Base
   end
   
   scope :attesting, lambda {|parsables, type|
-    { :joins => HASH_MAP_TO_PARSE, 
-      :conditions => { :parses => { :parsable_id => parsables, :parsable_type => type }}
-    }
+    joins(HASH_MAP_TO_PARSE).where(:parses => { :parsable_id => parsables, :parsable_type => type })
   }
   
   HASH_MAP_TO_PARSE = { :senses => Sense::HASH_MAP_TO_PARSE }

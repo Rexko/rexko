@@ -13,7 +13,7 @@ class ParseTest < ActiveSupport::TestCase
 	end
 	
 	def test_unattached_to
-		paasu = Parse.forms_of(Parse.find(:all)).uniq
+		paasu = Parse.forms_of(Parse.all).uniq
 		paasu.each do |f|
   		result = Parse.unattached_to f
   		assert_equal Parse.count_unattached_to(f), result.length 
