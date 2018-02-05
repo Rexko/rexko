@@ -59,5 +59,12 @@ Lexicon::Application.routes.draw do
     get 'html(/:headword)' => 'lexemes#show_by_headword', :as => :exact_lexeme
     
     resources :loci
+    
+    # TODO: Audit whether these are used/necessary
+    scaffoldy = [:attestations]
+    scaffoldy.each do |resource|
+      resources resource
+    end
+    
   end
 end
