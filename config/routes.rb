@@ -53,4 +53,11 @@ Lexicon::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  
+  scope "/(:locale)" do
+    resources :lexemes
+    get 'html(/:headword)' => 'lexemes#show_by_headword', :as => :exact_lexeme
+    
+    resources :loci
+  end
 end
