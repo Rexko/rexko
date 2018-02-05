@@ -193,8 +193,8 @@ module ApplicationHelper
   # Translate a string in wiki format into HTML
   def wh text, highlight = []
     output = html_escape(text).to_str
-    output.gsub!(/&\#x27;&\#x27;&\#x27;(.+?)&\#x27;&\#x27;&\#x27;/, '<b>\1</b>')
-    output.gsub!(/&\#x27;&\#x27;(.+?)&\#x27;&\#x27;/, '<i>\1</i>')
+    output.gsub!(/&\#39;&\#39;&\#39;(.+?)&\#39;&\#39;&\#39;/, '<b>\1</b>')
+    output.gsub!(/&\#39;&\#39;(.+?)&\#39;&\#39;/, '<i>\1</i>')
     output.gsub!(/\[\[(?<lexeme>[^|]+?)\]\](?<ending>\w*)|\[\[(?<lexeme>.+?)\|(?<stem>.+?)\]\](?<ending>\w*)/).with_index do |match, index|
       bold = highlight.include?($~[:lexeme])
       bb, eb = ('<b>' if bold), ('</b>' if bold)
