@@ -36,7 +36,7 @@ class LexemesController < ApplicationController
   # GET /lexemes/1
   # GET /lexemes/1.xml
   def show
-    @lexeme = Lexeme.find(params[:id], :include => Lexeme::INCLUDE_TREE[:lexemes])
+    @lexeme = Lexeme.includes(Lexeme::INCLUDE_TREE[:lexemes]).find(params[:id])
     @loci = @lexeme.loci(:include => {:source => {:authorship => [:author, :title]}})
     @constructions = @lexeme.constructions
     @unattached = Parse.count_unattached_to @lexeme.headword_forms
@@ -89,7 +89,7 @@ class LexemesController < ApplicationController
   # GET /lexemes/new
   # GET /lexemes/new.xml
   def new
-    @lexeme = Lexeme.new(:dictionaries => [Dictionary.find(:first)])
+    @lexeme = Lexeme.new(:dictionaries => [Dictionary.first])
     @lexeme.headwords.build
     @lexeme.subentries.build
     @page_title = flash[:headword].present? ? 

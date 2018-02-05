@@ -6,7 +6,7 @@ class Locus < ActiveRecord::Base
   # Not till we have a sensible UI for this:
   # translates :example, :example_translation
   
-  scope :sorted, -> { order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).order(Source.arel_table[:pointer].asc) }
+  scope :sorted, -> { order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).order(Source.arel_table[:pointer].asc).references(:author, :title, :source) }
 
 	# Given an Author or array of Authors, return all loci authored by them.
   scope :authored_by, ->(author_array) { joins( :source => :authorship ).where( :authorships => { :author_id => author_array }).uniq }
