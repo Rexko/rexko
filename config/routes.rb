@@ -61,10 +61,11 @@ Lexicon::Application.routes.draw do
     resources :loci
     
     # TODO: Audit whether these are used/necessary
-    scaffoldy = [:attestations, :authors]
+    scaffoldy = [:attestations, :authors, :languages, :dictionaries]
     scaffoldy.each do |resource|
       resources resource
     end
     
+    root to: 'editor#index'
   end
 end
