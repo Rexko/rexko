@@ -8,7 +8,7 @@ class Interpretation < ActiveRecord::Base
   # ARel conditions for whether this interpretation is linking a parse to a sense
   NOT_INTERPRETING = arel_table[:parse_id].eq(nil).or(arel_table[:sense_id].eq(nil))
   
-  def safe_params
+  def self.safe_params
     [:sense_id, :sense, :sense_attributes => Sense.safe_params]
   end
 end

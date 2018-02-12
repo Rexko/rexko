@@ -5,6 +5,10 @@ class Attestation < ActiveRecord::Base
   
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
+  def self.safe_params
+    [:attested_form, :parses_attributes => Parse.safe_params]
+  end
+
   # In doing update_attributes on an attestation from the Loci form, we 
   # we pass on each parse to Parse#update_attributes.  If there are no 
   # attributes—Parse validates the presence of its parsed_form—delete the
@@ -12,10 +16,6 @@ class Attestation < ActiveRecord::Base
   # There is almost certainly a better way to do this.
   # I am also entirely certain the parses.delete will a) not work and b) 
   # never be called anyway.
-
-  def self.safe_params
-    [:attested_form, :parses_attributes => Parse.safe_params]
-  end
 
   def parse=(parse_params)
     parse_params.each do |id, attributes|

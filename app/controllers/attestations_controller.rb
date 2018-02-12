@@ -44,7 +44,7 @@ class AttestationsController < ApplicationController
   # POST /attestations
   # POST /attestations.xml
   def create
-    @attestation = Attestation.new(params[:attestation])
+    @attestation = Attestation.new(params[:attestation].permit(allowed_params))
 
     respond_to do |format|
       if @attestation.save
@@ -91,5 +91,10 @@ class AttestationsController < ApplicationController
       format.html { redirect_to(attestations_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  def allowed_params
+    Attestation.safe_params
   end
 end
