@@ -7,7 +7,8 @@ class AuthorshipsController < ApplicationController
     @authorships = Authorship.
       includes(:author, :title, { :sources => :loci }).
       order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).
-      paginate(:page => params[:page])
+      paginate(:page => params[:page]).
+      references(:author, :title)
 
     respond_to do |format|
       format.html # index.html.erb
