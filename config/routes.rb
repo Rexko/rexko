@@ -60,8 +60,12 @@ Lexicon::Application.routes.draw do
     
     resources :loci
     
+    resources :languages
+    
+    resources :dictionaries
+    
     # TODO: Audit whether these are used/necessary
-    scaffoldy = [:attestations, :authors, :languages, :dictionaries]
+    scaffoldy = [:attestations, :authors]
     scaffoldy.each do |resource|
       resources resource
     end
