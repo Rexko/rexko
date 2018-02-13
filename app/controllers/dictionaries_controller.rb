@@ -5,7 +5,7 @@ class DictionariesController < ApplicationController
   def index
     @dictionaries = (params[:dictionaries].present? \
       ? Dictionary.where(id: params[:dictionaries])
-      : Dictionary).includes([:language, :source_language, :target_language]).all.sort_by {|d| d.title }
+      : Dictionary).includes([:language, :source_language, :target_language]).sort_by {|d| d.title }
 
     respond_to do |format|
       format.html # index.html.erb
