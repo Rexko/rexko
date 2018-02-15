@@ -36,8 +36,8 @@ class LociController < ApplicationController
     @authorship.build_author
     @authorship.build_title
 
-    @authors = Author.find(:all, :order => "name")
-    @titles = Title.find(:all, :order => "name")
+    @authors = Author.order(:name)
+    @titles = Title.order(:name)
 
     respond_to do |format|
       format.html # new.html.erb
