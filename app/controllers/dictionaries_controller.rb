@@ -60,7 +60,7 @@ class DictionariesController < ApplicationController
   # POST /dictionaries
   # POST /dictionaries.xml
   def create
-    @dictionary = Dictionary.new(params[:dictionary])
+    @dictionary = Dictionary.new(params[:dictionary].permit(allowed_params))
 
     respond_to do |format|
       if @dictionary.save
@@ -80,7 +80,7 @@ class DictionariesController < ApplicationController
     @dictionary = Dictionary.find(params[:id])
 
     respond_to do |format|
-      if @dictionary.update_attributes(params[:dictionary])
+      if @dictionary.update_attributes(params[:dictionary].permit(allowed_params))
         flash[:notice] = t('dictionaries.update.success')
         format.html { redirect_to(@dictionary) }
         format.xml  { head :ok }
@@ -101,5 +101,10 @@ class DictionariesController < ApplicationController
       format.html { redirect_to(dictionaries_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  def allowed_params
+    Dictionary.safe_params
   end
 end
