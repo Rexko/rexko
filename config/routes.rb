@@ -59,13 +59,15 @@ Lexicon::Application.routes.draw do
     get 'html(/:headword)' => 'lexemes#show_by_headword', :as => :exact_lexeme
     
     resources :loci
+    get 'loci/show_by_author(/:author)' => 'loci#show_by_author'
     
     resources :languages
     
     resources :dictionaries
     
     # TODO: Audit whether these are used/necessary
-    scaffoldy = [:attestations, :authors, :authorships, :sources, :dictionary_scopes]
+    scaffoldy = [:attestations, :authors, :authorships, :sources, 
+                 :dictionary_scopes, :etymologies]
     scaffoldy.each do |resource|
       resources resource
     end
