@@ -54,7 +54,7 @@ class EtymologiesController < ApplicationController
   # POST /etymologies
   # POST /etymologies.xml
   def create
-    @etymology = Etymology.new(params[:etymology])
+    @etymology = Etymology.new(params[:etymology].permit(allowed_params))
 
     respond_to do |format|
       if @etymology.save
@@ -95,5 +95,10 @@ class EtymologiesController < ApplicationController
       format.html { redirect_to(etymologies_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+  def allowed_params
+    Etymology.safe_params
   end
 end
