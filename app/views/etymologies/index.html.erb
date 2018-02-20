@@ -14,7 +14,7 @@
     <td><%=h etymology.gloss %></td>
     <td><%= link_to 'Show', etymology %></td>
     <td><%= link_to 'Edit', edit_etymology_path(etymology) %></td>
-    <td><%= link_to 'Destroy', etymology, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', etymology, data: { :confirm => 'Are you sure?' }, :method => :delete %></td>
   </tr>
 <% end %>
 </table>
