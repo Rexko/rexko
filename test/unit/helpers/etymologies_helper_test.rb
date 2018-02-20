@@ -70,16 +70,16 @@ class EtymologiesHelperTest < ActionView::TestCase
 			if word.shift
 				if word[0].is_a? Array
 					next_etym = Etymology.create!(:etymon => word[0][1].to_s)
-					pars = next_etym.parses.create(:parsed_form => word[0][1].to_s)
+					pars = next_etym.parses.create!(:parsed_form => word[0][1].to_s)
 					terp = pars.interpretations.create(:sense => subentries[word[0][1]].senses.first)
 
 					etym = cur.etymologies.create(:etymon => word[0][0].to_s, :next_etymon => next_etym)
-					pars = etym.parses.create(:parsed_form => word[0][0].to_s)
+					pars = etym.parses.create!(:parsed_form => word[0][0].to_s)
 					terp = pars.interpretations.create(:sense => subentries[word[0][0]].senses.first)
 				else 
 					unless word.blank?
 						etym = cur.etymologies.create!(:etymon => word[0].to_s)
-						pars = etym.parses.create(:parsed_form => word[0].to_s)
+						pars = etym.parses.create!(:parsed_form => word[0].to_s)
 						terp = pars.interpretations.create(:sense => subentries[word[0]].senses.first)
 					end
 				end
