@@ -56,7 +56,7 @@ class InterpretationsController < ApplicationController
   # POST /interpretations
   # POST /interpretations.xml
   def create
-    @interpretation = Interpretation.new(params[:interpretation])
+    @interpretation = Interpretation.new(params[:interpretation].permit(allowed_params))
 
     respond_to do |format|
       if @interpretation.save
@@ -76,7 +76,7 @@ class InterpretationsController < ApplicationController
     @interpretation = Interpretation.find(params[:id])
 
     respond_to do |format|
-      if @interpretation.update_attributes(params[:interpretation])
+      if @interpretation.update_attributes(params[:interpretation].permit(allowed_params))
         flash[:notice] = 'Interpretation was successfully updated.'
         format.html { redirect_to(@interpretation) }
         format.xml  { head :ok }
@@ -97,5 +97,10 @@ class InterpretationsController < ApplicationController
       format.html { redirect_to(params[:back] || request.referer || interpretations_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+  def allowed_params
+    Interpretation.safe_params
   end
 end
