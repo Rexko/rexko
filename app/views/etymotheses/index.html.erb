@@ -12,7 +12,7 @@
     <td><%=h etymothesis.subentry_id %></td>
     <td><%= link_to 'Show', etymothesis %></td>
     <td><%= link_to 'Edit', edit_etymothesis_path(etymothesis) %></td>
-    <td><%= link_to 'Destroy', etymothesis, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', etymothesis, data: { :confirm => 'Are you sure?' }, :method => :delete %></td>
   </tr>
 <% end %>
 </table>

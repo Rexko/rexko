@@ -27,7 +27,7 @@ class EtymothesesController < ApplicationController
     @etymothesis = Etymothesis.build_from_only_valid(params)
     @etymothesis.build_etymology
     @path = params[:path].try(:sub, /(subentr.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
-    @dictionaries = Dictionary.where(id: params[:dictionaries]).all
+    @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
 
     respond_to do |format|
