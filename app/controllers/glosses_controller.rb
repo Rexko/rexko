@@ -26,7 +26,7 @@ class GlossesController < ApplicationController
   def new
     @gloss = Gloss.build_from_only_valid(params)
     @path = params[:path].try(:sub, /(gloss.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
-    @dictionaries = Dictionary.where(id: params[:dictionaries]).all
+    @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
     
     respond_to do |format|
