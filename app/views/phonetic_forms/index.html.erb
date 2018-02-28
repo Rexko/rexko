@@ -10,7 +10,7 @@
     <td><%=h phonetic_form.form %></td>
     <td><%= link_to 'Show', phonetic_form %></td>
     <td><%= link_to 'Edit', edit_phonetic_form_path(phonetic_form) %></td>
-    <td><%= link_to 'Destroy', phonetic_form, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', phonetic_form, data: { :confirm => 'Are you sure?' }, :method => :delete %></td>
   </tr>
 <% end %>
 </table>

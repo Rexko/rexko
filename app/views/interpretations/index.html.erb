@@ -12,7 +12,7 @@
     <td><%=h interpretation.sense_id %></td>
     <td><%= link_to 'Show', interpretation %></td>
     <td><%= link_to 'Edit', edit_interpretation_path(interpretation) %></td>
-    <td><%= link_to 'Destroy', interpretation, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', interpretation, data: { :confirm => 'Are you sure?' }, :method => :delete %></td>
   </tr>
 <% end %>
 </table>

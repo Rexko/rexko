@@ -14,7 +14,7 @@
     <td><%=h subentry.part_of_speech %></td>
     <td><%= link_to 'Show', subentry %></td>
     <td><%= link_to 'Edit', edit_subentry_path(subentry) %></td>
-    <td><%= link_to 'Destroy', subentry, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', subentry, data: { :confirm => 'Are you sure?' }, :method => :delete %></td>
   </tr>
 <% end %>
 </table>

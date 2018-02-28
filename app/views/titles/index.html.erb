@@ -14,7 +14,7 @@
   <tr>
     <td><%= link_to 'Show', title %></td>
     <td><%= link_to 'Edit', edit_title_path(title) %></td>
-    <td><%= link_to 'Destroy', title, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', title, data: { :confirm => 'Are you sure?' }, :method => :delete %></td>
   </tr>
 <% end %>
 </table>
