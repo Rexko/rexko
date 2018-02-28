@@ -47,7 +47,7 @@ class HeadwordsController < ApplicationController
   # POST /headwords
   # POST /headwords.xml
   def create
-    @headword = Headword.new(params[:headword])
+    @headword = Headword.new(params[:headword].permit(allowed_params))
 
     respond_to do |format|
       if @headword.save
@@ -67,7 +67,7 @@ class HeadwordsController < ApplicationController
     @headword = Headword.find(params[:id])
 
     respond_to do |format|
-      if @headword.update_attributes(params[:headword])
+      if @headword.update_attributes(params[:headword].permit(allowed_params))
         flash[:notice] = 'Headword was successfully updated.'
         format.html { redirect_to(@headword) }
         format.xml  { head :ok }
@@ -88,5 +88,10 @@ class HeadwordsController < ApplicationController
       format.html { redirect_to(headwords_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  def allowed_params
+    Headword.safe_params
   end
 end
