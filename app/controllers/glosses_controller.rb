@@ -47,7 +47,7 @@ class GlossesController < ApplicationController
   # POST /glosses
   # POST /glosses.xml
   def create
-    @gloss = Gloss.new(params[:gloss])
+    @gloss = Gloss.new(params[:gloss].permit(allowed_params))
 
     respond_to do |format|
       if @gloss.save
@@ -67,7 +67,7 @@ class GlossesController < ApplicationController
     @gloss = Gloss.find(params[:id])
 
     respond_to do |format|
-      if @gloss.update_attributes(params[:gloss])
+      if @gloss.update_attributes(params[:gloss].permit(allowed_params))
         flash[:notice] = 'Gloss was successfully updated.'
         format.html { redirect_to(@gloss) }
         format.xml  { head :ok }
@@ -88,5 +88,10 @@ class GlossesController < ApplicationController
       format.html { redirect_to(glosses_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  def allowed_params
+    Gloss.safe_params
   end
 end
