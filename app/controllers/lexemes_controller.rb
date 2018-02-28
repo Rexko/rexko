@@ -22,7 +22,7 @@ class LexemesController < ApplicationController
     @lexeme = Lexeme.lookup_all_by_headword(params[:headword], :matchtype => params[:matchtype] || Lexeme::SUBSTRING)
     
     @page_title = t('lexemes.matching.results', count: @lexeme.length, query: params[:headword])
-    @lexemes = @lexeme.paginate(:page => params[:page], :include => Lexeme::INCLUDE_TREE[:lexemes])
+    @lexemes = @lexeme.paginate(:page => params[:page]).includes(Lexeme::INCLUDE_TREE[:lexemes])
 
     @all_langs = Hash[@lexemes.collect do |lex|
       [lex, Dictionary.langs_hash_for(lex.dictionaries)]
