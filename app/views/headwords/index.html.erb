@@ -10,7 +10,7 @@
     <td><%=h headword.form %></td>
     <td><%= link_to 'Show', headword %></td>
     <td><%= link_to 'Edit', edit_headword_path(headword) %></td>
-    <td><%= link_to 'Destroy', headword, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', headword, data: { :confirm => 'Are you sure?' }, :method => :delete %></td>
   </tr>
 <% end %>
 </table>
