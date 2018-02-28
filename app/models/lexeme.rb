@@ -23,7 +23,7 @@ class Lexeme < ActiveRecord::Base
   HASH_MAP_TO_PARSE = { :subentries => Subentry::HASH_MAP_TO_PARSE }
   INCLUDE_TREE = { :lexemes => [:dictionaries, Headword::INCLUDE_TREE, Subentry::INCLUDE_TREE] }
  
-  def self.attr_accessible
+  def self.safe_params
     [:subentries_attributes, :dictionaries, :dictionary_ids, :headwords_attributes]
   end
  

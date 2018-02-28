@@ -119,7 +119,7 @@ class LexemesController < ApplicationController
   # POST /lexemes
   # POST /lexemes.xml
   def create
-    @lexeme = Lexeme.new(params[:lexeme])
+    @lexeme = Lexeme.new(params[:lexeme].permit(allowed_params))
     @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
 
 =begin
@@ -158,7 +158,7 @@ class LexemesController < ApplicationController
   # PUT /lexemes/1.xml
   def update
     @lexeme = Lexeme.find(params[:id])
-    @lexeme.attributes = params[:lexeme]
+    @lexeme.update(params[:lexeme].permit(allowed_params))
     @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
 
 =begin
@@ -208,5 +208,10 @@ class LexemesController < ApplicationController
       format.html { redirect_to(redirect_target) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+  def allowed_params
+    Lexeme.safe_params
   end
 end
