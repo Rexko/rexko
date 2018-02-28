@@ -68,7 +68,7 @@ Lexicon::Application.routes.draw do
     # TODO: Audit whether these are used/necessary
     scaffoldy = [:attestations, :authors, :authorships, :sources, 
                  :dictionary_scopes, :etymologies, :etymotheses,
-                 :glosses]
+                 :glosses, :headwords]
     scaffoldy.each do |resource|
       resources resource
     end
