@@ -47,7 +47,7 @@ class PhoneticFormsController < ApplicationController
   # POST /phonetic_forms
   # POST /phonetic_forms.xml
   def create
-    @phonetic_form = PhoneticForm.new(params[:phonetic_form])
+    @phonetic_form = PhoneticForm.new(params[:phonetic_form].permit(allowed_params))
 
     respond_to do |format|
       if @phonetic_form.save
@@ -67,7 +67,7 @@ class PhoneticFormsController < ApplicationController
     @phonetic_form = PhoneticForm.find(params[:id])
 
     respond_to do |format|
-      if @phonetic_form.update_attributes(params[:phonetic_form])
+      if @phonetic_form.update_attributes(params[:phonetic_form].permit(allowed_params))
         flash[:notice] = 'PhoneticForm was successfully updated.'
         format.html { redirect_to(@phonetic_form) }
         format.xml  { head :ok }
@@ -88,5 +88,10 @@ class PhoneticFormsController < ApplicationController
       format.html { redirect_to(phonetic_forms_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  def allowed_params
+    PhoneticForm.safe_params
   end
 end

@@ -47,7 +47,7 @@ class SensesController < ApplicationController
   # POST /senses
   # POST /senses.xml
   def create
-    @sense = Sense.new(params[:sense])
+    @sense = Sense.new(params[:sense].permit(allowed_params))
 
     respond_to do |format|
       if @sense.save
@@ -67,7 +67,7 @@ class SensesController < ApplicationController
     @sense = Sense.find(params[:id])
 
     respond_to do |format|
-      if @sense.update_attributes(params[:sense])
+      if @sense.update_attributes(params[:sense].permit(allowed_params))
         flash[:notice] = 'Sense was successfully updated.'
         format.html { redirect_to(@sense) }
         format.xml  { head :ok }
@@ -88,5 +88,10 @@ class SensesController < ApplicationController
       format.html { redirect_to(senses_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  def allowed_params
+    Sense.safe_params
   end
 end

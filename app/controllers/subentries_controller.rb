@@ -47,7 +47,7 @@ class SubentriesController < ApplicationController
   # POST /subentries
   # POST /subentries.xml
   def create
-    @subentry = Subentry.new(params[:subentry])
+    @subentry = Subentry.new(params[:subentry].permit(allowed_params))
 
     respond_to do |format|
       if @subentry.save
@@ -88,5 +88,10 @@ class SubentriesController < ApplicationController
       format.html { redirect_to(subentries_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+  def allowed_params
+    Subentry.safe_params
   end
 end

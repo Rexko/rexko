@@ -51,7 +51,7 @@ class ParsesController < ApplicationController
   # POST /parses
   # POST /parses.xml
   def create
-    @parse = Parse.new(params[:parse])
+    @parse = Parse.new(params[:parse].permit(allowed_params))
 
     respond_to do |format|
       if @parse.save
@@ -71,7 +71,7 @@ class ParsesController < ApplicationController
     @parse = Parse.find(params[:id])
 
     respond_to do |format|
-      if @parse.update_attributes(params[:parse])
+      if @parse.update_attributes(params[:parse].permit(allowed_params))
         flash[:notice] = 'Parse was successfully updated.'
         format.html { redirect_to(@parse) }
         format.xml  { head :ok }
@@ -92,5 +92,10 @@ class ParsesController < ApplicationController
       format.html { redirect_to(parses_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  def allowed_params
+    Parse.safe_params
   end
 end

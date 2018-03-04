@@ -82,7 +82,7 @@ class LociController < ApplicationController
   # POST /loci
   # POST /loci.xml
   def create
-    @locus = Locus.new(params[:locus])
+    @locus = Locus.new(params[:locus].permit(allowed_params))
 
     each_wikilink(params[:locus][:example]) do |linked, shown|
       att = @locus.attestations.build(:attested_form => shown)
@@ -128,7 +128,7 @@ class LociController < ApplicationController
 			} if paasu
 		} if atesute
 		
-    @locus.attributes = params[:locus]
+    @locus.attributes = params[:locus].permit(allowed_params)
 
     respond_to do |format|
       if @locus.save
@@ -205,4 +205,9 @@ protected
       yield(linked, shown)
     end
   end
+  
+private
+  def allowed_params
+    Locus.safe_params
+  end  
 end
