@@ -21,7 +21,8 @@ class Locus < ActiveRecord::Base
     when String
       includes(:parses => :translations).
       where(Attestation.arel_table[:attested_form].eq(obj).
-      or(Parse::Translation.arel_table[:parsed_form].eq(obj)))
+      or(Parse::Translation.arel_table[:parsed_form].eq(obj))).
+      references(:parses => :translations)
     when Sense
       joins(:attestations => { :parses => :interpretations }) \
       .where(:interpretations => { :sense_id => [*obj].collect(&:id) }) \
