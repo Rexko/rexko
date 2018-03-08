@@ -75,8 +75,8 @@ class LociController < ApplicationController
     @wantedparse = @locus.most_wanted_parse
     @potential_constructions = @locus.potential_constructions
     
-    @authors = Author.find(:all, :order => "name")
-    @titles = @authorship ? Title.joins(:authors).where(:authors => { :id => @authorship.author}).order(:name) : Title.find(:all, :order => "name")
+    @authors = Author.order(:name)
+    @titles = @authorship ? Title.joins(:authors).where(:authors => { :id => @authorship.author}).order(:name) : Title.order(:name)
   end
 
   # POST /loci
