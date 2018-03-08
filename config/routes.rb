@@ -66,9 +66,10 @@ Lexicon::Application.routes.draw do
       as: :matching, 
       defaults: { matchtype: 'contains' }, 
       constraints: { headword: /.+/ }
-    
+
     resources :loci
     get 'loci/show_by_author(/:author)' => 'loci#show_by_author'
+    get 'author(/:author(/:page))' => 'loci#matching'
     
     resources :languages
     
