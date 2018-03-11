@@ -70,10 +70,13 @@ Lexicon::Application.routes.draw do
     resources :loci
     get 'loci/show_by_author(/:author)' => 'loci#show_by_author'
     get 'author(/:author(/:page))' => 'loci#matching'
+    get 'unattached/:id' => 'loci#unattached'
     
     resources :languages
     
     resources :dictionaries
+    
+    get "parsable/index" => 'parsable#index'
     
     # TODO: Audit whether these are used/necessary
     scaffoldy = [:attestations, :authors, :authorships, :sources, 

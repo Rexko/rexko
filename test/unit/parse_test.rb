@@ -69,7 +69,7 @@ class ParseTest < ActiveSupport::TestCase
   test "#count_unattached_to's results should find those not attached to senses, too" do
     TEST_STRING = "#143parse"
     
-    parse = Parse.create(parsed_form: TEST_STRING)
+    parse = Parse.create!(parsed_form: TEST_STRING)
     terp = parse.interpretations.create
 
     assert terp.sense.nil? 
