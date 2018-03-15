@@ -9,7 +9,7 @@ class Lexeme < ActiveRecord::Base
   scope :sorted, -> { includes(headwords: :translations).order(Headword::Translation.arel_table[:form].asc).references(headwords: :translations) }
   
   scope :attested_by, lambda {|parsables, type|
-    joins(HASH_MAP_TO_PARSE).where({ :parses => { :parsable_id => parsables, :parsable_type => type }})
+    joins(HASH_MAP_TO_PARSE).where({ :parses => { :parsable_id => [*parsables], :parsable_type => type }})
   }
   
   accepts_nested_attributes_for :dictionary_scopes, :dictionaries, :subentries, :headwords, :phonetic_forms, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
