@@ -24,7 +24,7 @@ class Lexeme < ActiveRecord::Base
   INCLUDE_TREE = { :lexemes => [:dictionaries, Headword::INCLUDE_TREE, Subentry::INCLUDE_TREE] }
  
   def self.safe_params
-    [:subentries_attributes, :dictionaries, :dictionary_ids, :headwords_attributes]
+    [:dictionaries, :subentries_attributes => Subentry.safe_params, :dictionary_ids => [], :headwords_attributes => Headword.safe_params]
   end
  
   # Returns an array containing the forms of each headword.

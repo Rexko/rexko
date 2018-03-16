@@ -5,6 +5,6 @@ class Note < ActiveRecord::Base
   globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])
   
   def self.safe_params
-    Note.globalize_attribute_names
+    [:_destroy, *Note.globalize_attribute_names]
   end
 end

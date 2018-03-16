@@ -17,7 +17,7 @@ class Sense < ActiveRecord::Base
   INCLUDE_TREE = {:senses => [:glosses, :notes, :language, :translations]}
   
   def self.safe_params
-    [:definition, :subentry_id, *Sense.globalize_attribute_names, :glosses_attributes => Gloss.safe_params]
+    [:_destroy, :definition, :subentry_id, *Sense.globalize_attribute_names, :glosses_attributes => Gloss.safe_params]
   end
   
   # Returns all senses for lexemes with a headword matching +form+, insensitive to the case of the first letter.

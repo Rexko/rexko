@@ -27,7 +27,7 @@ class Headword < ActiveRecord::Base
   end
 
   def self.safe_params
-    [:form, :descriptively_ok, :prescriptively_ok, :notes_attributes, *Headword.globalize_attribute_names]
+    [:_destroy, :form, :descriptively_ok, :prescriptively_ok, Headword.globalize_attribute_names, :phonetic_forms_attributes => {}, :notes_attributes => Note.safe_params]
   end
   
   def set_defaults
