@@ -42,7 +42,7 @@ class Locus < ActiveRecord::Base
   accepts_nested_attributes_for :attestations, :source, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
 
   def self.safe_params
-    [:example, :attestations_attributes]
+    [:example, :attestations_attributes => Attestation.safe_params]
   end
   
   # Returns the parse with the most attestations that doesn't have an entry yet. 

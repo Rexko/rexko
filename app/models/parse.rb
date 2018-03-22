@@ -33,7 +33,7 @@ class Parse < ActiveRecord::Base
   accepts_nested_attributes_for :interpretations, :allow_destroy => true, :reject_if => proc { |attributes| attributes[:sense_id].blank? }
      
   def self.safe_params
-    [:parsed_form, *Parse.globalize_attribute_names, :interpretations_attributes => Interpretation.safe_params]
+    [:id, :parsed_form, *Parse.globalize_attribute_names, :interpretations_attributes => Interpretation.safe_params]
   end
   
   def interpretation=(terp_params)

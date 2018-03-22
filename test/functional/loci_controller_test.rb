@@ -71,11 +71,11 @@ class LociControllerTest < ActionController::TestCase
 	  assert_difference('Interpretation.count') do
       put :update, id: loci(:one).id, 
         locus: 
-        { attestations_attributes: { 0 => 
+        { attestations_attributes: { "0" => 
           { attested_form: "tested", 
-            parses_attributes: { 0 => 
+            parses_attributes: { "0" => 
             { parsed_form: "test",
-              interpretations_attributes: { 0 => 
+              interpretations_attributes: { "0" => 
               { sense_id: "new-1", 
                 sense_attributes: { definition: "Test." }}}}}}}}
 	  end

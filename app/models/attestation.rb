@@ -6,7 +6,7 @@ class Attestation < ActiveRecord::Base
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   
   def self.safe_params
-    [:attested_form, :parses_attributes => Parse.safe_params]
+    [:id, :attested_form, :parses_attributes => Parse.safe_params]
   end
 
   # In doing update_attributes on an attestation from the Loci form, we 
