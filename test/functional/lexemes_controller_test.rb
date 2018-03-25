@@ -152,13 +152,13 @@ class LexemesControllerTest < ActionController::TestCase
 	  assert_difference('Parse.count') do
       put :update, id: lexemes(:one).id, 
         lexeme:
-          { subentries_attributes: { 0 =>
-            { etymotheses_attributes: { 0 =>
+          { subentries_attributes: { "0" =>
+            { etymotheses_attributes: { "0" =>
               { etymology_attributes:
                 { etymon: "tested",
-                  parses_attributes: { 0 =>
+                  parses_attributes: { "0" =>
                   { parsed_form_en: "test",
-                    interpretations_attributes: { 0 =>
+                    interpretations_attributes: { "0" =>
                       { sense_id: "1",
                         sense_attributes: { definition_en: "" }}}}}}}}}}}
     end

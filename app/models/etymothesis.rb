@@ -7,7 +7,7 @@ class Etymothesis < ActiveRecord::Base
   accepts_nested_attributes_for :source, allow_destroy: false, reject_if: :all_blank
   
   def self.safe_params
-    [:etymology_attributes, :source_attributes]
+    [etymology_attributes: Etymology.safe_params, source_attributes: Source.safe_params]
   end
 
   # Dissociate the source 

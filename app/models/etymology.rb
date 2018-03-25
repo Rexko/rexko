@@ -19,7 +19,7 @@ class Etymology < ActiveRecord::Base
   INCLUDE_TREE = {:etymologies => [:notes, :translations]}
   
   def self.safe_params
-    [:etymotheses_attributes, :etymon, :next_etymon, :parses_attributes]
+    [:etymotheses_attributes, :etymon, :next_etymon, parses_attributes: Parse.safe_params]
   end
   
   def to_s

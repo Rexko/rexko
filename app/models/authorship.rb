@@ -7,6 +7,10 @@ class Authorship < ActiveRecord::Base
   accepts_nested_attributes_for :author, reject_if: :all_blank
   accepts_nested_attributes_for :title, allow_destroy: true, reject_if: :all_blank
   
+  def self.safe_params
+    [author_attributes: Author.safe_params, title_attributes: Title.safe_params]
+  end
+  
   # Given a string +query+, return all authorships where each word in +query+ 
   # appears as a substring of either the author or the title (or both) 
   def Authorship.matching query
