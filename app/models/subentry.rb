@@ -13,7 +13,7 @@ class Subentry < ActiveRecord::Base
   accepts_nested_attributes_for :etymologies, :allow_destroy => true, :reject_if => proc {|attrs| Etymology.rejectable?(attrs) }
   
   def self.safe_params
-    [:_destroy, :paradigm, Subentry.globalize_attribute_names, :etymotheses_attributes => Etymothesis.safe_params, :senses_attributes => Sense.safe_params]
+    [:id, :_destroy, :paradigm, Subentry.globalize_attribute_names, :etymotheses_attributes => Etymothesis.safe_params, :senses_attributes => Sense.safe_params]
   end
   
   scope :attesting, lambda {|parsables, type|

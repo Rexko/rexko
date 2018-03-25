@@ -222,7 +222,7 @@ class LexemesControllerTest < ActionController::TestCase
     
     # Make sure that it doesn't actually delete the source
 	  assert_no_difference('Source.count') do
-      put :update, id: lexeme.id, commit: I18n.t('lexemes.form.save_and_continue_editing'), lexeme: lexeme.attributes
+      put :update, id: lexeme.id, commit: I18n.t('lexemes.form.save_and_continue_editing'), lexeme: lexeme.attributes.except("id", "created_at", "updated_at")
       assert_select '.subentry', subentry_count
       assert_select '.etymothesis .source', etymo_count
 

@@ -11,7 +11,7 @@ class Source < ActiveRecord::Base
   accepts_nested_attributes_for :authorship, :allow_destroy => false, reject_if: :all_blank
   
   def self.safe_params
-    [authorship_attributes: Authorship.safe_params]
+    [:id, :_destroy, :pointer, authorship_attributes: Authorship.safe_params]
   end
   
   def authorship_attributes=(attributes)
