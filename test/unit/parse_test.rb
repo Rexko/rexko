@@ -35,8 +35,8 @@ class ParseTest < ActiveSupport::TestCase
   
   # 71: Case variants erroneously flagged as not existing
   test "most wanted should be initial-case-insensitive" do
-    assert Headword.where(form: "blue").present?
-    assert Headword.where(form: "Blue").blank?
+    assert Headword.with_translations.where(form: "blue").present?
+    assert Headword.with_translations.where(form: "Blue").blank?
     
     100.times { Parse.create(parsed_form: "Blue") }
     most_wanted = Parse.most_wanted 1
