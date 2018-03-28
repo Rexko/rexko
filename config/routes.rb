@@ -56,7 +56,7 @@ Lexicon::Application.routes.draw do
   
   scope "/(:locale)" do
     resources :lexemes
-    get 'html(/:headword)' => 'lexemes#show_by_headword', :as => :exact_lexeme
+    match 'html(/:headword)' => 'lexemes#show_by_headword', as: :exact_lexeme, via: [:get, :post]
     get 'lexemes/matching/:matchtype/*headword', 
       to: 'lexemes#matching', 
       defaults: { matchtype: 'contains' }, 
