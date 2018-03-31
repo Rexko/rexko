@@ -25,11 +25,11 @@ class ParseTest < ActiveSupport::TestCase
     invalid_params = { :parsed_form => "valid", :interpretations_attributes => [{ :sense_id => "" }] }
 	  
 	  assert_difference('Interpretation.count') do
-      Parse.create(valid_params)
+      Parse.create!(valid_params)
 	  end
 	  
 	  assert_no_difference('Interpretation.count') do
-	    Parse.create(invalid_params)
+	    Parse.create!(invalid_params)
 	  end
   end
   
