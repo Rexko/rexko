@@ -3,6 +3,7 @@ class Parse < ActiveRecord::Base
   belongs_to :parsable, :polymorphic => true
   translates :parsed_form, :fallbacks_for_empty_translations => true
   globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])  
+  validate :any_form_present?
   
   # Returns parses without entries (determined by comparing parsed_form to headword forms).
   scope :without_entries, -> { 
@@ -92,8 +93,11 @@ class Parse < ActiveRecord::Base
   def self.rejectable?(attributes)
     attributes.all? {|k, v| v.blank? || !k.start_with?("parsed_form") }
   end
-end
-
-Parse::Translation.class_eval do
-  validates :parsed_form, presence: true
+  
+  
+  def any_form_present?
+    if parsed_form.blank? && globalize_attribute_names.select {|k| k.to_s.start_with?("parsed_form")}.all? {|k| self[k].blank? }
+      errors.add(:parsed_form, I18n.t('errors.messages.blank'))
+    end
+  end
 end

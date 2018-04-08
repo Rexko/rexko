@@ -19,6 +19,7 @@ class AttestationTest < ActiveSupport::TestCase
     assert_not_equal "foo", Parse.find(@one.id).parsed_form
     
     @parsendum.parses_attributes = [{ :id => @two.id, :parsed_form => ""}]
-    assert !@parsendum.save
+    
+    assert !@parsendum.save || Parse.find(@two.id).parsed_form != "", "Attributes are #{Parse.find(@two.id).attributes}"
   end
 end
