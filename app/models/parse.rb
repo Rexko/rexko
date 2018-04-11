@@ -72,7 +72,7 @@ class Parse < ActiveRecord::Base
   end
   
   # Return a count of all uninterpreted parses whose parsed form matches the given headwords
-  def self.count_unattached_to *headwords
+  def self.count_unattached_to headwords
     uninterpreted.where(:parsed_form => headwords).count(:id)
   end
   
