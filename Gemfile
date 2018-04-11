@@ -37,6 +37,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
+  gem 'minitest', '~> 5.10.0'
   gem 'missing_t', '~> 0.4.1'
   gem 'rails-perftest'
   gem 'ruby-prof', '~> 0.15.9'
