@@ -4,7 +4,7 @@
 source 'http://rubygems.org'
 gem 'rails', '4.2.10'
 
-gem 'globalize', '~> 4.0.3'
+gem 'globalize', '~> 5.0.0'
 gem 'globalize-accessors'
 
 # Bundle edge Rails instead:
@@ -48,3 +48,4 @@ gem 'strip_attributes'
 gem 'will_paginate', '~> 3.0.0'
 gem 'dynamic_form'
 gem 'web-console', '~> 2.0', group: :development
+gem 'rails-perftest'
