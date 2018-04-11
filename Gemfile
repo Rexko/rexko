@@ -43,7 +43,8 @@ group :development, :test do
 end
 
 gem 'multi_json'
-gem 'prototype-rails'
+gem 'prototype-rails', github: 'rails/prototype-rails', branch: '4.2'
 gem 'strip_attributes'
 gem 'will_paginate', '~> 3.0.0'
 gem 'dynamic_form'
+gem 'web-console', '~> 2.0', group: :development
