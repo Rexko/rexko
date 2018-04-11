@@ -38,7 +38,8 @@ group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'missing_t', '~> 0.4.1'
-  gem 'ruby-prof'
+  gem 'rails-perftest'
+  gem 'ruby-prof', '~> 0.15.9'
   gem 'test-unit'
 end
 
@@ -48,4 +49,3 @@ gem 'strip_attributes'
 gem 'will_paginate', '~> 3.0.0'
 gem 'dynamic_form'
 gem 'web-console', '~> 2.0', group: :development
-gem 'rails-perftest'
