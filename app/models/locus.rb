@@ -32,7 +32,7 @@ class Locus < ActiveRecord::Base
   
   scope :unattached, lambda {|lexeme|
     joins("INNER JOIN attestations ON attestations.locus_id = loci.id INNER JOIN parses ON (parses.parsable_id = attestations.id AND parses.parsable_type = 'Attestation') LEFT OUTER JOIN interpretations ON interpretations.parse_id = parses.id") \
-    .where( "interpretations.parse_id" => nil, "parses.parsed_form" => [*lexeme].collect(&:headword_forms))
+    .where( "interpretations.parse_id" => nil, "parses.parsed_form" => [*lexeme].collect(&:headword_forms).flatten)
   }
 
   scope :possibly_construing_with, lambda {|attested_forms|
