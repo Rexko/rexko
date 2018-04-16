@@ -138,7 +138,8 @@ class LexemesControllerTest < ActionController::TestCase
     get :show, :id => reku.id
     assert reku.dictionaries.present?
     assert reku.headwords.present?
-    assert_select "a[href=?]", /#{Regexp.escape(dictionaries(:one).external_address)}.*/
+
+    assert_select "a[href^=?]", dictionaries(:one).external_address
   end
   
   #139: Make sure the button images behind the submit buttons exist
