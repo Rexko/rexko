@@ -269,6 +269,7 @@ module ApplicationHelper
       # (such as old data still using default locale, or if the dictionary 
       # has changed to one with a different language code)
       languages |= Language.of_translations_of(form.object)
+      languages |= [Language::DEFAULT] if languages.empty?
           
       output = ActiveSupport::SafeBuffer.new
     
