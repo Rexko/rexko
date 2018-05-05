@@ -2,9 +2,9 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 
 source 'http://rubygems.org'
-gem 'rails', '4.2.10'
+gem 'rails', '5.0.7'
 
-gem 'globalize', '~> 5.0.0'
+gem 'globalize', '~> 5.1.0'
 gem 'globalize-accessors'
 
 # Bundle edge Rails instead:
@@ -45,7 +45,7 @@ group :development, :test do
 end
 
 gem 'multi_json'
-gem 'prototype-rails', github: 'rails/prototype-rails', branch: '4.2'
+# gem 'prototype-rails', github: 'rails/prototype-rails', branch: '4.2' # Not supported in 5.0
 gem 'strip_attributes'
 gem 'will_paginate', '~> 3.0.0'
 gem 'dynamic_form'
