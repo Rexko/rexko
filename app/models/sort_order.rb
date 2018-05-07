@@ -1,4 +1,4 @@
-class SortOrder < ActiveRecord::Base
+class SortOrder < ApplicationRecord
   belongs_to :language
   serialize :substitutions, Hash
   serialize :orderings, Hash

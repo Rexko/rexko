@@ -1,4 +1,4 @@
-class Interpretation < ActiveRecord::Base
+class Interpretation < ApplicationRecord
   belongs_to :parse
   belongs_to :sense
   

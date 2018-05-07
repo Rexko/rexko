@@ -1,4 +1,4 @@
-class Source < ActiveRecord::Base
+class Source < ApplicationRecord
   has_many :loci
   belongs_to :authorship #, :include => [:title, :author]
   delegate :title, :to => '(authorship or return nil)'

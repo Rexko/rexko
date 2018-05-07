@@ -1,3 +1,3 @@
-class AuthorshipType < ActiveRecord::Base
+class AuthorshipType < ApplicationRecord
   translates :name
 end

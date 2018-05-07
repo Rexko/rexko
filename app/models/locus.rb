@@ -1,4 +1,4 @@
-class Locus < ActiveRecord::Base
+class Locus < ApplicationRecord
   belongs_to :source
   has_many :attestations, :dependent => :destroy
   has_many :parses, :through => :attestations

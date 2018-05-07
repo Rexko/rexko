@@ -1,4 +1,4 @@
-class Headword < ActiveRecord::Base
+class Headword < ApplicationRecord
   has_many :orthographs
   has_many :phonetic_forms, :through => :orthographs
   has_many :notes, as: :annotatable

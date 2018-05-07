@@ -1,4 +1,4 @@
-class Attestation < ActiveRecord::Base
+class Attestation < ApplicationRecord
   belongs_to :locus
   has_many :parses, :as => :parsable, :dependent => :destroy
   validates_presence_of :attested_form

@@ -1,4 +1,4 @@
-class Authorship < ActiveRecord::Base
+class Authorship < ApplicationRecord
   belongs_to :author
   belongs_to :title
   belongs_to :authorship_type

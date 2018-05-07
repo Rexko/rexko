@@ -1,4 +1,4 @@
-class Parse < ActiveRecord::Base
+class Parse < ApplicationRecord
   has_many :interpretations
   belongs_to :parsable, :polymorphic => true
   translates :parsed_form, :fallbacks_for_empty_translations => true

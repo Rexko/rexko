@@ -1,4 +1,4 @@
-class Lexeme < ActiveRecord::Base
+class Lexeme < ApplicationRecord
   has_many :dictionary_scopes
   has_many :dictionaries, :through => :dictionary_scopes
   has_many :subentries

@@ -1,4 +1,4 @@
-class Gloss < ActiveRecord::Base
+class Gloss < ApplicationRecord
   belongs_to :sense
   validate :any_gloss_present?
   belongs_to :language

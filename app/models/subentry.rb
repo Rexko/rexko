@@ -1,4 +1,4 @@
-class Subentry < ActiveRecord::Base
+class Subentry < ApplicationRecord
   has_many :etymotheses
   has_many :etymologies, :through => :etymotheses
   belongs_to :lexeme

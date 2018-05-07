@@ -1,4 +1,4 @@
-class DictionaryScope < ActiveRecord::Base
+class DictionaryScope < ApplicationRecord
   belongs_to :dictionary
   belongs_to :lexeme
 end

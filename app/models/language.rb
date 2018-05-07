@@ -1,4 +1,4 @@
-class Language < ActiveRecord::Base
+class Language < ApplicationRecord
   has_many :dictionaries
   has_many :etymologies
   has_many :glosses

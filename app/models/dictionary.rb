@@ -1,4 +1,4 @@
-class Dictionary < ActiveRecord::Base
+class Dictionary < ApplicationRecord
   has_many :dictionary_scopes # has_one?
   has_many :lexemes, :through => :dictionary_scopes
   validates_presence_of :title

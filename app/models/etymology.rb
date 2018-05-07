@@ -1,4 +1,4 @@
-class Etymology < ActiveRecord::Base
+class Etymology < ApplicationRecord
   has_many :etymotheses
   has_many :subentries, :through => :etymotheses
   has_many :sources, :through => :etymotheses

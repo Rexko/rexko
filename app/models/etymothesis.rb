@@ -1,4 +1,4 @@
-class Etymothesis < ActiveRecord::Base
+class Etymothesis < ApplicationRecord
   belongs_to :etymology
   belongs_to :subentry
   belongs_to :source

@@ -1,4 +1,4 @@
-class Note < ActiveRecord::Base
+class Note < ApplicationRecord
   belongs_to :language
   belongs_to :annotatable, :polymorphic => true
   translates :content, :fallbacks_for_empty_translations => true

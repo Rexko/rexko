@@ -1,4 +1,4 @@
-class Sense < ActiveRecord::Base
+class Sense < ApplicationRecord
   belongs_to :subentry
   delegate :lexeme, :to => '(subentry or return nil)' 
   belongs_to :language
