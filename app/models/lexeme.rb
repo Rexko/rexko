@@ -67,7 +67,7 @@ class Lexeme < ApplicationRecord
       [("AND dictionaries.id = ?" if from_dictionary),
       headlike]), id, from_dictionary.try(:id), *heads].compact
 
-    Lexeme.attested_by(loci.collect(&:attestations).flatten, "Attestation").where(conditions).includes([:headwords, :dictionaries, :subentries]).uniq
+    Lexeme.attested_by(loci.collect(&:attestations).flatten, "Attestation").where(conditions).includes([:headwords, :dictionaries, :subentries]).distinct
   end  
   
   # Return all lexemes with a headword matching a string or the string with

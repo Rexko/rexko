@@ -9,7 +9,7 @@ class Locus < ApplicationRecord
   scope :sorted, -> { order(Author.arel_table[:name].asc).order(Title.arel_table[:name].asc).order(Source.arel_table[:pointer].asc).references(:author, :title, :source) }
 
 	# Given an Author or array of Authors, return all loci authored by them.
-  scope :authored_by, ->(author_array) { joins( :source => :authorship ).where( :authorships => { :author_id => author_array }).uniq }
+  scope :authored_by, ->(author_array) { joins( :source => :authorship ).where( :authorships => { :author_id => author_array }).distinct }
 
   # Takes a lexeme, sense, string, or an array of each, and returns the loci that attest the input
   scope :attesting, lambda { |obj|
