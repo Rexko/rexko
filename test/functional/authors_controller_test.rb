@@ -14,30 +14,30 @@ class AuthorsControllerTest < ActionController::TestCase
 
   def test_should_create_author
     assert_difference('Author.count') do
-      post :create, :author => { }
+      post :create, params: { :author => { } }
     end
 
     assert_redirected_to author_path(assigns(:author))
   end
 
   def test_should_show_author
-    get :show, :id => authors(:one).id
+    get :show, params: { :id => authors(:one).id }
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => authors(:one).id
+    get :edit, params: { :id => authors(:one).id }
     assert_response :success
   end
 
   def test_should_update_author
-    put :update, :id => authors(:one).id, :author => { }
+    put :update, params: { :id => authors(:one).id, :author => { } }
     assert_redirected_to author_path(assigns(:author))
   end
 
   def test_should_destroy_author
     assert_difference('Author.count', -1) do
-      delete :destroy, :id => authors(:one).id
+      delete :destroy, params: { :id => authors(:one).id }
     end
 
     assert_redirected_to authors_path

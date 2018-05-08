@@ -14,30 +14,30 @@ class LexemesControllerTest < ActionController::TestCase
 
   def test_should_create_lexeme
     assert_difference('Lexeme.count') do
-      post :create, :lexeme => { }
+      post :create, params: { :lexeme => { } }
     end
 
     assert_redirected_to lexeme_path(assigns(:lexeme))
   end
 
   def test_should_show_lexeme
-    get :show, :id => lexemes(:one).id
+    get :show, params: { :id => lexemes(:one).id }
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => lexemes(:one).id
+    get :edit, params: { :id => lexemes(:one).id }
     assert_response :success
   end
 
   def test_should_update_lexeme
-    put :update, :id => lexemes(:one).id, :lexeme => { }
+    put :update, params: { :id => lexemes(:one).id, :lexeme => { } }
     assert_redirected_to lexeme_path(assigns(:lexeme))
   end
 
   def test_should_destroy_lexeme
     assert_difference('Lexeme.count', -1) do
-      delete :destroy, :id => lexemes(:one).id
+      delete :destroy, params: { :id => lexemes(:one).id }
     end
 
     assert_redirected_to lexemes_path
@@ -54,7 +54,7 @@ class LexemesControllerTest < ActionController::TestCase
   # 'show' should create a @loci_for hash that breaks out constructions by 
   # headword form.
   def test_show_should_assign_loci_for
-    get :show, :id => lexemes(:liter_lex).id
+    get :show, params: { :id => lexemes(:liter_lex).id }
     
     loci_for = assigns(:loci_for)
     
@@ -71,13 +71,13 @@ class LexemesControllerTest < ActionController::TestCase
   end
   
   def test_show_by_headword_can_return_multiple_results
-    get :show_by_headword, :headword => "liter", :matchtype => Lexeme::EXACT
+    get :show_by_headword, params: { :headword => "liter", :matchtype => Lexeme::EXACT }
     
     lexeme = assigns(:lexeme)
     assert_not_nil lexeme, "Headword 'liter' should return a lexeme; 'liter's lexeme is #{Lexeme.lookup_by_headword('liter')}"
     assert_equal 1, lexeme.length, "Headword 'liter' should return only one lexeme"
     
-    get :show_by_headword, :headword => "spring", :matchtype => Lexeme::EXACT
+    get :show_by_headword, params: { :headword => "spring", :matchtype => Lexeme::EXACT }
     
     lexeme = assigns(:lexeme)
     assert_not_nil lexeme, "Headword 'spring' should return a lexeme"
@@ -85,13 +85,13 @@ class LexemesControllerTest < ActionController::TestCase
   end
   
   def test_matching_uses_template
-    get :matching, :headword => "spring", :matchtype => Lexeme::SUBSTRING
+    get :matching, params: { :headword => "spring", :matchtype => Lexeme::SUBSTRING }
     
     assert_template "layouts/1col_layout"
   end
   
   def test_matching_sets_title
-    get :matching, :headword => "spring", :matchtype => Lexeme::SUBSTRING
+    get :matching, params: { :headword => "spring", :matchtype => Lexeme::SUBSTRING }
     
     title = assigns(:page_title)
     assert_not_nil title, "Show_by_headword should set a title"
@@ -99,13 +99,13 @@ class LexemesControllerTest < ActionController::TestCase
   end
   
   def test_show_by_headword_respects_match_type
-    get :show_by_headword, :headword => "liter", :matchtype => Lexeme::SUBSTRING
+    get :show_by_headword, params: { :headword => "liter", :matchtype => Lexeme::SUBSTRING }
     
     results = assigns(:lexeme)
     assert results.length > 1, 
       "Substring search for 'liter' found #{results.length}; there are at least two in the fixtures"
     
-    get :show_by_headword, :headword => "liter", :matchtype => Lexeme::EXACT
+    get :show_by_headword, params: { :headword => "liter", :matchtype => Lexeme::EXACT }
     
     results = assigns(:lexeme)
     assert_equal 1, results.length,
@@ -115,7 +115,7 @@ class LexemesControllerTest < ActionController::TestCase
   def test_substring_search_friendly_url
     assert_recognizes({:controller => "lexemes", :action => "matching", :headword => 'liter', :matchtype => Lexeme::SUBSTRING }, "/lexemes/matching/liter")
     
-    get :show_by_headword, :headword => "liter", :matchtype => Lexeme::SUBSTRING
+    get :show_by_headword, params: { :headword => "liter", :matchtype => Lexeme::SUBSTRING }
     
     assert_redirected_to "/en/lexemes/matching/contains/liter"
   end
@@ -128,14 +128,14 @@ class LexemesControllerTest < ActionController::TestCase
     assert Lexeme.attested_by(loci(:with_same_construction).attestations, "Attestation").include? blue_jay
     assert !Lexeme.attested_by(loci(:with_same_construction).attestations, "Attestation").include?(blue)  
       
-    get :show, :id => lexemes(:appearing_in_construction_a).id
+    get :show, params: { :id => lexemes(:appearing_in_construction_a).id }
     assert_response :success
   end
     
   # 82
   test "should use dictionary's external address when linking" do
     reku = dictionaries(:one).lexemes.first
-    get :show, :id => reku.id
+    get :show, params: { :id => reku.id }
     assert reku.dictionaries.present?
     assert reku.headwords.present?
 
@@ -151,8 +151,7 @@ class LexemesControllerTest < ActionController::TestCase
   # 161b: Nested attributes are not working to create parses
   test "should be able to create new parses by nested attributes" do
 	  assert_difference('Parse.count') do
-      put :update, id: lexemes(:one).id, 
-        lexeme:
+      put :update, params: { id: lexemes(:one).id, lexeme:
           { subentries_attributes: { "0" =>
             { etymotheses_attributes: { "0" =>
               { etymology_attributes:
@@ -161,7 +160,7 @@ class LexemesControllerTest < ActionController::TestCase
                   { parsed_form_en: "test",
                     interpretations_attributes: { "0" =>
                       { sense_id: "1",
-                        sense_attributes: { definition_en: "" }}}}}}}}}}}
+                        sense_attributes: { definition_en: "" }}}}}}}}}}} }
     end
   end
   
@@ -189,7 +188,7 @@ class LexemesControllerTest < ActionController::TestCase
   # was not defined.  It was showing nothing; eventually should find
   # a way to show each
   test "should display correctly if lexeme is in multiple language dictionaries" do
-    get :show, id: lexemes(:"179_in_multiple_language_dictionaries").id
+    get :show, params: { id: lexemes(:"179_in_multiple_language_dictionaries").id }
     
     assert_select ".lexform-paradigm", /tene/
   end
@@ -198,7 +197,7 @@ class LexemesControllerTest < ActionController::TestCase
   # The lexeme edit form should include an autocomplete for the source language.
   # (It was formerly listing the languages in creation order.)
   test "should display language autocomplete" do
-    get :edit, id: lexemes(:literal).id
+    get :edit, params: { id: lexemes(:literal).id }
     
     assert_select 'span[id$=search-indicator]'
   end
@@ -214,7 +213,7 @@ class LexemesControllerTest < ActionController::TestCase
     etymo_count = subentry.etymotheses.count
     source = etymothesis.source
 
-    get :edit, id: lexeme.id
+    get :edit, params: { id: lexeme.id }
     
     # Make sure the source section is shown
     # Also check number of subentries as error in update hash caused duplication
@@ -223,12 +222,11 @@ class LexemesControllerTest < ActionController::TestCase
     
     # Make sure that it doesn't actually delete the source
 	  assert_no_difference('Source.count') do
-      put :update, id: lexeme.id, commit: I18n.t('lexemes.form.save_and_continue_editing'), lexeme: lexeme.attributes.except("id", "created_at", "updated_at")
+      put :update, params: { id: lexeme.id, commit: I18n.t('lexemes.form.save_and_continue_editing'), lexeme: lexeme.attributes.except("id", "created_at", "updated_at") }
       assert_select '.subentry', subentry_count
       assert_select '.etymothesis .source', etymo_count
 
-      put :update, id: lexeme.id, commit: I18n.t('lexemes.form.save_and_continue_editing'),
-        lexeme:
+      put :update, params: { id: lexeme.id, commit: I18n.t('lexemes.form.save_and_continue_editing'), lexeme:
           { subentries_attributes: 
             { "0" => 
               { id: subentry.id,
@@ -247,7 +245,7 @@ class LexemesControllerTest < ActionController::TestCase
                 }
               }
             }
-          }
+          } }
 
       # Make sure it's no longer associated with the lexeme
       assert_select '.subentry', subentry_count
@@ -281,7 +279,7 @@ class LexemesControllerTest < ActionController::TestCase
   # 188: Show all languages for which there is data on edit form
   test "Lexeme edit should show all languages with data" do
     # control
-    get :edit, id: lexemes(:"179_in_multiple_language_dictionaries").id
+    get :edit, params: { id: lexemes(:"179_in_multiple_language_dictionaries").id }
     assert_select '.headword .language-list li', /la/
     
     # change a headword locale
@@ -289,7 +287,7 @@ class LexemesControllerTest < ActionController::TestCase
     languages(:latin).save
     
     # should still show the 'la' headword, as well as the 'xxx' prompt
-    get :edit, id: lexemes(:"179_in_multiple_language_dictionaries").id
+    get :edit, params: { id: lexemes(:"179_in_multiple_language_dictionaries").id }
     assert_select '.headword .language-list li', /la/
     assert_select '.headword .language-list li', /xxx/
   end
@@ -303,7 +301,7 @@ class LexemesControllerTest < ActionController::TestCase
       hw.phonetic_forms.create form: "187_tEst"
     end
     
-    get :matching, headword: "187_test"
+    get :matching, params: { headword: "187_test" }
     
     assert_select ".lexform-phonetic-form", /187_tEst/
   end
@@ -321,7 +319,7 @@ class LexemesControllerTest < ActionController::TestCase
     sense = subentry.senses.create definition: "Test def."
     sense.glosses.create gloss_es: "sought"
     
-    get :show, id: lex.id
+    get :show, params: { id: lex.id }
     
     assert_select ".wikified-headword textarea", /#\* sought/
     assert_select ".wikified-lexeme textarea", /#\* sought/

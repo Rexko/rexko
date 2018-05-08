@@ -14,30 +14,30 @@ class TitlesControllerTest < ActionController::TestCase
 
   def test_should_create_title
     assert_difference('Title.count') do
-      post :create, :title => { }
+      post :create, params: { :title => { } }
     end
 
     assert_redirected_to title_path(assigns(:title))
   end
 
   def test_should_show_title
-    get :show, :id => titles(:one).id
+    get :show, params: { :id => titles(:one).id }
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => titles(:one).id
+    get :edit, params: { :id => titles(:one).id }
     assert_response :success
   end
 
   def test_should_update_title
-    put :update, :id => titles(:one).id, :title => { }
+    put :update, params: { :id => titles(:one).id, :title => { } }
     assert_redirected_to title_path(assigns(:title))
   end
 
   def test_should_destroy_title
     assert_difference('Title.count', -1) do
-      delete :destroy, :id => titles(:one).id
+      delete :destroy, params: { :id => titles(:one).id }
     end
 
     assert_redirected_to titles_path

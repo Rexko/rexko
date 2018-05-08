@@ -14,30 +14,30 @@ class SensesControllerTest < ActionController::TestCase
 
   def test_should_create_sense
     assert_difference('Sense.count') do
-      post :create, :sense => { :definition => "text"}
+      post :create, params: { :sense => { :definition => "text"} }
     end
 
     assert_redirected_to sense_path(assigns(:sense))
   end
 
   def test_should_show_sense
-    get :show, :id => senses(:one).id
+    get :show, params: { :id => senses(:one).id }
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => senses(:one).id
+    get :edit, params: { :id => senses(:one).id }
     assert_response :success
   end
 
   def test_should_update_sense
-    put :update, :id => senses(:one).id, :sense => { :definition => "test"}
+    put :update, params: { :id => senses(:one).id, :sense => { :definition => "test"} }
     assert_redirected_to sense_path(assigns(:sense))
   end
 
   def test_should_destroy_sense
     assert_difference('Sense.count', -1) do
-      delete :destroy, :id => senses(:one).id
+      delete :destroy, params: { :id => senses(:one).id }
     end
 
     assert_redirected_to senses_path

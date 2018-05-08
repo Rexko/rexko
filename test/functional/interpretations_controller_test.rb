@@ -14,30 +14,30 @@ class InterpretationsControllerTest < ActionController::TestCase
 
   def test_should_create_interpretation
     assert_difference('Interpretation.count') do
-      post :create, :interpretation => { :sense_attributes => { :definition => "First sense" }}
+      post :create, params: { :interpretation => { :sense_attributes => { :definition => "First sense" }} }
     end
 
     assert_redirected_to interpretation_path(assigns(:interpretation))
   end
 
   def test_should_show_interpretation
-    get :show, :id => interpretations(:one).id
+    get :show, params: { :id => interpretations(:one).id }
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => interpretations(:one).id
+    get :edit, params: { :id => interpretations(:one).id }
     assert_response :success
   end
 
   def test_should_update_interpretation
-    put :update, :id => interpretations(:one).id, :interpretation => { :sense_attributes => { :definition => "First sense" }}
+    put :update, params: { :id => interpretations(:one).id, :interpretation => { :sense_attributes => { :definition => "First sense" }} }
     assert_redirected_to interpretation_path(assigns(:interpretation))
   end
 
   def test_should_destroy_interpretation
     assert_difference('Interpretation.count', -1) do
-      delete :destroy, :id => interpretations(:one).id
+      delete :destroy, params: { :id => interpretations(:one).id }
     end
 
     assert_redirected_to interpretations_path
