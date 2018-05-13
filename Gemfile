@@ -47,6 +47,7 @@ end
 
 gem 'multi_json'
 # gem 'prototype-rails', github: 'rails/prototype-rails', branch: '4.2' # Not supported in 5.0
+gem 'jquery-rails'
 gem 'strip_attributes'
 gem 'will_paginate', '~> 3.0.0'
 gem 'dynamic_form'
