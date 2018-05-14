@@ -70,7 +70,7 @@ class AuthorsController < ApplicationController
     @author = Author.find(params[:id])
 
     respond_to do |format|
-      if @author.update_attributes(params[:author])
+      if @author.update_attributes(params.fetch(:author, {}))
         flash[:notice] = 'Author was successfully updated.'
         format.html { redirect_to(@author) }
         format.xml  { head :ok }

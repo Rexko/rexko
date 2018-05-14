@@ -68,7 +68,7 @@ class AttestationsController < ApplicationController
     @attestation = Attestation.find(params[:id])
 
     respond_to do |format|
-      if @attestation.update_attributes(params[:attestation])
+      if @attestation.update_attributes(params.fetch(:attestation, {}))
         flash[:notice] = 'Attestation was successfully updated.'
         format.html { redirect_to(@attestation) }
         format.xml  { head :ok }

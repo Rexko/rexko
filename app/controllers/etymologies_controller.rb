@@ -74,7 +74,7 @@ class EtymologiesController < ApplicationController
     @etymology = Etymology.find(params[:id])
 
     respond_to do |format|
-      if @etymology.update_attributes(params[:etymology])
+      if @etymology.update_attributes(params.fetch(:etymology, {}))
         flash[:notice] = 'Etymology was successfully updated.'
         format.html { redirect_to(@etymology) }
         format.xml  { head :ok }
