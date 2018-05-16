@@ -67,7 +67,7 @@ class Parse < ApplicationRecord
 
   # Return an array of all the parsed_forms in the supplied array of parses
   def self.forms_of parse_array
-    result = Parse.select([:parses, Parse::Translation.arel_table[:parsed_form]]).where(:id => parse_array).includes(:translations).references(:translations)
+    result = Parse.where(:id => parse_array).includes(:translations)
     result.collect(&:parsed_form)
   end
   
