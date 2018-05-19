@@ -116,11 +116,11 @@ class LociController < ApplicationController
     # FIXME Because of the way a new sense is added under an existing subentry,
     # we have to tweak params so that it is appropriately associated.
 		atesute = params[:locus][:attestations_attributes]
-		atesute.each_value {|att_v|
+		atesute.each {|_, att_v|
 			paasu = att_v[:parses_attributes]
-			paasu.each_value {|par_v|
+			paasu.each {|_, par_v|
 				intah = par_v[:interpretations_attributes]
-				intah.each_value {|int_v|
+				intah.each {|_, int_v|
 					if int_v[:sense_id].try(:slice, "new")
 						int_v[:sense_attributes][:subentry_id] = int_v[:sense_id].split('-')[1]
 					end
