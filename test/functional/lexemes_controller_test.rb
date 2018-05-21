@@ -31,7 +31,7 @@ class LexemesControllerTest < ActionController::TestCase
   end
 
   def test_should_update_lexeme
-    put :update, params: { :id => lexemes(:one).id, :lexeme => { } }
+    put :update, params: { :id => lexemes(:one).id }
     assert_redirected_to lexeme_path(assigns(:lexeme))
   end
 
