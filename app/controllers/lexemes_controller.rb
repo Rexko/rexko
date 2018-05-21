@@ -158,7 +158,6 @@ class LexemesController < ApplicationController
   # PUT /lexemes/1.xml
   def update
     @lexeme = Lexeme.find(params[:id])
-    @lexeme.update(params[:lexeme].permit(allowed_params))
     @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
 
 =begin
@@ -168,7 +167,7 @@ class LexemesController < ApplicationController
 =end
 
     respond_to do |format|
-      if @lexeme.save
+      if @lexeme.update_attributes(params.fetch(:lexeme, {}).permit(allowed_params))
         flash[:notice] = t('lexemes.update.successful_update')
         format.html do
           case params[:commit]
