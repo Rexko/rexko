@@ -119,7 +119,7 @@ class LexemesController < ApplicationController
   # POST /lexemes
   # POST /lexemes.xml
   def create
-    @lexeme = Lexeme.new(params[:lexeme].permit(allowed_params))
+    @lexeme = Lexeme.new(params.fetch(:lexeme, {}).permit(allowed_params))
     @page_title = t('lexemes.edit.page_title', headwords: view_context.titleize_headwords_for(@lexeme))
 
 =begin
