@@ -2,6 +2,15 @@
 //= require jquery_ujs
 //= require_self
 
+// https://css-tricks.com/snippets/jquery/get-query-params-object/
+jQuery.extend({
+
+  toQueryParams : function(str) {
+	  return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+  }
+
+});
+
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
@@ -12,23 +21,23 @@ replace_ids = function(template){
 }
 
 activate_links = function(element){
-	element.getElementsBySelector('.remove').each(function(link){  
-		link.observe('click', NestedAttributesJs.remove);  
+	$(element).find('.remove').each(function(link){  
+		$(link).click(NestedAttributesJs.remove);  
 	});
-	element.getElementsBySelector('.add').each(function(link){  
-			link.observe('click', NestedAttributesJs.add);  
+	$(element).find('.add').each(function(link){  
+			$(link).click(NestedAttributesJs.add);  
 	});
-	element.getElementsBySelector('.add_nested').each(function(link){  
-			link.observe('click', NestedAttributesJs.add_nested);  
+	$(element).find('.add_nested').each(function(link){  
+			$(link).click(NestedAttributesJs.add_nested);  
 	});
-	element.getElementsBySelector('.pull_nested').each(function(link){  
-		link.observe('click', NestedAttributesJs.start_throbber);
-		link.observe('ajax:before', NestedAttributesJs.add_live_value_to_query);
-		link.observe('ajax:success', NestedAttributesJs.pull_nested);
+	$(element).find('.pull_nested').each(function(link){  
+		$(link).click(NestedAttributesJs.start_throbber);
+		$(link).ajaxSend(NestedAttributesJs.add_live_value_to_query);
+		$(link).ajaxSuccess(NestedAttributesJs.pull_nested);
 	});
 
-    element.getElementsBySelector('.combobox').each(function(e){
-       e.observe('change', NestedAttributesJs.toggle_comboform_input.bindAsEventListener(this, e));
+    $(element).find('.combobox').each(function(e){
+       e.change(NestedAttributesJs.toggle_comboform_input.bindAsEventListener(this, e));
     });
 }
 
@@ -38,9 +47,9 @@ var NestedAttributesJs = {
 	},
     add_live_value_to_query : function(e) {
 			live_value = this.up('fieldset').select('.bequeathed').last().value;
-			query = e.target.search.toQueryParams()
+			query = $.toQueryParams(e.target.search)
 			query['live_value'] = live_value
-			e.target.search = '?'+Object.toQueryString(query); 
+			e.target.search = '?'+$.param(query); 
 	},
     toggle_comboform_input : function(e2, e){
          combotext = e.up().next('.comboform');
@@ -125,9 +134,9 @@ var NestedAttributesJs = {
 }; 
   
 activate_autocompletes = function(element){  
-    element.getElementsBySelector('.autocomplete').each(function(div){
+    $(element).find('.autocomplete').each(function(div){
         complendum = div.identify().match(/.*(?=_choices)/g)[0];
-        complenda = div.readAttribute('data-plural');
+        complenda = $(div).attr('data-plural');
         
         new Ajax.Autocompleter(complendum+"_search", complendum+"_choices", "/"+locale+"/"+complenda+"/matching", {
             paramName: "value",
@@ -137,16 +146,16 @@ activate_autocompletes = function(element){
             afterUpdateElement: function(text, li) { 
                 complendum = li.id.substr(li.id.indexOf("-")+1);
                 if(li.id == "new-"+complendum) { // User chose the 'new X' option 
-                    $(complendum+"_id").value = "";
-                    newform = $(complendum+'_new');
+                    $("#"+complendum+"_id").value = "";
+                    newform = $("#"+complendum+'_new');
                     if(newform) {
-                        $(complendum+"_search").value = "";
+                        $("#"+complendum+"_search").value = "";
                         Effect.BlindDown(newform, {duration: 0.25} );
                     }
                 } 
                 else { // User chose a given option
-                    $(complendum+"_id").value = parseInt(li.id);
-                    newform = $(complendum+'_new');
+                    $("#"+complendum+"_id").value = parseInt(li.id);
+                    newform = $("#"+complendum+'_new');
                     if(newform) Effect.BlindUp(newform, {duration: 0.25} );
                 }
             }
@@ -154,11 +163,11 @@ activate_autocompletes = function(element){
     });
 };
 
-Event.observe(window, 'load', function(){  
-	activate_links($$('body')[0]);
-    activate_autocompletes($$('body')[0]);
-    activate_language_tabs($$(".language-list"));
-    if ($('lexeme_dictionary_ids')) { $('lexeme_dictionary_ids').observe("change", fetch_languages); };
+$(document).ready(function(){  
+	activate_links($('body')[0]);
+    activate_autocompletes($('body')[0]);
+    activate_language_tabs($(".language-list"));
+    if ($('#lexeme_dictionary_ids')) { $('#lexeme_dictionary_ids').change(fetch_languages); };
     update_add_links();
 });
 
@@ -169,8 +178,8 @@ function insert_with_effect(container, content){
         before: '<div style="display:none;">'+content+'</div>'
     });
     Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
-    activate_links($$('body')[0]);
-    activate_autocompletes($$('body')[0]);
+    activate_links($('body')[0]);
+    activate_autocompletes($('body')[0]);
     activate_language_tabs(container.previous().select(".language-list"));
     update_add_links();
 };
@@ -184,13 +193,13 @@ function select_all(id){
 // For language tabs
 activate_language_tabs = function(elements){
     elements.each(function(list){
-        list.select('li').each(function(li){
-            if (li.hasClassName("selected") ) toggle_to_corresponding_content(li);
+        $(list).select('li').each(function(li){
+            if ($(li).hasClass("selected") ) toggle_to_corresponding_content(li);
         });
 
-        list.on("click", "li", function(ev, el){
+        $(list).on("click", "li", function(ev, el){
             ev.preventDefault();
-            items = list.select("li");
+            items = $(list).select("li");
             items.invoke('removeClassName', 'selected');
             el.addClassName("selected");
             toggle_to_corresponding_content(el);
@@ -200,7 +209,7 @@ activate_language_tabs = function(elements){
 
 function toggle_to_corresponding_content(tab){
     list = tab.up(".language-list");
-    items = list.select("li");
+    items = $(list).select("li");
     content = list.previous(".language-content");
     idx = items.indexOf(tab);
     corresponding = content.childElements()[idx];
@@ -216,9 +225,9 @@ function toggle_to_corresponding_content(tab){
 // UGH.
 
 fetch_languages = function() {
-    $('lexeme_dictionary_ids').disable();
+    $('#lexeme_dictionary_ids').disable();
     
-    $$(".translatable").each(function(content){
+    $(".translatable").each(function(content){
         content.down('.language-content').childElements().invoke('disable');
         
         langtabs = content.down('.language-list ul');
@@ -226,13 +235,13 @@ fetch_languages = function() {
         langtabs.insert({top: "<li class=\"throb\"><img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"12\" height=\"12\"></li>"});
     });
     
-    forms = $$(".translatable").collect(function(tag) {
-        return tag.readAttribute('data-form');
+    forms = $(".translatable").collect(function(tag) {
+        return $(tag).attr('data-form');
     });
 
     request = new Ajax.Request("/"+locale+"/dictionaries.json", {
         method: "get",
-        parameters: { data: "langs", 'dictionaries[]': $('lexeme_dictionary_ids').getValue() },
+        parameters: { data: "langs", 'dictionaries[]': $('#lexeme_dictionary_ids').val() },
         onSuccess: function(response) { 
             lang_hash = response.responseJSON;
             update_languages(lang_hash);
@@ -241,11 +250,11 @@ fetch_languages = function() {
 };
 
 function update_languages(languages) {
-    $('lexeme_dictionary_ids').enable();
+    $('#lexeme_dictionary_ids').enable();
     update_add_links();
-    $$(".translatable").each(function(content){
-        oldlangs = content.down('.language-content').childElements().invoke('readAttribute', 'data-language');
-        langtype = content.readAttribute("data-languages");
+    $(".translatable").each(function(content){
+        oldlangs = content.down('.language-content').childElements().invoke('attr', 'data-language');
+        langtype = $(content).attr("data-languages");
         langtabs = content.down('.language-list ul');
         // go through each language in the languages for the appropriate language class
         languages[langtype].each(function(language){
@@ -267,7 +276,7 @@ function update_languages(languages) {
                 // if it's in the languages and doesn't already have a field, duplicate, blanken, re-ID, and add it in its place     
                 oldfield = content.down('input,textarea');
                 oldtab = content.down('li', 1);
-                oldlang = oldfield.readAttribute('data-language');
+                oldlang = $(oldfield).attr('data-language');
                 
                 newfield = oldfield.up().appendChild(oldfield.clone(true));
                     posindex = oldfield.identify().lastIndexOf(oldlang);
@@ -281,7 +290,7 @@ function update_languages(languages) {
                 newtab.innerHTML = language.tab;
                 newtab.removeClassName('warning');
                 newtab.removeClassName('default');
-                newfield.writeAttribute('data-language', language.underscore_code);
+                $(newfield).attr('data-language', language.underscore_code);
                 Effect.Appear(newtab, {duration: 0.25});
             }        
         });
@@ -329,10 +338,10 @@ function update_languages(languages) {
 };
 
 function update_add_links(){
-    $$(".pull_nested").each(function(anchor){
-        params = anchor.readAttribute('href').toQueryParams();
-        params['dictionaries[]'] = $('lexeme_dictionary_ids').getValue();
-        anchor.writeAttribute('href', anchor.pathname + '?' + Object.toQueryString(params));
+    $(".pull_nested").each(function(anchor){
+        params = $.toQueryParams($(anchor).attr('href'));
+        params['dictionaries[]'] = $('#lexeme_dictionary_ids').val();
+        $(anchor).attr('href', anchor.pathname + '?' + $.param(params));
     });
 };
 
@@ -340,7 +349,7 @@ function update_add_links(){
 function clean_defaults(content, oldfield, oldtab){  
     newfields = content.select('input,textarea');
     newfields.each(function(newfield) {
-        if (newfield.getValue() == "") { newfield.setValue($F(oldfield)); }
+        if (newfield.val() == "") { newfield.setValue($F(oldfield)); }
     });
     oldfield.setValue("");
     //oldfield.remove();
