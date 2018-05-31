@@ -43,7 +43,7 @@ activate_links = function(element){
 
 var NestedAttributesJs = {  
     start_throbber : function(e) {
-	    this.insert({after: "<img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"16\" height=\"16\">"})
+	    $("<img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"16\" height=\"16\">").insertAfter(this)
 	},
     add_live_value_to_query : function(e) {
 			live_value = this.up('fieldset').select('.bequeathed').last().value;
