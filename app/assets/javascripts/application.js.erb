@@ -341,7 +341,7 @@ function update_add_links(){
     $(".pull_nested").each(function(){
         params = $.toQueryParams($(this).attr('href'));
         params['dictionaries[]'] = $('#lexeme_dictionary_ids').val();
-        $(this).attr('href', this.pathname + '?' + $.param(params));
+        // $(this).attr('href', this.pathname + '?' + $.param(params));
     });
 };
 
