@@ -46,7 +46,7 @@ var NestedAttributesJs = {
 	    $("<img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"16\" height=\"16\">").insertAfter(this)
 	},
     add_live_value_to_query : function(e) {
-			live_value = this.up('fieldset').select('.bequeathed').last().value;
+			live_value = this.closest('fieldset').select('.bequeathed').last().value;
 			query = $.toQueryParams(e.target.search)
 			query['live_value'] = live_value
 			e.target.search = '?'+$.param(query); 
@@ -62,22 +62,22 @@ var NestedAttributesJs = {
 	remove : function(e) {
 		el = Event.findElement(e);
 		target = el.href.replace(/.*#/, '.');
-		var oldStyle = el.up(target).style.border;
-		el.up(target).style.border = "3px solid red";
+		var oldStyle = el.closest(target).style.border;
+		el.closest(target).style.border = "3px solid red";
 		
 		var conf = confirm("Delete this " + el.href.replace(/.*#/, '') + "?");
 		if (conf) {
-			el.up(target).hide();
+			el.closest(target).hide();
 			if(hidden_input = el.previous("input[type=hidden]")) hidden_input.value = '1';
 		}
 		else {
-			el.up(target).style.border = oldStyle;
+			el.closest(target).style.border = oldStyle;
 		}
 	},
 	add : function(e) {  
 		element = Event.findElement(e);
 		template = replace_ids(eval(element.href.replace(/.*#/, '') + '_template'));
-		insert_with_effect(element.up('.par'), template);
+		insert_with_effect(element.closest('.par'), template);
 	},
 	add_nested : function(e) {
 		el = Event.findElement(e);
@@ -88,8 +88,8 @@ var NestedAttributesJs = {
 			par = '.'+elements[0]
 			child = '.'+elements[1]
 		
-			child_container = el.up('.par')
-			parent_object_id = el.up(par).find('input').first().name.match(/.*\[(\d+)\]/)[1]
+			child_container = el.closest('.par')
+			parent_object_id = el.closest(par).find('input').first().name.match(/.*\[(\d+)\]/)[1]
 		
 			tempname = el.href.replace(/.*#/, '');
 			template = eval('window.' + tempname + '_template') || eval(tempname + '$' + elements[0] + '_template')
@@ -102,9 +102,9 @@ var NestedAttributesJs = {
 			par = '.'+elements[0]
 			child = '.'+elements[2]
 			
-			child_container = el.up('.par')
-			parent_object_id = el.up(par).find('input').first().name.match(/.*\[(\d+)\]/)[1]
-			middle_object_id = el.up('fieldset').find('input').first().name.match(/\d+/g)[1]
+			child_container = el.closest('.par')
+			parent_object_id = el.closest(par).find('input').first().name.match(/.*\[(\d+)\]/)[1]
+			middle_object_id = el.closest('fieldset').find('input').first().name.match(/\d+/g)[1]
 			
 			template = eval(el.href.replace(/.*#/, '') + '$' + elements[1] + '$' + elements[0] + '_template')
 			
@@ -123,13 +123,13 @@ var NestedAttributesJs = {
 		elements = el.rel.match(/(\w+)/g)
 		par = '.'+elements[0]
 		
-		child_container = el.up('.par')
+		child_container = el.closest('.par')
 		
 		template = e.memo.responseText;
 		
 		insert_with_effect(child_container, template);
 		el.next('.throb').remove();
-		if(el.hasClassName('limit-one')) el.remove();
+		if(el.hasClass('limit-one')) el.remove();
 	}
 }; 
   
@@ -201,18 +201,18 @@ activate_language_tabs = function(elements){
             ev.preventDefault();
             items = $(list).select("li");
             items.removeClass('selected');
-            el.addClassName("selected");
+            el.addClass("selected");
             toggle_to_corresponding_content(el);
         });
     });
 };
 
 function toggle_to_corresponding_content(tab){
-    list = tab.up(".language-list");
+    list = tab.closest(".language-list");
     items = $(list).select("li");
-    content = list.previous(".language-content");
-    idx = items.indexOf(tab);
-    corresponding = content.children()[idx];
+    content = list.prevAll(".language-content");
+    idx = items.index(tab);
+    corresponding = content.children(idx);
     content.children().hide();
     corresponding.show()
 }
@@ -262,17 +262,17 @@ function update_languages(languages) {
         // if an existing div is in the languages, keep it (moving it to the appropriate position); if it's not, flag it as not to be saved (if content) or remove it (if not)
             if (oldlangs.includes(this.underscore_code)) {
                 // old field and tab
-                oldfield = content.find('[data-language='+this.underscore_code+']').first();
-                oldtab_index = oldfield.parent().children().indexOf(oldfield) + 1;  
-                oldtab = content.find('li', oldtab_index).first();
+                oldfield = $(content).find('[data-language='+this.underscore_code+']').first();
+                oldtab_index = $(oldfield).parent().children().index(oldfield) + 1;  
+                oldtab = $(content).find('li', oldtab_index).first();
 
                 oldfield.prop('disabled', false);
 
                 // reposition tab & field
-                oldfield.parent().appendChild(oldfield);
-                oldtab.parent().appendChild(oldtab);
-                oldtab.removeClassName('warning');
-                Effect.Appear(oldtab, {duration: 0.25});
+                oldfield.parent().append(oldfield);
+                oldtab.parent().append(oldtab);
+                oldtab.removeClass('warning');
+                oldtab.show(0.25);
             } else { 
                 // if it's in the languages and doesn't already have a field, duplicate, blanken, re-ID, and add it in its place     
                 oldfield = $(content).find('input,textarea').first();
@@ -280,30 +280,31 @@ function update_languages(languages) {
                 oldlang = $(oldfield).attr('data-language');
                 
                 newfield = $(oldfield).parent().append(oldfield.clone(true));
-                    posindex = $(oldfield).identify().lastIndexOf(oldlang);
-                newfield.id = $(oldfield).identify().substring(0, posindex) + this.underscore_code + $(oldfield).identify().substring(posindex + oldlang.length)
+                    posindex = $(oldfield).attr('id').lastIndexOf(oldlang);
+                newfield.id = $(oldfield).attr('id').substring(0, posindex) + this.underscore_code + $(oldfield).attr('id').substring(posindex + oldlang.length)
 //                newfield.id = oldfield.identify().replace(/(.+_).+$/, "$1"+language.underscore_code);
-                    posindex = $(oldfield).name.lastIndexOf(oldlang);
-                newfield.name = $(oldfield).name.substring(0, posindex) + this.underscore_code + $(oldfield).name.substring(posindex + oldlang.length)
+                    posindex = $(oldfield).attr('name').lastIndexOf(oldlang);
+                newfield.name = $(oldfield).attr('name').substring(0, posindex) + this.underscore_code + $(oldfield).attr('name').substring(posindex + oldlang.length)
 //                newfield.name = oldfield.name.replace(/(.+_).*?\]$/, "$1"+language.underscore_code+"]");
-                newfield.clear();
-                newtab = oldtab.parent().appendChild(oldtab.clone(true));
+                newfield.val("");
+                newtab = $(oldtab).parent().append(oldtab.clone(true));
                 newtab.innerHTML = this.tab;
-                newtab.removeClassName('warning');
-                newtab.removeClassName('default');
+                newtab.removeClass('warning');
+                newtab.removeClass('default');
                 $(newfield).attr('data-language', this.underscore_code);
-                Effect.Appear(newtab, {duration: 0.25});
+                newtab.show(0.25);
             }        
         });
         
-        dropped_languages = oldlangs.without.apply(oldlangs, languages[langtype].map(function(){return $(this).underscore_code}));
+        // dropped_languages = oldlangs.without.apply(oldlangs, languages[langtype].map(function(){return $(this).underscore_code}));
+        dropped_languages = $(oldlangs).not(languages[langtype].map(function(){return $(this).underscore_code}));
         dropped_languages.each(function(){
-            oldfield = content.find('[data-language='+this+']').first();
-            oldtab_index = oldfield.parent().children().indexOf(oldfield) + 1;
-            oldtab = content.find('li', oldtab_index).first();
+            oldfield = $(content).find('[data-language='+this+']').first();
+            oldtab_index = $(oldfield).parent().children().index(oldfield) + 1;
+            oldtab = $(content).find('li', oldtab_index).first();
             
                 // if droppable is DEFAULT then add its content to any blank, then remove.
-            if (oldtab.hasClassName('default')) {
+            if (oldtab.hasClass('default')) {
                 clean_defaults(content, oldfield, oldtab);
                     
 //                    newfields = content.select('input,textarea');
@@ -316,11 +317,11 @@ function update_languages(languages) {
             } 
                 
             oldfield.prop('disabled', false);
-            oldtab.addClassName('warning');
+            oldtab.addClass('warning');
             
-            oldfield.parent().appendChild(oldfield);
-            oldtab.parent().appendChild(oldtab);
-            Effect.Appear(oldtab, {duration: 0.25});
+            oldfield.parent().append(oldfield);
+            oldtab.parent().append(oldtab);
+            oldtab.show(0.25);
         });
         
         // deselect all tabs
@@ -329,12 +330,12 @@ function update_languages(languages) {
         langtabs.select('.throb').remove();
         
         // toggle to first
-        langtabs.find('li').first().addClassName('selected');
-        if (langtabs.select('li').length == 1) { langtabs.find('li').first().addClassName('solo') };
+        langtabs.find('li').first().addClass('selected');
+        if (langtabs.select('li').length == 1) { langtabs.find('li').first().addClass('solo') };
         toggle_to_corresponding_content(langtabs.find('li').first());
-        langtabs.setStyle({ width: content.find('input,textarea').first().getWidth() + "px" });
+        langtabs.css({ width: $(content).find('input,textarea').first().width() + "px" });
         
-        content.find('.language-content').first().children().prop('disabled', false);
+        $(content).find('.language-content').first().children().prop('disabled', false);
     });
 };
 
