@@ -32,8 +32,8 @@ activate_links = function(element){
 	});
 	$(element).find('.pull_nested').each(function(){  
 		$(this).click(NestedAttributesJs.start_throbber);
-		$(this).ajaxSend(NestedAttributesJs.add_live_value_to_query);
-		$(this).ajaxSuccess(NestedAttributesJs.pull_nested);
+		$(this).on("ajax:before", NestedAttributesJs.add_live_value_to_query);
+		$(this).on("ajax:success", NestedAttributesJs.pull_nested);
 	});
 
     $(element).find('.combobox').each(function(i, e){
@@ -46,7 +46,7 @@ var NestedAttributesJs = {
 	    $("<img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"16\" height=\"16\">").insertAfter(this)
 	},
     add_live_value_to_query : function(e) {
-			live_value = this.closest('fieldset').select('.bequeathed').last().value;
+			live_value = $(this).closest('fieldset').find('.bequeathed').last().value;
 			query = $.toQueryParams(e.target.search)
 			query['live_value'] = live_value
 			e.target.search = '?'+$.param(query); 
