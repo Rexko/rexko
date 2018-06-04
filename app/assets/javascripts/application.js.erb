@@ -52,7 +52,7 @@ var NestedAttributesJs = {
 			e.target.search = '?'+$.param(query); 
 	},
     toggle_comboform_input : function(e2, e){
-         combotext = e.up().next('.comboform');
+         combotext = e.parent().next('.comboform');
          if (e.options[e.selectedIndex].value.indexOf("new-") == 0) {
              if (combotext) Effect.BlindDown(combotext, {duration: 0.25});
          } else {
@@ -232,61 +232,62 @@ fetch_languages = function() {
         
         langtabs = $(this).find('.language-list ul').first();
 //        langtabs.children().each(function(tab){ Effect.Fade(tab, {duration: 0.25})});
-        langtabs.insert({top: "<li class=\"throb\"><img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"12\" height=\"12\"></li>"});
+        $("<li class=\"throb\"><img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"12\" height=\"12\"></li>").prependTo(langtabs);
     });
     
-    forms = $(".translatable").collect(function(tag) {
-        return $(tag).attr('data-form');
+    forms = $(".translatable").map(function() {
+        return $(this).attr('data-form');
     });
 
-    request = new Ajax.Request("/"+locale+"/dictionaries.json", {
+    request = $.ajax("/"+locale+"/dictionaries.json", {
         method: "get",
-        parameters: { data: "langs", 'dictionaries[]': $('#lexeme_dictionary_ids').val() },
-        onSuccess: function(response) { 
-            lang_hash = response.responseJSON;
-            update_languages(lang_hash);
+        data: { data: "langs", 'dictionaries[]': $('#lexeme_dictionary_ids').val() },
+        success: function(response) { 
+            // lang_hash = response.responseJSON;
+            // update_languages(lang_hash);
+            update_languages(response);
         },
     });
 };
 
 function update_languages(languages) {
-    $('#lexeme_dictionary_ids').enable();
+    $('#lexeme_dictionary_ids').prop('disabled', false);
     update_add_links();
     $(".translatable").each(function(i, content){
-        oldlangs = content.find('.language-content').first().children().map(function(){return attr('data-language')}).get();
+        oldlangs = $(content).find('.language-content').first().children().map(function(){return $(this).attr('data-language')}).get();
         langtype = $(content).attr("data-languages");
-        langtabs = content.find('.language-list ul').first();
+        langtabs = $(content).find('.language-list ul').first();
         // go through each language in the languages for the appropriate language class
-        languages[langtype].each(function(){
+        $.each(languages[langtype], function(){
         // if an existing div is in the languages, keep it (moving it to the appropriate position); if it's not, flag it as not to be saved (if content) or remove it (if not)
-            if (oldlangs.include(this.underscore_code)) {
+            if (oldlangs.includes(this.underscore_code)) {
                 // old field and tab
                 oldfield = content.find('[data-language='+this.underscore_code+']').first();
-                oldtab_index = oldfield.up().children().indexOf(oldfield) + 1;  
+                oldtab_index = oldfield.parent().children().indexOf(oldfield) + 1;  
                 oldtab = content.find('li', oldtab_index).first();
 
-                oldfield.enable();
+                oldfield.prop('disabled', false);
 
                 // reposition tab & field
-                oldfield.up().appendChild(oldfield);
-                oldtab.up().appendChild(oldtab);
+                oldfield.parent().appendChild(oldfield);
+                oldtab.parent().appendChild(oldtab);
                 oldtab.removeClassName('warning');
                 Effect.Appear(oldtab, {duration: 0.25});
             } else { 
                 // if it's in the languages and doesn't already have a field, duplicate, blanken, re-ID, and add it in its place     
-                oldfield = content.find('input,textarea').first();
-                oldtab = content.find('li', 1).first();
+                oldfield = $(content).find('input,textarea').first();
+                oldtab = $(content).find('li', 1).first();
                 oldlang = $(oldfield).attr('data-language');
                 
-                newfield = oldfield.up().appendChild(oldfield.clone(true));
-                    posindex = oldfield.identify().lastIndexOf(oldlang);
-                newfield.id = oldfield.identify().substring(0, posindex) + this.underscore_code + oldfield.identify().substring(posindex + oldlang.length)
+                newfield = $(oldfield).parent().append(oldfield.clone(true));
+                    posindex = $(oldfield).identify().lastIndexOf(oldlang);
+                newfield.id = $(oldfield).identify().substring(0, posindex) + this.underscore_code + $(oldfield).identify().substring(posindex + oldlang.length)
 //                newfield.id = oldfield.identify().replace(/(.+_).+$/, "$1"+language.underscore_code);
-                    posindex = oldfield.name.lastIndexOf(oldlang);
-                newfield.name = oldfield.name.substring(0, posindex) + this.underscore_code + oldfield.name.substring(posindex + oldlang.length)
+                    posindex = $(oldfield).name.lastIndexOf(oldlang);
+                newfield.name = $(oldfield).name.substring(0, posindex) + this.underscore_code + $(oldfield).name.substring(posindex + oldlang.length)
 //                newfield.name = oldfield.name.replace(/(.+_).*?\]$/, "$1"+language.underscore_code+"]");
                 newfield.clear();
-                newtab = oldtab.up().appendChild(oldtab.clone(true));
+                newtab = oldtab.parent().appendChild(oldtab.clone(true));
                 newtab.innerHTML = this.tab;
                 newtab.removeClassName('warning');
                 newtab.removeClassName('default');
@@ -295,10 +296,10 @@ function update_languages(languages) {
             }        
         });
         
-        dropped_languages = oldlangs.without.apply(oldlangs, languages[langtype].collect(function(lang){return lang.underscore_code}));
+        dropped_languages = oldlangs.without.apply(oldlangs, languages[langtype].map(function(){return $(this).underscore_code}));
         dropped_languages.each(function(){
             oldfield = content.find('[data-language='+this+']').first();
-            oldtab_index = oldfield.up().children().indexOf(oldfield) + 1;
+            oldtab_index = oldfield.parent().children().indexOf(oldfield) + 1;
             oldtab = content.find('li', oldtab_index).first();
             
                 // if droppable is DEFAULT then add its content to any blank, then remove.
@@ -314,11 +315,11 @@ function update_languages(languages) {
                     
             } 
                 
-            oldfield.enable();
+            oldfield.prop('disabled', false);
             oldtab.addClassName('warning');
             
-            oldfield.up().appendChild(oldfield);
-            oldtab.up().appendChild(oldtab);
+            oldfield.parent().appendChild(oldfield);
+            oldtab.parent().appendChild(oldtab);
             Effect.Appear(oldtab, {duration: 0.25});
         });
         
