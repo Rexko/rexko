@@ -89,7 +89,7 @@ var NestedAttributesJs = {
 			child = '.'+elements[1]
 		
 			child_container = el.up('.par')
-			parent_object_id = el.up(par).down('input').name.match(/.*\[(\d+)\]/)[1]
+			parent_object_id = el.up(par).find('input').first().name.match(/.*\[(\d+)\]/)[1]
 		
 			tempname = el.href.replace(/.*#/, '');
 			template = eval('window.' + tempname + '_template') || eval(tempname + '$' + elements[0] + '_template')
@@ -103,8 +103,8 @@ var NestedAttributesJs = {
 			child = '.'+elements[2]
 			
 			child_container = el.up('.par')
-			parent_object_id = el.up(par).down('input').name.match(/.*\[(\d+)\]/)[1]
-			middle_object_id = el.up('fieldset').down('input').name.match(/\d+/g)[1]
+			parent_object_id = el.up(par).find('input').first().name.match(/.*\[(\d+)\]/)[1]
+			middle_object_id = el.up('fieldset').find('input').first().name.match(/\d+/g)[1]
 			
 			template = eval(el.href.replace(/.*#/, '') + '$' + elements[1] + '$' + elements[0] + '_template')
 			
@@ -200,7 +200,7 @@ activate_language_tabs = function(elements){
         $(list).on("click", "li", function(ev, el){
             ev.preventDefault();
             items = $(list).select("li");
-            items.invoke('removeClassName', 'selected');
+            items.removeClass('selected');
             el.addClassName("selected");
             toggle_to_corresponding_content(el);
         });
@@ -212,8 +212,8 @@ function toggle_to_corresponding_content(tab){
     items = $(list).select("li");
     content = list.previous(".language-content");
     idx = items.indexOf(tab);
-    corresponding = content.childElements()[idx];
-    content.childElements().invoke('hide');
+    corresponding = content.children()[idx];
+    content.children().hide();
     corresponding.show()
 }
 
@@ -225,13 +225,13 @@ function toggle_to_corresponding_content(tab){
 // UGH.
 
 fetch_languages = function() {
-    $('#lexeme_dictionary_ids').disable();
+    $('#lexeme_dictionary_ids').prop("disabled", true);
     
     $(".translatable").each(function(){
-        this.down('.language-content').childElements().invoke('disable');
+        $(this).find('.language-content').first().children().prop('disabled', true);
         
-        langtabs = this.down('.language-list ul');
-//        langtabs.childElements().each(function(tab){ Effect.Fade(tab, {duration: 0.25})});
+        langtabs = $(this).find('.language-list ul').first();
+//        langtabs.children().each(function(tab){ Effect.Fade(tab, {duration: 0.25})});
         langtabs.insert({top: "<li class=\"throb\"><img class=\"throb\" src=\"<%= asset_path('icons/throbber.gif') %>\" style=\"vertical-align:middle\" width=\"12\" height=\"12\"></li>"});
     });
     
@@ -253,17 +253,17 @@ function update_languages(languages) {
     $('#lexeme_dictionary_ids').enable();
     update_add_links();
     $(".translatable").each(function(i, content){
-        oldlangs = content.down('.language-content').childElements().invoke('attr', 'data-language');
+        oldlangs = content.find('.language-content').first().children().map(function(){return attr('data-language')}).get();
         langtype = $(content).attr("data-languages");
-        langtabs = content.down('.language-list ul');
+        langtabs = content.find('.language-list ul').first();
         // go through each language in the languages for the appropriate language class
         languages[langtype].each(function(){
         // if an existing div is in the languages, keep it (moving it to the appropriate position); if it's not, flag it as not to be saved (if content) or remove it (if not)
             if (oldlangs.include(this.underscore_code)) {
                 // old field and tab
-                oldfield = content.down('[data-language='+this.underscore_code+']');
-                oldtab_index = oldfield.up().childElements().indexOf(oldfield) + 1;  
-                oldtab = content.down('li', oldtab_index);
+                oldfield = content.find('[data-language='+this.underscore_code+']').first();
+                oldtab_index = oldfield.up().children().indexOf(oldfield) + 1;  
+                oldtab = content.find('li', oldtab_index).first();
 
                 oldfield.enable();
 
@@ -274,8 +274,8 @@ function update_languages(languages) {
                 Effect.Appear(oldtab, {duration: 0.25});
             } else { 
                 // if it's in the languages and doesn't already have a field, duplicate, blanken, re-ID, and add it in its place     
-                oldfield = content.down('input,textarea');
-                oldtab = content.down('li', 1);
+                oldfield = content.find('input,textarea').first();
+                oldtab = content.find('li', 1).first();
                 oldlang = $(oldfield).attr('data-language');
                 
                 newfield = oldfield.up().appendChild(oldfield.clone(true));
@@ -297,9 +297,9 @@ function update_languages(languages) {
         
         dropped_languages = oldlangs.without.apply(oldlangs, languages[langtype].collect(function(lang){return lang.underscore_code}));
         dropped_languages.each(function(){
-            oldfield = content.down('[data-language='+this+']');
-            oldtab_index = oldfield.up().childElements().indexOf(oldfield) + 1;
-            oldtab = content.down('li', oldtab_index);
+            oldfield = content.find('[data-language='+this+']').first();
+            oldtab_index = oldfield.up().children().indexOf(oldfield) + 1;
+            oldtab = content.find('li', oldtab_index).first();
             
                 // if droppable is DEFAULT then add its content to any blank, then remove.
             if (oldtab.hasClassName('default')) {
@@ -323,17 +323,17 @@ function update_languages(languages) {
         });
         
         // deselect all tabs
-        langtabs.select('li').invoke('removeClassName', 'selected');
-        langtabs.select('li').invoke('removeClassName', 'solo');
-        langtabs.select('.throb').invoke('remove');
+        langtabs.select('li').removeClass('selected');
+        langtabs.select('li').removeClass('solo');
+        langtabs.select('.throb').remove();
         
         // toggle to first
-        langtabs.down('li').addClassName('selected');
-        if (langtabs.select('li').length == 1) { langtabs.down('li').addClassName('solo') };
-        toggle_to_corresponding_content(langtabs.down('li'));
-        langtabs.setStyle({ width: content.down('input,textarea').getWidth() + "px" });
+        langtabs.find('li').first().addClassName('selected');
+        if (langtabs.select('li').length == 1) { langtabs.find('li').first().addClassName('solo') };
+        toggle_to_corresponding_content(langtabs.find('li').first());
+        langtabs.setStyle({ width: content.find('input,textarea').first().getWidth() + "px" });
         
-        content.down('.language-content').childElements().invoke('enable');
+        content.find('.language-content').first().children().prop('disabled', false);
     });
 };
 
