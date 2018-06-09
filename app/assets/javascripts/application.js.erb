@@ -60,7 +60,7 @@ var NestedAttributesJs = {
          };
     },
 	remove : function(e) {
-		el = Event.findElement(e);
+		el = e.target;
 		target = el.href.replace(/.*#/, '.');
 		var oldStyle = el.closest(target).style.border;
 		el.closest(target).style.border = "3px solid red";
@@ -75,12 +75,12 @@ var NestedAttributesJs = {
 		}
 	},
 	add : function(e) {  
-		element = Event.findElement(e);
+		element = e.target;
 		template = replace_ids(eval(element.href.replace(/.*#/, '') + '_template'));
 		insert_with_effect(element.closest('.par'), template);
 	},
 	add_nested : function(e) {
-		el = Event.findElement(e);
+		el = e.target;
 		elements = el.rel.match(/(\w+)/g)
 		// refactor this later, after it works
 		switch (elements.length) {
@@ -118,18 +118,18 @@ var NestedAttributesJs = {
 		
 		insert_with_effect(child_container, replace_ids(template));
 	},
-	pull_nested : function(e) {
-		el = Event.findElement(e);
+	pull_nested : function(e, xhr) {
+		el = e.target;
 		elements = el.rel.match(/(\w+)/g)
 		par = '.'+elements[0]
 		
 		child_container = el.closest('.par')
 		
-		template = e.memo.responseText;
+		template = xhr.responseText;
 		
 		insert_with_effect(child_container, template);
-		el.next('.throb').remove();
-		if(el.hasClass('limit-one')) el.remove();
+		$(el).nextAll('.throb').remove();
+		if($(el).hasClass('limit-one')) el.remove();
 	}
 }; 
   
@@ -174,13 +174,11 @@ $(document).ready(function(){
 // Simple add effect
 // and updating various observers
 function insert_with_effect(container, content){
-    container.insert({
-        before: '<div style="display:none;">'+content+'</div>'
-    });
-    Effect.BlindDown(container.previous().identify(), {duration: 0.25} );
+    $('<div style="display:none;">'+content+'</div>').insertBefore(container);
+    $(container).prev().show(250);
     activate_links($('body')[0]);
     activate_autocompletes($('body')[0]);
-    activate_language_tabs(container.previous().select(".language-list"));
+    activate_language_tabs($(container).prev().select(".language-list"));
     update_add_links();
 };
 
@@ -272,7 +270,7 @@ function update_languages(languages) {
                 oldfield.parent().append(oldfield);
                 oldtab.parent().append(oldtab);
                 oldtab.removeClass('warning');
-                oldtab.show(0.25);
+                oldtab.show(250);
             } else { 
                 // if it's in the languages and doesn't already have a field, duplicate, blanken, re-ID, and add it in its place     
                 oldfield = $(content).find('input,textarea').first();
@@ -292,7 +290,7 @@ function update_languages(languages) {
                 newtab.removeClass('warning');
                 newtab.removeClass('default');
                 $(newfield).attr('data-language', this.underscore_code);
-                newtab.show(0.25);
+                newtab.show(250);
             }        
         });
         
