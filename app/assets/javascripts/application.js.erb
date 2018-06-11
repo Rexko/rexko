@@ -32,8 +32,8 @@ activate_links = function(element){
 	});
 	$(element).find('.pull_nested').each(function(){  
 		$(this).click(NestedAttributesJs.start_throbber);
-		$(this).on("ajax:before", NestedAttributesJs.add_live_value_to_query);
-		$(this).on("ajax:success", NestedAttributesJs.pull_nested);
+		$(this).off("ajax:before").on("ajax:before", NestedAttributesJs.add_live_value_to_query);
+		$(this).off("ajax:success").on("ajax:success", NestedAttributesJs.pull_nested);
 	});
 
     $(element).find('.combobox').each(function(i, e){
@@ -88,7 +88,7 @@ var NestedAttributesJs = {
 			par = '.'+elements[0]
 			child = '.'+elements[1]
 		
-			child_container = el.closest('.par')
+			child_container = $(el).closest('.par')
 			parent_object_id = el.closest(par).find('input').first().name.match(/.*\[(\d+)\]/)[1]
 		
 			tempname = el.href.replace(/.*#/, '');
@@ -102,7 +102,7 @@ var NestedAttributesJs = {
 			par = '.'+elements[0]
 			child = '.'+elements[2]
 			
-			child_container = el.closest('.par')
+			child_container = $(el).closest('.par')
 			parent_object_id = el.closest(par).find('input').first().name.match(/.*\[(\d+)\]/)[1]
 			middle_object_id = el.closest('fieldset').find('input').first().name.match(/\d+/g)[1]
 			
@@ -123,9 +123,9 @@ var NestedAttributesJs = {
 		elements = el.rel.match(/(\w+)/g)
 		par = '.'+elements[0]
 		
-		child_container = el.closest('.par')
+		child_container = $(el).closest('.par')
 		
-		template = xhr.responseText;
+		template = xhr;
 		
 		insert_with_effect(child_container, template);
 		$(el).nextAll('.throb').remove();
