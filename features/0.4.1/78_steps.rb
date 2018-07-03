@@ -32,8 +32,7 @@ When(/^I select "(.*?)" as my search option$/) do |arg1|
 end
 
 When(/^I enter "(.*?)" into the query field$/) do |arg1|
-  page.fill_in I18n.t('editor.index.find_or_create_a_lexeme'), with: arg1
-  page.execute_script("$(\"editor-lexeme-search\").submit()");
+  page.fill_in I18n.t('editor.index.find_or_create_a_lexeme'), with: arg1 << "\n"
 end
 
 Then(/^I should get a new entry page$/) do

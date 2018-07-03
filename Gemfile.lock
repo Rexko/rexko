@@ -150,7 +150,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
-    rails-perftest (0.0.7)
     railties (5.0.7)
       actionpack (= 5.0.7)
       activesupport (= 5.0.7)
@@ -210,7 +209,6 @@ DEPENDENCIES
   puma
   rails (= 5.0.7)
   rails-controller-testing
-  rails-perftest
   ruby-prof (~> 0.15.9)
   sqlite3
   strip_attributes

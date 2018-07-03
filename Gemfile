@@ -40,7 +40,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'minitest', '~> 5.10.0'
   gem 'missing_t', '~> 0.4.1'
-  gem 'rails-perftest'
   gem 'rails-controller-testing'
   gem 'ruby-prof', '~> 0.15.9'
   gem 'test-unit'
