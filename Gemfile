@@ -38,6 +38,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
+  gem 'listen'
   gem 'minitest', '~> 5.10.0'
   gem 'missing_t', '~> 0.4.1'
   gem 'rails-controller-testing'
