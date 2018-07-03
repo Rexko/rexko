@@ -6,9 +6,13 @@
 jQuery.extend({
 
   toQueryParams : function(str) {
-	  return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+	  return decodeURIComponent(str || document.location.search).replace(/.*\?/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
   }
 
+});
+
+$(window).bind('beforeunload', function(){
+  return 'Are you sure you want to leave?';
 });
 
 // Place your application-specific JavaScript functions and classes here
@@ -174,7 +178,7 @@ $(document).ready(function(){
 // Simple add effect
 // and updating various observers
 function insert_with_effect(container, content){
-    $('<div style="display:none;">'+content+'</div>').insertBefore(container);
+    $('<div style="display:none;">'+decodeURIComponent(content)+'</div>').insertBefore(container);
     $(container).prev().show(250);
     activate_links($('body')[0]);
     activate_autocompletes($('body')[0]);
@@ -340,8 +344,8 @@ function update_languages(languages) {
 function update_add_links(){
     $(".pull_nested").each(function(){
         params = $.toQueryParams($(this).attr('href'));
-        params['dictionaries[]'] = $('#lexeme_dictionary_ids').val();
-        // $(this).attr('href', this.pathname + '?' + $.param(params));
+        params['dictionaries'] = $('#lexeme_dictionary_ids').val();
+        $(this).prop('href', this.pathname + '?' + $.param(params));
     });
 };
 
