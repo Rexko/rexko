@@ -1,4 +1,6 @@
 class PhoneticForm < ApplicationRecord
+  attribute :form
+  
 #  has_and_belongs_to_many :headwords # why?
   has_many :orthographs
   has_many :headwords, :through => :orthographs

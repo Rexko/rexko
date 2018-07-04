@@ -1,4 +1,7 @@
 class Subentry < ApplicationRecord
+  attribute :paradigm
+  attribute :part_of_speech
+
   has_many :etymotheses
   has_many :etymologies, :through => :etymotheses
   belongs_to :lexeme

@@ -1,4 +1,6 @@
 class Gloss < ApplicationRecord
+  attribute :gloss
+
   belongs_to :sense
   validate :any_gloss_present?
   belongs_to :language

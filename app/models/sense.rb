@@ -1,4 +1,6 @@
 class Sense < ApplicationRecord
+  attribute :definition
+  
   belongs_to :subentry
   delegate :lexeme, :to => '(subentry or return nil)' 
   belongs_to :language

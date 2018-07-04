@@ -1,4 +1,6 @@
 class Language < ApplicationRecord
+  attribute :default_name
+
   has_many :dictionaries
   has_many :etymologies
   has_many :glosses

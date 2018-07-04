@@ -1,4 +1,6 @@
 class Headword < ApplicationRecord
+  attribute :form
+
   has_many :orthographs
   has_many :phonetic_forms, :through => :orthographs
   has_many :notes, as: :annotatable
