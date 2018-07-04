@@ -8,7 +8,7 @@ class Authorship < ApplicationRecord
   accepts_nested_attributes_for :title, allow_destroy: true, reject_if: :all_blank
   
   def self.safe_params
-    [:id, author_attributes: Author.safe_params, title_attributes: Title.safe_params]
+    [:id, :year, :author_id, :title_id, :authorship_type_id, author_attributes: Author.safe_params, title_attributes: Title.safe_params]
   end
   
   # Given a string +query+, return all authorships where each word in +query+ 

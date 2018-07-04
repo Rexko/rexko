@@ -40,7 +40,7 @@ class DictionaryScopesController < ApplicationController
   # POST /dictionary_scopes
   # POST /dictionary_scopes.xml
   def create
-    @dictionary_scope = DictionaryScope.new(params[:dictionary_scope])
+    @dictionary_scope = DictionaryScope.new(params[:dictionary_scope].permit(allowed_params))
 
     respond_to do |format|
       if @dictionary_scope.save
@@ -81,5 +81,10 @@ class DictionaryScopesController < ApplicationController
       format.html { redirect_to(dictionary_scopes_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+  def allowed_params
+    DictionaryScope.safe_params
   end
 end

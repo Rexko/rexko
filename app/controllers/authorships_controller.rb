@@ -57,7 +57,7 @@ class AuthorshipsController < ApplicationController
   # POST /authorships
   # POST /authorships.xml
   def create
-    @authorship = Authorship.new(params[:authorship])
+    @authorship = Authorship.new(params[:authorship].permit(allowed_params))
 
     respond_to do |format|
       if @authorship.save
@@ -77,7 +77,7 @@ class AuthorshipsController < ApplicationController
     @authorship = Authorship.find(params[:id])
 
     respond_to do |format|
-      if @authorship.update_attributes(params.fetch(:authorship, {}))
+      if @authorship.update_attributes(params.fetch(:authorship, {}).permit(allowed_params))
         flash[:notice] = 'Authorship was successfully updated.'
         format.html { redirect_to(@authorship) }
         format.xml  { head :ok }
@@ -98,5 +98,10 @@ class AuthorshipsController < ApplicationController
       format.html { redirect_to(authorships_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  def allowed_params
+    Authorship.safe_params
   end
 end

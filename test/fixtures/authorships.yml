@@ -3,6 +3,9 @@
 one:
   id: 1
   author_id: 1
+  title_id: 1
+  authorship_type_id: 1
+  
 #
 # two:
 #   column: value

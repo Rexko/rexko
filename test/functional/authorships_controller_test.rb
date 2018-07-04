@@ -14,7 +14,9 @@ class AuthorshipsControllerTest < ActionController::TestCase
 
   def test_should_create_authorship
     assert_difference('Authorship.count') do
-      post :create, params: { :authorship => { } }
+      attrs = authorships(:one).attributes
+      attrs.delete("id")
+      post(:create, params: { :authorship => attrs }).parsed_body
     end
 
     assert_redirected_to authorship_path(assigns(:authorship))

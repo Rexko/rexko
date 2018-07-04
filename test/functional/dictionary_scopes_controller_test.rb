@@ -14,7 +14,7 @@ class DictionaryScopesControllerTest < ActionController::TestCase
 
   def test_should_create_dictionary_scope
     assert_difference('DictionaryScope.count') do
-      post :create, params: { :dictionary_scope => { } }
+      post :create, params: { :dictionary_scope => dictionary_scopes(:one).attributes }
     end
 
     assert_redirected_to dictionary_scope_path(assigns(:dictionary_scope))
