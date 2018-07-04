@@ -7,3 +7,9 @@
     subentry_id: 50
     locale: la
     paradigm: "teneo, -ere, -ui, tentum"
+
+subentry_without_dictionary:
+    subentry_id: 10
+    locale: en
+    paradigm: -----
+    part_of_speech: none

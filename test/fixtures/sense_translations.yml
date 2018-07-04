@@ -1,0 +1,4 @@
+sense_without_dictionary:
+  sense_id: 10
+  locale: en
+  definition: "A series of dashes."
