@@ -2,3 +2,13 @@ sense_without_dictionary:
   sense_id: 10
   locale: en
   definition: "A series of dashes."
+
+one:
+  sense_id: 1
+  locale: en
+  definition: First sense
+
+two:
+  sense_id: 2
+  locale: en
+  definition: Second sense

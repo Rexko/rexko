@@ -2,3 +2,8 @@ parse_without_dictionary:
   parse_id: 10
   locale: en
   parsed_form: -----
+
+literal:
+  parse_id: 5
+  locale: en
+  parsed_form: literal

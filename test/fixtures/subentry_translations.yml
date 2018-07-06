@@ -13,3 +13,9 @@ subentry_without_dictionary:
     locale: en
     paradigm: -----
     part_of_speech: none
+
+one:
+  subentry_id: 1
+  locale: en
+  paradigm: "literal, -alis"
+  part_of_speech: adj.
