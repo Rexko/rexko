@@ -7,7 +7,7 @@ class Language < ApplicationRecord
   has_many :headwords
   has_many :senses
   has_many :subentries
-  belongs_to :sort_order # The language's default sort order
+  belongs_to :sort_order, optional: true # The language's default sort order
   has_many :sort_orders  # All sort orders defined for this language
   translates :default_name
   

@@ -1,9 +1,9 @@
 class Sense < ApplicationRecord
   attribute :definition
   
-  belongs_to :subentry
+  belongs_to :subentry, optional: true
   delegate :lexeme, :to => '(subentry or return nil)' 
-  belongs_to :language
+  belongs_to :language, optional: true
   has_many :glosses
   has_many :interpretations
   has_many :parses, :through => :interpretations

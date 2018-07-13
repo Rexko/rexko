@@ -12,9 +12,9 @@ class Headword < ApplicationRecord
   
   scope :unattested, -> { joins(['LEFT OUTER JOIN "parses" ON "parses"."parsed_form" = "form"']).where({:parses => {:parsed_form => nil}}) }
 
-  belongs_to :lexeme
+  belongs_to :lexeme, optional: true
   delegate :senses, :to => '(lexeme or return nil)'
-  belongs_to :language
+  belongs_to :language, optional: true
   validate :any_form_present?
   
   before_save :set_defaults

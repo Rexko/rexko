@@ -1,5 +1,5 @@
 class Locus < ApplicationRecord
-  belongs_to :source
+  belongs_to :source, optional: true
   has_many :attestations, :dependent => :destroy
   has_many :parses, :through => :attestations
   delegate :author, to: :source, allow_nil: true

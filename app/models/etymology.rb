@@ -5,8 +5,8 @@ class Etymology < ApplicationRecord
   belongs_to :language # language of gloss and source_language name
   has_many :notes, :as => :annotatable
   has_many :parses, :as => :parsable, :dependent => :destroy
-  belongs_to :next_etymon, :class_name => "Etymology"
-  belongs_to :original_language, :class_name => "Language" # language of etymon
+  belongs_to :next_etymon, :optional => true, :class_name => "Etymology"
+  belongs_to :original_language, :optional => true, :class_name => "Language" # language of etymon
   validate :validate_sufficient_data
   translates :gloss
   globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])

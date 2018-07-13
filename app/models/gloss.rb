@@ -3,7 +3,7 @@ class Gloss < ApplicationRecord
 
   belongs_to :sense
   validate :any_gloss_present?
-  belongs_to :language
+  belongs_to :language, optional: true
   has_many :parses, :as => :parsable, :dependent => :destroy
   accepts_nested_attributes_for :parses, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   translates :gloss, :fallbacks_for_empty_translations => true
