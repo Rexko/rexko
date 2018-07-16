@@ -7,3 +7,8 @@ literal:
   parse_id: 5
   locale: en
   parsed_form: literal
+
+wrong_case_parse:
+  parse_id: 20
+  locale: en
+  parsed_form: Liter
