@@ -2,7 +2,7 @@ class Parse < ApplicationRecord
   attribute :parsed_form
 
   has_many :interpretations
-  belongs_to :parsable, :polymorphic => true
+  belongs_to :parsable, :polymorphic => true, :optional => true
   translates :parsed_form, :fallbacks_for_empty_translations => true
   globalize_accessors :locales => (Language.defined_language_codes | [I18n.default_locale])  
   validate :any_form_present?
