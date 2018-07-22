@@ -1,0 +1,14 @@
+testwegian:
+  language_id: 1
+  locale: en
+  default_name: Testwegian
+
+without_code:
+  language_id: 10
+  locale: en
+  default_name: Testian
+
+with_blank_code:
+  language_id: 11
+  locale: en
+  default_name: Testian
