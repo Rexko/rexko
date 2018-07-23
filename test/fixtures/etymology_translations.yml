@@ -32,3 +32,14 @@ chained_A:
   etymology_id: 50
   locale: en
   gloss: "primary"
+
+chained_B:
+  etymology_id: 52
+  locale: en
+  gloss: "test"
+
+chained_B2:
+  etymology_id: 53
+  locale: en
+  gloss: "test 2"
+
