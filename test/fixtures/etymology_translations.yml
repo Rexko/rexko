@@ -12,3 +12,8 @@ with_same_language_next_b:
   etymology_id: 21
   locale: en
   gloss: horn
+
+chained_A:
+  etymology_id: 50
+  locale: en
+  gloss: "primary"
