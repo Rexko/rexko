@@ -2,3 +2,13 @@ simple:
   etymology_id: 10
   locale: en
   gloss: one
+
+with_same_language_next:
+  etymology_id: 20
+  locale: en
+  gloss: one
+
+with_same_language_next_b:
+  etymology_id: 21
+  locale: en
+  gloss: horn
