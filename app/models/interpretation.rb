@@ -1,5 +1,5 @@
 class Interpretation < ApplicationRecord
-  belongs_to :parse
+  belongs_to :parse, optional: true
   belongs_to :sense
   
   accepts_nested_attributes_for :sense, :reject_if => :all_blank
