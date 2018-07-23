@@ -1,3 +1,8 @@
+one:
+  etymology_id: 1
+  locale: en
+  gloss: MyString
+
 simple:
   etymology_id: 10
   locale: en
