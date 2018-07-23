@@ -1,7 +1,7 @@
 class Etymothesis < ApplicationRecord
-  belongs_to :etymology
-  belongs_to :subentry
-  belongs_to :source
+  belongs_to :etymology, optional: true
+  belongs_to :subentry, optional: true
+  belongs_to :source, optional: true
   
   accepts_nested_attributes_for :etymology, allow_destroy: true, reject_if: proc {|attrs| Etymology.rejectable?(attrs) }
   accepts_nested_attributes_for :source, allow_destroy: false, reject_if: :all_blank
