@@ -4,7 +4,7 @@ class Subentry < ApplicationRecord
 
   has_many :etymotheses
   has_many :etymologies, :through => :etymotheses
-  belongs_to :lexeme
+  belongs_to :lexeme, optional: true
   belongs_to :language, optional: true
   has_many :senses
   has_many :notes, :as => :annotatable
