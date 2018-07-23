@@ -18,6 +18,11 @@ with_same_language_next_b:
   locale: en
   gloss: horn
 
+with_parse:
+  etymology_id: 30
+  locale: en
+  gloss: "30"
+
 without_language:
   etymology_id: 40
   locale: en

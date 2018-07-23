@@ -3,6 +3,16 @@ testwegian:
   locale: en
   default_name: Testwegian
 
+latin:
+  language_id: 2
+  locale: en
+  default_name: Latin
+
+spanish:
+  language_id: 3
+  locale: en
+  default_name: Spanish
+
 without_code:
   language_id: 10
   locale: en
@@ -13,7 +23,3 @@ with_blank_code:
   locale: en
   default_name: Testian
 
-latin:
-  language_id: 2
-  locale: en
-  default_name: Latin
