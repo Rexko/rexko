@@ -12,3 +12,8 @@ with_blank_code:
   language_id: 11
   locale: en
   default_name: Testian
+
+latin:
+  language_id: 2
+  locale: en
+  default_name: Latin
