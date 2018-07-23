@@ -18,6 +18,11 @@ with_same_language_next_b:
   locale: en
   gloss: horn
 
+without_language:
+  etymology_id: 40
+  locale: en
+  gloss: smile
+
 chained_A:
   etymology_id: 50
   locale: en
