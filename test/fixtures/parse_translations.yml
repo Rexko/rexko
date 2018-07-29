@@ -8,7 +8,18 @@ literal:
   locale: en
   parsed_form: literal
 
+liters: 
+  parse_id: 3
+  locale: en
+  parsed_form: liter
+
+litres: 
+  parse_id: 4
+  locale: en
+  parsed_form: litre
+
 wrong_case_parse:
   parse_id: 20
   locale: en
   parsed_form: Liter
+  

@@ -1,6 +1,6 @@
 class Source < ApplicationRecord
   has_many :loci
-  belongs_to :authorship #, :include => [:title, :author]
+  belongs_to :authorship, optional: true #, :include => [:title, :author]
   delegate :title, :to => '(authorship or return nil)'
   delegate :author, :to => '(authorship or return nil)'
   # => would be nice:
