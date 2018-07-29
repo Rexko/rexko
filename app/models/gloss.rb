@@ -1,7 +1,7 @@
 class Gloss < ApplicationRecord
   attribute :gloss
 
-  belongs_to :sense
+  belongs_to :sense, optional: true
   validate :any_gloss_present?
   belongs_to :language, optional: true
   has_many :parses, :as => :parsable, :dependent => :destroy
