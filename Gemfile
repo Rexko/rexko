@@ -10,7 +10,7 @@ gem 'globalize-accessors'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.3.0'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -35,6 +35,7 @@ gem 'puma'
 group :development, :test do
   # gem 'webrat'
   gem 'bullet', '~> 5.4.0'
+  gem 'capybara', '~> 2.3'
   gem 'capybara-webkit'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'

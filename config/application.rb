@@ -15,7 +15,7 @@ module Lexicon
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
-    config.i18n.fallbacks = true
+    config.i18n.fallbacks = [I18n.default_locale]
     config.i18n.enforce_available_locales = false
   end
 end
