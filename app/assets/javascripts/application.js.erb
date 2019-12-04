@@ -139,7 +139,7 @@ var NestedAttributesJs = {
   
 activate_autocompletes = function(element){  
     $(element).find('.autocomplete').each(function(){
-        complendum = this.identify().match(/.*(?=_choices)/g)[0];
+        complendum = $(this).attr('id').match(/.*(?=_choices)/g)[0];
         complenda = $(this).attr('data-plural');
         
         new Ajax.Autocompleter(complendum+"_search", complendum+"_choices", "/"+locale+"/"+complenda+"/matching", {
