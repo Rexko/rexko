@@ -2,7 +2,7 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 
 source 'http://rubygems.org'
-gem 'rails', '5.1.6'
+gem 'rails', '5.1.7'
 
 gem 'globalize', '~> 5.1.0'
 gem 'globalize-accessors'
