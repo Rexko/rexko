@@ -2,9 +2,10 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 
 source 'http://rubygems.org'
-gem 'rails', '5.1.7'
+gem 'rails', '5.2.0'
 
-gem 'globalize', '~> 5.1.0'
+gem 'globalize', git: 'https://github.com/globalize/globalize'
+gem 'activemodel-serializers-xml'
 gem 'globalize-accessors'
 
 # Bundle edge Rails instead:
@@ -34,7 +35,7 @@ gem 'puma'
 # and rake tasks are available in development mode:
 group :development, :test do
   # gem 'webrat'
-  gem 'bullet', '~> 5.4.0'
+  gem 'bullet'
   gem 'capybara', '~> 2.3'
   gem 'capybara-webkit'
   gem 'cucumber-rails', require: false
