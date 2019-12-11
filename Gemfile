@@ -3,6 +3,7 @@
 
 source 'http://rubygems.org'
 gem 'rails', '5.2.0'
+gem 'bootsnap', require: false
 
 gem 'globalize', git: 'https://github.com/globalize/globalize'
 gem 'activemodel-serializers-xml'
