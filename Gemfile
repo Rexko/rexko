@@ -2,7 +2,7 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 
 source 'http://rubygems.org'
-gem 'rails', '5.2.4.1'
+gem 'rails', '6.0.2.1'
 gem 'bootsnap', require: false
 
 gem 'globalize', git: 'https://github.com/globalize/globalize'
@@ -12,7 +12,7 @@ gem 'globalize-accessors'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3', '~> 1.3.0'
+gem 'sqlite3', '~> 1.4.0'
 
 # Use unicorn as the web server
 # gem 'unicorn'
