@@ -6,7 +6,7 @@ class UnjoinSensesAndGlosses < ActiveRecord::Migration[4.2]
     # Go through all senses, and assign their id to their glosses directly. 
     # This will act up if someone got clever and started linking glosses to multiple senses
     # Doesn't seem to work anyway.  Oh well.
-    senses = Sense.find(:all)
+    senses = Sense.all
     for sense in senses
       for gloss in sense.glosses
         gloss.sense_id = sense.id
