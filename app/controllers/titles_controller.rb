@@ -70,7 +70,7 @@ class TitlesController < ApplicationController
     @title = Title.find(params[:id])
 
     respond_to do |format|
-      if @title.update_attributes(params.fetch(:title, {}))
+      if @title.update(params.fetch(:title, {}))
         flash[:notice] = 'Title was successfully updated.'
         format.html { redirect_to(@title) }
         format.xml  { head :ok }

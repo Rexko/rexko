@@ -65,7 +65,7 @@ class LanguagesController < ApplicationController
     @language = Language.includes(:sort_order).find(params[:id])
 
     respond_to do |format|
-      if @language.update_attributes(params[:language])
+      if @language.update(params[:language])
         update_accessors
         
         flash[:notice] = t('languages.edit.success')

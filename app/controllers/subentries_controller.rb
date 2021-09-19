@@ -67,7 +67,7 @@ class SubentriesController < ApplicationController
     @subentry = Subentry.find(params[:id])
 
     respond_to do |format|
-      if @subentry.update_attributes(params.fetch(:subentry, {}))
+      if @subentry.update(params.fetch(:subentry, {}))
         flash[:notice] = 'Subentry was successfully updated.'
         format.html { redirect_to(@subentry) }
         format.xml  { head :ok }

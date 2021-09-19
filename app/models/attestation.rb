@@ -9,8 +9,8 @@ class Attestation < ApplicationRecord
     [:id, :attested_form, :parses_attributes => Parse.safe_params]
   end
 
-  # In doing update_attributes on an attestation from the Loci form, we 
-  # we pass on each parse to Parse#update_attributes.  If there are no 
+  # In doing update on an attestation from the Loci form, we 
+  # we pass on each parse to Parse#update.  If there are no 
   # attributes—Parse validates the presence of its parsed_form—delete the
   # parse.
   # There is almost certainly a better way to do this.
@@ -22,7 +22,7 @@ class Attestation < ApplicationRecord
       this_parse = Parse.find(id)
       p this_parse
       if attributes
-        this_parse.update_attributes(attributes)
+        this_parse.update(attributes)
 #       Parse.update(id, attributes)
 #        this_parse.parsed_form = attributes["parsed_form"]
 #        this_parse.save

@@ -67,7 +67,7 @@ class HeadwordsController < ApplicationController
     @headword = Headword.find(params[:id])
 
     respond_to do |format|
-      if @headword.update_attributes(params.fetch(:headword, {}).permit(allowed_params))
+      if @headword.update(params.fetch(:headword, {}).permit(allowed_params))
         flash[:notice] = 'Headword was successfully updated.'
         format.html { redirect_to(@headword) }
         format.xml  { head :ok }

@@ -66,7 +66,7 @@ class SourcesController < ApplicationController
     @source = Source.find(params[:id])
 
     respond_to do |format|
-      if @source.update_attributes(params.fetch(:source, {}))
+      if @source.update(params.fetch(:source, {}))
         flash[:notice] = 'Source was successfully updated.'
         format.html { redirect_to(@source) }
         format.xml  { head :ok }

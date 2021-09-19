@@ -67,7 +67,7 @@ class GlossesController < ApplicationController
     @gloss = Gloss.find(params[:id])
 
     respond_to do |format|
-      if @gloss.update_attributes(params[:gloss].permit(allowed_params))
+      if @gloss.update(params[:gloss].permit(allowed_params))
         flash[:notice] = 'Gloss was successfully updated.'
         format.html { redirect_to(@gloss) }
         format.xml  { head :ok }

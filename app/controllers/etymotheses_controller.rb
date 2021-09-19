@@ -68,7 +68,7 @@ class EtymothesesController < ApplicationController
     @etymothesis = Etymothesis.find(params[:id])
 
     respond_to do |format|
-      if @etymothesis.update_attributes(params.fetch(:etymothesis, {}))
+      if @etymothesis.update(params.fetch(:etymothesis, {}))
         flash[:notice] = 'Etymothesis was successfully updated.'
         format.html { redirect_to(@etymothesis) }
         format.xml  { head :ok }

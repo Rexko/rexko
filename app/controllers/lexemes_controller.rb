@@ -167,7 +167,7 @@ class LexemesController < ApplicationController
 =end
 
     respond_to do |format|
-      if @lexeme.update_attributes(params.fetch(:lexeme, {}).permit(allowed_params))
+      if @lexeme.update(params.fetch(:lexeme, {}).permit(allowed_params))
         flash[:notice] = t('lexemes.update.successful_update')
         format.html do
           case params[:commit]

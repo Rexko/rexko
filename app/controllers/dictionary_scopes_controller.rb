@@ -60,7 +60,7 @@ class DictionaryScopesController < ApplicationController
     @dictionary_scope = DictionaryScope.find(params[:id])
 
     respond_to do |format|
-      if @dictionary_scope.update_attributes(params.fetch(:dictionary_scope, {}))
+      if @dictionary_scope.update(params.fetch(:dictionary_scope, {}))
         flash[:notice] = 'DictionaryScope was successfully updated.'
         format.html { redirect_to(@dictionary_scope) }
         format.xml  { head :ok }

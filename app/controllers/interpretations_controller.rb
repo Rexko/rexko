@@ -76,7 +76,7 @@ class InterpretationsController < ApplicationController
     @interpretation = Interpretation.find(params[:id])
 
     respond_to do |format|
-      if @interpretation.update_attributes(params[:interpretation].permit(allowed_params))
+      if @interpretation.update(params[:interpretation].permit(allowed_params))
         flash[:notice] = 'Interpretation was successfully updated.'
         format.html { redirect_to(@interpretation) }
         format.xml  { head :ok }

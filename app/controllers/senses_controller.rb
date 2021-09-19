@@ -67,7 +67,7 @@ class SensesController < ApplicationController
     @sense = Sense.find(params[:id])
 
     respond_to do |format|
-      if @sense.update_attributes(params[:sense].permit(allowed_params))
+      if @sense.update(params[:sense].permit(allowed_params))
         flash[:notice] = 'Sense was successfully updated.'
         format.html { redirect_to(@sense) }
         format.xml  { head :ok }

@@ -80,7 +80,7 @@ class DictionariesController < ApplicationController
     @dictionary = Dictionary.find(params[:id])
 
     respond_to do |format|
-      if @dictionary.update_attributes(params[:dictionary].permit(allowed_params))
+      if @dictionary.update(params[:dictionary].permit(allowed_params))
         flash[:notice] = t('dictionaries.update.success')
         format.html { redirect_to(@dictionary) }
         format.xml  { head :ok }

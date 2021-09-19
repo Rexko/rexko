@@ -60,7 +60,7 @@ class OrthographsController < ApplicationController
     @orthograph = Orthograph.find(params[:id])
 
     respond_to do |format|
-      if @orthograph.update_attributes(params.fetch(:orthograph, {}))
+      if @orthograph.update(params.fetch(:orthograph, {}))
         flash[:notice] = 'Orthograph was successfully updated.'
         format.html { redirect_to(@orthograph) }
         format.xml  { head :ok }

@@ -71,7 +71,7 @@ class ParsesController < ApplicationController
     @parse = Parse.find(params[:id])
 
     respond_to do |format|
-      if @parse.update_attributes(params[:parse].permit(allowed_params))
+      if @parse.update(params[:parse].permit(allowed_params))
         flash[:notice] = 'Parse was successfully updated.'
         format.html { redirect_to(@parse) }
         format.xml  { head :ok }

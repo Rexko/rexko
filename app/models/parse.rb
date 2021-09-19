@@ -43,7 +43,7 @@ class Parse < ApplicationRecord
     terp_params.each do |id, attributes|
       this_terp = Interpretation.find(id)
       if attributes
-        this_terp.update_attributes(attributes)
+        this_terp.update(attributes)
       else
         interpretations.delete(this_terp)
       end
