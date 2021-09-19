@@ -1,4 +1,4 @@
-class CreateDictionaryScopes < ActiveRecord::Migration
+class CreateDictionaryScopes < ActiveRecord::Migration[4.2]
   def self.up
     drop_table :dictionaries_lexemes
     

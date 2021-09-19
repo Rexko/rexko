@@ -1,4 +1,4 @@
-class CreateParses < ActiveRecord::Migration
+class CreateParses < ActiveRecord::Migration[4.2]
   def self.up
     remove_column :attestations, :sense_id
     add_column :attestations, :attested_form, :string

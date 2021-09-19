@@ -1,4 +1,4 @@
-class AddParsableTypeToParses < ActiveRecord::Migration
+class AddParsableTypeToParses < ActiveRecord::Migration[4.2]
   def self.up
     add_column :parses, :parsable_type, :string
     rename_column :parses, :attestation_id, :parsable_id

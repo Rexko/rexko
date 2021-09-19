@@ -1,4 +1,4 @@
-class CreateAuthorships < ActiveRecord::Migration
+class CreateAuthorships < ActiveRecord::Migration[4.2]
   def self.up
     drop_table :authors_titles
     

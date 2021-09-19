@@ -1,4 +1,4 @@
-class OverhaulBiblio < ActiveRecord::Migration
+class OverhaulBiblio < ActiveRecord::Migration[4.2]
   def change
     create_table :authorship_types do |t|
       t.string :name

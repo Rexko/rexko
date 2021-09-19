@@ -1,4 +1,4 @@
-class CreateLoci < ActiveRecord::Migration
+class CreateLoci < ActiveRecord::Migration[4.2]
   def self.up
     create_table :loci do |t|
       t.integer :source_id

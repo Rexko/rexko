@@ -1,4 +1,4 @@
-class AddIndices < ActiveRecord::Migration
+class AddIndices < ActiveRecord::Migration[4.2]
   def self.up
     add_index :subentries, :lexeme_id
     add_index :interpretations, :sense_id

@@ -1,4 +1,4 @@
-class UnjoinHeadwordsAndLexemes < ActiveRecord::Migration
+class UnjoinHeadwordsAndLexemes < ActiveRecord::Migration[4.2]
   def self.up
     # add lexeme_id column to headword
     add_column :headwords, :lexeme_id, :integer

@@ -1,4 +1,4 @@
-class CreateSubentries < ActiveRecord::Migration
+class CreateSubentries < ActiveRecord::Migration[4.2]
   def self.up
     create_table :subentries do |t|
       t.integer :lexeme_id

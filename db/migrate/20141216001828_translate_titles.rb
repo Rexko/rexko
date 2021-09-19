@@ -1,4 +1,4 @@
-class TranslateTitles < ActiveRecord::Migration
+class TranslateTitles < ActiveRecord::Migration[4.2]
   def up
     Title.create_translation_table!({
       name:                 :string,

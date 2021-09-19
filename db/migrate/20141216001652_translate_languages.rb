@@ -1,4 +1,4 @@
-class TranslateLanguages < ActiveRecord::Migration
+class TranslateLanguages < ActiveRecord::Migration[4.2]
   def up
     Language.create_translation_table!({
       default_name:         :string

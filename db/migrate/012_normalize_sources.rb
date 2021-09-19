@@ -1,4 +1,4 @@
-class NormalizeSources < ActiveRecord::Migration
+class NormalizeSources < ActiveRecord::Migration[4.2]
   def self.up
     remove_column :sources, :title
     remove_column :sources, :author

@@ -1,4 +1,4 @@
-class CreateEtymologies < ActiveRecord::Migration
+class CreateEtymologies < ActiveRecord::Migration[4.2]
   def self.up
     create_table :etymologies do |t|
       t.string :etymon

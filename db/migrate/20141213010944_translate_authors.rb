@@ -1,4 +1,4 @@
-class TranslateAuthors < ActiveRecord::Migration
+class TranslateAuthors < ActiveRecord::Migration[4.2]
   def up
     Author.create_translation_table!({
       name:                 :string, 

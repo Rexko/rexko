@@ -1,4 +1,4 @@
-class UnjoinSensesAndGlosses < ActiveRecord::Migration
+class UnjoinSensesAndGlosses < ActiveRecord::Migration[4.2]
   def self.up
     # add sense_id column to gloss
     add_column :glosses, :sense_id, :integer

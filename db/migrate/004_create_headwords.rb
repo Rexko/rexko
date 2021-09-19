@@ -1,4 +1,4 @@
-class CreateHeadwords < ActiveRecord::Migration
+class CreateHeadwords < ActiveRecord::Migration[4.2]
   def self.up
     create_table :headwords do |t|
       t.string :form

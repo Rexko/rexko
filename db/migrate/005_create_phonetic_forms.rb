@@ -1,4 +1,4 @@
-class CreatePhoneticForms < ActiveRecord::Migration
+class CreatePhoneticForms < ActiveRecord::Migration[4.2]
   def self.up
     create_table :phonetic_forms do |t|
       t.string :form

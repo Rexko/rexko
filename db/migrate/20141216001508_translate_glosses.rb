@@ -1,4 +1,4 @@
-class TranslateGlosses < ActiveRecord::Migration
+class TranslateGlosses < ActiveRecord::Migration[4.2]
   def up
     Gloss.create_translation_table!({
       gloss:               :string

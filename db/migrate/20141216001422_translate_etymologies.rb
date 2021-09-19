@@ -1,4 +1,4 @@
-class TranslateEtymologies < ActiveRecord::Migration
+class TranslateEtymologies < ActiveRecord::Migration[4.2]
   def up
     Etymology.create_translation_table!({
 #      etymon:              :string,

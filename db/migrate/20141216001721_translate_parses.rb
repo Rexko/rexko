@@ -1,4 +1,4 @@
-class TranslateParses < ActiveRecord::Migration
+class TranslateParses < ActiveRecord::Migration[4.2]
   def up
     Parse.create_translation_table!({
       parsed_form:          :string

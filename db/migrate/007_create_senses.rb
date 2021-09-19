@@ -1,4 +1,4 @@
-class CreateSenses < ActiveRecord::Migration
+class CreateSenses < ActiveRecord::Migration[4.2]
   def self.up
     create_table :senses do |t|
       t.integer :subentry_id

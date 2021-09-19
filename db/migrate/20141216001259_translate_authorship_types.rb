@@ -1,4 +1,4 @@
-class TranslateAuthorshipTypes < ActiveRecord::Migration
+class TranslateAuthorshipTypes < ActiveRecord::Migration[4.2]
   def up
     AuthorshipType.create_translation_table!({
       name:                :string 

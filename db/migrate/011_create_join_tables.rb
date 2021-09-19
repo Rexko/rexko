@@ -1,4 +1,4 @@
-class CreateJoinTables < ActiveRecord::Migration
+class CreateJoinTables < ActiveRecord::Migration[4.2]
   def self.up
     create_table :dictionaries_lexemes, :id => false do |t|
       t.integer :dictionary_id, :null => false

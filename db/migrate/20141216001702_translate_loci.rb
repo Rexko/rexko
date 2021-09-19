@@ -1,4 +1,4 @@
-class TranslateLoci < ActiveRecord::Migration
+class TranslateLoci < ActiveRecord::Migration[4.2]
   # Pending UI
 #  def up
 #    Locus.create_translation_table!({

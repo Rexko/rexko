@@ -1,4 +1,4 @@
-class TranslateSources < ActiveRecord::Migration
+class TranslateSources < ActiveRecord::Migration[4.2]
   def up
     Source.create_translation_table!({
       pointer:              :string

@@ -1,4 +1,4 @@
-class AddAcceptanceToHeadwords < ActiveRecord::Migration
+class AddAcceptanceToHeadwords < ActiveRecord::Migration[4.2]
   class Headword < ActiveRecord::Base
   end
   

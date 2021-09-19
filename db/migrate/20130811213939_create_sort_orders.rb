@@ -1,4 +1,4 @@
-class CreateSortOrders < ActiveRecord::Migration
+class CreateSortOrders < ActiveRecord::Migration[4.2]
   def change
     create_table :sort_orders do |t|
       t.string :name

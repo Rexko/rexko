@@ -1,4 +1,4 @@
-class TranslateNotes < ActiveRecord::Migration
+class TranslateNotes < ActiveRecord::Migration[4.2]
   def up
     Note.create_translation_table!({
       content:              :text

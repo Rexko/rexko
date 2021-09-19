@@ -1,4 +1,4 @@
-class TranslateSortOrders < ActiveRecord::Migration
+class TranslateSortOrders < ActiveRecord::Migration[4.2]
   def up
     SortOrder.create_translation_table!({
       name:                 :string

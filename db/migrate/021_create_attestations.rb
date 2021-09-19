@@ -1,4 +1,4 @@
-class CreateAttestations < ActiveRecord::Migration
+class CreateAttestations < ActiveRecord::Migration[4.2]
   def self.up
     drop_table :loci_senses
     
