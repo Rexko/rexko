@@ -2,7 +2,7 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 
 source 'http://rubygems.org'
-gem 'rails', '6.0.2.1'
+gem 'rails', '6.0.4.8'
 gem 'bootsnap', require: false
 
 gem 'globalize', git: 'https://github.com/globalize/globalize'
