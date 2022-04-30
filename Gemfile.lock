@@ -7,6 +7,13 @@ GIT
       activerecord (>= 4.2, < 7.1)
       request_store (~> 1.0)
 
+GIT
+  remote: https://github.com/joelmoss/dynamic_form.git
+  revision: bd9d4d9d92e724340be5f13e8b239537f29e2d90
+  ref: refs/pull/21/head
+  specs:
+    dynamic_form (1.1.4)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -141,7 +148,6 @@ GEM
     database_cleaner-core (2.0.1)
     debug_inspector (1.1.0)
     diff-lcs (1.5.0)
-    dynamic_form (1.1.4)
     erubi (1.10.0)
     ffi (1.15.5)
     ffi (1.15.5-x86-mingw32)
@@ -272,7 +278,7 @@ DEPENDENCIES
   capybara-webkit
   cucumber-rails
   database_cleaner
-  dynamic_form
+  dynamic_form!
   globalize!
   globalize-accessors
   jquery-rails

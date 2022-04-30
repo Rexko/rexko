@@ -29,7 +29,7 @@ class Parse < ApplicationRecord
   scope :most_wanted_in, ->(loci, count = 1) do
     most_wanted(count).
     joins('LEFT OUTER JOIN "attestations" ON ("parses"."parsable_id" = "attestations".id AND "parses"."parsable_type" = \'Attestation\')').
-    joins('LEFT OUTER JOIN (SELECT "parsed_form" AS "pf", "locus_id" AS "lid" FROM "parses" AS "p2" INNER JOIN "attestations" AS "a2" ON ("p2"."parsable_id" = "a2"."id" AND "p2"."parsable_type" = \'Attestation\' AND "a2"."locus_id" IN (' + connection.quote(loci) + '))) ON "parses"."parsed_form" = "pf"').
+    joins('LEFT OUTER JOIN (SELECT "parsed_form" AS "pf", "locus_id" AS "lid" FROM "parses" AS "p2" INNER JOIN "attestations" AS "a2" ON ("p2"."parsable_id" = "a2"."id" AND "p2"."parsable_type" = \'Attestation\' AND "a2"."locus_id" IN (' + connection.quote(loci.is_a?(Locus) ? loci.id : loci.pluck(:id)) + '))) ON "parses"."parsed_form" = "pf"').
     having('"lid" NOT NULL')
   end
 

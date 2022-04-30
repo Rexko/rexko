@@ -54,5 +54,5 @@ gem 'multi_json'
 gem 'jquery-rails'
 gem 'strip_attributes'
 gem 'will_paginate', '~> 3.0.0'
-gem 'dynamic_form'
+gem 'dynamic_form', github: 'joelmoss/dynamic_form', ref: 'refs/pull/21/head'
 gem 'web-console', '~> 2.0', group: :development
