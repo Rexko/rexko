@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_063425) do
+ActiveRecord::Schema[6.1].define(version: 2020_01_07_063425) do
 
   create_table "attestations", force: :cascade do |t|
     t.integer "locus_id"

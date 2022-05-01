@@ -2,7 +2,7 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 
 source 'http://rubygems.org'
-gem 'rails', '6.1.5.1'
+gem 'rails', '7.0.2.4'
 gem 'bootsnap', require: false
 
 gem 'globalize', git: 'https://github.com/globalize/globalize'
@@ -38,7 +38,7 @@ group :development, :test do
   # gem 'webrat'
   gem 'bullet'
   gem 'capybara', '~> 2.3'
-  gem 'capybara-webkit'
+  #gem 'capybara-webkit'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'listen'
@@ -53,6 +53,6 @@ gem 'multi_json'
 # gem 'prototype-rails', github: 'rails/prototype-rails', branch: '4.2' # Not supported in 5.0
 gem 'jquery-rails'
 gem 'strip_attributes'
-gem 'will_paginate', '~> 3.0.0'
+gem 'will_paginate', '~> 3.3'
 gem 'dynamic_form', github: 'joelmoss/dynamic_form', ref: 'refs/pull/21/head'
 gem 'web-console', '~> 2.0', group: :development
