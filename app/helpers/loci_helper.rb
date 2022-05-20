@@ -64,9 +64,9 @@ module LociHelper
     
     options = { counter: counter_link, constructions: construction_links, author: author, title: title, pointer: pointer }
     if pointer.present?
-      t('helpers.loci.cite_html', options.merge(default: "%{counter} %{constructions} %{author}, <i>%{title}</i> %{pointer}:"))
+      t('helpers.loci.cite_html', **options.merge(default: "%{counter} %{constructions} %{author}, <i>%{title}</i> %{pointer}:"))
     else
-      t('helpers.loci.cite_without_pointer.html', options.merge(default: "%{counter} %{constructions} %{author}, <i>%{title}</i>:"))
+      t('helpers.loci.cite_without_pointer.html', **options.merge(default: "%{counter} %{constructions} %{author}, <i>%{title}</i>:"))
     end
   end
 end

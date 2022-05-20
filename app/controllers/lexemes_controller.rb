@@ -76,7 +76,7 @@ class LexemesController < ApplicationController
       flash[:notice] = t('lexemes.show_by_headword.new_lexeme_prompt_html', headword: params[:headword])
       flash[:headword] = params[:headword]
       respond_to do |format|
-        format.html { redirect_to :action => 'new' }
+        format.html { redirect_to new_lexeme_path }
         format.xml { render :nothing => true, :status => '404 Not Found' }
       end
     else

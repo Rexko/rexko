@@ -37,8 +37,9 @@ gem 'puma'
 group :development, :test do
   # gem 'webrat'
   gem 'bullet'
-  gem 'capybara', '~> 2.3'
+  gem 'capybara', '~> 3.12'
   #gem 'capybara-webkit'
+  gem 'apparition', github: 'twalpole/apparition', ref: 'ca86be4d54af835d531dbcd2b86e7b2c77f85f34'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'listen'
@@ -56,3 +57,4 @@ gem 'strip_attributes'
 gem 'will_paginate', '~> 3.3'
 gem 'dynamic_form', github: 'joelmoss/dynamic_form', ref: 'refs/pull/21/head'
 gem 'web-console', '~> 2.0', group: :development
+gem 'sprockets-rails'
