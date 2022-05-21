@@ -1,4 +1,6 @@
-class CreateGlosses < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateGlosses < ActiveRecord::Migration[4.2]
   def self.up
     create_table :glosses do |t|
       t.string :gloss

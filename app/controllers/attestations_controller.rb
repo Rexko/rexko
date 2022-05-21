@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AttestationsController < ApplicationController
   # GET /attestations
   # GET /attestations.xml
@@ -44,7 +46,7 @@ class AttestationsController < ApplicationController
   # POST /attestations
   # POST /attestations.xml
   def create
-    @attestation = Attestation.new(params[:attestation])
+    @attestation = Attestation.new(params[:attestation].permit(allowed_params))
 
     respond_to do |format|
       if @attestation.save
@@ -68,7 +70,7 @@ class AttestationsController < ApplicationController
     @attestation = Attestation.find(params[:id])
 
     respond_to do |format|
-      if @attestation.update_attributes(params[:attestation])
+      if @attestation.update(params.fetch(:attestation, {}))
         flash[:notice] = 'Attestation was successfully updated.'
         format.html { redirect_to(@attestation) }
         format.xml  { head :ok }
@@ -91,5 +93,11 @@ class AttestationsController < ApplicationController
       format.html { redirect_to(attestations_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def allowed_params
+    Attestation.safe_params
   end
 end

@@ -1,4 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
+# frozen_string_literal: true
+
+require File.expand_path("#{File.dirname(__FILE__)}/../test_helper")
 
 class DictionariesControllerTest < ActionController::TestCase
   def test_should_get_index
@@ -14,38 +16,38 @@ class DictionariesControllerTest < ActionController::TestCase
 
   def test_should_create_dictionary
     assert_difference('Dictionary.count') do
-      post :create, :dictionary => { :title => "A test dictionary"}
+      post :create, params: { dictionary: { title: 'A test dictionary' } }
     end
 
     assert_redirected_to dictionary_path(assigns(:dictionary))
   end
 
   def test_should_show_dictionary
-    get :show, :id => dictionaries(:one).id
+    get :show, params: { id: dictionaries(:one).id }
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => dictionaries(:one).id
+    get :edit, params: { id: dictionaries(:one).id }
     assert_response :success
   end
 
   def test_should_update_dictionary
-    put :update, :id => dictionaries(:one).id, :dictionary => { :title => "A test dictionary" }
+    put :update, params: { id: dictionaries(:one).id, dictionary: { title: 'A test dictionary' } }
     assert_redirected_to dictionary_path(assigns(:dictionary))
   end
 
   def test_should_destroy_dictionary
     assert_difference('Dictionary.count', -1) do
-      delete :destroy, :id => dictionaries(:one).id
+      delete :destroy, params: { id: dictionaries(:one).id }
     end
 
     assert_redirected_to dictionaries_path
   end
-  
+
   # 82
-  test "should be able to edit external address" do
-    get :edit, :id => dictionaries(:one).id
-    assert_select 'input[name=?]', "dictionary[external_address]"
+  test 'should be able to edit external address' do
+    get :edit, params: { id: dictionaries(:one).id }
+    assert_select 'input[name=?]', 'dictionary[external_address]'
   end
 end

@@ -1,4 +1,6 @@
-class CreateDictionaries < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateDictionaries < ActiveRecord::Migration[4.2]
   def self.up
     create_table :dictionaries do |t|
       t.string :title

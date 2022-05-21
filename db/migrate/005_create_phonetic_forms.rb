@@ -1,4 +1,6 @@
-class CreatePhoneticForms < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreatePhoneticForms < ActiveRecord::Migration[4.2]
   def self.up
     create_table :phonetic_forms do |t|
       t.string :form

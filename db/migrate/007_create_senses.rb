@@ -1,4 +1,6 @@
-class CreateSenses < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateSenses < ActiveRecord::Migration[4.2]
   def self.up
     create_table :senses do |t|
       t.integer :subentry_id

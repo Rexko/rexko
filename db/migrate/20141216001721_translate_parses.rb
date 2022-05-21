@@ -1,8 +1,10 @@
-class TranslateParses < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class TranslateParses < ActiveRecord::Migration[4.2]
   def up
     Parse.create_translation_table!({
-      parsed_form:          :string
-    }, { migrate_data: true })
+                                      parsed_form: :string
+                                    }, { migrate_data: true })
   end
 
   def down

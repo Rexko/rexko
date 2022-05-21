@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubentriesController < ApplicationController
   # GET /subentries
   # GET /subentries.xml
@@ -6,7 +8,7 @@ class SubentriesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @subentries }
+      format.xml  { render xml: @subentries }
     end
   end
 
@@ -17,7 +19,7 @@ class SubentriesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @subentry }
+      format.xml  { render xml: @subentry }
     end
   end
 
@@ -25,17 +27,15 @@ class SubentriesController < ApplicationController
   # GET /subentries/new.xml
   def new
     @subentry = Subentry.build_from_only_valid(params)
-    @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
-    @dictionaries = Dictionary.where(id: params[:dictionaries]).all
+    @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, "\\1[#{Time.now.to_i}]")
+    @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
-    
+
     respond_to do |format|
       format.html do
-      	if request.xhr?
-      		render :partial => "form"
-      	end
+        render partial: 'form' if request.xhr?
       end
-      format.xml  { render :xml => @subentry }
+      format.xml { render xml: @subentry }
     end
   end
 
@@ -47,16 +47,16 @@ class SubentriesController < ApplicationController
   # POST /subentries
   # POST /subentries.xml
   def create
-    @subentry = Subentry.new(params[:subentry])
+    @subentry = Subentry.new(params[:subentry].permit(allowed_params))
 
     respond_to do |format|
       if @subentry.save
         flash[:notice] = 'Subentry was successfully created.'
         format.html { redirect_to(@subentry) }
-        format.xml  { render :xml => @subentry, :status => :created, :location => @subentry }
+        format.xml  { render xml: @subentry, status: :created, location: @subentry }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @subentry.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @subentry.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,13 +67,13 @@ class SubentriesController < ApplicationController
     @subentry = Subentry.find(params[:id])
 
     respond_to do |format|
-      if @subentry.update_attributes(params[:subentry])
+      if @subentry.update(params.fetch(:subentry, {}))
         flash[:notice] = 'Subentry was successfully updated.'
         format.html { redirect_to(@subentry) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @subentry.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @subentry.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -88,5 +88,11 @@ class SubentriesController < ApplicationController
       format.html { redirect_to(subentries_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def allowed_params
+    Subentry.safe_params
   end
 end

@@ -1,7 +1,9 @@
-class CreateDictionaryScopes < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateDictionaryScopes < ActiveRecord::Migration[4.2]
   def self.up
     drop_table :dictionaries_lexemes
-    
+
     create_table :dictionary_scopes do |t|
       t.integer :dictionary_id
       t.integer :lexeme_id

@@ -1,22 +1,24 @@
+# frozen_string_literal: true
+
 class AuthorsController < ApplicationController
   layout '1col_layout'
   # GET /authors
   # GET /authors.xml
   def index
-    @authors = Author.all.sort_by {|a| a.sort_key.present? ? a.sort_key : a.name }
+    @authors = Author.all.sort_by { |a| a.sort_key.present? ? a.sort_key : a.name }
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @authors }
+      format.xml  { render xml: @authors }
     end
   end
 
   def matching
     @authors = Author.where(Author.arel_table[:name].matches("%#{params[:value]}%")).order(:name)
     @ref = params[:ref]
-    
+
     respond_to do |format|
-      format.js { render :partial => "autocomplete" }
+      format.js { render partial: 'autocomplete' }
     end
   end
 
@@ -27,7 +29,7 @@ class AuthorsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @author }
+      format.xml  { render xml: @author }
     end
   end
 
@@ -38,7 +40,7 @@ class AuthorsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @author }
+      format.xml  { render xml: @author }
     end
   end
 
@@ -56,10 +58,10 @@ class AuthorsController < ApplicationController
       if @author.save
         flash[:notice] = 'Author was successfully created.'
         format.html { redirect_to(@author) }
-        format.xml  { render :xml => @author, :status => :created, :location => @author }
+        format.xml  { render xml: @author, status: :created, location: @author }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @author.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @author.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -70,13 +72,13 @@ class AuthorsController < ApplicationController
     @author = Author.find(params[:id])
 
     respond_to do |format|
-      if @author.update_attributes(params[:author])
+      if @author.update(params.fetch(:author, {}))
         flash[:notice] = 'Author was successfully updated.'
         format.html { redirect_to(@author) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @author.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @author.errors, status: :unprocessable_entity }
       end
     end
   end

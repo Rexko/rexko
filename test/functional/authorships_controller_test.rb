@@ -1,4 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
+# frozen_string_literal: true
+
+require File.expand_path("#{File.dirname(__FILE__)}/../test_helper")
 
 class AuthorshipsControllerTest < ActionController::TestCase
   def test_should_get_index
@@ -14,30 +16,32 @@ class AuthorshipsControllerTest < ActionController::TestCase
 
   def test_should_create_authorship
     assert_difference('Authorship.count') do
-      post :create, :authorship => { }
+      attrs = authorships(:one).attributes
+      attrs.delete('id')
+      post(:create, params: { authorship: attrs }).parsed_body
     end
 
     assert_redirected_to authorship_path(assigns(:authorship))
   end
 
   def test_should_show_authorship
-    get :show, :id => authorships(:one).id
+    get :show, params: { id: authorships(:one).id }
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => authorships(:one).id
+    get :edit, params: { id: authorships(:one).id }
     assert_response :success
   end
 
   def test_should_update_authorship
-    put :update, :id => authorships(:one).id, :authorship => { }
+    put :update, params: { id: authorships(:one).id, authorship: {} }
     assert_redirected_to authorship_path(assigns(:authorship))
   end
 
   def test_should_destroy_authorship
     assert_difference('Authorship.count', -1) do
-      delete :destroy, :id => authorships(:one).id
+      delete :destroy, params: { id: authorships(:one).id }
     end
 
     assert_redirected_to authorships_path

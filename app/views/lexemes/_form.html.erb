@@ -3,7 +3,7 @@
   <!-- Dictionary -->
   <div class="type-select">
       <label for="lexeme_dictionary_ids"><%= t('.dictionary') %></label>
-      <%= collection_select(:lexeme, :dictionary_ids, Dictionary.find(:all), :id, :title, {}, { :multiple => :true }) %> 
+      <%= collection_select(:lexeme, :dictionary_ids, Dictionary.all, :id, :title, {}, { :multiple => :true }) %> 
   </div>
 
   <!-- Headword -->

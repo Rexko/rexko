@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PhoneticFormsController < ApplicationController
   # GET /phonetic_forms
   # GET /phonetic_forms.xml
@@ -6,7 +8,7 @@ class PhoneticFormsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @phonetic_forms }
+      format.xml  { render xml: @phonetic_forms }
     end
   end
 
@@ -17,7 +19,7 @@ class PhoneticFormsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @phonetic_form }
+      format.xml  { render xml: @phonetic_form }
     end
   end
 
@@ -25,17 +27,17 @@ class PhoneticFormsController < ApplicationController
   # GET /phonetic_forms/new.xml
   def new
     @phonetic_form = PhoneticForm.build_from_only_valid(params)
-    @dictionaries = Dictionary.where(id: params[:dictionaries]).all
+    @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
 
     respond_to do |format|
       format.html do
         if request.xhr?
-          @path = params[:path].sub(/(headword.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
-        	render :partial => "form"
+          @path = params[:path].sub(/(headword.*)\[\d*\]/, "\\1[#{Time.now.to_i}]")
+          render partial: 'form'
         end
       end
-      format.xml  { render :xml => @phonetic_form }
+      format.xml { render xml: @phonetic_form }
     end
   end
 
@@ -47,16 +49,16 @@ class PhoneticFormsController < ApplicationController
   # POST /phonetic_forms
   # POST /phonetic_forms.xml
   def create
-    @phonetic_form = PhoneticForm.new(params[:phonetic_form])
+    @phonetic_form = PhoneticForm.new(params[:phonetic_form].permit(allowed_params))
 
     respond_to do |format|
       if @phonetic_form.save
         flash[:notice] = 'PhoneticForm was successfully created.'
         format.html { redirect_to(@phonetic_form) }
-        format.xml  { render :xml => @phonetic_form, :status => :created, :location => @phonetic_form }
+        format.xml  { render xml: @phonetic_form, status: :created, location: @phonetic_form }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @phonetic_form.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @phonetic_form.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,13 +69,13 @@ class PhoneticFormsController < ApplicationController
     @phonetic_form = PhoneticForm.find(params[:id])
 
     respond_to do |format|
-      if @phonetic_form.update_attributes(params[:phonetic_form])
+      if @phonetic_form.update(params[:phonetic_form].permit(allowed_params))
         flash[:notice] = 'PhoneticForm was successfully updated.'
         format.html { redirect_to(@phonetic_form) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @phonetic_form.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @phonetic_form.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -88,5 +90,11 @@ class PhoneticFormsController < ApplicationController
       format.html { redirect_to(phonetic_forms_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def allowed_params
+    PhoneticForm.safe_params
   end
 end

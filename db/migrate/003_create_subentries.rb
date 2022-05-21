@@ -1,4 +1,6 @@
-class CreateSubentries < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateSubentries < ActiveRecord::Migration[4.2]
   def self.up
     create_table :subentries do |t|
       t.integer :lexeme_id

@@ -1,9 +1,11 @@
-class TranslateEtymologies < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class TranslateEtymologies < ActiveRecord::Migration[4.2]
   def up
     Etymology.create_translation_table!({
-#      etymon:              :string,
-      gloss:               :string
-    }, { migrate_data: true })
+                                          #      etymon:              :string,
+                                          gloss: :string
+                                        }, { migrate_data: true })
   end
 
   def down

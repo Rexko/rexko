@@ -12,7 +12,7 @@
     <td><%=h dictionary_scope.lexeme_id %></td>
     <td><%= link_to 'Show', dictionary_scope %></td>
     <td><%= link_to 'Edit', edit_dictionary_scope_path(dictionary_scope) %></td>
-    <td><%= link_to 'Destroy', dictionary_scope, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', dictionary_scope, data: { :confirm => 'Are you sure?'}, :method => :delete %></td>
   </tr>
 <% end %>
 </table>

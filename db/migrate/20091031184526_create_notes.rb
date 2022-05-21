@@ -1,4 +1,6 @@
-class CreateNotes < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateNotes < ActiveRecord::Migration[4.2]
   def self.up
     create_table :notes do |t|
       t.text :content

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ParsesController < ApplicationController
   # GET /parses
   # GET /parses.xml
@@ -6,7 +8,7 @@ class ParsesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @parses }
+      format.xml  { render xml: @parses }
     end
   end
 
@@ -17,7 +19,7 @@ class ParsesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @parse }
+      format.xml  { render xml: @parse }
     end
   end
 
@@ -25,21 +27,21 @@ class ParsesController < ApplicationController
   # GET /parses/new.xml
   def new
     @parse = Parse.build_from_only_valid(params)
-    @path = params[:path].try(:sub, /(parse.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
-    @dictionaries = Dictionary.where(id: params[:dictionaries]).all
+    @path = params[:path].try(:sub, /(parse.*)\[\d*\]/, "\\1[#{Time.now.to_i}]")
+    @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for @dictionaries
-    
+
     respond_to do |format|
       format.html do
-      	if request.xhr?
+        if request.xhr?
           if params[:path] =~ /locus|etymo/
-            render :partial => "interlinear_form"
+            render partial: 'interlinear_form'
           else
-            render :partial => "form"
-          end 
-      	end
+            render partial: 'form'
+          end
+        end
       end
-      format.xml  { render :xml => @parse }
+      format.xml { render xml: @parse }
     end
   end
 
@@ -51,16 +53,16 @@ class ParsesController < ApplicationController
   # POST /parses
   # POST /parses.xml
   def create
-    @parse = Parse.new(params[:parse])
+    @parse = Parse.new(params[:parse].permit(allowed_params))
 
     respond_to do |format|
       if @parse.save
         flash[:notice] = 'Parse was successfully created.'
         format.html { redirect_to(@parse) }
-        format.xml  { render :xml => @parse, :status => :created, :location => @parse }
+        format.xml  { render xml: @parse, status: :created, location: @parse }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @parse.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @parse.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -71,13 +73,13 @@ class ParsesController < ApplicationController
     @parse = Parse.find(params[:id])
 
     respond_to do |format|
-      if @parse.update_attributes(params[:parse])
+      if @parse.update(params[:parse].permit(allowed_params))
         flash[:notice] = 'Parse was successfully updated.'
         format.html { redirect_to(@parse) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @parse.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @parse.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -92,5 +94,11 @@ class ParsesController < ApplicationController
       format.html { redirect_to(parses_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def allowed_params
+    Parse.safe_params
   end
 end

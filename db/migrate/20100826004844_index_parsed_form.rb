@@ -1,4 +1,6 @@
-class IndexParsedForm < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class IndexParsedForm < ActiveRecord::Migration[4.2]
   def self.up
     add_index :parses, :parsed_form
   end

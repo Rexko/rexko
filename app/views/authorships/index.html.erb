@@ -21,7 +21,7 @@
   <tr>
     <td><%= link_to t('.show'), authorship %></td>
     <td><%= link_to t('.edit'), edit_authorship_path(authorship) %></td>
-    <td><%= link_to t('.destroy'), authorship, :confirm => t('.confirm_destroy', name: j(cited_name(authorship, format: :text))), :method => :delete %></td>
+    <td><%= link_to t('.destroy'), authorship, data: { :confirm => t('.confirm_destroy', name: j(cited_name(authorship, format: :text))) }, :method => :delete %></td>
   </tr>
 <% end %>
 </table>

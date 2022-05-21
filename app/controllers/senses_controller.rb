@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SensesController < ApplicationController
   # GET /senses
   # GET /senses.xml
@@ -6,7 +8,7 @@ class SensesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @senses }
+      format.xml  { render xml: @senses }
     end
   end
 
@@ -17,7 +19,7 @@ class SensesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @sense }
+      format.xml  { render xml: @sense }
     end
   end
 
@@ -25,17 +27,15 @@ class SensesController < ApplicationController
   # GET /senses/new.xml
   def new
     @sense = Sense.build_from_only_valid(params)
-    @path = params[:path].try(:sub, /(sense.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
-    @dictionaries = Dictionary.where(id: params[:dictionaries]).all
+    @path = params[:path].try(:sub, /(sense.*)\[\d*\]/, "\\1[#{Time.now.to_i}]")
+    @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
-    
+
     respond_to do |format|
       format.html do
-      	if request.xhr?
-      		render :partial => "form"
-      	end
+        render partial: 'form' if request.xhr?
       end
-      format.xml  { render :xml => @sense }
+      format.xml { render xml: @sense }
     end
   end
 
@@ -47,16 +47,16 @@ class SensesController < ApplicationController
   # POST /senses
   # POST /senses.xml
   def create
-    @sense = Sense.new(params[:sense])
+    @sense = Sense.new(params[:sense].permit(allowed_params))
 
     respond_to do |format|
       if @sense.save
         flash[:notice] = 'Sense was successfully created.'
         format.html { redirect_to(@sense) }
-        format.xml  { render :xml => @sense, :status => :created, :location => @sense }
+        format.xml  { render xml: @sense, status: :created, location: @sense }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @sense.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @sense.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,13 +67,13 @@ class SensesController < ApplicationController
     @sense = Sense.find(params[:id])
 
     respond_to do |format|
-      if @sense.update_attributes(params[:sense])
+      if @sense.update(params[:sense].permit(allowed_params))
         flash[:notice] = 'Sense was successfully updated.'
         format.html { redirect_to(@sense) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @sense.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @sense.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -88,5 +88,11 @@ class SensesController < ApplicationController
       format.html { redirect_to(senses_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def allowed_params
+    Sense.safe_params
   end
 end

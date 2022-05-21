@@ -1,4 +1,6 @@
-class CreateEtymologies < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateEtymologies < ActiveRecord::Migration[4.2]
   def self.up
     create_table :etymologies do |t|
       t.string :etymon

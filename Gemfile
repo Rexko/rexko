@@ -1,19 +1,24 @@
+# frozen_string_literal: true
+
 # Edit this Gemfile to bundle your application's dependencies.
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 
 source 'http://rubygems.org'
-gem 'rails', '3.1.11'
+gem 'bootsnap', require: false
+gem 'rails', '7.0.2.4'
 
-gem 'globalize', '~> 3.1.0'
+gem 'activemodel-serializers-xml'
+gem 'globalize', git: 'https://github.com/globalize/globalize'
 gem 'globalize-accessors'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.4.0'
 
 # Use unicorn as the web server
 # gem 'unicorn'
+gem 'puma'
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -34,22 +39,25 @@ gem 'sqlite3'
 group :development, :test do
   # gem 'webrat'
   gem 'bullet'
-  gem 'capybara-webkit'
+  gem 'capybara', '~> 3.12'
+  # gem 'capybara-webkit'
+  gem 'apparition', github: 'twalpole/apparition', ref: 'ca86be4d54af835d531dbcd2b86e7b2c77f85f34'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
+  gem 'listen'
+  gem 'minitest', '~> 5.10.0'
   gem 'missing_t', '~> 0.4.1'
-  gem 'ruby-prof'
+  gem 'rails-controller-testing'
+  gem 'rubocop', require: false
+  gem 'ruby-prof', '~> 0.15.9'
   gem 'test-unit'
 end
 
-group :assets do
-  gem 'coffee-rails', '~> 3.1.0'
-  gem 'sass-rails', '~> 3.1.0'
-  gem 'uglifier'
-end
-
 gem 'multi_json'
-gem 'prototype-rails'
+# gem 'prototype-rails', github: 'rails/prototype-rails', branch: '4.2' # Not supported in 5.0
+gem 'dynamic_form', github: 'joelmoss/dynamic_form', ref: 'refs/pull/21/head'
+gem 'jquery-rails'
+gem 'sprockets-rails'
 gem 'strip_attributes'
-gem 'will_paginate', '~> 3.0.0'
-
+gem 'web-console', '~> 2.0', group: :development
+gem 'will_paginate', '~> 3.3'

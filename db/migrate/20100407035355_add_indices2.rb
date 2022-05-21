@@ -1,4 +1,6 @@
-class AddIndices2 < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class AddIndices2 < ActiveRecord::Migration[4.2]
   def self.up
     add_index :headwords, :lexeme_id
     add_index :headwords, :form

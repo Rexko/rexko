@@ -6,17 +6,17 @@
 
 	<div class="type-select">
         <%= f.label :source_language_id, t('.headword_language') %>
-		<%= collection_select(:dictionary, :source_language_id, Language.find(:all), :id, :to_s) %>
+		<%= collection_select(:dictionary, :source_language_id, Language.all, :id, :to_s) %>
     </div>
 
 	<div class="type-select">
         <%= f.label :language_id, t('.definition_language') %>
-		<%= collection_select(:dictionary, :language_id, Language.find(:all), :id, :to_s) %>
+		<%= collection_select(:dictionary, :language_id, Language.all, :id, :to_s) %>
     </div>
   
 	<div class="type-select">
         <%= f.label :target_language_id, t('.gloss_language') %>
-		<%= collection_select(:dictionary, :target_language_id, Language.find(:all), :id, :to_s) %>
+		<%= collection_select(:dictionary, :target_language_id, Language.all, :id, :to_s) %>
 	</div>
 
     <div class="type-text">

@@ -14,7 +14,7 @@
     <td><%=h source.pointer %></td>
     <td><%= link_to 'Show', source %></td>
     <td><%= link_to 'Edit', edit_source_path(source) %></td>
-    <td><%= link_to 'Destroy', source, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', source, data: { :confirm => 'Are you sure?' }, :method => :delete %></td>
   </tr>
 <% end %>
 </table>

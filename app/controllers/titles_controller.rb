@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TitlesController < ApplicationController
   layout '1col_layout'
   # GET /titles
@@ -7,16 +9,16 @@ class TitlesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @titles }
+      format.xml  { render xml: @titles }
     end
   end
 
   def matching
     @titles = Title.where(Title.arel_table[:name].matches("%#{params[:value]}%")).order(:name)
     @ref = params[:ref]
-    
+
     respond_to do |format|
-      format.js { render :partial => "autocomplete" }
+      format.js { render partial: 'autocomplete' }
     end
   end
 
@@ -27,7 +29,7 @@ class TitlesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @title }
+      format.xml  { render xml: @title }
     end
   end
 
@@ -38,7 +40,7 @@ class TitlesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @title }
+      format.xml  { render xml: @title }
     end
   end
 
@@ -56,10 +58,10 @@ class TitlesController < ApplicationController
       if @title.save
         flash[:notice] = 'Title was successfully created.'
         format.html { redirect_to(@title) }
-        format.xml  { render :xml => @title, :status => :created, :location => @title }
+        format.xml  { render xml: @title, status: :created, location: @title }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @title.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @title.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -70,13 +72,13 @@ class TitlesController < ApplicationController
     @title = Title.find(params[:id])
 
     respond_to do |format|
-      if @title.update_attributes(params[:title])
+      if @title.update(params.fetch(:title, {}))
         flash[:notice] = 'Title was successfully updated.'
         format.html { redirect_to(@title) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @title.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @title.errors, status: :unprocessable_entity }
       end
     end
   end

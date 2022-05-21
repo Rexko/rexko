@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SourcesController < ApplicationController
   # GET /sources
   # GET /sources.xml
@@ -6,7 +8,7 @@ class SourcesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @sources }
+      format.xml  { render xml: @sources }
     end
   end
 
@@ -17,7 +19,7 @@ class SourcesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @source }
+      format.xml  { render xml: @source }
     end
   end
 
@@ -30,11 +32,9 @@ class SourcesController < ApplicationController
 
     respond_to do |format|
       format.html do
-      	if request.xhr?
-      		render :partial => "form"
-      	end
+        render partial: 'form' if request.xhr?
       end
-      format.xml  { render :xml => @source }
+      format.xml { render xml: @source }
     end
   end
 
@@ -52,10 +52,10 @@ class SourcesController < ApplicationController
       if @source.save
         flash[:notice] = 'Source was successfully created.'
         format.html { redirect_to(@source) }
-        format.xml  { render :xml => @source, :status => :created, :location => @source }
+        format.xml  { render xml: @source, status: :created, location: @source }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @source.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @source.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,13 +66,13 @@ class SourcesController < ApplicationController
     @source = Source.find(params[:id])
 
     respond_to do |format|
-      if @source.update_attributes(params[:source])
+      if @source.update(params.fetch(:source, {}))
         flash[:notice] = 'Source was successfully updated.'
         format.html { redirect_to(@source) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @source.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @source.errors, status: :unprocessable_entity }
       end
     end
   end

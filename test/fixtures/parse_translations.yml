@@ -1,0 +1,35 @@
+one:
+  parse_id: 1
+  locale: en
+  parsed_form:  foo
+    
+two:
+  parse_id: 2
+  locale: en
+  parsed_form:  bar
+
+liters: 
+  parse_id: 3
+  locale: en
+  parsed_form: liter
+
+litres: 
+  parse_id: 4
+  locale: en
+  parsed_form: litre
+
+literal:
+  parse_id: 5
+  locale: en
+  parsed_form: literal
+
+parse_without_dictionary:
+  parse_id: 10
+  locale: en
+  parsed_form: -----
+
+wrong_case_parse:
+  parse_id: 20
+  locale: en
+  parsed_form: Liter
+  

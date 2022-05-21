@@ -1,0 +1,45 @@
+one:
+  etymology_id: 1
+  locale: en
+  gloss: MyString
+
+simple:
+  etymology_id: 10
+  locale: en
+  gloss: one
+
+with_same_language_next:
+  etymology_id: 20
+  locale: en
+  gloss: one
+
+with_same_language_next_b:
+  etymology_id: 21
+  locale: en
+  gloss: horn
+
+with_parse:
+  etymology_id: 30
+  locale: en
+  gloss: "30"
+
+without_language:
+  etymology_id: 40
+  locale: en
+  gloss: smile
+
+chained_A:
+  etymology_id: 50
+  locale: en
+  gloss: "primary"
+
+chained_B:
+  etymology_id: 52
+  locale: en
+  gloss: "test"
+
+chained_B2:
+  etymology_id: 53
+  locale: en
+  gloss: "test 2"
+

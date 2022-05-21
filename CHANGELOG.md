@@ -2,6 +2,7 @@
 * [#239] Fixed an issue where glosses might not appear in wiki show
 * [#253] Fixed an issue with some special characters in URLs
 * [#241] Fixed an issue with adding new languages from the etymology form
+* [#194, #195] Upgraded from Rails 3.1.11 & Ruby 1.9.3 to Rails 7.0.2 & Ruby 3.1.2
 
 ## Since 0.4.2
 * [#94] Added delete link to Lexeme show page

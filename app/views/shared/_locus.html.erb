@@ -19,13 +19,13 @@
             <% if defined? sense %>
             <li><%= link_to t('interpretations.index.unlink'), 
                     Interpretation.where(parse_id: locus.parse_ids, sense_id: sense.id).first,
-                    confirm: t('interpretations.index.confirm_destroy', locus: greek_numeral(locus_counter + 1), lexeme: @lexeme.primary_headword), 
+                    data: { confirm: t('interpretations.index.confirm_destroy', locus: greek_numeral(locus_counter + 1), lexeme: @lexeme.primary_headword) }, 
                     method: :delete, back: request.path
             %></li>
             <% end %>
             <li><%= link_to t('loci.index.destroy'), 
                     locus, 
-                    confirm: t('loci.index.confirm_destroy'), 
+                    data: { confirm: t('loci.index.confirm_destroy') }, 
                     method: :delete, back: request.path
             %></li>
             </ul>

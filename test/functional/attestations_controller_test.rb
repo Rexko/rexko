@@ -1,4 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
+# frozen_string_literal: true
+
+require File.expand_path("#{File.dirname(__FILE__)}/../test_helper")
 
 class AttestationsControllerTest < ActionController::TestCase
   def test_should_get_index
@@ -14,30 +16,30 @@ class AttestationsControllerTest < ActionController::TestCase
 
   def test_should_create_attestation
     assert_difference('Attestation.count') do
-      post :create, :attestation => { :attested_form => "test" }
+      post :create, params: { attestation: { attested_form: 'test' } }
     end
 
     assert_redirected_to attestation_path(assigns(:attestation))
   end
 
   def test_should_show_attestation
-    get :show, :id => attestations(:one).id
+    get :show, params: { id: attestations(:one).id }
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => attestations(:one).id
+    get :edit, params: { id: attestations(:one).id }
     assert_response :success
   end
 
   def test_should_update_attestation
-    put :update, :id => attestations(:one).id, :attestation => { }
+    put :update, params: { id: attestations(:one).id, attestation: {} }
     assert_redirected_to attestation_path(assigns(:attestation))
   end
 
   def test_should_destroy_attestation
     assert_difference('Attestation.count', -1) do
-      delete :destroy, :id => attestations(:one).id
+      delete :destroy, params: { id: attestations(:one).id }
     end
 
     assert_redirected_to attestations_path

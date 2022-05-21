@@ -1,4 +1,6 @@
-class CreateInterpretations < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateInterpretations < ActiveRecord::Migration[4.2]
   def self.up
     create_table :interpretations do |t|
       t.integer :parse_id
