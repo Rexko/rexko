@@ -92,8 +92,9 @@ class AttestationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   private
+
   def allowed_params
     Attestation.safe_params
   end

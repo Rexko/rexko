@@ -1,11 +1,11 @@
-ENV["RAILS_ENV"] = "test"
-require File.expand_path('../../config/environment', __FILE__)
+ENV['RAILS_ENV'] = 'test'
+require File.expand_path('../config/environment', __dir__)
 require 'rails/test_help'
-require "capybara/rails"
+require 'capybara/rails'
 require 'capybara/minitest'
 require 'capybara/minitest/spec'
-require "capybara/apparition"
-  
+require 'capybara/apparition'
+
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
   #
@@ -16,7 +16,7 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include Capybara::DSL
   include Capybara::Minitest::Assertions
-  
+
   Capybara.current_driver = :apparition
   Capybara.javascript_driver = :apparition
   Capybara.server = :puma, { Silent: true }
@@ -24,11 +24,11 @@ end
 
 class ActionView::TestCase
   setup :controller_with_default_locale
-  
+
   def controller_with_default_locale
     @controller = TestController.new
-    
-    def @controller.default_url_options(options = {})
+
+    def @controller.default_url_options(_options = {})
       { locale: 'en' }
     end
   end
@@ -52,7 +52,9 @@ if ENV['BULLET']
       super if defined?(super)
 
       if Bullet.warnings.present?
-        warnings = Bullet.warnings.map{ |_k, warning| warning }.flatten.map{|warn| warn.body_with_caller}.join("\n-----\n\n")
+        warnings = Bullet.warnings.map do |_k, warning|
+                     warning
+                   end.flatten.map { |warn| warn.body_with_caller }.join("\n-----\n\n")
 
         flunk(warnings)
       end

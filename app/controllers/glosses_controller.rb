@@ -6,7 +6,7 @@ class GlossesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @glosses }
+      format.xml  { render xml: @glosses }
     end
   end
 
@@ -17,7 +17,7 @@ class GlossesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @gloss }
+      format.xml  { render xml: @gloss }
     end
   end
 
@@ -25,17 +25,15 @@ class GlossesController < ApplicationController
   # GET /glosses/new.xml
   def new
     @gloss = Gloss.build_from_only_valid(params)
-    @path = params[:path].try(:sub, /(gloss.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @path = params[:path].try(:sub, /(gloss.*)\[\d*\]/, '\1[' + Time.now.to_i.to_s + ']')
     @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
-    
+
     respond_to do |format|
       format.html do
-      	if request.xhr?
-      		render :partial => "form"
-      	end
+        render partial: 'form' if request.xhr?
       end
-      format.xml  { render :xml => @gloss }
+      format.xml { render xml: @gloss }
     end
   end
 
@@ -53,10 +51,10 @@ class GlossesController < ApplicationController
       if @gloss.save
         flash[:notice] = 'Gloss was successfully created.'
         format.html { redirect_to(@gloss) }
-        format.xml  { render :xml => @gloss, :status => :created, :location => @gloss }
+        format.xml  { render xml: @gloss, status: :created, location: @gloss }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @gloss.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @gloss.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -72,8 +70,8 @@ class GlossesController < ApplicationController
         format.html { redirect_to(@gloss) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @gloss.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @gloss.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -89,8 +87,9 @@ class GlossesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   private
+
   def allowed_params
     Gloss.safe_params
   end

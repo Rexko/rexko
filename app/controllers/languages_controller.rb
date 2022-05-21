@@ -3,11 +3,11 @@ class LanguagesController < ApplicationController
   # GET /languages
   # GET /languages.xml
   def index
-    @languages = Language.all.sort_by{|l| l.to_s}
+    @languages = Language.all.sort_by { |l| l.to_s }
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @languages }
+      format.xml  { render xml: @languages }
     end
   end
 
@@ -18,7 +18,7 @@ class LanguagesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @languages }
+      format.xml  { render xml: @languages }
     end
   end
 
@@ -30,7 +30,7 @@ class LanguagesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @languages }
+      format.xml  { render xml: @languages }
     end
   end
 
@@ -48,13 +48,13 @@ class LanguagesController < ApplicationController
     respond_to do |format|
       if @language.save
         update_accessors
-        
+
         flash[:notice] = t('languages.new.success')
         format.html { redirect_to(@language) }
-        format.xml  { render :xml => @language, :status => :created, :location => @language }
+        format.xml  { render xml: @language, status: :created, location: @language }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @language.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @language.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,13 +67,13 @@ class LanguagesController < ApplicationController
     respond_to do |format|
       if @language.update(params[:language])
         update_accessors
-        
+
         flash[:notice] = t('languages.edit.success')
         format.html { redirect_to(@language) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @language.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @language.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -89,16 +89,16 @@ class LanguagesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def matching
-    @languages = Language.matching(params[:value]).sort_by {|lang| lang.to_s }
+    @languages = Language.matching(params[:value]).sort_by { |lang| lang.to_s }
     @ref = params[:ref]
-    
+
     respond_to do |format|
-      format.js { render :partial => "autocomplete" }
+      format.js { render partial: 'autocomplete' }
     end
   end
-  
+
   private
 
   # Update accessors for models that have accessors defined

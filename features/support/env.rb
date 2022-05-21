@@ -35,7 +35,7 @@ require 'cucumber/formatter/unicode'
 begin
   DatabaseCleaner.strategy = :truncation
 rescue NameError
-  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+  raise 'You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it.'
 end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
@@ -66,7 +66,7 @@ Capybara.run_server = true
 Capybara.server_port = 7787
 
 ApplicationController.class_eval do
-  def default_url_options(options = {})
-    { locale: I18n.locale, host: "127.0.0.1", port: 7787 }
+  def default_url_options(_options = {})
+    { locale: I18n.locale, host: '127.0.0.1', port: 7787 }
   end
 end

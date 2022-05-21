@@ -2,8 +2,8 @@ class TranslateLanguages < ActiveRecord::Migration[4.2]
   def up
     unless table_exists?(:language_translations)
       Language.create_translation_table!({
-        default_name:         :string
-      }, { migrate_data: true })
+                                           default_name: :string
+                                         }, { migrate_data: true })
     end
   end
 

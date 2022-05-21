@@ -3,25 +3,29 @@ class DictionariesController < ApplicationController
   # GET /dictionaries
   # GET /dictionaries.xml
   def index
-    @dictionaries = (params[:dictionaries].present? \
-      ? Dictionary.where(id: params[:dictionaries])
-      : Dictionary).includes([:language, :source_language, :target_language]).sort_by {|d| d.title }
+    @dictionaries = (if params[:dictionaries].present?
+                       Dictionary.where(id: params[:dictionaries])
+                     else
+                       Dictionary
+                     end).includes(%i[language source_language target_language]).sort_by { |d| d.title }
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @dictionaries }
-      format.json { 
-        case params[:data] 
-        when "langs" 
+      format.xml  { render xml: @dictionaries }
+      format.json do
+        case params[:data]
+        when 'langs'
           hsh = Dictionary.langs_hash_for(@dictionaries)
-          hsh = hsh.collect do |categ, langs| 
-            [categ, langs.collect {|lang| { tab: lang.to_s, code: lang.iso_639_code, underscore_code: lang.iso_639_code.underscore }}]
+          hsh = hsh.collect do |categ, langs|
+            [categ, langs.collect do |lang|
+                      { tab: lang.to_s, code: lang.iso_639_code, underscore_code: lang.iso_639_code.underscore }
+                    end]
           end
-          
+
           render json: Hash[hsh]
         else render nothing: true, status: 403
         end
-      }
+      end
     end
   end
 
@@ -37,7 +41,7 @@ class DictionariesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @dictionary }
+      format.xml  { render xml: @dictionary }
     end
   end
 
@@ -48,7 +52,7 @@ class DictionariesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @dictionary }
+      format.xml  { render xml: @dictionary }
     end
   end
 
@@ -66,10 +70,10 @@ class DictionariesController < ApplicationController
       if @dictionary.save
         flash[:notice] = t('dictionaries.create.success')
         format.html { redirect_to(@dictionary) }
-        format.xml  { render :xml => @dictionary, :status => :created, :location => @dictionary }
+        format.xml  { render xml: @dictionary, status: :created, location: @dictionary }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @dictionary.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @dictionary.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -85,8 +89,8 @@ class DictionariesController < ApplicationController
         format.html { redirect_to(@dictionary) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @dictionary.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @dictionary.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -102,8 +106,9 @@ class DictionariesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   private
+
   def allowed_params
     Dictionary.safe_params
   end

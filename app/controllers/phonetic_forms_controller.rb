@@ -6,7 +6,7 @@ class PhoneticFormsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @phonetic_forms }
+      format.xml  { render xml: @phonetic_forms }
     end
   end
 
@@ -17,7 +17,7 @@ class PhoneticFormsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @phonetic_form }
+      format.xml  { render xml: @phonetic_form }
     end
   end
 
@@ -31,11 +31,11 @@ class PhoneticFormsController < ApplicationController
     respond_to do |format|
       format.html do
         if request.xhr?
-          @path = params[:path].sub(/(headword.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
-        	render :partial => "form"
+          @path = params[:path].sub(/(headword.*)\[\d*\]/, '\1[' + Time.now.to_i.to_s + ']')
+          render partial: 'form'
         end
       end
-      format.xml  { render :xml => @phonetic_form }
+      format.xml { render xml: @phonetic_form }
     end
   end
 
@@ -53,10 +53,10 @@ class PhoneticFormsController < ApplicationController
       if @phonetic_form.save
         flash[:notice] = 'PhoneticForm was successfully created.'
         format.html { redirect_to(@phonetic_form) }
-        format.xml  { render :xml => @phonetic_form, :status => :created, :location => @phonetic_form }
+        format.xml  { render xml: @phonetic_form, status: :created, location: @phonetic_form }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @phonetic_form.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @phonetic_form.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -72,8 +72,8 @@ class PhoneticFormsController < ApplicationController
         format.html { redirect_to(@phonetic_form) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @phonetic_form.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @phonetic_form.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -89,8 +89,9 @@ class PhoneticFormsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   private
+
   def allowed_params
     PhoneticForm.safe_params
   end

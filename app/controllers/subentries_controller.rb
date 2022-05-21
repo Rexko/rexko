@@ -6,7 +6,7 @@ class SubentriesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @subentries }
+      format.xml  { render xml: @subentries }
     end
   end
 
@@ -17,7 +17,7 @@ class SubentriesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @subentry }
+      format.xml  { render xml: @subentry }
     end
   end
 
@@ -25,17 +25,15 @@ class SubentriesController < ApplicationController
   # GET /subentries/new.xml
   def new
     @subentry = Subentry.build_from_only_valid(params)
-    @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, '\1[' + Time.now.to_i.to_s + ']')
     @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
-    
+
     respond_to do |format|
       format.html do
-      	if request.xhr?
-      		render :partial => "form"
-      	end
+        render partial: 'form' if request.xhr?
       end
-      format.xml  { render :xml => @subentry }
+      format.xml { render xml: @subentry }
     end
   end
 
@@ -53,10 +51,10 @@ class SubentriesController < ApplicationController
       if @subentry.save
         flash[:notice] = 'Subentry was successfully created.'
         format.html { redirect_to(@subentry) }
-        format.xml  { render :xml => @subentry, :status => :created, :location => @subentry }
+        format.xml  { render xml: @subentry, status: :created, location: @subentry }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @subentry.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @subentry.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -72,8 +70,8 @@ class SubentriesController < ApplicationController
         format.html { redirect_to(@subentry) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @subentry.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @subentry.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -91,6 +89,7 @@ class SubentriesController < ApplicationController
   end
 
   private
+
   def allowed_params
     Subentry.safe_params
   end

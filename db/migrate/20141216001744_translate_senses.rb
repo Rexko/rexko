@@ -1,8 +1,8 @@
 class TranslateSenses < ActiveRecord::Migration[4.2]
   def up
     Sense.create_translation_table!({
-      definition:           :text
-    }, { migrate_data: true })
+                                      definition: :text
+                                    }, { migrate_data: true })
   end
 
   def down

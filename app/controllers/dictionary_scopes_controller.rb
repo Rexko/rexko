@@ -6,7 +6,7 @@ class DictionaryScopesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @dictionary_scopes }
+      format.xml  { render xml: @dictionary_scopes }
     end
   end
 
@@ -17,7 +17,7 @@ class DictionaryScopesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @dictionary_scope }
+      format.xml  { render xml: @dictionary_scope }
     end
   end
 
@@ -28,7 +28,7 @@ class DictionaryScopesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @dictionary_scope }
+      format.xml  { render xml: @dictionary_scope }
     end
   end
 
@@ -46,10 +46,10 @@ class DictionaryScopesController < ApplicationController
       if @dictionary_scope.save
         flash[:notice] = 'DictionaryScope was successfully created.'
         format.html { redirect_to(@dictionary_scope) }
-        format.xml  { render :xml => @dictionary_scope, :status => :created, :location => @dictionary_scope }
+        format.xml  { render xml: @dictionary_scope, status: :created, location: @dictionary_scope }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @dictionary_scope.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @dictionary_scope.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,8 +65,8 @@ class DictionaryScopesController < ApplicationController
         format.html { redirect_to(@dictionary_scope) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @dictionary_scope.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @dictionary_scope.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -84,6 +84,7 @@ class DictionaryScopesController < ApplicationController
   end
 
   private
+
   def allowed_params
     DictionaryScope.safe_params
   end

@@ -6,7 +6,7 @@ class InterpretationsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @interpretations }
+      format.xml  { render xml: @interpretations }
     end
   end
 
@@ -17,7 +17,7 @@ class InterpretationsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @interpretation }
+      format.xml  { render xml: @interpretation }
     end
   end
 
@@ -25,26 +25,26 @@ class InterpretationsController < ApplicationController
   # GET /interpretations/new.xml
   def new
     @interpretation = Interpretation.new
-    if params[:live_value].present? 
-      @interpretation.build_parse(:parsed_form => params[:live_value])
+    if params[:live_value].present?
+      @interpretation.build_parse(parsed_form: params[:live_value])
     elsif params[:parse].present?
       @interpretation.parse = Parse.find(params[:parse])
     end
-    @path = params[:path].try(:sub, /(interpretation.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @path = params[:path].try(:sub, /(interpretation.*)\[\d*\]/, '\1[' + Time.now.to_i.to_s + ']')
     @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
-    
+
     respond_to do |format|
       format.html do
-      	if request.xhr?
+        if request.xhr?
           if params[:path] =~ /locus|etymo/
-            render :partial => "interlinear_form"
+            render partial: 'interlinear_form'
           else
-            render :partial => "form"
-          end 
-      	end
+            render partial: 'form'
+          end
+        end
       end
-      format.xml  { render :xml => @interpretation }
+      format.xml { render xml: @interpretation }
     end
   end
 
@@ -62,10 +62,10 @@ class InterpretationsController < ApplicationController
       if @interpretation.save
         flash[:notice] = 'Interpretation was successfully created.'
         format.html { redirect_to(@interpretation) }
-        format.xml  { render :xml => @interpretation, :status => :created, :location => @interpretation }
+        format.xml  { render xml: @interpretation, status: :created, location: @interpretation }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @interpretation.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @interpretation.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -81,8 +81,8 @@ class InterpretationsController < ApplicationController
         format.html { redirect_to(@interpretation) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @interpretation.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @interpretation.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -100,6 +100,7 @@ class InterpretationsController < ApplicationController
   end
 
   private
+
   def allowed_params
     Interpretation.safe_params
   end

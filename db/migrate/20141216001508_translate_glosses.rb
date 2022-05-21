@@ -1,8 +1,8 @@
 class TranslateGlosses < ActiveRecord::Migration[4.2]
   def up
     Gloss.create_translation_table!({
-      gloss:               :string
-    }, { migrate_data: true })
+                                      gloss: :string
+                                    }, { migrate_data: true })
   end
 
   def down

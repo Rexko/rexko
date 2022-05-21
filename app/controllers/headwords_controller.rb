@@ -6,7 +6,7 @@ class HeadwordsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @headwords }
+      format.xml  { render xml: @headwords }
     end
   end
 
@@ -17,7 +17,7 @@ class HeadwordsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @headword }
+      format.xml  { render xml: @headword }
     end
   end
 
@@ -25,17 +25,15 @@ class HeadwordsController < ApplicationController
   # GET /headwords/new.xml
   def new
     @headword = Headword.build_from_only_valid(params)
-    @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, '\1['+Time.now.to_i.to_s+']')
+    @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, '\1[' + Time.now.to_i.to_s + ']')
     @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
-    
+
     respond_to do |format|
       format.html do
-      	if request.xhr?
-      		render :partial => "form"
-      	end
+        render partial: 'form' if request.xhr?
       end
-      format.xml  { render :xml => @headword }
+      format.xml { render xml: @headword }
     end
   end
 
@@ -53,10 +51,10 @@ class HeadwordsController < ApplicationController
       if @headword.save
         flash[:notice] = 'Headword was successfully created.'
         format.html { redirect_to(@headword) }
-        format.xml  { render :xml => @headword, :status => :created, :location => @headword }
+        format.xml  { render xml: @headword, status: :created, location: @headword }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @headword.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @headword.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -72,8 +70,8 @@ class HeadwordsController < ApplicationController
         format.html { redirect_to(@headword) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @headword.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @headword.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -89,8 +87,9 @@ class HeadwordsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   private
+
   def allowed_params
     Headword.safe_params
   end

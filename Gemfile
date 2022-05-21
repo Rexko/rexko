@@ -2,11 +2,11 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 
 source 'http://rubygems.org'
-gem 'rails', '7.0.2.4'
 gem 'bootsnap', require: false
+gem 'rails', '7.0.2.4'
 
-gem 'globalize', git: 'https://github.com/globalize/globalize'
 gem 'activemodel-serializers-xml'
+gem 'globalize', git: 'https://github.com/globalize/globalize'
 gem 'globalize-accessors'
 
 # Bundle edge Rails instead:
@@ -38,7 +38,7 @@ group :development, :test do
   # gem 'webrat'
   gem 'bullet'
   gem 'capybara', '~> 3.12'
-  #gem 'capybara-webkit'
+  # gem 'capybara-webkit'
   gem 'apparition', github: 'twalpole/apparition', ref: 'ca86be4d54af835d531dbcd2b86e7b2c77f85f34'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
@@ -46,15 +46,16 @@ group :development, :test do
   gem 'minitest', '~> 5.10.0'
   gem 'missing_t', '~> 0.4.1'
   gem 'rails-controller-testing'
+  gem 'rubocop', require: false
   gem 'ruby-prof', '~> 0.15.9'
   gem 'test-unit'
 end
 
 gem 'multi_json'
 # gem 'prototype-rails', github: 'rails/prototype-rails', branch: '4.2' # Not supported in 5.0
-gem 'jquery-rails'
-gem 'strip_attributes'
-gem 'will_paginate', '~> 3.3'
 gem 'dynamic_form', github: 'joelmoss/dynamic_form', ref: 'refs/pull/21/head'
-gem 'web-console', '~> 2.0', group: :development
+gem 'jquery-rails'
 gem 'sprockets-rails'
+gem 'strip_attributes'
+gem 'web-console', '~> 2.0', group: :development
+gem 'will_paginate', '~> 3.3'

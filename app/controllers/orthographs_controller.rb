@@ -6,7 +6,7 @@ class OrthographsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @orthographs }
+      format.xml  { render xml: @orthographs }
     end
   end
 
@@ -17,7 +17,7 @@ class OrthographsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @orthograph }
+      format.xml  { render xml: @orthograph }
     end
   end
 
@@ -28,7 +28,7 @@ class OrthographsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @orthograph }
+      format.xml  { render xml: @orthograph }
     end
   end
 
@@ -46,10 +46,10 @@ class OrthographsController < ApplicationController
       if @orthograph.save
         flash[:notice] = 'Orthograph was successfully created.'
         format.html { redirect_to(@orthograph) }
-        format.xml  { render :xml => @orthograph, :status => :created, :location => @orthograph }
+        format.xml  { render xml: @orthograph, status: :created, location: @orthograph }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @orthograph.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @orthograph.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,8 +65,8 @@ class OrthographsController < ApplicationController
         format.html { redirect_to(@orthograph) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @orthograph.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @orthograph.errors, status: :unprocessable_entity }
       end
     end
   end
