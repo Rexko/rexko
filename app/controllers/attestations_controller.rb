@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AttestationsController < ApplicationController
   # GET /attestations
   # GET /attestations.xml

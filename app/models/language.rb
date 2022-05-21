@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Language < ApplicationRecord
   attribute :default_name
 
@@ -78,14 +80,14 @@ class Language < ApplicationRecord
   # lang_attrs can be an array of symbols (the returned hash will use those
   # symbols as keys) or of arrays
   def self.langs_hash_for(content, lang_attrs = {})
-    Hash[lang_attrs.collect do |lang_name, lang_method|
-      [lang_name, langs_for(content, lang_method)]
-    end]
+    lang_attrs.transform_values do |lang_method|
+      langs_for(content, lang_method)
+    end
   end
 
   def self.code_for(content, subtags = {})
     lang_for(content).iso_639_code.tap do |code|
-      code += '-' + subtags[:variant] unless subtags[:variant].blank?
+      code += "-#{subtags[:variant]}" unless subtags[:variant].blank?
     end
   end
 
@@ -96,9 +98,9 @@ class Language < ApplicationRecord
   # :order - exceptions to default order, a hash like { "Ñ" => "N" }
   def sort(ordinandum, options = {})
     substs = options[:sub] || default_order.substitutions
-    substs.keys.each { |k| substs[k.mb_chars.downcase.to_s] ||= substs[k] }
+    substs.keys.each { |k| substs[k.mb_chars.downcase.to_s] ||= substs[k] } # rubocop:disable Style/HashEachMethods
     orders = options[:order] || default_order.orderings
-    orders.keys.each do |k|
+    orders.keys.each do |k| # rubocop:disable Style/HashEachMethods
       orders[k] = "#{orders[k]}\u{FFFF}"
       orders[k.mb_chars.downcase.to_s] ||= orders[k]
     end

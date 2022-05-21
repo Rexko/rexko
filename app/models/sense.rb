@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Sense < ApplicationRecord
   attribute :definition
 
@@ -18,15 +20,15 @@ class Sense < ApplicationRecord
                                                                                    end
                                                                                  }
   accepts_nested_attributes_for :glosses, allow_destroy: true, reject_if: proc { |attributes|
-                                                                            !attributes.select do |k, _v|
-                                                                               k.start_with?('gloss')
-                                                                             end.any? do |_k, v|
+                                                                            attributes.select do |k, _v|
+                                                                              k.start_with?('gloss')
+                                                                            end.none? do |_k, v|
                                                                               v.present?
                                                                             end
                                                                           }
 
-  HASH_MAP_TO_PARSE = { interpretations: Interpretation::HASH_MAP_TO_PARSE }
-  INCLUDE_TREE = { senses: %i[glosses notes language translations] }
+  HASH_MAP_TO_PARSE = { interpretations: Interpretation::HASH_MAP_TO_PARSE }.freeze
+  INCLUDE_TREE = { senses: %i[glosses notes language translations] }.freeze
 
   def self.safe_params
     [:id, :_destroy, :definition, :subentry_id, *Sense.globalize_attribute_names, {
@@ -65,7 +67,7 @@ class Sense < ApplicationRecord
   def validate_sufficient_data
     if globalize_attribute_names.select do |k, _v|
          k.to_s.start_with?('definition')
-       end.all? { |v| v.blank? } && glosses.empty?
+       end.all?(&:blank?) && glosses.empty?
       errors[:base] << 'Definition or gloss must be supplied for a sense'
     end
   end

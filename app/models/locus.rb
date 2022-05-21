@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Locus < ApplicationRecord
   belongs_to :source, optional: true
   has_many :attestations, dependent: :destroy
@@ -79,7 +81,7 @@ class Locus < ApplicationRecord
                                                    end).includes({ source: [{ authorship: [{ author: :translations }, { title: :translations }] }, :translations],
                                                                    parses: [:translations,
                                                                             { interpretations: { sense: :translations } }] }).where(Locus.arel_table[:id].not_eq(id))
-    grouped_construes = raw_construes.group_by { |l| l.parsed_form }
+    grouped_construes = raw_construes.group_by(&:parsed_form)
 
     construes = parses.collect do |forms|
       # For whatever reason, when the same Locus is returned multiple times in raw_construes, only the first one has the eager-loaded data.

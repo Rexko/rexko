@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../config/environment', __dir__)
 require 'rails/test_help'
@@ -6,30 +8,34 @@ require 'capybara/minitest'
 require 'capybara/minitest/spec'
 require 'capybara/apparition'
 
-class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
-  #
-  # Note: You'll currently still have to declare fixtures explicitly in integration tests
-  # -- they do not yet inherit this setting
-  fixtures :all
+module ActiveSupport
+  class TestCase
+    # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
+    #
+    # Note: You'll currently still have to declare fixtures explicitly in integration tests
+    # -- they do not yet inherit this setting
+    fixtures :all
 
-  # Add more helper methods to be used by all tests here...
-  include Capybara::DSL
-  include Capybara::Minitest::Assertions
+    # Add more helper methods to be used by all tests here...
+    include Capybara::DSL
+    include Capybara::Minitest::Assertions
 
-  Capybara.current_driver = :apparition
-  Capybara.javascript_driver = :apparition
-  Capybara.server = :puma, { Silent: true }
+    Capybara.current_driver = :apparition
+    Capybara.javascript_driver = :apparition
+    Capybara.server = :puma, { Silent: true }
+  end
 end
 
-class ActionView::TestCase
-  setup :controller_with_default_locale
+module ActionView
+  class TestCase
+    setup :controller_with_default_locale
 
-  def controller_with_default_locale
-    @controller = TestController.new
+    def controller_with_default_locale
+      @controller = TestController.new
 
-    def @controller.default_url_options(_options = {})
-      { locale: 'en' }
+      def @controller.default_url_options(_options = {})
+        { locale: 'en' }
+      end
     end
   end
 end
@@ -53,8 +59,8 @@ if ENV['BULLET']
 
       if Bullet.warnings.present?
         warnings = Bullet.warnings.map do |_k, warning|
-                     warning
-                   end.flatten.map { |warn| warn.body_with_caller }.join("\n-----\n\n")
+          warning
+        end.flatten.map(&:body_with_caller).join("\n-----\n\n")
 
         flunk(warnings)
       end
@@ -63,7 +69,9 @@ if ENV['BULLET']
     end
   end
 
-  class ActiveSupport::TestCase
-    include MiniTestWithBullet
+  module ActiveSupport
+    class TestCase
+      include MiniTestWithBullet
+    end
   end
 end

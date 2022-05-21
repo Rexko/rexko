@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Headword < ApplicationRecord
   attribute :form
 
@@ -31,7 +33,7 @@ class Headword < ApplicationRecord
 
   DESCRIPTIVE = 1
   PRESCRIPTIVE = 2
-  INCLUDE_TREE = { headwords: [PhoneticForm::INCLUDE_TREE, :language, :translations] }
+  INCLUDE_TREE = { headwords: [PhoneticForm::INCLUDE_TREE, :language, :translations] }.freeze
 
   after_initialize do |_hw|
     # Most likely default: assume the most acceptable forms are being entered.
@@ -100,7 +102,7 @@ class Headword < ApplicationRecord
   def self.best_headword_forms(headwords)
     return [] if headwords.empty?
 
-    most_accepted = headwords.max_by { |hw2| hw2.acceptance }.acceptance
+    most_accepted = headwords.max_by(&:acceptance).acceptance
 
     forms = headwords.select { |hw| hw.acceptance == most_accepted }.inject([]) do |memo, obj|
       memo | obj.orthographic_forms
@@ -111,7 +113,7 @@ class Headword < ApplicationRecord
   def self.best_phonetic_forms(headwords)
     return [] if headwords.empty?
 
-    most_accepted = headwords.max_by { |hw2| hw2.acceptance }.acceptance
+    most_accepted = headwords.max_by(&:acceptance).acceptance
 
     forms = headwords.select { |hw| hw.acceptance == most_accepted }.inject([]) do |memo, obj|
       memo | obj.phonetic_forms.collect(&:phonetic_forms).flatten
@@ -121,7 +123,7 @@ class Headword < ApplicationRecord
   protected
 
   def any_form_present?
-    if globalize_attribute_names.select { |k, _v| k.to_s.start_with?('form') }.all? { |v| v.blank? }
+    if globalize_attribute_names.select { |k, _v| k.to_s.start_with?('form') }.all?(&:blank?)
       errors.add(:form, I18n.t('errors.messages.blank'))
     end
   end

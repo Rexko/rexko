@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSortOrders < ActiveRecord::Migration[4.2]
   def change
     create_table :sort_orders do |t|

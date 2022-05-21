@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddParsableTypeToParses < ActiveRecord::Migration[4.2]
   def self.up
     add_column :parses, :parsable_type, :string

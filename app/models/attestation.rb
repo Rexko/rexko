@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Attestation < ApplicationRecord
   belongs_to :locus, optional: true
   has_many :parses, as: :parsable, dependent: :destroy

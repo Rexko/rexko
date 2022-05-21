@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Interpretation < ApplicationRecord
   belongs_to :parse, optional: true
   belongs_to :sense

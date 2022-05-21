@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LociHelper
   def greek_numeral(int)
     thousands = ['', '͵α', '͵β', '͵γ', '͵δ', '͵ε', '͵στ', '͵ζ', '͵η', '͵θ'][int / 1000 % 10]
@@ -13,7 +15,7 @@ module LociHelper
     groups = senses.collect do |sense|
       dict = (sense.lexeme.dictionaries.first.try(:title) || '(No dictionary)')
       paradigm = sense.subentry.paradigm
-      part = ('(' + sense.subentry.part_of_speech + ')' if sense.subentry.part_of_speech)
+      part = ("(#{sense.subentry.part_of_speech})" if sense.subentry.part_of_speech)
       optgroup = "#{dict}: #{paradigm} #{part}"
 
       # need to set id or otherwise make it optionable
@@ -29,7 +31,7 @@ module LociHelper
     output = {}
 
     groups.each do |group|
-      if output.has_key? group.first # if we already have optgroup X, append
+      if output.key? group.first # if we already have optgroup X, append
         output[group.first] << [group.second, group.last]
       else # otherwise, create optgroup X
         output[group.first] = [[group.second, group.last]]

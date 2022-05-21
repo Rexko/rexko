@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LociController < ApplicationController
   layout '1col_layout'
   # GET /loci
@@ -122,20 +124,16 @@ class LociController < ApplicationController
     # FIXME: Because of the way a new sense is added under an existing subentry,
     # we have to tweak params so that it is appropriately associated.
     atesute = params[:locus][:attestations_attributes]
-    if atesute
-      atesute.each do |_, att_v|
-        paasu = att_v[:parses_attributes]
-        next unless paasu
+    atesute&.each do |_, att_v|
+      paasu = att_v[:parses_attributes]
+      next unless paasu
 
-        paasu.each do |_, par_v|
-          intah = par_v[:interpretations_attributes]
-          next unless intah
+      paasu.each do |_, par_v|
+        intah = par_v[:interpretations_attributes]
+        next unless intah
 
-          intah.each do |_, int_v|
-            if int_v[:sense_id].try(:slice, 'new')
-              int_v[:sense_attributes][:subentry_id] = int_v[:sense_id].split('-')[1]
-            end
-          end
+        intah.each do |_, int_v|
+          int_v[:sense_attributes][:subentry_id] = int_v[:sense_id].split('-')[1] if int_v[:sense_id].try(:slice, 'new')
         end
       end
     end
@@ -189,7 +187,7 @@ class LociController < ApplicationController
   end
 
   def matching
-    authors = Author.where(['name LIKE ?', '%' + params[:author] + '%'])
+    authors = Author.where(['name LIKE ?', "%#{params[:author]}%"])
     if authors
       author_loci = Locus.sorted.includes([{ source: { authorship: %i[author title] } },
                                            parses: { interpretations: :sense }]).authored_by(authors)

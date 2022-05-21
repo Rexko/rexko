@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Source < ApplicationRecord
   has_many :loci
   belongs_to :authorship, optional: true # , :include => [:title, :author]

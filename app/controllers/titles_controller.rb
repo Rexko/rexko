@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TitlesController < ApplicationController
   layout '1col_layout'
   # GET /titles

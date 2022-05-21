@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TranslateAuthors < ActiveRecord::Migration[4.2]
   def up
     Author.create_translation_table!({

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SourcesController < ApplicationController
   # GET /sources
   # GET /sources.xml

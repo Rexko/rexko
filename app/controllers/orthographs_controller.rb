@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrthographsController < ApplicationController
   # GET /orthographs
   # GET /orthographs.xml

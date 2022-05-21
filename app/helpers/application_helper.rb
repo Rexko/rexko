@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+require 'English'
 module ApplicationHelper
   include ERB::Util
 
@@ -55,7 +58,7 @@ module ApplicationHelper
     @nests ||= {}
 
     content_for :javascript do
-      content = ''
+      content = +''
       args.each do |association|
         association = Array(association)
         assoc_key = association.join('$')
@@ -206,12 +209,12 @@ module ApplicationHelper
     output.gsub!(/&\#39;&\#39;&\#39;(.+?)&\#39;&\#39;&\#39;/, '<b>\1</b>')
     output.gsub!(/&\#39;&\#39;(.+?)&\#39;&\#39;/, '<i>\1</i>')
     output.gsub!(/\[\[(?<lexeme>[^|]+?)\]\](?<ending>\w*)|\[\[(?<lexeme>.+?)\|(?<stem>.+?)\]\](?<ending>\w*)/).with_index do |_match, index|
-      bold = highlight.include?($~[:lexeme])
+      bold = highlight.include?($LAST_MATCH_INFO[:lexeme])
       bb = ('<b>' if bold)
       eb = ('</b>' if bold)
-      parse = yield $~[:lexeme], index if block_given?
+      parse = yield $LAST_MATCH_INFO[:lexeme], index if block_given?
       parse = '' << ':'" #{parse}" if parse.present?
-      "<a href=\"/#{I18n.locale}/html/#{$~[:lexeme]}\" title=\"#{$~[:lexeme]}#{parse}\">#{bb}#{$~[:stem] || $~[:lexeme]}#{$~[:ending]}#{eb}</a>"
+      "<a href=\"/#{I18n.locale}/html/#{$LAST_MATCH_INFO[:lexeme]}\" title=\"#{$LAST_MATCH_INFO[:lexeme]}#{parse}\">#{bb}#{$LAST_MATCH_INFO[:stem] || $LAST_MATCH_INFO[:lexeme]}#{$LAST_MATCH_INFO[:ending]}#{eb}</a>"
     end
     output.html_safe
   end
@@ -228,7 +231,7 @@ module ApplicationHelper
       ref = child_form.object_name
 
       label_tag("#{ref}_search", t("activerecord.models.#{child}")) <<
-        if options.has_key? :custom_search
+        if options.key? :custom_search
           text_field_tag(:search, options[:custom_search], id: "#{ref}_search", placeholder: options[:prompt])
         else
           child_form.text_field(:name, id: "#{ref}_search", placeholder: options[:prompt])
@@ -254,7 +257,7 @@ module ApplicationHelper
       content_tag(:ul) do
         languages.each_with_index do |lang, index|
           concat(content_tag(:li,
-                             { class: [('selected' if index == 0), ('solo' if languages.length == 1),
+                             { class: [('selected' if index.zero?), ('solo' if languages.length == 1),
                                        ('default' if lang == Language::DEFAULT)] }) do
                    h lang
                  end)

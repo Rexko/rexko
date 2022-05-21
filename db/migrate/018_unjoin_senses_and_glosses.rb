@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UnjoinSensesAndGlosses < ActiveRecord::Migration[4.2]
   def self.up
     # add sense_id column to gloss
@@ -7,8 +9,8 @@ class UnjoinSensesAndGlosses < ActiveRecord::Migration[4.2]
     # This will act up if someone got clever and started linking glosses to multiple senses
     # Doesn't seem to work anyway.  Oh well.
     senses = Sense.all
-    for sense in senses
-      for gloss in sense.glosses
+    senses.each do |sense|
+      sense.glosses.each do |gloss|
         gloss.sense_id = sense.id
         gloss.save
       end

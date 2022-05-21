@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TranslateSubentries < ActiveRecord::Migration[4.2]
   def up
     Subentry.create_translation_table!({

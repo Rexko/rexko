@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Gloss < ApplicationRecord
   attribute :gloss
 
@@ -19,7 +21,7 @@ class Gloss < ApplicationRecord
     joins(HASH_MAP_TO_PARSE).where({ parses: { parsable_id: parsables, parsable_type: type } })
   }
 
-  HASH_MAP_TO_PARSE = { sense: Sense::HASH_MAP_TO_PARSE }
+  HASH_MAP_TO_PARSE = { sense: Sense::HASH_MAP_TO_PARSE }.freeze
 
   # Default to the target_language of the lexeme's dictionaries if not defined
   before_save :set_defaults

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TranslatePhoneticForms < ActiveRecord::Migration[4.2]
   def up
     PhoneticForm.create_translation_table!({

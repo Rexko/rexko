@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Dictionary < ApplicationRecord
   has_many :dictionary_scopes # has_one?
   has_many :lexemes, through: :dictionary_scopes

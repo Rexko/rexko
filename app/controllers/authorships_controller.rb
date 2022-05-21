@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthorshipsController < ApplicationController
   layout '1col_layout'
 

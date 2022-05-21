@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotesController < ApplicationController
   def new
     @note = Note.build_from_only_valid(params)

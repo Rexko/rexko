@@ -1,4 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
+# frozen_string_literal: true
+
+require File.expand_path("#{File.dirname(__FILE__)}/../test_helper")
 
 class LexemeTest < ActiveSupport::TestCase
   def test_lookup_all_by_headword_handles_wildcards

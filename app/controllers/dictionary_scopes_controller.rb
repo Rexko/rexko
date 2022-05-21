@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DictionaryScopesController < ApplicationController
   # GET /dictionary_scopes
   # GET /dictionary_scopes.xml

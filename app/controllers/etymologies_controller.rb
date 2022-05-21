@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EtymologiesController < ApplicationController
   # GET /etymologies
   # GET /etymologies.xml
@@ -33,7 +35,7 @@ class EtymologiesController < ApplicationController
         @path = params[:path]
       else
         pos = params[:path].rpartition(/(etymolog.*)\[\d*\]/)
-        pos[1].sub!(/\[\d*\]/, '[' + Time.now.to_i.to_s + ']')
+        pos[1].sub!(/\[\d*\]/, "[#{Time.now.to_i}]")
         @path = pos.join
       end
     end

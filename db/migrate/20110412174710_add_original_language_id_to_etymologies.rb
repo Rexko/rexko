@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddOriginalLanguageIdToEtymologies < ActiveRecord::Migration[4.2]
   def self.up
     add_column :etymologies, :original_language_id, :integer

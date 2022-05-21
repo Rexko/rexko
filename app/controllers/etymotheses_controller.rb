@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EtymothesesController < ApplicationController
   # GET /etymotheses
   # GET /etymotheses.xml
@@ -26,7 +28,7 @@ class EtymothesesController < ApplicationController
   def new
     @etymothesis = Etymothesis.build_from_only_valid(params)
     @etymothesis.build_etymology
-    @path = params[:path].try(:sub, /(subentr.*)\[\d*\]/, '\1[' + Time.now.to_i.to_s + ']')
+    @path = params[:path].try(:sub, /(subentr.*)\[\d*\]/, "\\1[#{Time.now.to_i}]")
     @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Etymothesis < ApplicationRecord
   belongs_to :etymology, optional: true
   belongs_to :subentry, optional: true

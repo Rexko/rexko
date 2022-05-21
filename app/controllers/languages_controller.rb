@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class LanguagesController < ApplicationController
   layout '1col_layout'
   # GET /languages
   # GET /languages.xml
   def index
-    @languages = Language.all.sort_by { |l| l.to_s }
+    @languages = Language.all.sort_by(&:to_s)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -91,7 +93,7 @@ class LanguagesController < ApplicationController
   end
 
   def matching
-    @languages = Language.matching(params[:value]).sort_by { |lang| lang.to_s }
+    @languages = Language.matching(params[:value]).sort_by(&:to_s)
     @ref = params[:ref]
 
     respond_to do |format|

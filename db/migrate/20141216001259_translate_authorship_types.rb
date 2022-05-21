@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TranslateAuthorshipTypes < ActiveRecord::Migration[4.2]
   def up
     AuthorshipType.create_translation_table!({

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InterpretationsController < ApplicationController
   # GET /interpretations
   # GET /interpretations.xml
@@ -30,7 +32,7 @@ class InterpretationsController < ApplicationController
     elsif params[:parse].present?
       @interpretation.parse = Parse.find(params[:parse])
     end
-    @path = params[:path].try(:sub, /(interpretation.*)\[\d*\]/, '\1[' + Time.now.to_i.to_s + ']')
+    @path = params[:path].try(:sub, /(interpretation.*)\[\d*\]/, "\\1[#{Time.now.to_i}]")
     @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
 

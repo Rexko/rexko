@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TranslateLanguages < ActiveRecord::Migration[4.2]
   def up
     unless table_exists?(:language_translations)

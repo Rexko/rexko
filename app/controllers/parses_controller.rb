@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ParsesController < ApplicationController
   # GET /parses
   # GET /parses.xml
@@ -25,7 +27,7 @@ class ParsesController < ApplicationController
   # GET /parses/new.xml
   def new
     @parse = Parse.build_from_only_valid(params)
-    @path = params[:path].try(:sub, /(parse.*)\[\d*\]/, '\1[' + Time.now.to_i.to_s + ']')
+    @path = params[:path].try(:sub, /(parse.*)\[\d*\]/, "\\1[#{Time.now.to_i}]")
     @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for @dictionaries
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PhoneticFormsController < ApplicationController
   # GET /phonetic_forms
   # GET /phonetic_forms.xml
@@ -31,7 +33,7 @@ class PhoneticFormsController < ApplicationController
     respond_to do |format|
       format.html do
         if request.xhr?
-          @path = params[:path].sub(/(headword.*)\[\d*\]/, '\1[' + Time.now.to_i.to_s + ']')
+          @path = params[:path].sub(/(headword.*)\[\d*\]/, "\\1[#{Time.now.to_i}]")
           render partial: 'form'
         end
       end

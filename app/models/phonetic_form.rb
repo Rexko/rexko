@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PhoneticForm < ApplicationRecord
   attribute :form
 
@@ -11,7 +13,7 @@ class PhoneticForm < ApplicationRecord
 
   validate :any_form_present?
 
-  INCLUDE_TREE = { phonetic_forms: :translations }
+  INCLUDE_TREE = { phonetic_forms: :translations }.freeze
 
   def self.safe_params
     :form
@@ -27,7 +29,7 @@ class PhoneticForm < ApplicationRecord
   protected
 
   def any_form_present?
-    if globalize_attribute_names.select { |k, _v| k.to_s.start_with?('form') }.all? { |v| v.blank? }
+    if globalize_attribute_names.select { |k, _v| k.to_s.start_with?('form') }.all?(&:blank?)
       errors.add(:form, I18n.t('errors.messages.blank'))
     end
   end

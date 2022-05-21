@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubentriesController < ApplicationController
   # GET /subentries
   # GET /subentries.xml
@@ -25,7 +27,7 @@ class SubentriesController < ApplicationController
   # GET /subentries/new.xml
   def new
     @subentry = Subentry.build_from_only_valid(params)
-    @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, '\1[' + Time.now.to_i.to_s + ']')
+    @path = params[:path].try(:sub, /(lexeme.*)\[\d*\]/, "\\1[#{Time.now.to_i}]")
     @dictionaries = Dictionary.where(id: params[:dictionaries])
     @langs = Dictionary.langs_hash_for(@dictionaries)
 

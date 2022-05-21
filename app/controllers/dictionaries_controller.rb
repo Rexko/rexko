@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DictionariesController < ApplicationController
   layout '1col_layout'
   # GET /dictionaries
@@ -7,7 +9,7 @@ class DictionariesController < ApplicationController
                        Dictionary.where(id: params[:dictionaries])
                      else
                        Dictionary
-                     end).includes(%i[language source_language target_language]).sort_by { |d| d.title }
+                     end).includes(%i[language source_language target_language]).sort_by(&:title)
 
     respond_to do |format|
       format.html # index.html.erb

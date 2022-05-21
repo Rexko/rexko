@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UnjoinHeadwordsAndLexemes < ActiveRecord::Migration[4.2]
   def self.up
     # add lexeme_id column to headword

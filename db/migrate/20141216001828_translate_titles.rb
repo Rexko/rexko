@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TranslateTitles < ActiveRecord::Migration[4.2]
   def up
     Title.create_translation_table!({

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TranslateGlosses < ActiveRecord::Migration[4.2]
   def up
     Gloss.create_translation_table!({

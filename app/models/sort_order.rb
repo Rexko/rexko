@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SortOrder < ApplicationRecord
   belongs_to :language
   serialize :substitutions, Hash

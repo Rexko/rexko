@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^languages for testing$/) do
   Language::DEFAULT.save
 end

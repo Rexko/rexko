@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddIndices < ActiveRecord::Migration[4.2]
   def self.up
     add_index :subentries, :lexeme_id

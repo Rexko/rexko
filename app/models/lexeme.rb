@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Lexeme < ApplicationRecord
   has_many :dictionary_scopes
   has_many :dictionaries, through: :dictionary_scopes
@@ -24,10 +26,10 @@ class Lexeme < ApplicationRecord
   CREATE = 'create_new'
   SUBSTRING = 'contains'
   EXACT = 'exact_match'
-  SEARCH_OPTIONS = [CREATE, SUBSTRING, EXACT]
+  SEARCH_OPTIONS = [CREATE, SUBSTRING, EXACT].freeze
 
-  HASH_MAP_TO_PARSE = { subentries: Subentry::HASH_MAP_TO_PARSE }
-  INCLUDE_TREE = { lexemes: [:dictionaries, Headword::INCLUDE_TREE, Subentry::INCLUDE_TREE] }
+  HASH_MAP_TO_PARSE = { subentries: Subentry::HASH_MAP_TO_PARSE }.freeze
+  INCLUDE_TREE = { lexemes: [:dictionaries, Headword::INCLUDE_TREE, Subentry::INCLUDE_TREE] }.freeze
 
   def self.safe_params
     [:dictionaries, {
@@ -67,10 +69,10 @@ class Lexeme < ApplicationRecord
   # dictionary.  Otherwise, fetch all results with any of the lexeme's headwords in its paradigm
   # that are linked wiki-style (e.g. [[foo]] or [[foo|bar]]).
   def constructions(from_dictionary = nil)
-    heads = headword_forms.compact.collect { |form| ['%[[' + form + '|%', '%[[' + form + ']]%'] }.flatten
+    heads = headword_forms.compact.collect { |form| ["%[[#{form}|%", "%[[#{form}]]%"] }.flatten
     return {} if heads.empty?
 
-    headlike = '(subentries.paradigm LIKE ?' + ' OR subentries.paradigm LIKE ?' * (heads.length - 1) + ')'
+    headlike = "(subentries.paradigm LIKE ?#{' OR subentries.paradigm LIKE ?' * (heads.length - 1)})"
 
     conditions = [format('lexemes.id != ? %s AND %s', ('AND dictionaries.id = ?' if from_dictionary), headlike), id,
                   from_dictionary.try(:id), *heads].compact
@@ -98,7 +100,7 @@ class Lexeme < ApplicationRecord
 
     case options[:matchtype] ||= EXACT
     when SUBSTRING
-      headwords_like = '(headword_translations.form LIKE ?' + ' OR headword_translations.form LIKE ?' * (forms.length - 1) + ')'
+      headwords_like = "(headword_translations.form LIKE ?#{' OR headword_translations.form LIKE ?' * (forms.length - 1)})"
       wildcarded_forms = forms.collect { |form| "%#{form}%" }
       Lexeme.joins(headwords: [:translations]).where([headwords_like,
                                                       *wildcarded_forms]).includes(options[:include]).group('"headwords"."lexeme_id"')
@@ -148,8 +150,8 @@ class Lexeme < ApplicationRecord
       memo.include?(swapform) ? memo : memo << form
     end
 
-    headwords.reject do |hw|
-      !hw_forms.include? hw.form
+    headwords.select do |hw|
+      hw_forms.include? hw.form
     end
   end
 

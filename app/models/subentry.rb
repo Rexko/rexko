@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Subentry < ApplicationRecord
   attribute :paradigm
   attribute :part_of_speech
@@ -31,8 +33,8 @@ class Subentry < ApplicationRecord
     joins(HASH_MAP_TO_PARSE).where(parses: { parsable_id: parsables, parsable_type: type })
   }
 
-  HASH_MAP_TO_PARSE = { senses: Sense::HASH_MAP_TO_PARSE }
-  INCLUDE_TREE = { subentries: [:translations, Sense::INCLUDE_TREE, Etymology::INCLUDE_TREE, :notes, :language] }
+  HASH_MAP_TO_PARSE = { senses: Sense::HASH_MAP_TO_PARSE }.freeze
+  INCLUDE_TREE = { subentries: [:translations, Sense::INCLUDE_TREE, Etymology::INCLUDE_TREE, :notes, :language] }.freeze
 
   before_save :set_defaults
 
@@ -46,7 +48,7 @@ class Subentry < ApplicationRecord
   protected
 
   def any_paradigm_present?
-    if globalize_attribute_names.select { |k, _v| k.to_s.start_with?('paradigm') }.all? { |v| v.blank? }
+    if globalize_attribute_names.select { |k, _v| k.to_s.start_with?('paradigm') }.all?(&:blank?)
       errors.add(:paradigm, I18n.t('errors.messages.blank'))
     end
   end

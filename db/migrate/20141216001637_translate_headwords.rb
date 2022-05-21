@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TranslateHeadwords < ActiveRecord::Migration[4.2]
   def up
     Headword.create_translation_table!({

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Settings to be inherited by other controllers
 class ApplicationController < ActionController::Base
   protect_from_forgery

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Etymology < ApplicationRecord
   has_many :etymotheses
   has_many :subentries, through: :etymotheses
@@ -26,7 +28,7 @@ class Etymology < ApplicationRecord
                                                                                 Etymology.rejectable?(attrs)
                                                                               }
 
-  INCLUDE_TREE = { etymologies: %i[notes translations] }
+  INCLUDE_TREE = { etymologies: %i[notes translations] }.freeze
 
   def self.safe_params
     [:etymotheses_attributes, :etymon, :next_etymon, { parses_attributes: Parse.safe_params }]
@@ -55,7 +57,7 @@ class Etymology < ApplicationRecord
 
   def primary_parent
     prim_sub = Subentry.attesting(self, 'Etymology').first
-    prim_sub.etymologies.first if prim_sub
+    prim_sub&.etymologies&.first
   end
 
   # Determine whether the given attribute hash would create an invalid etymology.

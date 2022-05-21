@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TranslateLoci < ActiveRecord::Migration[4.2]
   # Pending UI
   #  def up

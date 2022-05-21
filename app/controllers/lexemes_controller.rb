@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LexemesController < ApplicationController
   layout '1col_layout'
   # GET /lexemes
@@ -41,7 +43,7 @@ class LexemesController < ApplicationController
     @constructions = @lexeme.constructions
     @unattached = Parse.count_unattached_to @lexeme.headword_forms
     @loci_for = @lexeme.headword_forms.inject({}) { |hsh, headword| hsh.merge headword => @loci.attesting(headword) }
-    @external_addresses = @lexeme.dictionaries.collect(&:external_address).uniq.delete_if { |addy| addy.blank? }
+    @external_addresses = @lexeme.dictionaries.collect(&:external_address).uniq.delete_if(&:blank?)
     @loci_for_sense = Hash[@lexeme.senses.collect { |sense| [sense, Locus.attesting(sense)] }]
     @authors_of = Lexeme.authors_hash(@constructions)
     @loci_by = Hash[@authors_of.collect do |construction, authors|

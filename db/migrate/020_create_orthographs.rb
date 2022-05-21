@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateOrthographs < ActiveRecord::Migration[4.2]
   def self.up
     drop_table :headwords_phonetic_forms
