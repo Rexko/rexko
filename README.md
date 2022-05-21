@@ -2,7 +2,7 @@
 ## Let's make dictionaries!
 
 ## Getting started
-Assuming you have Ruby (1.9), gem, & bundler installed.
+Assuming you have Ruby (3.1.2), gem, & bundler installed.
 
 1. Clone or [download](https://github.com/Rexko/rexko/archive/master.zip) and unzip where you like.
 2. In your Rexko folder do:  
